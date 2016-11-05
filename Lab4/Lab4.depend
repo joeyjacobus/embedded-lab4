@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1478388540 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4\lcd.c
+	"LCD.h"
+	<stdint.h>
+	"at89c51ed2.h"
+	<stdio.h>
+
+1478384580 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4\lcd.h
+
+1478388575 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4\main.c
+	<mcs51/8051.h>
+	"at89c51ed2.h"
+	<stdio.h>
+	"LCD.h"
+
