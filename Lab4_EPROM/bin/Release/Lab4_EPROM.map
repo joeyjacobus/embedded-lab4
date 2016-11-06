@@ -50,12 +50,12 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      0022    s_SSEG
      002A    l_GSINIT4
      0032    s_GSINIT4
-     0059    l_XSEG
-     0059    s_XISEG
      005C    s_GSFINAL
      005C    s_GSINIT
      005C    s_GSINIT5
      005F    s_CSEG
+     0069    l_XSEG
+     0069    s_XISEG
      0073    l_DSEG
      0080    _P0
      0080    _P0_0
@@ -260,10 +260,10 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      00FD    _CCAP3H
      00FE    _CCAP4H
      0100    l_IRAM
-     037E    l_CONST
-     1161    l_CSEG
-     11C0    s_CONST
-     153E    s_XINIT
+     03CC    l_CONST
+     1596    l_CSEG
+     15F5    s_CONST
+     19C1    s_XINIT
 
 Hexadecimal
 
@@ -361,24 +361,28 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XSEG                               0000   0059 =     89. bytes (REL,CON,XDATA)
+XSEG                               0000   0069 =    105. bytes (REL,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
-  0D:0003    _LCD_gotoxy_PARM_2
-  0D:001E    _getstring_PARM_2
-  0D:0028    __gptrput_PARM_2
-  0D:0029    __mulint_PARM_2
-  0D:002B    _vprintf_PARM_2
-  0D:003F    __print_format_PARM_2
-  0D:0042    __print_format_PARM_3
-  0D:0045    __print_format_PARM_4
+  0D:0000    _EPROM_SetBlock_PARM_2
+  0D:0003    _EPROM_ByteWrite_PARM_2
+  0D:0004    _EPROM_ByteWrite_PARM_3
+  0D:0006    _EPROM_ByteRead_PARM_2
+  0D:000D    _LCD_gotoxy_PARM_2
+  0D:002D    _getstring_PARM_2
+  0D:0037    __gptrput_PARM_2
+  0D:0038    __mulint_PARM_2
+  0D:003C    _vprintf_PARM_2
+  0D:0050    __print_format_PARM_2
+  0D:0053    __print_format_PARM_3
+  0D:0056    __print_format_PARM_4
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XISEG                              0059   0000 =      0. bytes (REL,CON,XDATA)
+XISEG                              0069   0000 =      0. bytes (REL,CON,XDATA)
 
 Hexadecimal
 
@@ -451,61 +455,80 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               005F   1161 =   4449. bytes (REL,CON,CODE)
+CSEG                               005F   1596 =   5526. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:005F    _LCD_InstructionWrite
-  0C:007E    _LCD_DataWrite
-  0C:009D    _LCD_Busywait
-  0C:00B5    _LCD_ClearScreen
-  0C:00BE    _LCD_gotoaddr
-  0C:00ED    _LCD_gotoxy
-  0C:0121    _LCD_Putch
-  0C:0134    _LCD_Putstr
-  0C:01F7    _LCD_Init
-  0C:0209    _LCD_Test
-  0C:0229    __sdcc_program_startup
-  0C:022E    __sdcc_external_startup
-  0C:0235    _ShowMenu
-  0C:02F3    _handleInput
-  0C:04E1    _main
-  0C:050B    _putchar
-  0C:051D    _getchar
-  0C:0527    _Serial_GetInteger
-  0C:0645    _getstring
-  0C:0702    _Serial_Init
-  0C:0713    _isdigit
-  0C:0730    _atoi
-  0C:0863    __gptrput
-  0C:087C    __mulint
-  0C:08A9    _vprintf
-  0C:08E8    _printf
-  0C:0A01    __print_format
-  0C:1134    _strlen
-  0C:1187    __gptrget
-  0C:11A3    _islower
+  0C:005F    _EPROM_SetBlock
+  0C:00B6    _EPROM_ByteWrite
+  0C:00E2    _EPROM_ByteRead
+  0C:0131    _EPROM_Init
+  0C:0134    _Clock_Delay
+  0C:013D    _Clock_High
+  0C:0143    _Clock_Low
+  0C:0149    _I2CInit
+  0C:014E    _I2CStart
+  0C:0153    _I2CRestart
+  0C:015D    _I2CStop
+  0C:0168    _I2CAck
+  0C:0173    _I2CNak
+  0C:017E    _I2CSend
+  0C:01C9    _I2CRead
+  0C:0208    _LCD_InstructionWrite
+  0C:0227    _LCD_DataWrite
+  0C:0246    _LCD_Busywait
+  0C:025E    _LCD_ClearScreen
+  0C:0267    _LCD_gotoaddr
+  0C:0296    _LCD_gotoxy
+  0C:02CA    _LCD_Putch
+  0C:02DD    _LCD_Putstr
+  0C:03A0    _LCD_Init
+  0C:03B2    _LCD_Test
+  0C:03D2    __sdcc_program_startup
+  0C:03D7    __sdcc_external_startup
+  0C:03DE    _ShowMenu
+  0C:04C6    _handleInput
+  0C:06FD    _main
+  0C:072D    _putchar
+  0C:073F    _getchar
+  0C:0749    _Serial_GetInteger
+  0C:086E    _Serial_GetHex
+  0C:0A5D    _getstring
+  0C:0B1A    _Serial_Init
+  0C:0B2B    _isdigit
+  0C:0B48    _atoi
+  0C:0C7B    __gptrput
+  0C:0C94    __mulint
+  0C:0CB4    _islower
+  0C:0CD1    _isupper
+  0C:0CFB    _vprintf
+  0C:0D3A    _printf
+  0C:0E53    __print_format
+  0C:1586    _strlen
+  0C:15D9    __gptrget
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CONST                              11C0   037E =    894. bytes (REL,CON,CODE)
+CONST                              15F5   03CC =    972. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:11C0    _LCD_Addr
-  0C:11C2    _AddrMap
+  0C:160F    _LCD_Addr
+  0C:1611    _AddrMap
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XINIT                              153E   0000 =      0. bytes (REL,CON,CODE)
+XINIT                              19C1   0000 =      0. bytes (REL,CON,CODE)
 ASxxxx Linker V01.70 + NoICE + SDCC Feb 1999,  page 1.
 
 Files Linked      [ module(s) ]
 
+obj\Release\EPROM.rel
+obj\Release\I2c.rel
 obj\Release\LCD.rel
 obj\Release\main.rel
 obj\Release\serial.rel
@@ -519,13 +542,14 @@ C:\Program Files (x86)\SDCC\bin\..\lib\large/mcs51.lib    [     crtxinit.rel ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [         _gptrput ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/libint.lib    [          _mulint ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/mcs51.lib    [    crtxclear.rel ]
+C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [         _islower ]
+C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [         _isupper ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [          vprintf ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [     printf_large ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/mcs51.lib    [   crtpagesfr.rel ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [          _strlen ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/mcs51.lib    [     crtstart.rel ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [         _gptrget ]
-C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [         _islower ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [              _bp ]
 
 ASxxxx Linker V01.70 + NoICE + SDCC Feb 1999,  page 2.

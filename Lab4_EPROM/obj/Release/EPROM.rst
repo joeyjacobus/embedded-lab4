@@ -1,0 +1,763 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.6.0 #4309 (Jul 28 2006)
+                              4 ; This file generated Sun Nov 06 13:26:28 2016
+                              5 ;--------------------------------------------------------
+                              6 	.module EPROM
+                              7 	.optsdcc -mmcs51 --model-large
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _EPROM_Init
+                             13 	.globl _EPROM_ByteRead
+                             14 	.globl _EPROM_ByteWrite
+                             15 	.globl _EPROM_SetBlock
+                             16 	.globl _P5_7
+                             17 	.globl _P5_6
+                             18 	.globl _P5_5
+                             19 	.globl _P5_4
+                             20 	.globl _P5_3
+                             21 	.globl _P5_2
+                             22 	.globl _P5_1
+                             23 	.globl _P5_0
+                             24 	.globl _P4_7
+                             25 	.globl _P4_6
+                             26 	.globl _P4_5
+                             27 	.globl _P4_4
+                             28 	.globl _P4_3
+                             29 	.globl _P4_2
+                             30 	.globl _P4_1
+                             31 	.globl _P4_0
+                             32 	.globl _PX0L
+                             33 	.globl _PT0L
+                             34 	.globl _PX1L
+                             35 	.globl _PT1L
+                             36 	.globl _PLS
+                             37 	.globl _PT2L
+                             38 	.globl _PPCL
+                             39 	.globl _EC
+                             40 	.globl _CCF0
+                             41 	.globl _CCF1
+                             42 	.globl _CCF2
+                             43 	.globl _CCF3
+                             44 	.globl _CCF4
+                             45 	.globl _CR
+                             46 	.globl _CF
+                             47 	.globl _TF2
+                             48 	.globl _EXF2
+                             49 	.globl _RCLK
+                             50 	.globl _TCLK
+                             51 	.globl _EXEN2
+                             52 	.globl _TR2
+                             53 	.globl _C_T2
+                             54 	.globl _CP_RL2
+                             55 	.globl _T2CON_7
+                             56 	.globl _T2CON_6
+                             57 	.globl _T2CON_5
+                             58 	.globl _T2CON_4
+                             59 	.globl _T2CON_3
+                             60 	.globl _T2CON_2
+                             61 	.globl _T2CON_1
+                             62 	.globl _T2CON_0
+                             63 	.globl _PT2
+                             64 	.globl _ET2
+                             65 	.globl _CY
+                             66 	.globl _AC
+                             67 	.globl _F0
+                             68 	.globl _RS1
+                             69 	.globl _RS0
+                             70 	.globl _OV
+                             71 	.globl _F1
+                             72 	.globl _P
+                             73 	.globl _PS
+                             74 	.globl _PT1
+                             75 	.globl _PX1
+                             76 	.globl _PT0
+                             77 	.globl _PX0
+                             78 	.globl _RD
+                             79 	.globl _WR
+                             80 	.globl _T1
+                             81 	.globl _T0
+                             82 	.globl _INT1
+                             83 	.globl _INT0
+                             84 	.globl _TXD
+                             85 	.globl _RXD
+                             86 	.globl _P3_7
+                             87 	.globl _P3_6
+                             88 	.globl _P3_5
+                             89 	.globl _P3_4
+                             90 	.globl _P3_3
+                             91 	.globl _P3_2
+                             92 	.globl _P3_1
+                             93 	.globl _P3_0
+                             94 	.globl _EA
+                             95 	.globl _ES
+                             96 	.globl _ET1
+                             97 	.globl _EX1
+                             98 	.globl _ET0
+                             99 	.globl _EX0
+                            100 	.globl _P2_7
+                            101 	.globl _P2_6
+                            102 	.globl _P2_5
+                            103 	.globl _P2_4
+                            104 	.globl _P2_3
+                            105 	.globl _P2_2
+                            106 	.globl _P2_1
+                            107 	.globl _P2_0
+                            108 	.globl _SM0
+                            109 	.globl _SM1
+                            110 	.globl _SM2
+                            111 	.globl _REN
+                            112 	.globl _TB8
+                            113 	.globl _RB8
+                            114 	.globl _TI
+                            115 	.globl _RI
+                            116 	.globl _P1_7
+                            117 	.globl _P1_6
+                            118 	.globl _P1_5
+                            119 	.globl _P1_4
+                            120 	.globl _P1_3
+                            121 	.globl _P1_2
+                            122 	.globl _P1_1
+                            123 	.globl _P1_0
+                            124 	.globl _TF1
+                            125 	.globl _TR1
+                            126 	.globl _TF0
+                            127 	.globl _TR0
+                            128 	.globl _IE1
+                            129 	.globl _IT1
+                            130 	.globl _IE0
+                            131 	.globl _IT0
+                            132 	.globl _P0_7
+                            133 	.globl _P0_6
+                            134 	.globl _P0_5
+                            135 	.globl _P0_4
+                            136 	.globl _P0_3
+                            137 	.globl _P0_2
+                            138 	.globl _P0_1
+                            139 	.globl _P0_0
+                            140 	.globl _EECON
+                            141 	.globl _KBF
+                            142 	.globl _KBE
+                            143 	.globl _KBLS
+                            144 	.globl _BRL
+                            145 	.globl _BDRCON
+                            146 	.globl _T2MOD
+                            147 	.globl _SPDAT
+                            148 	.globl _SPSTA
+                            149 	.globl _SPCON
+                            150 	.globl _SADEN
+                            151 	.globl _SADDR
+                            152 	.globl _WDTPRG
+                            153 	.globl _WDTRST
+                            154 	.globl _P5
+                            155 	.globl _P4
+                            156 	.globl _IPH1
+                            157 	.globl _IPL1
+                            158 	.globl _IPH0
+                            159 	.globl _IPL0
+                            160 	.globl _IEN1
+                            161 	.globl _IEN0
+                            162 	.globl _CMOD
+                            163 	.globl _CL
+                            164 	.globl _CH
+                            165 	.globl _CCON
+                            166 	.globl _CCAPM4
+                            167 	.globl _CCAPM3
+                            168 	.globl _CCAPM2
+                            169 	.globl _CCAPM1
+                            170 	.globl _CCAPM0
+                            171 	.globl _CCAP4L
+                            172 	.globl _CCAP3L
+                            173 	.globl _CCAP2L
+                            174 	.globl _CCAP1L
+                            175 	.globl _CCAP0L
+                            176 	.globl _CCAP4H
+                            177 	.globl _CCAP3H
+                            178 	.globl _CCAP2H
+                            179 	.globl _CCAP1H
+                            180 	.globl _CCAP0H
+                            181 	.globl _CKCKON1
+                            182 	.globl _CKCKON0
+                            183 	.globl _CKRL
+                            184 	.globl _AUXR1
+                            185 	.globl _AUXR
+                            186 	.globl _TH2
+                            187 	.globl _TL2
+                            188 	.globl _RCAP2H
+                            189 	.globl _RCAP2L
+                            190 	.globl _T2CON
+                            191 	.globl _B
+                            192 	.globl _ACC
+                            193 	.globl _PSW
+                            194 	.globl _IP
+                            195 	.globl _P3
+                            196 	.globl _IE
+                            197 	.globl _P2
+                            198 	.globl _SBUF
+                            199 	.globl _SCON
+                            200 	.globl _P1
+                            201 	.globl _TH1
+                            202 	.globl _TH0
+                            203 	.globl _TL1
+                            204 	.globl _TL0
+                            205 	.globl _TMOD
+                            206 	.globl _TCON
+                            207 	.globl _PCON
+                            208 	.globl _DPH
+                            209 	.globl _DPL
+                            210 	.globl _SP
+                            211 	.globl _P0
+                            212 	.globl _EPROM_ByteRead_PARM_2
+                            213 	.globl _EPROM_ByteWrite_PARM_3
+                            214 	.globl _EPROM_ByteWrite_PARM_2
+                            215 	.globl _EPROM_SetBlock_PARM_2
+                            216 ;--------------------------------------------------------
+                            217 ; special function registers
+                            218 ;--------------------------------------------------------
+                            219 	.area RSEG    (DATA)
+                    0080    220 _P0	=	0x0080
+                    0081    221 _SP	=	0x0081
+                    0082    222 _DPL	=	0x0082
+                    0083    223 _DPH	=	0x0083
+                    0087    224 _PCON	=	0x0087
+                    0088    225 _TCON	=	0x0088
+                    0089    226 _TMOD	=	0x0089
+                    008A    227 _TL0	=	0x008a
+                    008B    228 _TL1	=	0x008b
+                    008C    229 _TH0	=	0x008c
+                    008D    230 _TH1	=	0x008d
+                    0090    231 _P1	=	0x0090
+                    0098    232 _SCON	=	0x0098
+                    0099    233 _SBUF	=	0x0099
+                    00A0    234 _P2	=	0x00a0
+                    00A8    235 _IE	=	0x00a8
+                    00B0    236 _P3	=	0x00b0
+                    00B8    237 _IP	=	0x00b8
+                    00D0    238 _PSW	=	0x00d0
+                    00E0    239 _ACC	=	0x00e0
+                    00F0    240 _B	=	0x00f0
+                    00C8    241 _T2CON	=	0x00c8
+                    00CA    242 _RCAP2L	=	0x00ca
+                    00CB    243 _RCAP2H	=	0x00cb
+                    00CC    244 _TL2	=	0x00cc
+                    00CD    245 _TH2	=	0x00cd
+                    008E    246 _AUXR	=	0x008e
+                    00A2    247 _AUXR1	=	0x00a2
+                    0097    248 _CKRL	=	0x0097
+                    008F    249 _CKCKON0	=	0x008f
+                    008F    250 _CKCKON1	=	0x008f
+                    00FA    251 _CCAP0H	=	0x00fa
+                    00FB    252 _CCAP1H	=	0x00fb
+                    00FC    253 _CCAP2H	=	0x00fc
+                    00FD    254 _CCAP3H	=	0x00fd
+                    00FE    255 _CCAP4H	=	0x00fe
+                    00EA    256 _CCAP0L	=	0x00ea
+                    00EB    257 _CCAP1L	=	0x00eb
+                    00EC    258 _CCAP2L	=	0x00ec
+                    00ED    259 _CCAP3L	=	0x00ed
+                    00EE    260 _CCAP4L	=	0x00ee
+                    00DA    261 _CCAPM0	=	0x00da
+                    00DB    262 _CCAPM1	=	0x00db
+                    00DC    263 _CCAPM2	=	0x00dc
+                    00DD    264 _CCAPM3	=	0x00dd
+                    00DE    265 _CCAPM4	=	0x00de
+                    00D8    266 _CCON	=	0x00d8
+                    00F9    267 _CH	=	0x00f9
+                    00E9    268 _CL	=	0x00e9
+                    00D9    269 _CMOD	=	0x00d9
+                    00A8    270 _IEN0	=	0x00a8
+                    00B1    271 _IEN1	=	0x00b1
+                    00B8    272 _IPL0	=	0x00b8
+                    00B7    273 _IPH0	=	0x00b7
+                    00B2    274 _IPL1	=	0x00b2
+                    00B3    275 _IPH1	=	0x00b3
+                    00C0    276 _P4	=	0x00c0
+                    00D8    277 _P5	=	0x00d8
+                    00A6    278 _WDTRST	=	0x00a6
+                    00A7    279 _WDTPRG	=	0x00a7
+                    00A9    280 _SADDR	=	0x00a9
+                    00B9    281 _SADEN	=	0x00b9
+                    00C3    282 _SPCON	=	0x00c3
+                    00C4    283 _SPSTA	=	0x00c4
+                    00C5    284 _SPDAT	=	0x00c5
+                    00C9    285 _T2MOD	=	0x00c9
+                    009B    286 _BDRCON	=	0x009b
+                    009A    287 _BRL	=	0x009a
+                    009C    288 _KBLS	=	0x009c
+                    009D    289 _KBE	=	0x009d
+                    009E    290 _KBF	=	0x009e
+                    00D2    291 _EECON	=	0x00d2
+                            292 ;--------------------------------------------------------
+                            293 ; special function bits
+                            294 ;--------------------------------------------------------
+                            295 	.area RSEG    (DATA)
+                    0080    296 _P0_0	=	0x0080
+                    0081    297 _P0_1	=	0x0081
+                    0082    298 _P0_2	=	0x0082
+                    0083    299 _P0_3	=	0x0083
+                    0084    300 _P0_4	=	0x0084
+                    0085    301 _P0_5	=	0x0085
+                    0086    302 _P0_6	=	0x0086
+                    0087    303 _P0_7	=	0x0087
+                    0088    304 _IT0	=	0x0088
+                    0089    305 _IE0	=	0x0089
+                    008A    306 _IT1	=	0x008a
+                    008B    307 _IE1	=	0x008b
+                    008C    308 _TR0	=	0x008c
+                    008D    309 _TF0	=	0x008d
+                    008E    310 _TR1	=	0x008e
+                    008F    311 _TF1	=	0x008f
+                    0090    312 _P1_0	=	0x0090
+                    0091    313 _P1_1	=	0x0091
+                    0092    314 _P1_2	=	0x0092
+                    0093    315 _P1_3	=	0x0093
+                    0094    316 _P1_4	=	0x0094
+                    0095    317 _P1_5	=	0x0095
+                    0096    318 _P1_6	=	0x0096
+                    0097    319 _P1_7	=	0x0097
+                    0098    320 _RI	=	0x0098
+                    0099    321 _TI	=	0x0099
+                    009A    322 _RB8	=	0x009a
+                    009B    323 _TB8	=	0x009b
+                    009C    324 _REN	=	0x009c
+                    009D    325 _SM2	=	0x009d
+                    009E    326 _SM1	=	0x009e
+                    009F    327 _SM0	=	0x009f
+                    00A0    328 _P2_0	=	0x00a0
+                    00A1    329 _P2_1	=	0x00a1
+                    00A2    330 _P2_2	=	0x00a2
+                    00A3    331 _P2_3	=	0x00a3
+                    00A4    332 _P2_4	=	0x00a4
+                    00A5    333 _P2_5	=	0x00a5
+                    00A6    334 _P2_6	=	0x00a6
+                    00A7    335 _P2_7	=	0x00a7
+                    00A8    336 _EX0	=	0x00a8
+                    00A9    337 _ET0	=	0x00a9
+                    00AA    338 _EX1	=	0x00aa
+                    00AB    339 _ET1	=	0x00ab
+                    00AC    340 _ES	=	0x00ac
+                    00AF    341 _EA	=	0x00af
+                    00B0    342 _P3_0	=	0x00b0
+                    00B1    343 _P3_1	=	0x00b1
+                    00B2    344 _P3_2	=	0x00b2
+                    00B3    345 _P3_3	=	0x00b3
+                    00B4    346 _P3_4	=	0x00b4
+                    00B5    347 _P3_5	=	0x00b5
+                    00B6    348 _P3_6	=	0x00b6
+                    00B7    349 _P3_7	=	0x00b7
+                    00B0    350 _RXD	=	0x00b0
+                    00B1    351 _TXD	=	0x00b1
+                    00B2    352 _INT0	=	0x00b2
+                    00B3    353 _INT1	=	0x00b3
+                    00B4    354 _T0	=	0x00b4
+                    00B5    355 _T1	=	0x00b5
+                    00B6    356 _WR	=	0x00b6
+                    00B7    357 _RD	=	0x00b7
+                    00B8    358 _PX0	=	0x00b8
+                    00B9    359 _PT0	=	0x00b9
+                    00BA    360 _PX1	=	0x00ba
+                    00BB    361 _PT1	=	0x00bb
+                    00BC    362 _PS	=	0x00bc
+                    00D0    363 _P	=	0x00d0
+                    00D1    364 _F1	=	0x00d1
+                    00D2    365 _OV	=	0x00d2
+                    00D3    366 _RS0	=	0x00d3
+                    00D4    367 _RS1	=	0x00d4
+                    00D5    368 _F0	=	0x00d5
+                    00D6    369 _AC	=	0x00d6
+                    00D7    370 _CY	=	0x00d7
+                    00AD    371 _ET2	=	0x00ad
+                    00BD    372 _PT2	=	0x00bd
+                    00C8    373 _T2CON_0	=	0x00c8
+                    00C9    374 _T2CON_1	=	0x00c9
+                    00CA    375 _T2CON_2	=	0x00ca
+                    00CB    376 _T2CON_3	=	0x00cb
+                    00CC    377 _T2CON_4	=	0x00cc
+                    00CD    378 _T2CON_5	=	0x00cd
+                    00CE    379 _T2CON_6	=	0x00ce
+                    00CF    380 _T2CON_7	=	0x00cf
+                    00C8    381 _CP_RL2	=	0x00c8
+                    00C9    382 _C_T2	=	0x00c9
+                    00CA    383 _TR2	=	0x00ca
+                    00CB    384 _EXEN2	=	0x00cb
+                    00CC    385 _TCLK	=	0x00cc
+                    00CD    386 _RCLK	=	0x00cd
+                    00CE    387 _EXF2	=	0x00ce
+                    00CF    388 _TF2	=	0x00cf
+                    00DF    389 _CF	=	0x00df
+                    00DE    390 _CR	=	0x00de
+                    00DC    391 _CCF4	=	0x00dc
+                    00DB    392 _CCF3	=	0x00db
+                    00DA    393 _CCF2	=	0x00da
+                    00D9    394 _CCF1	=	0x00d9
+                    00D8    395 _CCF0	=	0x00d8
+                    00AE    396 _EC	=	0x00ae
+                    00BE    397 _PPCL	=	0x00be
+                    00BD    398 _PT2L	=	0x00bd
+                    00BC    399 _PLS	=	0x00bc
+                    00BB    400 _PT1L	=	0x00bb
+                    00BA    401 _PX1L	=	0x00ba
+                    00B9    402 _PT0L	=	0x00b9
+                    00B8    403 _PX0L	=	0x00b8
+                    00C0    404 _P4_0	=	0x00c0
+                    00C1    405 _P4_1	=	0x00c1
+                    00C2    406 _P4_2	=	0x00c2
+                    00C3    407 _P4_3	=	0x00c3
+                    00C4    408 _P4_4	=	0x00c4
+                    00C5    409 _P4_5	=	0x00c5
+                    00C6    410 _P4_6	=	0x00c6
+                    00C7    411 _P4_7	=	0x00c7
+                    00D8    412 _P5_0	=	0x00d8
+                    00D9    413 _P5_1	=	0x00d9
+                    00DA    414 _P5_2	=	0x00da
+                    00DB    415 _P5_3	=	0x00db
+                    00DC    416 _P5_4	=	0x00dc
+                    00DD    417 _P5_5	=	0x00dd
+                    00DE    418 _P5_6	=	0x00de
+                    00DF    419 _P5_7	=	0x00df
+                            420 ;--------------------------------------------------------
+                            421 ; overlayable register banks
+                            422 ;--------------------------------------------------------
+                            423 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     424 	.ds 8
+                            425 ;--------------------------------------------------------
+                            426 ; internal ram data
+                            427 ;--------------------------------------------------------
+                            428 	.area DSEG    (DATA)
+                            429 ;--------------------------------------------------------
+                            430 ; overlayable items in internal ram 
+                            431 ;--------------------------------------------------------
+                            432 	.area OSEG    (OVR,DATA)
+                            433 ;--------------------------------------------------------
+                            434 ; indirectly addressable internal ram data
+                            435 ;--------------------------------------------------------
+                            436 	.area ISEG    (DATA)
+                            437 ;--------------------------------------------------------
+                            438 ; bit data
+                            439 ;--------------------------------------------------------
+                            440 	.area BSEG    (BIT)
+                            441 ;--------------------------------------------------------
+                            442 ; paged external ram data
+                            443 ;--------------------------------------------------------
+                            444 	.area PSEG    (PAG,XDATA)
+                            445 ;--------------------------------------------------------
+                            446 ; external ram data
+                            447 ;--------------------------------------------------------
+                            448 	.area XSEG    (XDATA)
+   0000                     449 _EPROM_SetBlock_PARM_2:
+   0000                     450 	.ds 1
+   0001                     451 _EPROM_SetBlock_block_1_1:
+   0001                     452 	.ds 1
+   0002                     453 _EPROM_SetBlock_byte_1_1:
+   0002                     454 	.ds 1
+   0003                     455 _EPROM_ByteWrite_PARM_2:
+   0003                     456 	.ds 1
+   0004                     457 _EPROM_ByteWrite_PARM_3:
+   0004                     458 	.ds 1
+   0005                     459 _EPROM_ByteWrite_writeData_1_1:
+   0005                     460 	.ds 1
+   0006                     461 _EPROM_ByteRead_PARM_2:
+   0006                     462 	.ds 1
+   0007                     463 _EPROM_ByteRead_address_1_1:
+   0007                     464 	.ds 1
+                            465 ;--------------------------------------------------------
+                            466 ; external initialized ram data
+                            467 ;--------------------------------------------------------
+                            468 	.area XISEG   (XDATA)
+                            469 	.area HOME    (CODE)
+                            470 	.area GSINIT0 (CODE)
+                            471 	.area GSINIT1 (CODE)
+                            472 	.area GSINIT2 (CODE)
+                            473 	.area GSINIT3 (CODE)
+                            474 	.area GSINIT4 (CODE)
+                            475 	.area GSINIT5 (CODE)
+                            476 	.area GSINIT  (CODE)
+                            477 	.area GSFINAL (CODE)
+                            478 	.area CSEG    (CODE)
+                            479 ;--------------------------------------------------------
+                            480 ; global & static initialisations
+                            481 ;--------------------------------------------------------
+                            482 	.area HOME    (CODE)
+                            483 	.area GSINIT  (CODE)
+                            484 	.area GSFINAL (CODE)
+                            485 	.area GSINIT  (CODE)
+                            486 ;--------------------------------------------------------
+                            487 ; Home
+                            488 ;--------------------------------------------------------
+                            489 	.area HOME    (CODE)
+                            490 	.area CSEG    (CODE)
+                            491 ;--------------------------------------------------------
+                            492 ; code
+                            493 ;--------------------------------------------------------
+                            494 	.area CSEG    (CODE)
+                            495 ;------------------------------------------------------------
+                            496 ;Allocation info for local variables in function 'EPROM_SetBlock'
+                            497 ;------------------------------------------------------------
+                            498 ;read                      Allocated with name '_EPROM_SetBlock_PARM_2'
+                            499 ;block                     Allocated with name '_EPROM_SetBlock_block_1_1'
+                            500 ;byte                      Allocated with name '_EPROM_SetBlock_byte_1_1'
+                            501 ;ack                       Allocated with name '_EPROM_SetBlock_ack_1_1'
+                            502 ;------------------------------------------------------------
+                            503 ;	EPROM.c:11: void EPROM_SetBlock(uint8_t block, uint8_t read){
+                            504 ;	-----------------------------------------
+                            505 ;	 function EPROM_SetBlock
+                            506 ;	-----------------------------------------
+   005F                     507 _EPROM_SetBlock:
+                    0002    508 	ar2 = 0x02
+                    0003    509 	ar3 = 0x03
+                    0004    510 	ar4 = 0x04
+                    0005    511 	ar5 = 0x05
+                    0006    512 	ar6 = 0x06
+                    0007    513 	ar7 = 0x07
+                    0000    514 	ar0 = 0x00
+                    0001    515 	ar1 = 0x01
+                            516 ;	genReceive
+   005F E5 82               517 	mov	a,dpl
+   0061 90 00 01            518 	mov	dptr,#_EPROM_SetBlock_block_1_1
+   0064 F0                  519 	movx	@dptr,a
+                            520 ;	EPROM.c:12: uint8_t byte = 0xA0;
+                            521 ;	genAssign
+   0065 90 00 02            522 	mov	dptr,#_EPROM_SetBlock_byte_1_1
+   0068 74 A0               523 	mov	a,#0xA0
+   006A F0                  524 	movx	@dptr,a
+                            525 ;	EPROM.c:14: if (read){
+                            526 ;	genAssign
+   006B 90 00 00            527 	mov	dptr,#_EPROM_SetBlock_PARM_2
+   006E E0                  528 	movx	a,@dptr
+                            529 ;	genIfx
+   006F FA                  530 	mov	r2,a
+                            531 ;	Peephole 105	removed redundant mov
+                            532 ;	genIfxJump
+                            533 ;	Peephole 108.c	removed ljmp by inverse jump logic
+   0070 60 06               534 	jz	00102$
+                            535 ;	Peephole 300	removed redundant label 00109$
+                            536 ;	EPROM.c:15: byte |= 0x01;   //set the read bit
+                            537 ;	genAssign
+   0072 90 00 02            538 	mov	dptr,#_EPROM_SetBlock_byte_1_1
+   0075 74 A1               539 	mov	a,#0xA1
+   0077 F0                  540 	movx	@dptr,a
+   0078                     541 00102$:
+                            542 ;	EPROM.c:17: if(block > 7){
+                            543 ;	genAssign
+   0078 90 00 01            544 	mov	dptr,#_EPROM_SetBlock_block_1_1
+   007B E0                  545 	movx	a,@dptr
+                            546 ;	genCmpGt
+                            547 ;	genCmp
+                            548 ;	genIfxJump
+                            549 ;	Peephole 108.a	removed ljmp by inverse jump logic
+                            550 ;	Peephole 132.b	optimized genCmpGt by inverse logic (acc differs)
+   007C FA                  551 	mov  r2,a
+                            552 ;	Peephole 177.a	removed redundant mov
+   007D 24 F8               553 	add	a,#0xff - 0x07
+   007F 50 1E               554 	jnc	00104$
+                            555 ;	Peephole 300	removed redundant label 00110$
+                            556 ;	EPROM.c:18: printf("\r\nInvalid block number %d", block);
+                            557 ;	genCast
+   0081 8A 03               558 	mov	ar3,r2
+   0083 7C 00               559 	mov	r4,#0x00
+                            560 ;	genIpush
+   0085 C0 03               561 	push	ar3
+   0087 C0 04               562 	push	ar4
+                            563 ;	genIpush
+   0089 74 F5               564 	mov	a,#__str_0
+   008B C0 E0               565 	push	acc
+   008D 74 15               566 	mov	a,#(__str_0 >> 8)
+   008F C0 E0               567 	push	acc
+   0091 74 80               568 	mov	a,#0x80
+   0093 C0 E0               569 	push	acc
+                            570 ;	genCall
+   0095 12 0D 3A            571 	lcall	_printf
+   0098 E5 81               572 	mov	a,sp
+   009A 24 FB               573 	add	a,#0xfb
+   009C F5 81               574 	mov	sp,a
+                            575 ;	EPROM.c:19: return;
+                            576 ;	genRet
+                            577 ;	Peephole 112.b	changed ljmp to sjmp
+                            578 ;	Peephole 251.b	replaced sjmp to ret with ret
+   009E 22                  579 	ret
+   009F                     580 00104$:
+                            581 ;	EPROM.c:21: byte |= (block << 1);   //Set bit 1,2,3 to the three bit block address
+                            582 ;	genLeftShift
+                            583 ;	genLeftShiftLiteral
+                            584 ;	genlshOne
+   009F EA                  585 	mov	a,r2
+                            586 ;	Peephole 254	optimized left shift
+   00A0 2A                  587 	add	a,r2
+   00A1 FA                  588 	mov	r2,a
+                            589 ;	genAssign
+                            590 ;	genOr
+   00A2 90 00 02            591 	mov	dptr,#_EPROM_SetBlock_byte_1_1
+   00A5 E0                  592 	movx	a,@dptr
+   00A6 FB                  593 	mov	r3,a
+                            594 ;	Peephole 248.a	optimized or to xdata
+   00A7 4A                  595 	orl	a,r2
+   00A8 F0                  596 	movx	@dptr,a
+                            597 ;	EPROM.c:22: I2CStart();
+                            598 ;	genCall
+   00A9 12 01 4E            599 	lcall	_I2CStart
+                            600 ;	EPROM.c:23: ack = I2CSend(byte);
+                            601 ;	genAssign
+   00AC 90 00 02            602 	mov	dptr,#_EPROM_SetBlock_byte_1_1
+   00AF E0                  603 	movx	a,@dptr
+                            604 ;	genCall
+   00B0 FA                  605 	mov	r2,a
+                            606 ;	Peephole 244.c	loading dpl from a instead of r2
+   00B1 F5 82               607 	mov	dpl,a
+                            608 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   00B3 02 01 7E            609 	ljmp	_I2CSend
+                            610 ;
+                            611 ;------------------------------------------------------------
+                            612 ;Allocation info for local variables in function 'EPROM_ByteWrite'
+                            613 ;------------------------------------------------------------
+                            614 ;address                   Allocated with name '_EPROM_ByteWrite_PARM_2'
+                            615 ;block                     Allocated with name '_EPROM_ByteWrite_PARM_3'
+                            616 ;writeData                 Allocated with name '_EPROM_ByteWrite_writeData_1_1'
+                            617 ;ack                       Allocated with name '_EPROM_ByteWrite_ack_1_1'
+                            618 ;------------------------------------------------------------
+                            619 ;	EPROM.c:32: void EPROM_ByteWrite(uint8_t writeData, uint8_t address, uint8_t block){
+                            620 ;	-----------------------------------------
+                            621 ;	 function EPROM_ByteWrite
+                            622 ;	-----------------------------------------
+   00B6                     623 _EPROM_ByteWrite:
+                            624 ;	genReceive
+   00B6 E5 82               625 	mov	a,dpl
+   00B8 90 00 05            626 	mov	dptr,#_EPROM_ByteWrite_writeData_1_1
+   00BB F0                  627 	movx	@dptr,a
+                            628 ;	EPROM.c:34: EPROM_SetBlock(block, WRITE);
+                            629 ;	genAssign
+   00BC 90 00 04            630 	mov	dptr,#_EPROM_ByteWrite_PARM_3
+   00BF E0                  631 	movx	a,@dptr
+   00C0 FA                  632 	mov	r2,a
+                            633 ;	genAssign
+   00C1 90 00 00            634 	mov	dptr,#_EPROM_SetBlock_PARM_2
+                            635 ;	Peephole 181	changed mov to clr
+   00C4 E4                  636 	clr	a
+   00C5 F0                  637 	movx	@dptr,a
+                            638 ;	genCall
+   00C6 8A 82               639 	mov	dpl,r2
+   00C8 12 00 5F            640 	lcall	_EPROM_SetBlock
+                            641 ;	EPROM.c:35: ack = I2CSend(address);
+                            642 ;	genAssign
+   00CB 90 00 03            643 	mov	dptr,#_EPROM_ByteWrite_PARM_2
+   00CE E0                  644 	movx	a,@dptr
+                            645 ;	genCall
+   00CF FA                  646 	mov	r2,a
+                            647 ;	Peephole 244.c	loading dpl from a instead of r2
+   00D0 F5 82               648 	mov	dpl,a
+   00D2 12 01 7E            649 	lcall	_I2CSend
+                            650 ;	EPROM.c:36: ack = I2CSend(writeData);
+                            651 ;	genAssign
+   00D5 90 00 05            652 	mov	dptr,#_EPROM_ByteWrite_writeData_1_1
+   00D8 E0                  653 	movx	a,@dptr
+                            654 ;	genCall
+   00D9 FA                  655 	mov	r2,a
+                            656 ;	Peephole 244.c	loading dpl from a instead of r2
+   00DA F5 82               657 	mov	dpl,a
+   00DC 12 01 7E            658 	lcall	_I2CSend
+                            659 ;	EPROM.c:37: I2CStop();
+                            660 ;	genCall
+                            661 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   00DF 02 01 5D            662 	ljmp	_I2CStop
+                            663 ;
+                            664 ;------------------------------------------------------------
+                            665 ;Allocation info for local variables in function 'EPROM_ByteRead'
+                            666 ;------------------------------------------------------------
+                            667 ;block                     Allocated with name '_EPROM_ByteRead_PARM_2'
+                            668 ;address                   Allocated with name '_EPROM_ByteRead_address_1_1'
+                            669 ;value                     Allocated with name '_EPROM_ByteRead_value_1_1'
+                            670 ;ack                       Allocated with name '_EPROM_ByteRead_ack_1_1'
+                            671 ;------------------------------------------------------------
+                            672 ;	EPROM.c:44: uint8_t EPROM_ByteRead(uint8_t address, uint8_t block){
+                            673 ;	-----------------------------------------
+                            674 ;	 function EPROM_ByteRead
+                            675 ;	-----------------------------------------
+   00E2                     676 _EPROM_ByteRead:
+                            677 ;	genReceive
+   00E2 E5 82               678 	mov	a,dpl
+   00E4 90 00 07            679 	mov	dptr,#_EPROM_ByteRead_address_1_1
+   00E7 F0                  680 	movx	@dptr,a
+                            681 ;	EPROM.c:47: EPROM_SetBlock(block, WRITE);
+                            682 ;	genAssign
+   00E8 90 00 06            683 	mov	dptr,#_EPROM_ByteRead_PARM_2
+   00EB E0                  684 	movx	a,@dptr
+   00EC FA                  685 	mov	r2,a
+                            686 ;	genAssign
+   00ED 90 00 00            687 	mov	dptr,#_EPROM_SetBlock_PARM_2
+                            688 ;	Peephole 181	changed mov to clr
+   00F0 E4                  689 	clr	a
+   00F1 F0                  690 	movx	@dptr,a
+                            691 ;	genCall
+   00F2 8A 82               692 	mov	dpl,r2
+   00F4 C0 02               693 	push	ar2
+   00F6 12 00 5F            694 	lcall	_EPROM_SetBlock
+   00F9 D0 02               695 	pop	ar2
+                            696 ;	EPROM.c:48: ack = I2CSend(address);
+                            697 ;	genAssign
+   00FB 90 00 07            698 	mov	dptr,#_EPROM_ByteRead_address_1_1
+   00FE E0                  699 	movx	a,@dptr
+                            700 ;	genCall
+   00FF FB                  701 	mov	r3,a
+                            702 ;	Peephole 244.c	loading dpl from a instead of r3
+   0100 F5 82               703 	mov	dpl,a
+   0102 C0 02               704 	push	ar2
+   0104 12 01 7E            705 	lcall	_I2CSend
+   0107 D0 02               706 	pop	ar2
+                            707 ;	EPROM.c:49: I2CRestart(); //Restart
+                            708 ;	genCall
+   0109 C0 02               709 	push	ar2
+   010B 12 01 53            710 	lcall	_I2CRestart
+   010E D0 02               711 	pop	ar2
+                            712 ;	EPROM.c:50: EPROM_SetBlock(block, READ);
+                            713 ;	genAssign
+   0110 90 00 00            714 	mov	dptr,#_EPROM_SetBlock_PARM_2
+   0113 74 01               715 	mov	a,#0x01
+   0115 F0                  716 	movx	@dptr,a
+                            717 ;	genCall
+   0116 8A 82               718 	mov	dpl,r2
+   0118 12 00 5F            719 	lcall	_EPROM_SetBlock
+                            720 ;	EPROM.c:51: value = I2CRead();
+                            721 ;	genCall
+   011B 12 01 C9            722 	lcall	_I2CRead
+   011E AA 82               723 	mov	r2,dpl
+                            724 ;	EPROM.c:52: I2CNak();
+                            725 ;	genCall
+   0120 C0 02               726 	push	ar2
+   0122 12 01 73            727 	lcall	_I2CNak
+   0125 D0 02               728 	pop	ar2
+                            729 ;	EPROM.c:53: I2CStop();
+                            730 ;	genCall
+   0127 C0 02               731 	push	ar2
+   0129 12 01 5D            732 	lcall	_I2CStop
+   012C D0 02               733 	pop	ar2
+                            734 ;	EPROM.c:54: return value;
+                            735 ;	genRet
+   012E 8A 82               736 	mov	dpl,r2
+                            737 ;	Peephole 300	removed redundant label 00101$
+   0130 22                  738 	ret
+                            739 ;------------------------------------------------------------
+                            740 ;Allocation info for local variables in function 'EPROM_Init'
+                            741 ;------------------------------------------------------------
+                            742 ;------------------------------------------------------------
+                            743 ;	EPROM.c:61: void EPROM_Init(void){
+                            744 ;	-----------------------------------------
+                            745 ;	 function EPROM_Init
+                            746 ;	-----------------------------------------
+   0131                     747 _EPROM_Init:
+                            748 ;	EPROM.c:62: I2CInit();
+                            749 ;	genCall
+                            750 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   0131 02 01 49            751 	ljmp	_I2CInit
+                            752 ;
+                            753 	.area CSEG    (CODE)
+                            754 	.area CONST   (CODE)
+   15F5                     755 __str_0:
+   15F5 0D                  756 	.db 0x0D
+   15F6 0A                  757 	.db 0x0A
+   15F7 49 6E 76 61 6C 69   758 	.ascii "Invalid block number %d"
+        64 20 62 6C 6F 63
+        6B 20 6E 75 6D 62
+        65 72 20 25 64
+   160E 00                  759 	.db 0x00
+                            760 	.area XINIT   (CODE)

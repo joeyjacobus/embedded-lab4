@@ -9,8 +9,6 @@
 #define LCD_DisplayOn 0x0F  //Display on with blinking and cursor
 #define LCD_SystemSet 0x38  //2 line display, 8 bit
 
-#define WRITE 0
-#define READ 1
 
 #define INSTRUCTION 0
 #define DATA        1

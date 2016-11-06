@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Sat Nov 05 18:57:33 2016
+                              4 ; This file generated Sat Nov 05 19:48:22 2016
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mmcs51 --model-large
@@ -489,16 +489,16 @@
                             489 	.globl __mcs51_genXRAMCLEAR
                             490 	.globl __mcs51_genRAMCLEAR
                             491 	.area GSFINAL (CODE)
-   005C 02 02 2D            492 	ljmp	__sdcc_program_startup
+   005C 02 02 29            492 	ljmp	__sdcc_program_startup
                             493 ;--------------------------------------------------------
                             494 ; Home
                             495 ;--------------------------------------------------------
                             496 	.area HOME    (CODE)
                             497 	.area CSEG    (CODE)
-   022D                     498 __sdcc_program_startup:
-   022D 12 04 E5            499 	lcall	_main
+   0229                     498 __sdcc_program_startup:
+   0229 12 04 E1            499 	lcall	_main
                             500 ;	return from main will lock up
-   0230 80 FE               501 	sjmp .
+   022C 80 FE               501 	sjmp .
                             502 ;--------------------------------------------------------
                             503 ; code
                             504 ;--------------------------------------------------------
@@ -511,7 +511,7 @@
                             511 ;	-----------------------------------------
                             512 ;	 function _sdcc_external_startup
                             513 ;	-----------------------------------------
-   0232                     514 __sdcc_external_startup:
+   022E                     514 __sdcc_external_startup:
                     0002    515 	ar2 = 0x02
                     0003    516 	ar3 = 0x03
                     0004    517 	ar4 = 0x04
@@ -522,13 +522,13 @@
                     0001    522 	ar1 = 0x01
                             523 ;	main.c:16: AUXR |= AUXR_ENABLE_XRAM_MASK;   //Enable all XRAM
                             524 ;	genOr
-   0232 43 8E 0C            525 	orl	_AUXR,#0x0C
+   022E 43 8E 0C            525 	orl	_AUXR,#0x0C
                             526 ;	main.c:17: return 0;
                             527 ;	genRet
                             528 ;	Peephole 182.b	used 16 bit load of dptr
-   0235 90 00 00            529 	mov	dptr,#0x0000
+   0231 90 00 00            529 	mov	dptr,#0x0000
                             530 ;	Peephole 300	removed redundant label 00101$
-   0238 22                  531 	ret
+   0234 22                  531 	ret
                             532 ;------------------------------------------------------------
                             533 ;Allocation info for local variables in function 'ShowMenu'
                             534 ;------------------------------------------------------------
@@ -537,126 +537,126 @@
                             537 ;	-----------------------------------------
                             538 ;	 function ShowMenu
                             539 ;	-----------------------------------------
-   0239                     540 _ShowMenu:
+   0235                     540 _ShowMenu:
                             541 ;	main.c:25: printf("\r\n***************");
                             542 ;	genIpush
-   0239 74 54               543 	mov	a,#__str_0
-   023B C0 E0               544 	push	acc
-   023D 74 12               545 	mov	a,#(__str_0 >> 8)
-   023F C0 E0               546 	push	acc
-   0241 74 80               547 	mov	a,#0x80
-   0243 C0 E0               548 	push	acc
+   0235 74 50               543 	mov	a,#__str_0
+   0237 C0 E0               544 	push	acc
+   0239 74 12               545 	mov	a,#(__str_0 >> 8)
+   023B C0 E0               546 	push	acc
+   023D 74 80               547 	mov	a,#0x80
+   023F C0 E0               548 	push	acc
                             549 ;	genCall
-   0245 12 08 EC            550 	lcall	_printf
-   0248 15 81               551 	dec	sp
-   024A 15 81               552 	dec	sp
-   024C 15 81               553 	dec	sp
+   0241 12 08 E8            550 	lcall	_printf
+   0244 15 81               551 	dec	sp
+   0246 15 81               552 	dec	sp
+   0248 15 81               553 	dec	sp
                             554 ;	main.c:26: printf("\r\n    Menu\r\n");
                             555 ;	genIpush
-   024E 74 66               556 	mov	a,#__str_1
-   0250 C0 E0               557 	push	acc
-   0252 74 12               558 	mov	a,#(__str_1 >> 8)
-   0254 C0 E0               559 	push	acc
-   0256 74 80               560 	mov	a,#0x80
-   0258 C0 E0               561 	push	acc
+   024A 74 62               556 	mov	a,#__str_1
+   024C C0 E0               557 	push	acc
+   024E 74 12               558 	mov	a,#(__str_1 >> 8)
+   0250 C0 E0               559 	push	acc
+   0252 74 80               560 	mov	a,#0x80
+   0254 C0 E0               561 	push	acc
                             562 ;	genCall
-   025A 12 08 EC            563 	lcall	_printf
-   025D 15 81               564 	dec	sp
-   025F 15 81               565 	dec	sp
-   0261 15 81               566 	dec	sp
+   0256 12 08 E8            563 	lcall	_printf
+   0259 15 81               564 	dec	sp
+   025B 15 81               565 	dec	sp
+   025D 15 81               566 	dec	sp
                             567 ;	main.c:27: printf("\r\n***************");
                             568 ;	genIpush
-   0263 74 54               569 	mov	a,#__str_0
-   0265 C0 E0               570 	push	acc
-   0267 74 12               571 	mov	a,#(__str_0 >> 8)
-   0269 C0 E0               572 	push	acc
-   026B 74 80               573 	mov	a,#0x80
-   026D C0 E0               574 	push	acc
+   025F 74 50               569 	mov	a,#__str_0
+   0261 C0 E0               570 	push	acc
+   0263 74 12               571 	mov	a,#(__str_0 >> 8)
+   0265 C0 E0               572 	push	acc
+   0267 74 80               573 	mov	a,#0x80
+   0269 C0 E0               574 	push	acc
                             575 ;	genCall
-   026F 12 08 EC            576 	lcall	_printf
-   0272 15 81               577 	dec	sp
-   0274 15 81               578 	dec	sp
-   0276 15 81               579 	dec	sp
+   026B 12 08 E8            576 	lcall	_printf
+   026E 15 81               577 	dec	sp
+   0270 15 81               578 	dec	sp
+   0272 15 81               579 	dec	sp
                             580 ;	main.c:28: printf("\r\nPress 'H' to show this menu");
                             581 ;	genIpush
-   0278 74 73               582 	mov	a,#__str_2
-   027A C0 E0               583 	push	acc
-   027C 74 12               584 	mov	a,#(__str_2 >> 8)
-   027E C0 E0               585 	push	acc
-   0280 74 80               586 	mov	a,#0x80
-   0282 C0 E0               587 	push	acc
+   0274 74 6F               582 	mov	a,#__str_2
+   0276 C0 E0               583 	push	acc
+   0278 74 12               584 	mov	a,#(__str_2 >> 8)
+   027A C0 E0               585 	push	acc
+   027C 74 80               586 	mov	a,#0x80
+   027E C0 E0               587 	push	acc
                             588 ;	genCall
-   0284 12 08 EC            589 	lcall	_printf
-   0287 15 81               590 	dec	sp
-   0289 15 81               591 	dec	sp
-   028B 15 81               592 	dec	sp
+   0280 12 08 E8            589 	lcall	_printf
+   0283 15 81               590 	dec	sp
+   0285 15 81               591 	dec	sp
+   0287 15 81               592 	dec	sp
                             593 ;	main.c:29: printf("\r\nPress 'I' to Init LCD. Must call this first");
                             594 ;	genIpush
-   028D 74 91               595 	mov	a,#__str_3
-   028F C0 E0               596 	push	acc
-   0291 74 12               597 	mov	a,#(__str_3 >> 8)
-   0293 C0 E0               598 	push	acc
-   0295 74 80               599 	mov	a,#0x80
-   0297 C0 E0               600 	push	acc
+   0289 74 8D               595 	mov	a,#__str_3
+   028B C0 E0               596 	push	acc
+   028D 74 12               597 	mov	a,#(__str_3 >> 8)
+   028F C0 E0               598 	push	acc
+   0291 74 80               599 	mov	a,#0x80
+   0293 C0 E0               600 	push	acc
                             601 ;	genCall
-   0299 12 08 EC            602 	lcall	_printf
-   029C 15 81               603 	dec	sp
-   029E 15 81               604 	dec	sp
-   02A0 15 81               605 	dec	sp
+   0295 12 08 E8            602 	lcall	_printf
+   0298 15 81               603 	dec	sp
+   029A 15 81               604 	dec	sp
+   029C 15 81               605 	dec	sp
                             606 ;	main.c:30: printf("\r\nPress 'g' to show gotoaddr. Will go to address 0x40, which is start of line 2");
                             607 ;	genIpush
-   02A2 74 BF               608 	mov	a,#__str_4
-   02A4 C0 E0               609 	push	acc
-   02A6 74 12               610 	mov	a,#(__str_4 >> 8)
-   02A8 C0 E0               611 	push	acc
-   02AA 74 80               612 	mov	a,#0x80
-   02AC C0 E0               613 	push	acc
+   029E 74 BB               608 	mov	a,#__str_4
+   02A0 C0 E0               609 	push	acc
+   02A2 74 12               610 	mov	a,#(__str_4 >> 8)
+   02A4 C0 E0               611 	push	acc
+   02A6 74 80               612 	mov	a,#0x80
+   02A8 C0 E0               613 	push	acc
                             614 ;	genCall
-   02AE 12 08 EC            615 	lcall	_printf
-   02B1 15 81               616 	dec	sp
-   02B3 15 81               617 	dec	sp
-   02B5 15 81               618 	dec	sp
+   02AA 12 08 E8            615 	lcall	_printf
+   02AD 15 81               616 	dec	sp
+   02AF 15 81               617 	dec	sp
+   02B1 15 81               618 	dec	sp
                             619 ;	main.c:31: printf("\r\nPress 'x' to show gotoxy.");
                             620 ;	genIpush
-   02B7 74 0F               621 	mov	a,#__str_5
-   02B9 C0 E0               622 	push	acc
-   02BB 74 13               623 	mov	a,#(__str_5 >> 8)
-   02BD C0 E0               624 	push	acc
-   02BF 74 80               625 	mov	a,#0x80
-   02C1 C0 E0               626 	push	acc
+   02B3 74 0B               621 	mov	a,#__str_5
+   02B5 C0 E0               622 	push	acc
+   02B7 74 13               623 	mov	a,#(__str_5 >> 8)
+   02B9 C0 E0               624 	push	acc
+   02BB 74 80               625 	mov	a,#0x80
+   02BD C0 E0               626 	push	acc
                             627 ;	genCall
-   02C3 12 08 EC            628 	lcall	_printf
-   02C6 15 81               629 	dec	sp
-   02C8 15 81               630 	dec	sp
-   02CA 15 81               631 	dec	sp
+   02BF 12 08 E8            628 	lcall	_printf
+   02C2 15 81               629 	dec	sp
+   02C4 15 81               630 	dec	sp
+   02C6 15 81               631 	dec	sp
                             632 ;	main.c:32: printf("\r\nPress 'c' to show putch. Will draw a character at the start of each line");
                             633 ;	genIpush
-   02CC 74 2B               634 	mov	a,#__str_6
-   02CE C0 E0               635 	push	acc
-   02D0 74 13               636 	mov	a,#(__str_6 >> 8)
-   02D2 C0 E0               637 	push	acc
-   02D4 74 80               638 	mov	a,#0x80
-   02D6 C0 E0               639 	push	acc
+   02C8 74 27               634 	mov	a,#__str_6
+   02CA C0 E0               635 	push	acc
+   02CC 74 13               636 	mov	a,#(__str_6 >> 8)
+   02CE C0 E0               637 	push	acc
+   02D0 74 80               638 	mov	a,#0x80
+   02D2 C0 E0               639 	push	acc
                             640 ;	genCall
-   02D8 12 08 EC            641 	lcall	_printf
-   02DB 15 81               642 	dec	sp
-   02DD 15 81               643 	dec	sp
-   02DF 15 81               644 	dec	sp
+   02D4 12 08 E8            641 	lcall	_printf
+   02D7 15 81               642 	dec	sp
+   02D9 15 81               643 	dec	sp
+   02DB 15 81               644 	dec	sp
                             645 ;	main.c:33: printf("\r\nPress 's' to show putstr. Will fill entire LCD with a string\r\n");
                             646 ;	genIpush
-   02E1 74 76               647 	mov	a,#__str_7
-   02E3 C0 E0               648 	push	acc
-   02E5 74 13               649 	mov	a,#(__str_7 >> 8)
-   02E7 C0 E0               650 	push	acc
-   02E9 74 80               651 	mov	a,#0x80
-   02EB C0 E0               652 	push	acc
+   02DD 74 72               647 	mov	a,#__str_7
+   02DF C0 E0               648 	push	acc
+   02E1 74 13               649 	mov	a,#(__str_7 >> 8)
+   02E3 C0 E0               650 	push	acc
+   02E5 74 80               651 	mov	a,#0x80
+   02E7 C0 E0               652 	push	acc
                             653 ;	genCall
-   02ED 12 08 EC            654 	lcall	_printf
-   02F0 15 81               655 	dec	sp
-   02F2 15 81               656 	dec	sp
-   02F4 15 81               657 	dec	sp
+   02E9 12 08 E8            654 	lcall	_printf
+   02EC 15 81               655 	dec	sp
+   02EE 15 81               656 	dec	sp
+   02F0 15 81               657 	dec	sp
                             658 ;	Peephole 300	removed redundant label 00101$
-   02F6 22                  659 	ret
+   02F2 22                  659 	ret
                             660 ;------------------------------------------------------------
                             661 ;Allocation info for local variables in function 'handleInput'
                             662 ;------------------------------------------------------------
@@ -668,399 +668,399 @@
                             668 ;	-----------------------------------------
                             669 ;	 function handleInput
                             670 ;	-----------------------------------------
-   02F7                     671 _handleInput:
+   02F3                     671 _handleInput:
                             672 ;	genReceive
-   02F7 E5 82               673 	mov	a,dpl
-   02F9 90 00 09            674 	mov	dptr,#_handleInput_c_1_1
-   02FC F0                  675 	movx	@dptr,a
+   02F3 E5 82               673 	mov	a,dpl
+   02F5 90 00 09            674 	mov	dptr,#_handleInput_c_1_1
+   02F8 F0                  675 	movx	@dptr,a
                             676 ;	main.c:42: switch (c){
                             677 ;	genAssign
-   02FD 90 00 09            678 	mov	dptr,#_handleInput_c_1_1
-   0300 E0                  679 	movx	a,@dptr
-   0301 FA                  680 	mov	r2,a
+   02F9 90 00 09            678 	mov	dptr,#_handleInput_c_1_1
+   02FC E0                  679 	movx	a,@dptr
+   02FD FA                  680 	mov	r2,a
                             681 ;	genCmpEq
                             682 ;	gencjneshort
-   0302 BA 48 03            683 	cjne	r2,#0x48,00127$
-   0305 02 04 E2            684 	ljmp	00112$
-   0308                     685 00127$:
+   02FE BA 48 03            683 	cjne	r2,#0x48,00127$
+   0301 02 04 DE            684 	ljmp	00112$
+   0304                     685 00127$:
                             686 ;	genCmpEq
                             687 ;	gencjneshort
-   0308 BA 49 02            688 	cjne	r2,#0x49,00128$
+   0304 BA 49 02            688 	cjne	r2,#0x49,00128$
                             689 ;	Peephole 112.b	changed ljmp to sjmp
-   030B 80 17               690 	sjmp	00101$
-   030D                     691 00128$:
+   0307 80 17               690 	sjmp	00101$
+   0309                     691 00128$:
                             692 ;	genCmpEq
                             693 ;	gencjneshort
-   030D BA 63 03            694 	cjne	r2,#0x63,00129$
-   0310 02 04 79            695 	ljmp	00110$
-   0313                     696 00129$:
+   0309 BA 63 03            694 	cjne	r2,#0x63,00129$
+   030C 02 04 75            695 	ljmp	00110$
+   030F                     696 00129$:
                             697 ;	genCmpEq
                             698 ;	gencjneshort
-   0313 BA 67 02            699 	cjne	r2,#0x67,00130$
+   030F BA 67 02            699 	cjne	r2,#0x67,00130$
                             700 ;	Peephole 112.b	changed ljmp to sjmp
-   0316 80 24               701 	sjmp	00102$
-   0318                     702 00130$:
+   0312 80 24               701 	sjmp	00102$
+   0314                     702 00130$:
                             703 ;	genCmpEq
                             704 ;	gencjneshort
-   0318 BA 73 03            705 	cjne	r2,#0x73,00131$
-   031B 02 04 C1            706 	ljmp	00111$
-   031E                     707 00131$:
+   0314 BA 73 03            705 	cjne	r2,#0x73,00131$
+   0317 02 04 BD            706 	ljmp	00111$
+   031A                     707 00131$:
                             708 ;	genCmpEq
                             709 ;	gencjneshort
-   031E BA 78 02            710 	cjne	r2,#0x78,00132$
+   031A BA 78 02            710 	cjne	r2,#0x78,00132$
                             711 ;	Peephole 112.b	changed ljmp to sjmp
-   0321 80 37               712 	sjmp	00103$
-   0323                     713 00132$:
+   031D 80 37               712 	sjmp	00103$
+   031F                     713 00132$:
                             714 ;	Peephole 251.a	replaced ljmp to ret with ret
-   0323 22                  715 	ret
+   031F 22                  715 	ret
                             716 ;	main.c:43: case 'I':
-   0324                     717 00101$:
+   0320                     717 00101$:
                             718 ;	main.c:44: printf("\r\nInitializing LCD\r\n");
                             719 ;	genIpush
-   0324 74 B7               720 	mov	a,#__str_8
-   0326 C0 E0               721 	push	acc
-   0328 74 13               722 	mov	a,#(__str_8 >> 8)
-   032A C0 E0               723 	push	acc
-   032C 74 80               724 	mov	a,#0x80
-   032E C0 E0               725 	push	acc
+   0320 74 B3               720 	mov	a,#__str_8
+   0322 C0 E0               721 	push	acc
+   0324 74 13               722 	mov	a,#(__str_8 >> 8)
+   0326 C0 E0               723 	push	acc
+   0328 74 80               724 	mov	a,#0x80
+   032A C0 E0               725 	push	acc
                             726 ;	genCall
-   0330 12 08 EC            727 	lcall	_printf
-   0333 15 81               728 	dec	sp
-   0335 15 81               729 	dec	sp
-   0337 15 81               730 	dec	sp
+   032C 12 08 E8            727 	lcall	_printf
+   032F 15 81               728 	dec	sp
+   0331 15 81               729 	dec	sp
+   0333 15 81               730 	dec	sp
                             731 ;	main.c:45: LCD_Init();
                             732 ;	genCall
                             733 ;	main.c:46: break;
                             734 ;	Peephole 251.a	replaced ljmp to ret with ret
                             735 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   0339 02 01 FB            736 	ljmp	_LCD_Init
+   0335 02 01 F7            736 	ljmp	_LCD_Init
                             737 ;	main.c:47: case 'g':
-   033C                     738 00102$:
+   0338                     738 00102$:
                             739 ;	main.c:48: printf("\r\nMoved cursor to start of line 2\r\n");
                             740 ;	genIpush
-   033C 74 CC               741 	mov	a,#__str_9
-   033E C0 E0               742 	push	acc
-   0340 74 13               743 	mov	a,#(__str_9 >> 8)
-   0342 C0 E0               744 	push	acc
-   0344 74 80               745 	mov	a,#0x80
-   0346 C0 E0               746 	push	acc
+   0338 74 C8               741 	mov	a,#__str_9
+   033A C0 E0               742 	push	acc
+   033C 74 13               743 	mov	a,#(__str_9 >> 8)
+   033E C0 E0               744 	push	acc
+   0340 74 80               745 	mov	a,#0x80
+   0342 C0 E0               746 	push	acc
                             747 ;	genCall
-   0348 12 08 EC            748 	lcall	_printf
-   034B 15 81               749 	dec	sp
-   034D 15 81               750 	dec	sp
-   034F 15 81               751 	dec	sp
+   0344 12 08 E8            748 	lcall	_printf
+   0347 15 81               749 	dec	sp
+   0349 15 81               750 	dec	sp
+   034B 15 81               751 	dec	sp
                             752 ;	main.c:49: LCD_ClearScreen();
                             753 ;	genCall
-   0351 12 00 B9            754 	lcall	_LCD_ClearScreen
+   034D 12 00 B5            754 	lcall	_LCD_ClearScreen
                             755 ;	main.c:50: LCD_gotoaddr(0x40);
                             756 ;	genCall
-   0354 75 82 40            757 	mov	dpl,#0x40
+   0350 75 82 40            757 	mov	dpl,#0x40
                             758 ;	main.c:51: break;
                             759 ;	Peephole 251.a	replaced ljmp to ret with ret
                             760 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   0357 02 00 C2            761 	ljmp	_LCD_gotoaddr
+   0353 02 00 BE            761 	ljmp	_LCD_gotoaddr
                             762 ;	main.c:52: case 'x':
-   035A                     763 00103$:
+   0356                     763 00103$:
                             764 ;	main.c:53: printf ("\r\nEnter a row from 0-3:");
                             765 ;	genIpush
-   035A 74 F0               766 	mov	a,#__str_10
-   035C C0 E0               767 	push	acc
-   035E 74 13               768 	mov	a,#(__str_10 >> 8)
-   0360 C0 E0               769 	push	acc
-   0362 74 80               770 	mov	a,#0x80
-   0364 C0 E0               771 	push	acc
+   0356 74 EC               766 	mov	a,#__str_10
+   0358 C0 E0               767 	push	acc
+   035A 74 13               768 	mov	a,#(__str_10 >> 8)
+   035C C0 E0               769 	push	acc
+   035E 74 80               770 	mov	a,#0x80
+   0360 C0 E0               771 	push	acc
                             772 ;	genCall
-   0366 12 08 EC            773 	lcall	_printf
-   0369 15 81               774 	dec	sp
-   036B 15 81               775 	dec	sp
-   036D 15 81               776 	dec	sp
-                            777 ;	main.c:54: row = Serial_GetInteger(3) ;
+   0362 12 08 E8            773 	lcall	_printf
+   0365 15 81               774 	dec	sp
+   0367 15 81               775 	dec	sp
+   0369 15 81               776 	dec	sp
+                            777 ;	main.c:54: row = Serial_GetInteger(3);
                             778 ;	genCall
                             779 ;	Peephole 182.b	used 16 bit load of dptr
-   036F 90 00 03            780 	mov	dptr,#0x0003
-   0372 12 05 2B            781 	lcall	_Serial_GetInteger
-   0375 E5 82               782 	mov	a,dpl
-   0377 85 83 F0            783 	mov	b,dph
+   036B 90 00 03            780 	mov	dptr,#0x0003
+   036E 12 05 27            781 	lcall	_Serial_GetInteger
+   0371 E5 82               782 	mov	a,dpl
+   0373 85 83 F0            783 	mov	b,dph
                             784 ;	genAssign
-   037A 90 00 0A            785 	mov	dptr,#_handleInput_row_1_1
-   037D F0                  786 	movx	@dptr,a
-   037E A3                  787 	inc	dptr
-   037F E5 F0               788 	mov	a,b
-   0381 F0                  789 	movx	@dptr,a
+   0376 90 00 0A            785 	mov	dptr,#_handleInput_row_1_1
+   0379 F0                  786 	movx	@dptr,a
+   037A A3                  787 	inc	dptr
+   037B E5 F0               788 	mov	a,b
+   037D F0                  789 	movx	@dptr,a
                             790 ;	main.c:55: while(row > 3){
-   0382                     791 00104$:
+   037E                     791 00104$:
                             792 ;	genAssign
-   0382 90 00 0A            793 	mov	dptr,#_handleInput_row_1_1
-   0385 E0                  794 	movx	a,@dptr
-   0386 FA                  795 	mov	r2,a
-   0387 A3                  796 	inc	dptr
-   0388 E0                  797 	movx	a,@dptr
-   0389 FB                  798 	mov	r3,a
+   037E 90 00 0A            793 	mov	dptr,#_handleInput_row_1_1
+   0381 E0                  794 	movx	a,@dptr
+   0382 FA                  795 	mov	r2,a
+   0383 A3                  796 	inc	dptr
+   0384 E0                  797 	movx	a,@dptr
+   0385 FB                  798 	mov	r3,a
                             799 ;	genCmpGt
                             800 ;	genCmp
-   038A C3                  801 	clr	c
-   038B 74 03               802 	mov	a,#0x03
-   038D 9A                  803 	subb	a,r2
+   0386 C3                  801 	clr	c
+   0387 74 03               802 	mov	a,#0x03
+   0389 9A                  803 	subb	a,r2
                             804 ;	Peephole 159	avoided xrl during execution
-   038E 74 80               805 	mov	a,#(0x00 ^ 0x80)
-   0390 8B F0               806 	mov	b,r3
-   0392 63 F0 80            807 	xrl	b,#0x80
-   0395 95 F0               808 	subb	a,b
+   038A 74 80               805 	mov	a,#(0x00 ^ 0x80)
+   038C 8B F0               806 	mov	b,r3
+   038E 63 F0 80            807 	xrl	b,#0x80
+   0391 95 F0               808 	subb	a,b
                             809 ;	genIfxJump
                             810 ;	Peephole 108.a	removed ljmp by inverse jump logic
-   0397 50 2A               811 	jnc	00106$
+   0393 50 2A               811 	jnc	00106$
                             812 ;	Peephole 300	removed redundant label 00133$
                             813 ;	main.c:56: printf ("\r\nEnter a row from 0-3:");
                             814 ;	genIpush
-   0399 74 F0               815 	mov	a,#__str_10
-   039B C0 E0               816 	push	acc
-   039D 74 13               817 	mov	a,#(__str_10 >> 8)
-   039F C0 E0               818 	push	acc
-   03A1 74 80               819 	mov	a,#0x80
-   03A3 C0 E0               820 	push	acc
+   0395 74 EC               815 	mov	a,#__str_10
+   0397 C0 E0               816 	push	acc
+   0399 74 13               817 	mov	a,#(__str_10 >> 8)
+   039B C0 E0               818 	push	acc
+   039D 74 80               819 	mov	a,#0x80
+   039F C0 E0               820 	push	acc
                             821 ;	genCall
-   03A5 12 08 EC            822 	lcall	_printf
-   03A8 15 81               823 	dec	sp
-   03AA 15 81               824 	dec	sp
-   03AC 15 81               825 	dec	sp
+   03A1 12 08 E8            822 	lcall	_printf
+   03A4 15 81               823 	dec	sp
+   03A6 15 81               824 	dec	sp
+   03A8 15 81               825 	dec	sp
                             826 ;	main.c:57: row = Serial_GetInteger(3);
                             827 ;	genCall
                             828 ;	Peephole 182.b	used 16 bit load of dptr
-   03AE 90 00 03            829 	mov	dptr,#0x0003
-   03B1 12 05 2B            830 	lcall	_Serial_GetInteger
-   03B4 E5 82               831 	mov	a,dpl
-   03B6 85 83 F0            832 	mov	b,dph
+   03AA 90 00 03            829 	mov	dptr,#0x0003
+   03AD 12 05 27            830 	lcall	_Serial_GetInteger
+   03B0 E5 82               831 	mov	a,dpl
+   03B2 85 83 F0            832 	mov	b,dph
                             833 ;	genAssign
-   03B9 90 00 0A            834 	mov	dptr,#_handleInput_row_1_1
-   03BC F0                  835 	movx	@dptr,a
-   03BD A3                  836 	inc	dptr
-   03BE E5 F0               837 	mov	a,b
-   03C0 F0                  838 	movx	@dptr,a
+   03B5 90 00 0A            834 	mov	dptr,#_handleInput_row_1_1
+   03B8 F0                  835 	movx	@dptr,a
+   03B9 A3                  836 	inc	dptr
+   03BA E5 F0               837 	mov	a,b
+   03BC F0                  838 	movx	@dptr,a
                             839 ;	Peephole 112.b	changed ljmp to sjmp
-   03C1 80 BF               840 	sjmp	00104$
-   03C3                     841 00106$:
+   03BD 80 BF               840 	sjmp	00104$
+   03BF                     841 00106$:
                             842 ;	main.c:60: printf ("\r\nEnter a col from 0-15:");
                             843 ;	genIpush
-   03C3 74 08               844 	mov	a,#__str_11
-   03C5 C0 E0               845 	push	acc
-   03C7 74 14               846 	mov	a,#(__str_11 >> 8)
-   03C9 C0 E0               847 	push	acc
-   03CB 74 80               848 	mov	a,#0x80
-   03CD C0 E0               849 	push	acc
+   03BF 74 04               844 	mov	a,#__str_11
+   03C1 C0 E0               845 	push	acc
+   03C3 74 14               846 	mov	a,#(__str_11 >> 8)
+   03C5 C0 E0               847 	push	acc
+   03C7 74 80               848 	mov	a,#0x80
+   03C9 C0 E0               849 	push	acc
                             850 ;	genCall
-   03CF 12 08 EC            851 	lcall	_printf
-   03D2 15 81               852 	dec	sp
-   03D4 15 81               853 	dec	sp
-   03D6 15 81               854 	dec	sp
+   03CB 12 08 E8            851 	lcall	_printf
+   03CE 15 81               852 	dec	sp
+   03D0 15 81               853 	dec	sp
+   03D2 15 81               854 	dec	sp
                             855 ;	main.c:61: col = Serial_GetInteger(3) ;
                             856 ;	genCall
                             857 ;	Peephole 182.b	used 16 bit load of dptr
-   03D8 90 00 03            858 	mov	dptr,#0x0003
-   03DB 12 05 2B            859 	lcall	_Serial_GetInteger
-   03DE E5 82               860 	mov	a,dpl
-   03E0 85 83 F0            861 	mov	b,dph
+   03D4 90 00 03            858 	mov	dptr,#0x0003
+   03D7 12 05 27            859 	lcall	_Serial_GetInteger
+   03DA E5 82               860 	mov	a,dpl
+   03DC 85 83 F0            861 	mov	b,dph
                             862 ;	genAssign
-   03E3 90 00 0C            863 	mov	dptr,#_handleInput_col_1_1
-   03E6 F0                  864 	movx	@dptr,a
-   03E7 A3                  865 	inc	dptr
-   03E8 E5 F0               866 	mov	a,b
-   03EA F0                  867 	movx	@dptr,a
+   03DF 90 00 0C            863 	mov	dptr,#_handleInput_col_1_1
+   03E2 F0                  864 	movx	@dptr,a
+   03E3 A3                  865 	inc	dptr
+   03E4 E5 F0               866 	mov	a,b
+   03E6 F0                  867 	movx	@dptr,a
                             868 ;	main.c:62: while(col > 15){
-   03EB                     869 00107$:
+   03E7                     869 00107$:
                             870 ;	genAssign
-   03EB 90 00 0C            871 	mov	dptr,#_handleInput_col_1_1
-   03EE E0                  872 	movx	a,@dptr
-   03EF FA                  873 	mov	r2,a
-   03F0 A3                  874 	inc	dptr
-   03F1 E0                  875 	movx	a,@dptr
-   03F2 FB                  876 	mov	r3,a
+   03E7 90 00 0C            871 	mov	dptr,#_handleInput_col_1_1
+   03EA E0                  872 	movx	a,@dptr
+   03EB FA                  873 	mov	r2,a
+   03EC A3                  874 	inc	dptr
+   03ED E0                  875 	movx	a,@dptr
+   03EE FB                  876 	mov	r3,a
                             877 ;	genCmpGt
                             878 ;	genCmp
-   03F3 C3                  879 	clr	c
-   03F4 74 0F               880 	mov	a,#0x0F
-   03F6 9A                  881 	subb	a,r2
+   03EF C3                  879 	clr	c
+   03F0 74 0F               880 	mov	a,#0x0F
+   03F2 9A                  881 	subb	a,r2
                             882 ;	Peephole 159	avoided xrl during execution
-   03F7 74 80               883 	mov	a,#(0x00 ^ 0x80)
-   03F9 8B F0               884 	mov	b,r3
-   03FB 63 F0 80            885 	xrl	b,#0x80
-   03FE 95 F0               886 	subb	a,b
+   03F3 74 80               883 	mov	a,#(0x00 ^ 0x80)
+   03F5 8B F0               884 	mov	b,r3
+   03F7 63 F0 80            885 	xrl	b,#0x80
+   03FA 95 F0               886 	subb	a,b
                             887 ;	genIfxJump
                             888 ;	Peephole 108.a	removed ljmp by inverse jump logic
-   0400 50 2A               889 	jnc	00109$
+   03FC 50 2A               889 	jnc	00109$
                             890 ;	Peephole 300	removed redundant label 00134$
                             891 ;	main.c:63: printf ("\r\nEnter a col from 0-15:");
                             892 ;	genIpush
-   0402 74 08               893 	mov	a,#__str_11
-   0404 C0 E0               894 	push	acc
-   0406 74 14               895 	mov	a,#(__str_11 >> 8)
-   0408 C0 E0               896 	push	acc
-   040A 74 80               897 	mov	a,#0x80
-   040C C0 E0               898 	push	acc
+   03FE 74 04               893 	mov	a,#__str_11
+   0400 C0 E0               894 	push	acc
+   0402 74 14               895 	mov	a,#(__str_11 >> 8)
+   0404 C0 E0               896 	push	acc
+   0406 74 80               897 	mov	a,#0x80
+   0408 C0 E0               898 	push	acc
                             899 ;	genCall
-   040E 12 08 EC            900 	lcall	_printf
-   0411 15 81               901 	dec	sp
-   0413 15 81               902 	dec	sp
-   0415 15 81               903 	dec	sp
+   040A 12 08 E8            900 	lcall	_printf
+   040D 15 81               901 	dec	sp
+   040F 15 81               902 	dec	sp
+   0411 15 81               903 	dec	sp
                             904 ;	main.c:64: col = Serial_GetInteger(3);
                             905 ;	genCall
                             906 ;	Peephole 182.b	used 16 bit load of dptr
-   0417 90 00 03            907 	mov	dptr,#0x0003
-   041A 12 05 2B            908 	lcall	_Serial_GetInteger
-   041D E5 82               909 	mov	a,dpl
-   041F 85 83 F0            910 	mov	b,dph
+   0413 90 00 03            907 	mov	dptr,#0x0003
+   0416 12 05 27            908 	lcall	_Serial_GetInteger
+   0419 E5 82               909 	mov	a,dpl
+   041B 85 83 F0            910 	mov	b,dph
                             911 ;	genAssign
-   0422 90 00 0C            912 	mov	dptr,#_handleInput_col_1_1
-   0425 F0                  913 	movx	@dptr,a
-   0426 A3                  914 	inc	dptr
-   0427 E5 F0               915 	mov	a,b
-   0429 F0                  916 	movx	@dptr,a
+   041E 90 00 0C            912 	mov	dptr,#_handleInput_col_1_1
+   0421 F0                  913 	movx	@dptr,a
+   0422 A3                  914 	inc	dptr
+   0423 E5 F0               915 	mov	a,b
+   0425 F0                  916 	movx	@dptr,a
                             917 ;	Peephole 112.b	changed ljmp to sjmp
-   042A 80 BF               918 	sjmp	00107$
-   042C                     919 00109$:
+   0426 80 BF               918 	sjmp	00107$
+   0428                     919 00109$:
                             920 ;	main.c:66: LCD_ClearScreen();
                             921 ;	genCall
-   042C C0 02               922 	push	ar2
-   042E C0 03               923 	push	ar3
-   0430 12 00 B9            924 	lcall	_LCD_ClearScreen
-   0433 D0 03               925 	pop	ar3
-   0435 D0 02               926 	pop	ar2
+   0428 C0 02               922 	push	ar2
+   042A C0 03               923 	push	ar3
+   042C 12 00 B5            924 	lcall	_LCD_ClearScreen
+   042F D0 03               925 	pop	ar3
+   0431 D0 02               926 	pop	ar2
                             927 ;	main.c:67: LCD_gotoxy(row, col);
                             928 ;	genAssign
-   0437 90 00 0A            929 	mov	dptr,#_handleInput_row_1_1
-   043A E0                  930 	movx	a,@dptr
-   043B FC                  931 	mov	r4,a
-   043C A3                  932 	inc	dptr
-   043D E0                  933 	movx	a,@dptr
-   043E FD                  934 	mov	r5,a
+   0433 90 00 0A            929 	mov	dptr,#_handleInput_row_1_1
+   0436 E0                  930 	movx	a,@dptr
+   0437 FC                  931 	mov	r4,a
+   0438 A3                  932 	inc	dptr
+   0439 E0                  933 	movx	a,@dptr
+   043A FD                  934 	mov	r5,a
                             935 ;	genCast
-   043F 8C 06               936 	mov	ar6,r4
+   043B 8C 06               936 	mov	ar6,r4
                             937 ;	genCast
-   0441 90 00 03            938 	mov	dptr,#_LCD_gotoxy_PARM_2
-   0444 EA                  939 	mov	a,r2
-   0445 F0                  940 	movx	@dptr,a
+   043D 90 00 03            938 	mov	dptr,#_LCD_gotoxy_PARM_2
+   0440 EA                  939 	mov	a,r2
+   0441 F0                  940 	movx	@dptr,a
                             941 ;	genCall
-   0446 8E 82               942 	mov	dpl,r6
-   0448 C0 02               943 	push	ar2
-   044A C0 03               944 	push	ar3
-   044C C0 04               945 	push	ar4
-   044E C0 05               946 	push	ar5
-   0450 12 00 F1            947 	lcall	_LCD_gotoxy
-   0453 D0 05               948 	pop	ar5
-   0455 D0 04               949 	pop	ar4
-   0457 D0 03               950 	pop	ar3
-   0459 D0 02               951 	pop	ar2
+   0442 8E 82               942 	mov	dpl,r6
+   0444 C0 02               943 	push	ar2
+   0446 C0 03               944 	push	ar3
+   0448 C0 04               945 	push	ar4
+   044A C0 05               946 	push	ar5
+   044C 12 00 ED            947 	lcall	_LCD_gotoxy
+   044F D0 05               948 	pop	ar5
+   0451 D0 04               949 	pop	ar4
+   0453 D0 03               950 	pop	ar3
+   0455 D0 02               951 	pop	ar2
                             952 ;	main.c:68: printf("\r\nMoved cursor to new location (%d,%d)\r\n", row, col);
                             953 ;	genIpush
-   045B C0 02               954 	push	ar2
-   045D C0 03               955 	push	ar3
+   0457 C0 02               954 	push	ar2
+   0459 C0 03               955 	push	ar3
                             956 ;	genIpush
-   045F C0 04               957 	push	ar4
-   0461 C0 05               958 	push	ar5
+   045B C0 04               957 	push	ar4
+   045D C0 05               958 	push	ar5
                             959 ;	genIpush
-   0463 74 21               960 	mov	a,#__str_12
-   0465 C0 E0               961 	push	acc
-   0467 74 14               962 	mov	a,#(__str_12 >> 8)
-   0469 C0 E0               963 	push	acc
-   046B 74 80               964 	mov	a,#0x80
-   046D C0 E0               965 	push	acc
+   045F 74 1D               960 	mov	a,#__str_12
+   0461 C0 E0               961 	push	acc
+   0463 74 14               962 	mov	a,#(__str_12 >> 8)
+   0465 C0 E0               963 	push	acc
+   0467 74 80               964 	mov	a,#0x80
+   0469 C0 E0               965 	push	acc
                             966 ;	genCall
-   046F 12 08 EC            967 	lcall	_printf
-   0472 E5 81               968 	mov	a,sp
-   0474 24 F9               969 	add	a,#0xf9
-   0476 F5 81               970 	mov	sp,a
+   046B 12 08 E8            967 	lcall	_printf
+   046E E5 81               968 	mov	a,sp
+   0470 24 F9               969 	add	a,#0xf9
+   0472 F5 81               970 	mov	sp,a
                             971 ;	main.c:69: break;
                             972 ;	main.c:70: case 'c':
                             973 ;	Peephole 112.b	changed ljmp to sjmp
                             974 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0478 22                  975 	ret
-   0479                     976 00110$:
+   0474 22                  975 	ret
+   0475                     976 00110$:
                             977 ;	main.c:71: printf("\r\nUpdating first character of each line\r\n");
                             978 ;	genIpush
-   0479 74 4A               979 	mov	a,#__str_13
-   047B C0 E0               980 	push	acc
-   047D 74 14               981 	mov	a,#(__str_13 >> 8)
-   047F C0 E0               982 	push	acc
-   0481 74 80               983 	mov	a,#0x80
-   0483 C0 E0               984 	push	acc
+   0475 74 46               979 	mov	a,#__str_13
+   0477 C0 E0               980 	push	acc
+   0479 74 14               981 	mov	a,#(__str_13 >> 8)
+   047B C0 E0               982 	push	acc
+   047D 74 80               983 	mov	a,#0x80
+   047F C0 E0               984 	push	acc
                             985 ;	genCall
-   0485 12 08 EC            986 	lcall	_printf
-   0488 15 81               987 	dec	sp
-   048A 15 81               988 	dec	sp
-   048C 15 81               989 	dec	sp
+   0481 12 08 E8            986 	lcall	_printf
+   0484 15 81               987 	dec	sp
+   0486 15 81               988 	dec	sp
+   0488 15 81               989 	dec	sp
                             990 ;	main.c:72: LCD_ClearScreen();
                             991 ;	genCall
-   048E 12 00 B9            992 	lcall	_LCD_ClearScreen
+   048A 12 00 B5            992 	lcall	_LCD_ClearScreen
                             993 ;	main.c:73: LCD_gotoaddr(0x00);
                             994 ;	genCall
-   0491 75 82 00            995 	mov	dpl,#0x00
-   0494 12 00 C2            996 	lcall	_LCD_gotoaddr
+   048D 75 82 00            995 	mov	dpl,#0x00
+   0490 12 00 BE            996 	lcall	_LCD_gotoaddr
                             997 ;	main.c:74: LCD_Putch('A');
                             998 ;	genCall
-   0497 75 82 41            999 	mov	dpl,#0x41
-   049A 12 01 25           1000 	lcall	_LCD_Putch
+   0493 75 82 41            999 	mov	dpl,#0x41
+   0496 12 01 21           1000 	lcall	_LCD_Putch
                            1001 ;	main.c:75: LCD_gotoaddr(0x40);
                            1002 ;	genCall
-   049D 75 82 40           1003 	mov	dpl,#0x40
-   04A0 12 00 C2           1004 	lcall	_LCD_gotoaddr
+   0499 75 82 40           1003 	mov	dpl,#0x40
+   049C 12 00 BE           1004 	lcall	_LCD_gotoaddr
                            1005 ;	main.c:76: LCD_Putch('B');
                            1006 ;	genCall
-   04A3 75 82 42           1007 	mov	dpl,#0x42
-   04A6 12 01 25           1008 	lcall	_LCD_Putch
+   049F 75 82 42           1007 	mov	dpl,#0x42
+   04A2 12 01 21           1008 	lcall	_LCD_Putch
                            1009 ;	main.c:77: LCD_gotoaddr(0x10);
                            1010 ;	genCall
-   04A9 75 82 10           1011 	mov	dpl,#0x10
-   04AC 12 00 C2           1012 	lcall	_LCD_gotoaddr
+   04A5 75 82 10           1011 	mov	dpl,#0x10
+   04A8 12 00 BE           1012 	lcall	_LCD_gotoaddr
                            1013 ;	main.c:78: LCD_Putch('C');
                            1014 ;	genCall
-   04AF 75 82 43           1015 	mov	dpl,#0x43
-   04B2 12 01 25           1016 	lcall	_LCD_Putch
+   04AB 75 82 43           1015 	mov	dpl,#0x43
+   04AE 12 01 21           1016 	lcall	_LCD_Putch
                            1017 ;	main.c:79: LCD_gotoaddr(0x50);
                            1018 ;	genCall
-   04B5 75 82 50           1019 	mov	dpl,#0x50
-   04B8 12 00 C2           1020 	lcall	_LCD_gotoaddr
+   04B1 75 82 50           1019 	mov	dpl,#0x50
+   04B4 12 00 BE           1020 	lcall	_LCD_gotoaddr
                            1021 ;	main.c:80: LCD_Putch('D');
                            1022 ;	genCall
-   04BB 75 82 44           1023 	mov	dpl,#0x44
+   04B7 75 82 44           1023 	mov	dpl,#0x44
                            1024 ;	main.c:81: break;
                            1025 ;	main.c:82: case 's':
                            1026 ;	Peephole 112.b	changed ljmp to sjmp
                            1027 ;	Peephole 251.b	replaced sjmp to ret with ret
                            1028 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   04BE 02 01 25           1029 	ljmp	_LCD_Putch
-   04C1                    1030 00111$:
+   04BA 02 01 21           1029 	ljmp	_LCD_Putch
+   04BD                    1030 00111$:
                            1031 ;	main.c:83: printf("\r\Writing a string to LCD\r\n");
                            1032 ;	genIpush
-   04C1 74 74              1033 	mov	a,#__str_14
-   04C3 C0 E0              1034 	push	acc
-   04C5 74 14              1035 	mov	a,#(__str_14 >> 8)
-   04C7 C0 E0              1036 	push	acc
-   04C9 74 80              1037 	mov	a,#0x80
-   04CB C0 E0              1038 	push	acc
+   04BD 74 70              1033 	mov	a,#__str_14
+   04BF C0 E0              1034 	push	acc
+   04C1 74 14              1035 	mov	a,#(__str_14 >> 8)
+   04C3 C0 E0              1036 	push	acc
+   04C5 74 80              1037 	mov	a,#0x80
+   04C7 C0 E0              1038 	push	acc
                            1039 ;	genCall
-   04CD 12 08 EC           1040 	lcall	_printf
-   04D0 15 81              1041 	dec	sp
-   04D2 15 81              1042 	dec	sp
-   04D4 15 81              1043 	dec	sp
+   04C9 12 08 E8           1040 	lcall	_printf
+   04CC 15 81              1041 	dec	sp
+   04CE 15 81              1042 	dec	sp
+   04D0 15 81              1043 	dec	sp
                            1044 ;	main.c:84: LCD_ClearScreen();
                            1045 ;	genCall
-   04D6 12 00 B9           1046 	lcall	_LCD_ClearScreen
+   04D2 12 00 B5           1046 	lcall	_LCD_ClearScreen
                            1047 ;	main.c:85: LCD_Putstr("abcdefghijklnopqrstuvwxyz123456789abcdefghijklmnopqrstuvwxyz12345678987654321");
                            1048 ;	genCall
                            1049 ;	Peephole 182.a	used 16 bit load of DPTR
-   04D9 90 14 8F           1050 	mov	dptr,#__str_15
-   04DC 75 F0 80           1051 	mov	b,#0x80
+   04D5 90 14 8B           1050 	mov	dptr,#__str_15
+   04D8 75 F0 80           1051 	mov	b,#0x80
                            1052 ;	main.c:86: break;
                            1053 ;	main.c:87: case 'H':
                            1054 ;	Peephole 112.b	changed ljmp to sjmp
                            1055 ;	Peephole 251.b	replaced sjmp to ret with ret
                            1056 ;	Peephole 253.a	replaced lcall/ret with ljmp
-   04DF 02 01 38           1057 	ljmp	_LCD_Putstr
-   04E2                    1058 00112$:
+   04DB 02 01 34           1057 	ljmp	_LCD_Putstr
+   04DE                    1058 00112$:
                            1059 ;	main.c:88: ShowMenu();
                            1060 ;	genCall
                            1061 ;	main.c:92: }
                            1062 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   04E2 02 02 39           1063 	ljmp	_ShowMenu
+   04DE 02 02 35           1063 	ljmp	_ShowMenu
                            1064 ;
                            1065 ;------------------------------------------------------------
                            1066 ;Allocation info for local variables in function 'main'
@@ -1071,82 +1071,82 @@
                            1071 ;	-----------------------------------------
                            1072 ;	 function main
                            1073 ;	-----------------------------------------
-   04E5                    1074 _main:
+   04E1                    1074 _main:
                            1075 ;	main.c:100: Serial_Init();
                            1076 ;	genCall
-   04E5 12 07 06           1077 	lcall	_Serial_Init
+   04E1 12 07 02           1077 	lcall	_Serial_Init
                            1078 ;	main.c:101: P1_3 = 1;
                            1079 ;	genAssign
-   04E8 D2 93              1080 	setb	_P1_3
+   04E4 D2 93              1080 	setb	_P1_3
                            1081 ;	main.c:103: ShowMenu();
                            1082 ;	genCall
-   04EA 12 02 39           1083 	lcall	_ShowMenu
+   04E6 12 02 35           1083 	lcall	_ShowMenu
                            1084 ;	main.c:104: while(1){
-   04ED                    1085 00104$:
+   04E9                    1085 00104$:
                            1086 ;	main.c:106: c = getchar ();
                            1087 ;	genCall
-   04ED 12 05 21           1088 	lcall	_getchar
-   04F0 AA 82              1089 	mov	r2,dpl
+   04E9 12 05 1D           1088 	lcall	_getchar
+   04EC AA 82              1089 	mov	r2,dpl
                            1090 ;	main.c:107: if (c == ENTER_KEY){
                            1091 ;	genCmpEq
                            1092 ;	gencjneshort
                            1093 ;	Peephole 112.b	changed ljmp to sjmp
                            1094 ;	Peephole 198.b	optimized misc jump sequence
-   04F2 BA 0D 0A           1095 	cjne	r2,#0x0D,00102$
+   04EE BA 0D 0A           1095 	cjne	r2,#0x0D,00102$
                            1096 ;	Peephole 200.b	removed redundant sjmp
                            1097 ;	Peephole 300	removed redundant label 00110$
                            1098 ;	Peephole 300	removed redundant label 00111$
                            1099 ;	main.c:108: putchar('\n');
                            1100 ;	genCall
-   04F5 75 82 0A           1101 	mov	dpl,#0x0A
-   04F8 C0 02              1102 	push	ar2
-   04FA 12 05 0F           1103 	lcall	_putchar
-   04FD D0 02              1104 	pop	ar2
-   04FF                    1105 00102$:
+   04F1 75 82 0A           1101 	mov	dpl,#0x0A
+   04F4 C0 02              1102 	push	ar2
+   04F6 12 05 0B           1103 	lcall	_putchar
+   04F9 D0 02              1104 	pop	ar2
+   04FB                    1105 00102$:
                            1106 ;	main.c:110: putchar(c);
                            1107 ;	genCall
-   04FF 8A 82              1108 	mov	dpl,r2
-   0501 C0 02              1109 	push	ar2
-   0503 12 05 0F           1110 	lcall	_putchar
-   0506 D0 02              1111 	pop	ar2
+   04FB 8A 82              1108 	mov	dpl,r2
+   04FD C0 02              1109 	push	ar2
+   04FF 12 05 0B           1110 	lcall	_putchar
+   0502 D0 02              1111 	pop	ar2
                            1112 ;	main.c:111: handleInput(c);
                            1113 ;	genCall
-   0508 8A 82              1114 	mov	dpl,r2
-   050A 12 02 F7           1115 	lcall	_handleInput
+   0504 8A 82              1114 	mov	dpl,r2
+   0506 12 02 F3           1115 	lcall	_handleInput
                            1116 ;	Peephole 112.b	changed ljmp to sjmp
-   050D 80 DE              1117 	sjmp	00104$
+   0509 80 DE              1117 	sjmp	00104$
                            1118 ;	Peephole 259.a	removed redundant label 00106$ and ret
                            1119 ;
                            1120 	.area CSEG    (CODE)
                            1121 	.area CONST   (CODE)
-   1254                    1122 __str_0:
-   1254 0D                 1123 	.db 0x0D
-   1255 0A                 1124 	.db 0x0A
-   1256 2A 2A 2A 2A 2A 2A  1125 	.ascii "***************"
+   1250                    1122 __str_0:
+   1250 0D                 1123 	.db 0x0D
+   1251 0A                 1124 	.db 0x0A
+   1252 2A 2A 2A 2A 2A 2A  1125 	.ascii "***************"
         2A 2A 2A 2A 2A 2A
         2A 2A 2A
-   1265 00                 1126 	.db 0x00
-   1266                    1127 __str_1:
-   1266 0D                 1128 	.db 0x0D
-   1267 0A                 1129 	.db 0x0A
-   1268 20 20 20 20 4D 65  1130 	.ascii "    Menu"
+   1261 00                 1126 	.db 0x00
+   1262                    1127 __str_1:
+   1262 0D                 1128 	.db 0x0D
+   1263 0A                 1129 	.db 0x0A
+   1264 20 20 20 20 4D 65  1130 	.ascii "    Menu"
         6E 75
-   1270 0D                 1131 	.db 0x0D
-   1271 0A                 1132 	.db 0x0A
-   1272 00                 1133 	.db 0x00
-   1273                    1134 __str_2:
-   1273 0D                 1135 	.db 0x0D
-   1274 0A                 1136 	.db 0x0A
-   1275 50 72 65 73 73 20  1137 	.ascii "Press 'H' to show this menu"
+   126C 0D                 1131 	.db 0x0D
+   126D 0A                 1132 	.db 0x0A
+   126E 00                 1133 	.db 0x00
+   126F                    1134 __str_2:
+   126F 0D                 1135 	.db 0x0D
+   1270 0A                 1136 	.db 0x0A
+   1271 50 72 65 73 73 20  1137 	.ascii "Press 'H' to show this menu"
         27 48 27 20 74 6F
         20 73 68 6F 77 20
         74 68 69 73 20 6D
         65 6E 75
-   1290 00                 1138 	.db 0x00
-   1291                    1139 __str_3:
-   1291 0D                 1140 	.db 0x0D
-   1292 0A                 1141 	.db 0x0A
-   1293 50 72 65 73 73 20  1142 	.ascii "Press 'I' to Init LCD. Must call this first"
+   128C 00                 1138 	.db 0x00
+   128D                    1139 __str_3:
+   128D 0D                 1140 	.db 0x0D
+   128E 0A                 1141 	.db 0x0A
+   128F 50 72 65 73 73 20  1142 	.ascii "Press 'I' to Init LCD. Must call this first"
         27 49 27 20 74 6F
         20 49 6E 69 74 20
         4C 43 44 2E 20 4D
@@ -1154,11 +1154,11 @@
         6C 6C 20 74 68 69
         73 20 66 69 72 73
         74
-   12BE 00                 1143 	.db 0x00
-   12BF                    1144 __str_4:
-   12BF 0D                 1145 	.db 0x0D
-   12C0 0A                 1146 	.db 0x0A
-   12C1 50 72 65 73 73 20  1147 	.ascii "Press 'g' to show gotoaddr. Will go to address 0x40, which"
+   12BA 00                 1143 	.db 0x00
+   12BB                    1144 __str_4:
+   12BB 0D                 1145 	.db 0x0D
+   12BC 0A                 1146 	.db 0x0A
+   12BD 50 72 65 73 73 20  1147 	.ascii "Press 'g' to show gotoaddr. Will go to address 0x40, which"
         27 67 27 20 74 6F
         20 73 68 6F 77 20
         67 6F 74 6F 61 64
@@ -1168,24 +1168,24 @@
         72 65 73 73 20 30
         78 34 30 2C 20 77
         68 69 63 68
-   12FB 20 69 73 20 73 74  1148 	.ascii " is start of line 2"
+   12F7 20 69 73 20 73 74  1148 	.ascii " is start of line 2"
         61 72 74 20 6F 66
         20 6C 69 6E 65 20
         32
-   130E 00                 1149 	.db 0x00
-   130F                    1150 __str_5:
-   130F 0D                 1151 	.db 0x0D
-   1310 0A                 1152 	.db 0x0A
-   1311 50 72 65 73 73 20  1153 	.ascii "Press 'x' to show gotoxy."
+   130A 00                 1149 	.db 0x00
+   130B                    1150 __str_5:
+   130B 0D                 1151 	.db 0x0D
+   130C 0A                 1152 	.db 0x0A
+   130D 50 72 65 73 73 20  1153 	.ascii "Press 'x' to show gotoxy."
         27 78 27 20 74 6F
         20 73 68 6F 77 20
         67 6F 74 6F 78 79
         2E
-   132A 00                 1154 	.db 0x00
-   132B                    1155 __str_6:
-   132B 0D                 1156 	.db 0x0D
-   132C 0A                 1157 	.db 0x0A
-   132D 50 72 65 73 73 20  1158 	.ascii "Press 'c' to show putch. Will draw a character at the star"
+   1326 00                 1154 	.db 0x00
+   1327                    1155 __str_6:
+   1327 0D                 1156 	.db 0x0D
+   1328 0A                 1157 	.db 0x0A
+   1329 50 72 65 73 73 20  1158 	.ascii "Press 'c' to show putch. Will draw a character at the star"
         27 63 27 20 74 6F
         20 73 68 6F 77 20
         70 75 74 63 68 2E
@@ -1195,14 +1195,14 @@
         63 74 65 72 20 61
         74 20 74 68 65 20
         73 74 61 72
-   1367 74 20 6F 66 20 65  1159 	.ascii "t of each line"
+   1363 74 20 6F 66 20 65  1159 	.ascii "t of each line"
         61 63 68 20 6C 69
         6E 65
-   1375 00                 1160 	.db 0x00
-   1376                    1161 __str_7:
-   1376 0D                 1162 	.db 0x0D
-   1377 0A                 1163 	.db 0x0A
-   1378 50 72 65 73 73 20  1164 	.ascii "Press 's' to show putstr. Will fill entire LCD with a stri"
+   1371 00                 1160 	.db 0x00
+   1372                    1161 __str_7:
+   1372 0D                 1162 	.db 0x0D
+   1373 0A                 1163 	.db 0x0A
+   1374 50 72 65 73 73 20  1164 	.ascii "Press 's' to show putstr. Will fill entire LCD with a stri"
         27 73 27 20 74 6F
         20 73 68 6F 77 20
         70 75 74 73 74 72
@@ -1212,83 +1212,83 @@
         20 4C 43 44 20 77
         69 74 68 20 61 20
         73 74 72 69
-   13B2 6E 67              1165 	.ascii "ng"
-   13B4 0D                 1166 	.db 0x0D
-   13B5 0A                 1167 	.db 0x0A
-   13B6 00                 1168 	.db 0x00
-   13B7                    1169 __str_8:
-   13B7 0D                 1170 	.db 0x0D
-   13B8 0A                 1171 	.db 0x0A
-   13B9 49 6E 69 74 69 61  1172 	.ascii "Initializing LCD"
+   13AE 6E 67              1165 	.ascii "ng"
+   13B0 0D                 1166 	.db 0x0D
+   13B1 0A                 1167 	.db 0x0A
+   13B2 00                 1168 	.db 0x00
+   13B3                    1169 __str_8:
+   13B3 0D                 1170 	.db 0x0D
+   13B4 0A                 1171 	.db 0x0A
+   13B5 49 6E 69 74 69 61  1172 	.ascii "Initializing LCD"
         6C 69 7A 69 6E 67
         20 4C 43 44
-   13C9 0D                 1173 	.db 0x0D
-   13CA 0A                 1174 	.db 0x0A
-   13CB 00                 1175 	.db 0x00
-   13CC                    1176 __str_9:
-   13CC 0D                 1177 	.db 0x0D
-   13CD 0A                 1178 	.db 0x0A
-   13CE 4D 6F 76 65 64 20  1179 	.ascii "Moved cursor to start of line 2"
+   13C5 0D                 1173 	.db 0x0D
+   13C6 0A                 1174 	.db 0x0A
+   13C7 00                 1175 	.db 0x00
+   13C8                    1176 __str_9:
+   13C8 0D                 1177 	.db 0x0D
+   13C9 0A                 1178 	.db 0x0A
+   13CA 4D 6F 76 65 64 20  1179 	.ascii "Moved cursor to start of line 2"
         63 75 72 73 6F 72
         20 74 6F 20 73 74
         61 72 74 20 6F 66
         20 6C 69 6E 65 20
         32
-   13ED 0D                 1180 	.db 0x0D
-   13EE 0A                 1181 	.db 0x0A
-   13EF 00                 1182 	.db 0x00
-   13F0                    1183 __str_10:
-   13F0 0D                 1184 	.db 0x0D
-   13F1 0A                 1185 	.db 0x0A
-   13F2 45 6E 74 65 72 20  1186 	.ascii "Enter a row from 0-3:"
+   13E9 0D                 1180 	.db 0x0D
+   13EA 0A                 1181 	.db 0x0A
+   13EB 00                 1182 	.db 0x00
+   13EC                    1183 __str_10:
+   13EC 0D                 1184 	.db 0x0D
+   13ED 0A                 1185 	.db 0x0A
+   13EE 45 6E 74 65 72 20  1186 	.ascii "Enter a row from 0-3:"
         61 20 72 6F 77 20
         66 72 6F 6D 20 30
         2D 33 3A
-   1407 00                 1187 	.db 0x00
-   1408                    1188 __str_11:
-   1408 0D                 1189 	.db 0x0D
-   1409 0A                 1190 	.db 0x0A
-   140A 45 6E 74 65 72 20  1191 	.ascii "Enter a col from 0-15:"
+   1403 00                 1187 	.db 0x00
+   1404                    1188 __str_11:
+   1404 0D                 1189 	.db 0x0D
+   1405 0A                 1190 	.db 0x0A
+   1406 45 6E 74 65 72 20  1191 	.ascii "Enter a col from 0-15:"
         61 20 63 6F 6C 20
         66 72 6F 6D 20 30
         2D 31 35 3A
-   1420 00                 1192 	.db 0x00
-   1421                    1193 __str_12:
-   1421 0D                 1194 	.db 0x0D
-   1422 0A                 1195 	.db 0x0A
-   1423 4D 6F 76 65 64 20  1196 	.ascii "Moved cursor to new location (%d,%d)"
+   141C 00                 1192 	.db 0x00
+   141D                    1193 __str_12:
+   141D 0D                 1194 	.db 0x0D
+   141E 0A                 1195 	.db 0x0A
+   141F 4D 6F 76 65 64 20  1196 	.ascii "Moved cursor to new location (%d,%d)"
         63 75 72 73 6F 72
         20 74 6F 20 6E 65
         77 20 6C 6F 63 61
         74 69 6F 6E 20 28
         25 64 2C 25 64 29
-   1447 0D                 1197 	.db 0x0D
-   1448 0A                 1198 	.db 0x0A
-   1449 00                 1199 	.db 0x00
-   144A                    1200 __str_13:
-   144A 0D                 1201 	.db 0x0D
-   144B 0A                 1202 	.db 0x0A
-   144C 55 70 64 61 74 69  1203 	.ascii "Updating first character of each line"
+   1443 0D                 1197 	.db 0x0D
+   1444 0A                 1198 	.db 0x0A
+   1445 00                 1199 	.db 0x00
+   1446                    1200 __str_13:
+   1446 0D                 1201 	.db 0x0D
+   1447 0A                 1202 	.db 0x0A
+   1448 55 70 64 61 74 69  1203 	.ascii "Updating first character of each line"
         6E 67 20 66 69 72
         73 74 20 63 68 61
         72 61 63 74 65 72
         20 6F 66 20 65 61
         63 68 20 6C 69 6E
         65
-   1471 0D                 1204 	.db 0x0D
-   1472 0A                 1205 	.db 0x0A
-   1473 00                 1206 	.db 0x00
-   1474                    1207 __str_14:
-   1474 0D                 1208 	.db 0x0D
-   1475 57 72 69 74 69 6E  1209 	.ascii "Writing a string to LCD"
+   146D 0D                 1204 	.db 0x0D
+   146E 0A                 1205 	.db 0x0A
+   146F 00                 1206 	.db 0x00
+   1470                    1207 __str_14:
+   1470 0D                 1208 	.db 0x0D
+   1471 57 72 69 74 69 6E  1209 	.ascii "Writing a string to LCD"
         67 20 61 20 73 74
         72 69 6E 67 20 74
         6F 20 4C 43 44
-   148C 0D                 1210 	.db 0x0D
-   148D 0A                 1211 	.db 0x0A
-   148E 00                 1212 	.db 0x00
-   148F                    1213 __str_15:
-   148F 61 62 63 64 65 66  1214 	.ascii "abcdefghijklnopqrstuvwxyz123456789abcdefghijklmnopqrstuvwxyz"
+   1488 0D                 1210 	.db 0x0D
+   1489 0A                 1211 	.db 0x0A
+   148A 00                 1212 	.db 0x00
+   148B                    1213 __str_15:
+   148B 61 62 63 64 65 66  1214 	.ascii "abcdefghijklnopqrstuvwxyz123456789abcdefghijklmnopqrstuvwxyz"
         67 68 69 6A 6B 6C
         6E 6F 70 71 72 73
         74 75 76 77 78 79
@@ -1298,8 +1298,8 @@
         69 6A 6B 6C 6D 6E
         6F 70 71 72 73 74
         75 76 77 78 79 7A
-   14CB 31 32 33 34 35 36  1215 	.ascii "12345678987654321"
+   14C7 31 32 33 34 35 36  1215 	.ascii "12345678987654321"
         37 38 39 38 37 36
         35 34 33 32 31
-   14DC 00                 1216 	.db 0x00
+   14D8 00                 1216 	.db 0x00
                            1217 	.area XINIT   (CODE)

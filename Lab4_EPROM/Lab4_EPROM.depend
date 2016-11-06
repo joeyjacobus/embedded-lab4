@@ -1,0 +1,45 @@
+# depslib dependency file v1.0
+1478470909 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\main.c
+	<mcs51/8051.h>
+	"at89c51ed2.h"
+	"LCD.h"
+	"serial.h"
+	<stdio.h>
+	"EPROM.h"
+	"I2C.h"
+
+1478458926 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\lcd.h
+
+1478469616 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\serial.h
+	<stdint.h>
+
+1478458933 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\lcd.c
+	"LCD.h"
+	<stdint.h>
+	"at89c51ed2.h"
+	<stdio.h>
+
+1478469590 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\serial.c
+	<mcs51/8051.h>
+	"at89c51ed2.h"
+	<stdio.h>
+	<ctype.h>
+	<stdlib.h>
+	"serial.h"
+
+1478463986 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\eprom.c
+	"at89c51ed2.h"
+	<stdint.h>
+	"I2C.h"
+	<stdio.h>
+	"LCD.h"
+
+1478455448 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\i2c.h
+
+1478455374 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\i2c.c
+	"at89c51ed2.h"
+	<stdint.h>
+
+1478459147 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\eprom.h
+	<stdint.h>
+

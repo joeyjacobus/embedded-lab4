@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Sat Nov 05 18:57:33 2016
+                              4 ; This file generated Sat Nov 05 19:48:22 2016
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mmcs51 --model-large
@@ -774,7 +774,7 @@
    013C 15 81               774 	dec	sp
    013E 15 81               775 	dec	sp
    0140 15 81               776 	dec	sp
-                            777 ;	main.c:54: row = Serial_GetInteger(3) ;
+                            777 ;	main.c:54: row = Serial_GetInteger(3);
                             778 ;	genCall
                             779 ;	Peephole 182.b	used 16 bit load of dptr
    0142 90 00 03            780 	mov	dptr,#0x0003

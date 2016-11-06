@@ -51,7 +51,7 @@ void handleInput(char c){
             break;
         case 'x':
             printf ("\r\nEnter a row from 0-3:");
-            row = Serial_GetInteger(3) ;
+            row = Serial_GetInteger(3);
             while(row > 3){
                 printf ("\r\nEnter a row from 0-3:");
                 row = Serial_GetInteger(3);

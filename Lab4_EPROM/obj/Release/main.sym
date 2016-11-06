@@ -174,7 +174,6 @@ Symbol Table
     _ACC                                                        =  00E0 G
     _AUXR                                                       =  008E G
     _AUXR1                                                      =  00A2 G
- 14 _AddrMap                                                       0002 GR
     _B                                                          =  00F0 G
     _BDRCON                                                     =  009B G
     _BRL                                                        =  009A G
@@ -215,6 +214,12 @@ Symbol Table
     _EA                                                         =  00AF G
     _EC                                                         =  00AE G
     _EECON                                                      =  00D2 G
+    _EPROM_ByteRead                                                **** GX
+    _EPROM_ByteRead_PARM_2                                         **** GX
+    _EPROM_ByteWrite                                               **** GX
+    _EPROM_ByteWrite_PARM_2                                        **** GX
+    _EPROM_ByteWrite_PARM_3                                        **** GX
+    _EPROM_Init                                                    **** GX
     _ES                                                         =  00AC G
     _ET0                                                        =  00A9 G
     _ET1                                                        =  00AB G
@@ -242,24 +247,7 @@ Symbol Table
     _KBE                                                        =  009D G
     _KBF                                                        =  009E G
     _KBLS                                                       =  009C G
- 14 _LCD_Addr                                                      0000 GR
- 13 _LCD_Busywait                                                  003E GR
- 13 _LCD_ClearScreen                                               0056 GR
- 13 _LCD_DataWrite                                                 001F GR
-  8 _LCD_DataWrite_Data_1_1                                        0001 R
- 13 _LCD_Init                                                      0198 GR
- 13 _LCD_InstructionWrite                                          0000 GR
-  8 _LCD_InstructionWrite_instruction_1_1                          0000 R
- 13 _LCD_Putch                                                     00C2 GR
-  8 _LCD_Putch_cc_1_1                                              0005 R
- 13 _LCD_Putstr                                                    00D5 GR
-  8 _LCD_Putstr_ss_1_1                                             0006 R
- 13 _LCD_Test                                                      01AA GR
- 13 _LCD_gotoaddr                                                  005F GR
-  8 _LCD_gotoaddr_addr_1_1                                         0002 R
- 13 _LCD_gotoxy                                                    008E GR
-  8 _LCD_gotoxy_PARM_2                                             0003 GR
-  8 _LCD_gotoxy_row_1_1                                            0004 R
+    _LCD_Init                                                      **** GX
     _OV                                                         =  00D2 G
     _P                                                          =  00D0 G
     _P0                                                         =  0080 G
@@ -352,6 +340,10 @@ Symbol Table
     _SPCON                                                      =  00C3 G
     _SPDAT                                                      =  00C5 G
     _SPSTA                                                      =  00C4 G
+    _Serial_GetHex                                                 **** GX
+    _Serial_GetInteger                                             **** GX
+    _Serial_Init                                                   **** GX
+ 14 _ShowMenu                                                      000C GR
     _T0                                                         =  00B4 G
     _T1                                                         =  00B5 G
     _T2CON                                                      =  00C8 G
@@ -385,8 +377,39 @@ Symbol Table
     _WDTPRG                                                     =  00A7 G
     _WDTRST                                                     =  00A6 G
     _WR                                                         =  00B6 G
-    __gptrget                                                      **** GX
- 14 __str_0                                                        0042 R
+  B __interrupt_vect                                               0000 R
+    __mcs51_genRAMCLEAR                                            **** GX
+    __mcs51_genXINIT                                               **** GX
+    __mcs51_genXRAMCLEAR                                           **** GX
+ 14 __sdcc_external_startup                                        0005 GR
+    __sdcc_gsinit_startup                                          **** GX
+ 14 __sdcc_program_startup                                         0000 GR
+  5 __start__stack                                                 0000 GR
+ 15 __str_0                                                        0000 R
+ 15 __str_1                                                        0012 R
+ 15 __str_10                                                       0156 R
+ 15 __str_11                                                       016D R
+ 15 __str_12                                                       0197 R
+ 15 __str_13                                                       01CA R
+ 15 __str_14                                                       01F1 R
+ 15 __str_15                                                       021C R
+ 15 __str_16                                                       024D R
+ 15 __str_17                                                       0266 R
+ 15 __str_2                                                        001F R
+ 15 __str_3                                                        003D R
+ 15 __str_4                                                        0063 R
+ 15 __str_5                                                        008A R
+ 15 __str_6                                                        00B4 R
+ 15 __str_7                                                        00D9 R
+ 15 __str_8                                                        0100 R
+ 15 __str_9                                                        012A R
+    _getchar                                                       **** GX
+ 14 _handleInput                                                   00F4 GR
+  9 _handleInput_block_1_1                                         0001 R
+  9 _handleInput_c_1_1                                             0000 R
+ 14 _main                                                          032B GR
+    _printf                                                        **** GX
+    _putchar                                                       **** GX
     a                                                              00D6 
     ac                                                             00D6 
     acc                                                            00E0 
@@ -573,20 +596,21 @@ Area Table
    2 REG_BANK_0                                                                         size    8   flags 4
    3 DSEG                                                                               size    0   flags 0
    4 OSEG                                                                               size    0   flags 4
-   5 ISEG                                                                               size    0   flags 0
-   6 BSEG                                                                               size    0   flags 80
-   7 PSEG                                                                               size    0   flags 50
-   8 XSEG                                                                               size    9   flags 40
-   9 XISEG                                                                              size    0   flags 40
-   A HOME                                                                               size    0   flags 20
-   B GSINIT0                                                                            size    0   flags 20
-   C GSINIT1                                                                            size    0   flags 20
-   D GSINIT2                                                                            size    0   flags 20
-   E GSINIT3                                                                            size    0   flags 20
-   F GSINIT4                                                                            size    0   flags 20
-  10 GSINIT5                                                                            size    0   flags 20
-  11 GSINIT                                                                             size    0   flags 20
-  12 GSFINAL                                                                            size    0   flags 20
-  13 CSEG                                                                               size  1CA   flags 20
-  14 CONST                                                                              size   90   flags 20
-  15 XINIT                                                                              size    0   flags 20
+   5 SSEG                                                                               size    1   flags 0
+   6 ISEG                                                                               size    0   flags 0
+   7 BSEG                                                                               size    0   flags 80
+   8 PSEG                                                                               size    0   flags 50
+   9 XSEG                                                                               size    3   flags 40
+   A XISEG                                                                              size    0   flags 40
+   B HOME                                                                               size    3   flags 20
+   C GSINIT0                                                                            size    0   flags 20
+   D GSINIT1                                                                            size    0   flags 20
+   E GSINIT2                                                                            size    0   flags 20
+   F GSINIT3                                                                            size    0   flags 20
+  10 GSINIT4                                                                            size    0   flags 20
+  11 GSINIT5                                                                            size    0   flags 20
+  12 GSINIT                                                                             size    0   flags 20
+  13 GSFINAL                                                                            size    3   flags 20
+  14 CSEG                                                                               size  35B   flags 20
+  15 CONST                                                                              size  28D   flags 20
+  16 XINIT                                                                              size    0   flags 20
