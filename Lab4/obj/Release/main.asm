@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Sat Nov 05 16:29:37 2016
+; This file generated Sat Nov 05 18:57:33 2016
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-large
@@ -10,6 +10,9 @@
 ; Public variables in this module
 ;--------------------------------------------------------
 	.globl _main
+	.globl _handleInput
+	.globl _ShowMenu
+	.globl __sdcc_external_startup
 	.globl _P5_7
 	.globl _P5_6
 	.globl _P5_5
@@ -446,6 +449,12 @@ __start__stack:
 ; external ram data
 ;--------------------------------------------------------
 	.area XSEG    (XDATA)
+_handleInput_c_1_1:
+	.ds 1
+_handleInput_row_1_1:
+	.ds 2
+_handleInput_col_1_1:
+	.ds 2
 ;--------------------------------------------------------
 ; external initialized ram data
 ;--------------------------------------------------------
@@ -495,14 +504,14 @@ __sdcc_program_startup:
 ;--------------------------------------------------------
 	.area CSEG    (CODE)
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'main'
+;Allocation info for local variables in function '_sdcc_external_startup'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	main.c:10: void main(void)
+;	main.c:14: _sdcc_external_startup(){
 ;	-----------------------------------------
-;	 function main
+;	 function _sdcc_external_startup
 ;	-----------------------------------------
-_main:
+__sdcc_external_startup:
 	ar2 = 0x02
 	ar3 = 0x03
 	ar4 = 0x04
@@ -511,21 +520,698 @@ _main:
 	ar7 = 0x07
 	ar0 = 0x00
 	ar1 = 0x01
-;	main.c:13: P1_3 = 1;
+;	main.c:16: AUXR |= AUXR_ENABLE_XRAM_MASK;   //Enable all XRAM
+;	genOr
+	orl	_AUXR,#0x0C
+;	main.c:17: return 0;
+;	genRet
+;	Peephole 182.b	used 16 bit load of dptr
+	mov	dptr,#0x0000
+;	Peephole 300	removed redundant label 00101$
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'ShowMenu'
+;------------------------------------------------------------
+;------------------------------------------------------------
+;	main.c:24: void ShowMenu(void){
+;	-----------------------------------------
+;	 function ShowMenu
+;	-----------------------------------------
+_ShowMenu:
+;	main.c:25: printf("\r\n***************");
+;	genIpush
+	mov	a,#__str_0
+	push	acc
+	mov	a,#(__str_0 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:26: printf("\r\n    Menu\r\n");
+;	genIpush
+	mov	a,#__str_1
+	push	acc
+	mov	a,#(__str_1 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:27: printf("\r\n***************");
+;	genIpush
+	mov	a,#__str_0
+	push	acc
+	mov	a,#(__str_0 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:28: printf("\r\nPress 'H' to show this menu");
+;	genIpush
+	mov	a,#__str_2
+	push	acc
+	mov	a,#(__str_2 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:29: printf("\r\nPress 'I' to Init LCD. Must call this first");
+;	genIpush
+	mov	a,#__str_3
+	push	acc
+	mov	a,#(__str_3 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:30: printf("\r\nPress 'g' to show gotoaddr. Will go to address 0x40, which is start of line 2");
+;	genIpush
+	mov	a,#__str_4
+	push	acc
+	mov	a,#(__str_4 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:31: printf("\r\nPress 'x' to show gotoxy.");
+;	genIpush
+	mov	a,#__str_5
+	push	acc
+	mov	a,#(__str_5 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:32: printf("\r\nPress 'c' to show putch. Will draw a character at the start of each line");
+;	genIpush
+	mov	a,#__str_6
+	push	acc
+	mov	a,#(__str_6 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:33: printf("\r\nPress 's' to show putstr. Will fill entire LCD with a string\r\n");
+;	genIpush
+	mov	a,#__str_7
+	push	acc
+	mov	a,#(__str_7 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	Peephole 300	removed redundant label 00101$
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'handleInput'
+;------------------------------------------------------------
+;c                         Allocated with name '_handleInput_c_1_1'
+;row                       Allocated with name '_handleInput_row_1_1'
+;col                       Allocated with name '_handleInput_col_1_1'
+;------------------------------------------------------------
+;	main.c:39: void handleInput(char c){
+;	-----------------------------------------
+;	 function handleInput
+;	-----------------------------------------
+_handleInput:
+;	genReceive
+	mov	a,dpl
+	mov	dptr,#_handleInput_c_1_1
+	movx	@dptr,a
+;	main.c:42: switch (c){
 ;	genAssign
-	setb	_P1_3
-;	main.c:14: LCD_Init();
-;	genCall
-	lcall	_LCD_Init
-;	main.c:15: LCD_Test();
-;	genCall
-	lcall	_LCD_Test
-;	main.c:16: while(1){
-00102$:
+	mov	dptr,#_handleInput_c_1_1
+	movx	a,@dptr
+	mov	r2,a
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x48,00127$
+	ljmp	00112$
+00127$:
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x49,00128$
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00101$
+00128$:
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x63,00129$
+	ljmp	00110$
+00129$:
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x67,00130$
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00102$
-;	Peephole 259.a	removed redundant label 00104$ and ret
+00130$:
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x73,00131$
+	ljmp	00111$
+00131$:
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x78,00132$
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00103$
+00132$:
+;	Peephole 251.a	replaced ljmp to ret with ret
+	ret
+;	main.c:43: case 'I':
+00101$:
+;	main.c:44: printf("\r\nInitializing LCD\r\n");
+;	genIpush
+	mov	a,#__str_8
+	push	acc
+	mov	a,#(__str_8 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:45: LCD_Init();
+;	genCall
+;	main.c:46: break;
+;	Peephole 251.a	replaced ljmp to ret with ret
+;	Peephole 253.a	replaced lcall/ret with ljmp
+	ljmp	_LCD_Init
+;	main.c:47: case 'g':
+00102$:
+;	main.c:48: printf("\r\nMoved cursor to start of line 2\r\n");
+;	genIpush
+	mov	a,#__str_9
+	push	acc
+	mov	a,#(__str_9 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:49: LCD_ClearScreen();
+;	genCall
+	lcall	_LCD_ClearScreen
+;	main.c:50: LCD_gotoaddr(0x40);
+;	genCall
+	mov	dpl,#0x40
+;	main.c:51: break;
+;	Peephole 251.a	replaced ljmp to ret with ret
+;	Peephole 253.a	replaced lcall/ret with ljmp
+	ljmp	_LCD_gotoaddr
+;	main.c:52: case 'x':
+00103$:
+;	main.c:53: printf ("\r\nEnter a row from 0-3:");
+;	genIpush
+	mov	a,#__str_10
+	push	acc
+	mov	a,#(__str_10 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:54: row = Serial_GetInteger(3) ;
+;	genCall
+;	Peephole 182.b	used 16 bit load of dptr
+	mov	dptr,#0x0003
+	lcall	_Serial_GetInteger
+	mov	a,dpl
+	mov	b,dph
+;	genAssign
+	mov	dptr,#_handleInput_row_1_1
+	movx	@dptr,a
+	inc	dptr
+	mov	a,b
+	movx	@dptr,a
+;	main.c:55: while(row > 3){
+00104$:
+;	genAssign
+	mov	dptr,#_handleInput_row_1_1
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCmpGt
+;	genCmp
+	clr	c
+	mov	a,#0x03
+	subb	a,r2
+;	Peephole 159	avoided xrl during execution
+	mov	a,#(0x00 ^ 0x80)
+	mov	b,r3
+	xrl	b,#0x80
+	subb	a,b
+;	genIfxJump
+;	Peephole 108.a	removed ljmp by inverse jump logic
+	jnc	00106$
+;	Peephole 300	removed redundant label 00133$
+;	main.c:56: printf ("\r\nEnter a row from 0-3:");
+;	genIpush
+	mov	a,#__str_10
+	push	acc
+	mov	a,#(__str_10 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:57: row = Serial_GetInteger(3);
+;	genCall
+;	Peephole 182.b	used 16 bit load of dptr
+	mov	dptr,#0x0003
+	lcall	_Serial_GetInteger
+	mov	a,dpl
+	mov	b,dph
+;	genAssign
+	mov	dptr,#_handleInput_row_1_1
+	movx	@dptr,a
+	inc	dptr
+	mov	a,b
+	movx	@dptr,a
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00104$
+00106$:
+;	main.c:60: printf ("\r\nEnter a col from 0-15:");
+;	genIpush
+	mov	a,#__str_11
+	push	acc
+	mov	a,#(__str_11 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:61: col = Serial_GetInteger(3) ;
+;	genCall
+;	Peephole 182.b	used 16 bit load of dptr
+	mov	dptr,#0x0003
+	lcall	_Serial_GetInteger
+	mov	a,dpl
+	mov	b,dph
+;	genAssign
+	mov	dptr,#_handleInput_col_1_1
+	movx	@dptr,a
+	inc	dptr
+	mov	a,b
+	movx	@dptr,a
+;	main.c:62: while(col > 15){
+00107$:
+;	genAssign
+	mov	dptr,#_handleInput_col_1_1
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCmpGt
+;	genCmp
+	clr	c
+	mov	a,#0x0F
+	subb	a,r2
+;	Peephole 159	avoided xrl during execution
+	mov	a,#(0x00 ^ 0x80)
+	mov	b,r3
+	xrl	b,#0x80
+	subb	a,b
+;	genIfxJump
+;	Peephole 108.a	removed ljmp by inverse jump logic
+	jnc	00109$
+;	Peephole 300	removed redundant label 00134$
+;	main.c:63: printf ("\r\nEnter a col from 0-15:");
+;	genIpush
+	mov	a,#__str_11
+	push	acc
+	mov	a,#(__str_11 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:64: col = Serial_GetInteger(3);
+;	genCall
+;	Peephole 182.b	used 16 bit load of dptr
+	mov	dptr,#0x0003
+	lcall	_Serial_GetInteger
+	mov	a,dpl
+	mov	b,dph
+;	genAssign
+	mov	dptr,#_handleInput_col_1_1
+	movx	@dptr,a
+	inc	dptr
+	mov	a,b
+	movx	@dptr,a
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00107$
+00109$:
+;	main.c:66: LCD_ClearScreen();
+;	genCall
+	push	ar2
+	push	ar3
+	lcall	_LCD_ClearScreen
+	pop	ar3
+	pop	ar2
+;	main.c:67: LCD_gotoxy(row, col);
+;	genAssign
+	mov	dptr,#_handleInput_row_1_1
+	movx	a,@dptr
+	mov	r4,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r5,a
+;	genCast
+	mov	ar6,r4
+;	genCast
+	mov	dptr,#_LCD_gotoxy_PARM_2
+	mov	a,r2
+	movx	@dptr,a
+;	genCall
+	mov	dpl,r6
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	lcall	_LCD_gotoxy
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:68: printf("\r\nMoved cursor to new location (%d,%d)\r\n", row, col);
+;	genIpush
+	push	ar2
+	push	ar3
+;	genIpush
+	push	ar4
+	push	ar5
+;	genIpush
+	mov	a,#__str_12
+	push	acc
+	mov	a,#(__str_12 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xf9
+	mov	sp,a
+;	main.c:69: break;
+;	main.c:70: case 'c':
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 251.b	replaced sjmp to ret with ret
+	ret
+00110$:
+;	main.c:71: printf("\r\nUpdating first character of each line\r\n");
+;	genIpush
+	mov	a,#__str_13
+	push	acc
+	mov	a,#(__str_13 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:72: LCD_ClearScreen();
+;	genCall
+	lcall	_LCD_ClearScreen
+;	main.c:73: LCD_gotoaddr(0x00);
+;	genCall
+	mov	dpl,#0x00
+	lcall	_LCD_gotoaddr
+;	main.c:74: LCD_Putch('A');
+;	genCall
+	mov	dpl,#0x41
+	lcall	_LCD_Putch
+;	main.c:75: LCD_gotoaddr(0x40);
+;	genCall
+	mov	dpl,#0x40
+	lcall	_LCD_gotoaddr
+;	main.c:76: LCD_Putch('B');
+;	genCall
+	mov	dpl,#0x42
+	lcall	_LCD_Putch
+;	main.c:77: LCD_gotoaddr(0x10);
+;	genCall
+	mov	dpl,#0x10
+	lcall	_LCD_gotoaddr
+;	main.c:78: LCD_Putch('C');
+;	genCall
+	mov	dpl,#0x43
+	lcall	_LCD_Putch
+;	main.c:79: LCD_gotoaddr(0x50);
+;	genCall
+	mov	dpl,#0x50
+	lcall	_LCD_gotoaddr
+;	main.c:80: LCD_Putch('D');
+;	genCall
+	mov	dpl,#0x44
+;	main.c:81: break;
+;	main.c:82: case 's':
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 251.b	replaced sjmp to ret with ret
+;	Peephole 253.a	replaced lcall/ret with ljmp
+	ljmp	_LCD_Putch
+00111$:
+;	main.c:83: printf("\r\Writing a string to LCD\r\n");
+;	genIpush
+	mov	a,#__str_14
+	push	acc
+	mov	a,#(__str_14 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:84: LCD_ClearScreen();
+;	genCall
+	lcall	_LCD_ClearScreen
+;	main.c:85: LCD_Putstr("abcdefghijklnopqrstuvwxyz123456789abcdefghijklmnopqrstuvwxyz12345678987654321");
+;	genCall
+;	Peephole 182.a	used 16 bit load of DPTR
+	mov	dptr,#__str_15
+	mov	b,#0x80
+;	main.c:86: break;
+;	main.c:87: case 'H':
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 251.b	replaced sjmp to ret with ret
+;	Peephole 253.a	replaced lcall/ret with ljmp
+	ljmp	_LCD_Putstr
+00112$:
+;	main.c:88: ShowMenu();
+;	genCall
+;	main.c:92: }
+;	Peephole 253.b	replaced lcall/ret with ljmp
+	ljmp	_ShowMenu
+;
+;------------------------------------------------------------
+;Allocation info for local variables in function 'main'
+;------------------------------------------------------------
+;c                         Allocated with name '_main_c_2_2'
+;------------------------------------------------------------
+;	main.c:98: void main(void)
+;	-----------------------------------------
+;	 function main
+;	-----------------------------------------
+_main:
+;	main.c:100: Serial_Init();
+;	genCall
+	lcall	_Serial_Init
+;	main.c:101: P1_3 = 1;
+;	genAssign
+	setb	_P1_3
+;	main.c:103: ShowMenu();
+;	genCall
+	lcall	_ShowMenu
+;	main.c:104: while(1){
+00104$:
+;	main.c:106: c = getchar ();
+;	genCall
+	lcall	_getchar
+	mov	r2,dpl
+;	main.c:107: if (c == ENTER_KEY){
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r2,#0x0D,00102$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00110$
+;	Peephole 300	removed redundant label 00111$
+;	main.c:108: putchar('\n');
+;	genCall
+	mov	dpl,#0x0A
+	push	ar2
+	lcall	_putchar
+	pop	ar2
+00102$:
+;	main.c:110: putchar(c);
+;	genCall
+	mov	dpl,r2
+	push	ar2
+	lcall	_putchar
+	pop	ar2
+;	main.c:111: handleInput(c);
+;	genCall
+	mov	dpl,r2
+	lcall	_handleInput
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00104$
+;	Peephole 259.a	removed redundant label 00106$ and ret
 ;
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
+__str_0:
+	.db 0x0D
+	.db 0x0A
+	.ascii "***************"
+	.db 0x00
+__str_1:
+	.db 0x0D
+	.db 0x0A
+	.ascii "    Menu"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_2:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Press 'H' to show this menu"
+	.db 0x00
+__str_3:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Press 'I' to Init LCD. Must call this first"
+	.db 0x00
+__str_4:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Press 'g' to show gotoaddr. Will go to address 0x40, which"
+	.ascii " is start of line 2"
+	.db 0x00
+__str_5:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Press 'x' to show gotoxy."
+	.db 0x00
+__str_6:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Press 'c' to show putch. Will draw a character at the star"
+	.ascii "t of each line"
+	.db 0x00
+__str_7:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Press 's' to show putstr. Will fill entire LCD with a stri"
+	.ascii "ng"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_8:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Initializing LCD"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_9:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Moved cursor to start of line 2"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_10:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Enter a row from 0-3:"
+	.db 0x00
+__str_11:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Enter a col from 0-15:"
+	.db 0x00
+__str_12:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Moved cursor to new location (%d,%d)"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_13:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Updating first character of each line"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_14:
+	.db 0x0D
+	.ascii "Writing a string to LCD"
+	.db 0x0D
+	.db 0x0A
+	.db 0x00
+__str_15:
+	.ascii "abcdefghijklnopqrstuvwxyz123456789abcdefghijklmnopqrstuvwxyz"
+	.ascii "12345678987654321"
+	.db 0x00
 	.area XINIT   (CODE)

@@ -46,6 +46,7 @@ void LCD_DataWrite(uint8_t Data){
 }
 
 
+
 /**
  *  Polls the LCD busy flag. Function does not return until the LCD controller
  *  is ready to accept another command
@@ -56,6 +57,14 @@ void LCD_Busywait(void){
     while (*LCD_Addr & 0x80){
         P1_3 = !P1_3;
     }
+}
+
+/**
+ *  Clears the LCD
+ */
+void LCD_ClearScreen(void){
+    LCD_Busywait();
+    LCD_InstructionWrite(LCD_Clear);
 }
 
 

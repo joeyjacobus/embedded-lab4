@@ -15,5 +15,6 @@
 -l libfloat
 obj\Release\LCD.rel
 obj\Release\main.rel
+obj\Release\serial.rel
 
 -e
