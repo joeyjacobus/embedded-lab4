@@ -529,7 +529,7 @@
    0210 C2 95               529 	clr	_P1_5
                             530 ;	LCD.c:34: *LCD_Addr = instruction;
                             531 ;	genAssign
-   0212 90 17 D5            532 	mov	dptr,#_LCD_Addr
+   0212 90 18 FD            532 	mov	dptr,#_LCD_Addr
    0215 E4                  533 	clr	a
    0216 93                  534 	movc	a,@a+dptr
    0217 FA                  535 	mov	r2,a
@@ -570,7 +570,7 @@
    022F D2 95               570 	setb	_P1_5
                             571 ;	LCD.c:43: *LCD_Addr = Data;
                             572 ;	genAssign
-   0231 90 17 D5            573 	mov	dptr,#_LCD_Addr
+   0231 90 18 FD            573 	mov	dptr,#_LCD_Addr
    0234 E4                  574 	clr	a
    0235 93                  575 	movc	a,@a+dptr
    0236 FA                  576 	mov	r2,a
@@ -632,7 +632,7 @@
                             632 ;	Peephole 186.c	optimized movc sequence
                             633 ;	Peephole 177.c	removed redundant move
    025A FB                  634 	mov	r3,a
-   025B 90 18 17            635 	mov	dptr,#_ASCII_lookup
+   025B 90 19 3F            635 	mov	dptr,#_ASCII_lookup
    025E 93                  636 	movc	a,@a+dptr
    025F CB                  637 	xch	a,r3
    0260 A3                  638 	inc	dptr
@@ -661,7 +661,7 @@
                             661 ;	Peephole 186.c	optimized movc sequence
                             662 ;	Peephole 177.c	removed redundant move
    0271 FA                  663 	mov	r2,a
-   0272 90 18 17            664 	mov	dptr,#_ASCII_lookup
+   0272 90 19 3F            664 	mov	dptr,#_ASCII_lookup
    0275 93                  665 	movc	a,@a+dptr
    0276 CA                  666 	xch	a,r2
    0277 A3                  667 	inc	dptr
@@ -691,7 +691,7 @@
                             691 ;	LCD.c:66: while (*LCD_Addr & 0x80){}
    0283                     692 00101$:
                             693 ;	genAssign
-   0283 90 17 D5            694 	mov	dptr,#_LCD_Addr
+   0283 90 18 FD            694 	mov	dptr,#_LCD_Addr
    0286 E4                  695 	clr	a
    0287 93                  696 	movc	a,@a+dptr
    0288 FA                  697 	mov	r2,a
@@ -777,7 +777,7 @@
    02B9 C2 95               777 	clr	_P1_5
                             778 ;	LCD.c:90: *LCD_Addr = (0x01 << 7) | addr;
                             779 ;	genAssign
-   02BB 90 17 D5            780 	mov	dptr,#_LCD_Addr
+   02BB 90 18 FD            780 	mov	dptr,#_LCD_Addr
    02BE E4                  781 	clr	a
    02BF 93                  782 	movc	a,@a+dptr
    02C0 FB                  783 	mov	r3,a
@@ -854,11 +854,11 @@
                             854 ;	genPlus
                             855 ;	Peephole 177.b	removed redundant mov
                             856 ;	Peephole 215	removed some moves
-   02EC 24 D7               857 	add	a,#_AddrMap
+   02EC 24 FF               857 	add	a,#_AddrMap
    02EE FA                  858 	mov	r2,a
                             859 ;	Peephole 181	changed mov to clr
    02EF E4                  860 	clr	a
-   02F0 34 17               861 	addc	a,#(_AddrMap >> 8)
+   02F0 34 18               861 	addc	a,#(_AddrMap >> 8)
    02F2 FC                  862 	mov	r4,a
                             863 ;	genPlus
                             864 ;	Peephole 236.g	used r3 instead of ar3
@@ -950,7 +950,7 @@
    0331 8A 82               950 	mov	dpl,r2
    0333 8B 83               951 	mov	dph,r3
    0335 8C F0               952 	mov	b,r4
-   0337 12 17 9F            953 	lcall	__gptrget
+   0337 12 18 C7            953 	lcall	__gptrget
                             954 ;	genIfx
    033A FD                  955 	mov	r5,a
                             956 ;	Peephole 105	removed redundant mov
@@ -1003,7 +1003,7 @@
    0370 C2 95              1003 	clr	_P1_5
                            1004 ;	LCD.c:129: addr = *LCD_Addr & 0x7F;    //Mask off the busy bit, even though it should always be 0 here
                            1005 ;	genAssign
-   0372 90 17 D5           1006 	mov	dptr,#_LCD_Addr
+   0372 90 18 FD           1006 	mov	dptr,#_LCD_Addr
    0375 E4                 1007 	clr	a
    0376 93                 1008 	movc	a,@a+dptr
    0377 FD                 1009 	mov	r5,a
@@ -1150,99 +1150,99 @@
                            1150 ;	LCD.c:173: LCD_Putstr("abcdefghijklnopqrstuvwxyz123456789abcdefghijklmnopqrstuvwxyz12345678987654321");
                            1151 ;	genCall
                            1152 ;	Peephole 182.a	used 16 bit load of DPTR
-   0402 90 18 37           1153 	mov	dptr,#__str_0
+   0402 90 19 5F           1153 	mov	dptr,#__str_0
    0405 75 F0 80           1154 	mov	b,#0x80
                            1155 ;	Peephole 253.b	replaced lcall/ret with ljmp
    0408 02 03 16           1156 	ljmp	_LCD_Putstr
                            1157 ;
                            1158 	.area CSEG    (CODE)
                            1159 	.area CONST   (CODE)
-   17D5                    1160 _LCD_Addr:
-   17D5 00 E0              1161 	.byte #0x00,#0xE0
-   17D7                    1162 _AddrMap:
-   17D7 00                 1163 	.db #0x00
-   17D8 01                 1164 	.db #0x01
-   17D9 02                 1165 	.db #0x02
-   17DA 03                 1166 	.db #0x03
-   17DB 04                 1167 	.db #0x04
-   17DC 05                 1168 	.db #0x05
-   17DD 06                 1169 	.db #0x06
-   17DE 07                 1170 	.db #0x07
-   17DF 08                 1171 	.db #0x08
-   17E0 09                 1172 	.db #0x09
-   17E1 0A                 1173 	.db #0x0A
-   17E2 0B                 1174 	.db #0x0B
-   17E3 0C                 1175 	.db #0x0C
-   17E4 0D                 1176 	.db #0x0D
-   17E5 0E                 1177 	.db #0x0E
-   17E6 0F                 1178 	.db #0x0F
-   17E7 40                 1179 	.db #0x40
-   17E8 41                 1180 	.db #0x41
-   17E9 42                 1181 	.db #0x42
-   17EA 43                 1182 	.db #0x43
-   17EB 44                 1183 	.db #0x44
-   17EC 45                 1184 	.db #0x45
-   17ED 46                 1185 	.db #0x46
-   17EE 47                 1186 	.db #0x47
-   17EF 48                 1187 	.db #0x48
-   17F0 49                 1188 	.db #0x49
-   17F1 4A                 1189 	.db #0x4A
-   17F2 4B                 1190 	.db #0x4B
-   17F3 4C                 1191 	.db #0x4C
-   17F4 4D                 1192 	.db #0x4D
-   17F5 4E                 1193 	.db #0x4E
-   17F6 4F                 1194 	.db #0x4F
-   17F7 10                 1195 	.db #0x10
-   17F8 11                 1196 	.db #0x11
-   17F9 12                 1197 	.db #0x12
-   17FA 13                 1198 	.db #0x13
-   17FB 14                 1199 	.db #0x14
-   17FC 15                 1200 	.db #0x15
-   17FD 16                 1201 	.db #0x16
-   17FE 17                 1202 	.db #0x17
-   17FF 18                 1203 	.db #0x18
-   1800 19                 1204 	.db #0x19
-   1801 1A                 1205 	.db #0x1A
-   1802 1B                 1206 	.db #0x1B
-   1803 1C                 1207 	.db #0x1C
-   1804 1D                 1208 	.db #0x1D
-   1805 1E                 1209 	.db #0x1E
-   1806 1F                 1210 	.db #0x1F
-   1807 50                 1211 	.db #0x50
-   1808 51                 1212 	.db #0x51
-   1809 52                 1213 	.db #0x52
-   180A 53                 1214 	.db #0x53
-   180B 54                 1215 	.db #0x54
-   180C 55                 1216 	.db #0x55
-   180D 56                 1217 	.db #0x56
-   180E 57                 1218 	.db #0x57
-   180F 58                 1219 	.db #0x58
-   1810 59                 1220 	.db #0x59
-   1811 5A                 1221 	.db #0x5A
-   1812 5B                 1222 	.db #0x5B
-   1813 5C                 1223 	.db #0x5C
-   1814 5D                 1224 	.db #0x5D
-   1815 5E                 1225 	.db #0x5E
-   1816 5F                 1226 	.db #0x5F
-   1817                    1227 _ASCII_lookup:
-   1817 30 00              1228 	.byte #0x30,#0x00
-   1819 31 00              1229 	.byte #0x31,#0x00
-   181B 32 00              1230 	.byte #0x32,#0x00
-   181D 33 00              1231 	.byte #0x33,#0x00
-   181F 34 00              1232 	.byte #0x34,#0x00
-   1821 35 00              1233 	.byte #0x35,#0x00
-   1823 36 00              1234 	.byte #0x36,#0x00
-   1825 37 00              1235 	.byte #0x37,#0x00
-   1827 38 00              1236 	.byte #0x38,#0x00
-   1829 39 00              1237 	.byte #0x39,#0x00
-   182B 41 00              1238 	.byte #0x41,#0x00
-   182D 42 00              1239 	.byte #0x42,#0x00
-   182F 43 00              1240 	.byte #0x43,#0x00
-   1831 44 00              1241 	.byte #0x44,#0x00
-   1833 45 00              1242 	.byte #0x45,#0x00
-   1835 46 00              1243 	.byte #0x46,#0x00
-   1837                    1244 __str_0:
-   1837 61 62 63 64 65 66  1245 	.ascii "abcdefghijklnopqrstuvwxyz123456789abcdefghijklmnopqrstuvwxyz"
+   18FD                    1160 _LCD_Addr:
+   18FD 00 E0              1161 	.byte #0x00,#0xE0
+   18FF                    1162 _AddrMap:
+   18FF 00                 1163 	.db #0x00
+   1900 01                 1164 	.db #0x01
+   1901 02                 1165 	.db #0x02
+   1902 03                 1166 	.db #0x03
+   1903 04                 1167 	.db #0x04
+   1904 05                 1168 	.db #0x05
+   1905 06                 1169 	.db #0x06
+   1906 07                 1170 	.db #0x07
+   1907 08                 1171 	.db #0x08
+   1908 09                 1172 	.db #0x09
+   1909 0A                 1173 	.db #0x0A
+   190A 0B                 1174 	.db #0x0B
+   190B 0C                 1175 	.db #0x0C
+   190C 0D                 1176 	.db #0x0D
+   190D 0E                 1177 	.db #0x0E
+   190E 0F                 1178 	.db #0x0F
+   190F 40                 1179 	.db #0x40
+   1910 41                 1180 	.db #0x41
+   1911 42                 1181 	.db #0x42
+   1912 43                 1182 	.db #0x43
+   1913 44                 1183 	.db #0x44
+   1914 45                 1184 	.db #0x45
+   1915 46                 1185 	.db #0x46
+   1916 47                 1186 	.db #0x47
+   1917 48                 1187 	.db #0x48
+   1918 49                 1188 	.db #0x49
+   1919 4A                 1189 	.db #0x4A
+   191A 4B                 1190 	.db #0x4B
+   191B 4C                 1191 	.db #0x4C
+   191C 4D                 1192 	.db #0x4D
+   191D 4E                 1193 	.db #0x4E
+   191E 4F                 1194 	.db #0x4F
+   191F 10                 1195 	.db #0x10
+   1920 11                 1196 	.db #0x11
+   1921 12                 1197 	.db #0x12
+   1922 13                 1198 	.db #0x13
+   1923 14                 1199 	.db #0x14
+   1924 15                 1200 	.db #0x15
+   1925 16                 1201 	.db #0x16
+   1926 17                 1202 	.db #0x17
+   1927 18                 1203 	.db #0x18
+   1928 19                 1204 	.db #0x19
+   1929 1A                 1205 	.db #0x1A
+   192A 1B                 1206 	.db #0x1B
+   192B 1C                 1207 	.db #0x1C
+   192C 1D                 1208 	.db #0x1D
+   192D 1E                 1209 	.db #0x1E
+   192E 1F                 1210 	.db #0x1F
+   192F 50                 1211 	.db #0x50
+   1930 51                 1212 	.db #0x51
+   1931 52                 1213 	.db #0x52
+   1932 53                 1214 	.db #0x53
+   1933 54                 1215 	.db #0x54
+   1934 55                 1216 	.db #0x55
+   1935 56                 1217 	.db #0x56
+   1936 57                 1218 	.db #0x57
+   1937 58                 1219 	.db #0x58
+   1938 59                 1220 	.db #0x59
+   1939 5A                 1221 	.db #0x5A
+   193A 5B                 1222 	.db #0x5B
+   193B 5C                 1223 	.db #0x5C
+   193C 5D                 1224 	.db #0x5D
+   193D 5E                 1225 	.db #0x5E
+   193E 5F                 1226 	.db #0x5F
+   193F                    1227 _ASCII_lookup:
+   193F 30 00              1228 	.byte #0x30,#0x00
+   1941 31 00              1229 	.byte #0x31,#0x00
+   1943 32 00              1230 	.byte #0x32,#0x00
+   1945 33 00              1231 	.byte #0x33,#0x00
+   1947 34 00              1232 	.byte #0x34,#0x00
+   1949 35 00              1233 	.byte #0x35,#0x00
+   194B 36 00              1234 	.byte #0x36,#0x00
+   194D 37 00              1235 	.byte #0x37,#0x00
+   194F 38 00              1236 	.byte #0x38,#0x00
+   1951 39 00              1237 	.byte #0x39,#0x00
+   1953 41 00              1238 	.byte #0x41,#0x00
+   1955 42 00              1239 	.byte #0x42,#0x00
+   1957 43 00              1240 	.byte #0x43,#0x00
+   1959 44 00              1241 	.byte #0x44,#0x00
+   195B 45 00              1242 	.byte #0x45,#0x00
+   195D 46 00              1243 	.byte #0x46,#0x00
+   195F                    1244 __str_0:
+   195F 61 62 63 64 65 66  1245 	.ascii "abcdefghijklnopqrstuvwxyz123456789abcdefghijklmnopqrstuvwxyz"
         67 68 69 6A 6B 6C
         6E 6F 70 71 72 73
         74 75 76 77 78 79
@@ -1252,8 +1252,8 @@
         69 6A 6B 6C 6D 6E
         6F 70 71 72 73 74
         75 76 77 78 79 7A
-   1873 31 32 33 34 35 36  1246 	.ascii "12345678987654321"
+   199B 31 32 33 34 35 36  1246 	.ascii "12345678987654321"
         37 38 39 38 37 36
         35 34 33 32 31
-   1884 00                 1247 	.db 0x00
+   19AC 00                 1247 	.db 0x00
                            1248 	.area XINIT   (CODE)

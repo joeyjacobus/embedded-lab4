@@ -36,57 +36,55 @@ void ShowMenu(void){
     printf("\r\nPress 'G' to read the contents of CGRAM\r\n");
 }
 
+
+void getBlockAndAddress(uint8_t *address, uint8_t *block){
+    printf("\r\nEnter an EEPROM block number from 0-7: ");
+    *block = Serial_GetInteger(1);
+    while(*block > 7){
+        printf("\r\nINVALID: Enter an EEPROM block number from 0-7: ");
+        *block = Serial_GetInteger(1);
+    }
+
+    printf("\r\nEnter an EEPROM Word address in hex:");
+    *address = Serial_GetHex();
+}
+
 /**
  *  Handles a given character input
  */
 void handleInput(char c){
-    int block;
+    uint8_t block;
+    uint8_t end_block;
     uint8_t address;
-    uint8_t writeData;
+    uint8_t end_address;
+    uint8_t i;
+
+    uint8_t lcdData;
     uint8_t Lcd_row;
+    uint16_t start_addr;
+    uint16_t end_addr;
 
     switch (c){
         case 'W':
             printf("\r\nWriting to EEPROM...");
-            printf("\r\nEnter an EEPROM block number from 0-7: ");
-            block = Serial_GetInteger(1);
-            while(block > 7){
-                printf("\r\nINVALID: Enter an EEPROM block number from 0-7: ");
-                block = Serial_GetInteger(1);
-            }
-
-            printf("\r\nEnter an EEPROM Word address in hex:");
-            address = Serial_GetHex();
+            getBlockAndAddress(&address, &block);
             printf("\r\nEnter a byte of data to write to EEPROM:");
-            writeData = Serial_GetHex();
-            EPROM_ByteWrite(writeData, address, block);
-            printf("\r\nWrote %X to block %d address 0x%X in EEPROM!\r\n", writeData, block, address);
+            lcdData = Serial_GetHex();
+            EPROM_ByteWrite(lcdData, address, block);
+            printf("\r\nWrote %X to block %d address 0x%X in EEPROM!\r\n", lcdData, block, address);
             break;
         case 'R':
             printf("\r\nReading from EEPROM...");
-            printf("\r\nEnter an EEPROM block number from 0-7: ");
-            block = Serial_GetInteger(1);
-            while(block > 7){
-                printf("\r\nINVALID: Enter an EEPROM block number from 0-7: ");
-                block = Serial_GetInteger(1);
-            }
+            getBlockAndAddress(&address, &block);
 
-            printf("\r\nEnter an EEPROM Word address in hex:");
-            address = Serial_GetHex();
-            writeData = EPROM_ByteRead(address, block);
-            printf("\r\nRead %X from block %d address 0x%X\r\n", writeData, block, address);
+            lcdData = EPROM_ByteRead(address, block);
+            printf("\r\nRead %X from block %d address 0x%X\r\n", lcdData, block, address);
             break;
         case 'L':
             printf("\r\nEnter an EEPROM block number from 0-7: ");
-            block = Serial_GetInteger(1);
-            while(block > 7){
-                printf("\r\nINVALID: Enter an EEPROM block number from 0-7: ");
-                block = Serial_GetInteger(1);
-            }
+            getBlockAndAddress(&address, &block);
 
-            printf("\r\nEnter an EEPROM Word address in hex:");
-            address = Serial_GetHex();
-            writeData = EPROM_ByteRead(address, block);
+            lcdData = EPROM_ByteRead(address, block);
 
             printf("\r\nEnter LCD row from 0-3:");
             Lcd_row = Serial_GetInteger(1);
@@ -95,7 +93,7 @@ void handleInput(char c){
             LCD_Putch(block + '0');
             LCD_Puthex(address);
             LCD_Putstr(": ");
-            LCD_Puthex(writeData);
+            LCD_Puthex(lcdData);
 
             printf("\r\nWrote to LCD!\r\n");
             break;
@@ -104,6 +102,31 @@ void handleInput(char c){
             printf("\r\nLCD Display Cleared!\r\n");
             break;
         case 'D':
+            printf("\r\nPerforming an EEPROM data dump\r\n");
+            printf("\r\nEnter the starting block and address");
+            getBlockAndAddress(&address, &block);
+            printf("\r\nEnter the ending block and address");
+            getBlockAndAddress(&end_address, &end_block);
+            start_addr =( block << 8) | address;
+            end_addr = (end_block << 8) | end_address;
+            if (start_addr > end_addr){
+                printf("\r\nInvalid addresses. End address must be after start address");
+                return;
+            }
+            printf("\r\n");
+            while(start_addr <= end_addr){
+                printf("%x: ", start_addr);
+                //Print 16 bytes per line
+                for (i = 0; i < 16; ++i){
+                    lcdData = EPROM_ByteRead(start_addr & 0xFF, start_addr >> 8);
+                    printf("%x ", lcdData);
+                    start_addr++;
+                    if(start_addr > end_addr){
+                        break;
+                    }
+                }
+                printf("\r\n");
+            }
             break;
         case 'Y':
             break;

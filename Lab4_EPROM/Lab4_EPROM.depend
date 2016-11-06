@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1478473046 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\main.c
+1478474691 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\main.c
 	<mcs51/8051.h>
 	"at89c51ed2.h"
 	"LCD.h"
@@ -19,7 +19,7 @@
 	"at89c51ed2.h"
 	<stdio.h>
 
-1478471086 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\serial.c
+1478473319 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\serial.c
 	<mcs51/8051.h>
 	"at89c51ed2.h"
 	<stdio.h>
