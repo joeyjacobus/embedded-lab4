@@ -43,6 +43,7 @@ void handleInput(char c){
     int block;
     uint8_t address;
     uint8_t writeData;
+    uint8_t Lcd_row;
 
     switch (c){
         case 'W':
@@ -76,8 +77,31 @@ void handleInput(char c){
             printf("\r\nRead %X from block %d address 0x%X\r\n", writeData, block, address);
             break;
         case 'L':
+            printf("\r\nEnter an EEPROM block number from 0-7: ");
+            block = Serial_GetInteger(1);
+            while(block > 7){
+                printf("\r\nINVALID: Enter an EEPROM block number from 0-7: ");
+                block = Serial_GetInteger(1);
+            }
+
+            printf("\r\nEnter an EEPROM Word address in hex:");
+            address = Serial_GetHex();
+            writeData = EPROM_ByteRead(address, block);
+
+            printf("\r\nEnter LCD row from 0-3:");
+            Lcd_row = Serial_GetInteger(1);
+
+            LCD_gotoxy(Lcd_row, 0);
+            LCD_Putch(block + '0');
+            LCD_Puthex(address);
+            LCD_Putstr(": ");
+            LCD_Puthex(writeData);
+
+            printf("\r\nWrote to LCD!\r\n");
             break;
         case 'C':
+            LCD_ClearScreen();
+            printf("\r\nLCD Display Cleared!\r\n");
             break;
         case 'D':
             break;

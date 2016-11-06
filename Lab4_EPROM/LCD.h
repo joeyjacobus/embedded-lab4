@@ -11,6 +11,10 @@ void LCD_Init(void);
 
 void LCD_Test(void);
 
+/**
+ *  Puts c out to the LCD as two nibbles
+ */
+void LCD_Puthex(char c);
 
 /**
  *  Clears the LCD

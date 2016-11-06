@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Sun Nov 06 15:23:59 2016
+; This file generated Sun Nov 06 16:02:04 2016
 ;--------------------------------------------------------
 	.module serial
 	.optsdcc -mmcs51 --model-large
@@ -794,7 +794,7 @@ _Serial_GetInteger:
 	movx	@dptr,a
 	ljmp	00116$
 00104$:
-;	serial.c:68: printf("\r\nInvalid character. Enter only digits.");
+;	serial.c:68: printf("\r\nInvalid character. Enter only digits.\r\n");
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -874,7 +874,7 @@ _Serial_GetHex:
 	clr	a
 	movx	@dptr,a
 ;	serial.c:87: while (index < max_length ){
-00118$:
+00123$:
 ;	genAssign
 	mov	dptr,#_Serial_GetHex_index_1_1
 	movx	a,@dptr
@@ -891,9 +891,9 @@ _Serial_GetHex:
 	xrl	a,#0x80
 	subb	a,#0x80
 ;	genIfxJump
-	jc	00155$
-	ljmp	00120$
-00155$:
+	jc	00162$
+	ljmp	00125$
+00162$:
 ;	serial.c:88: c = getchar();
 ;	genCall
 	push	ar2
@@ -912,22 +912,79 @@ _Serial_GetHex:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	serial.c:90: if (c == ENTER_KEY)
-;	genCmpEq
-;	gencjneshort
-	cjne	r4,#0x0D,00156$
-	ljmp	00120$
-00156$:
-;	serial.c:92: else if (c == BACKSPACE_KEY)
+;	serial.c:90: if (c == ENTER_KEY){
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
-	cjne	r4,#0x08,00113$
+	cjne	r4,#0x0D,00121$
 ;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00157$
-;	Peephole 300	removed redundant label 00158$
-;	serial.c:93: --index;
+;	Peephole 300	removed redundant label 00163$
+;	Peephole 300	removed redundant label 00164$
+;	serial.c:91: if (index == 0){
+;	genIfx
+	mov	a,r2
+	orl	a,r3
+;	genIfxJump
+;	Peephole 108.b	removed ljmp by inverse jump logic
+	jnz	00104$
+;	Peephole 300	removed redundant label 00165$
+;	serial.c:92: buf[0] = 0;
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#_Serial_GetHex_buf_1_1
+;	Peephole 181	changed mov to clr
+;	serial.c:93: buf[1] = 0;
+;	genPointerSet
+;     genFarPointerSet
+;	Peephole 181	changed mov to clr
+;	Peephole 219.a	removed redundant clear
+	clr	a
+	movx	@dptr,a
+	mov	dptr,#(_Serial_GetHex_buf_1_1 + 0x0001)
+	movx	@dptr,a
+	ljmp	00125$
+00104$:
+;	serial.c:95: else if(index == 1){
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x01,00166$
+	cjne	r3,#0x00,00166$
+	sjmp	00167$
+00166$:
+	ljmp	00125$
+00167$:
+;	serial.c:96: buf[1] = buf[0];
+;	genPointerGet
+;	genFarPointerGet
+	mov	dptr,#_Serial_GetHex_buf_1_1
+	movx	a,@dptr
+;	genPointerSet
+;     genFarPointerSet
+	mov	r5,a
+	mov	dptr,#(_Serial_GetHex_buf_1_1 + 0x0001)
+;	Peephole 100	removed redundant mov
+	movx	@dptr,a
+;	serial.c:97: buf[0] = 0;
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#_Serial_GetHex_buf_1_1
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+;	serial.c:99: break;
+	ljmp	00125$
+00121$:
+;	serial.c:101: else if (c == BACKSPACE_KEY)
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r4,#0x08,00118$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00168$
+;	Peephole 300	removed redundant label 00169$
+;	serial.c:102: --index;
 ;	genMinus
 ;	genMinusDec
 	mov	a,r2
@@ -943,10 +1000,9 @@ _Serial_GetHex:
 	inc	dptr
 	mov	a,r6
 	movx	@dptr,a
-;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00118$
-00113$:
-;	serial.c:94: else if ( isdigit(c) ){
+	ljmp	00123$
+00118$:
+;	serial.c:103: else if ( isdigit(c) ){
 ;	genCall
 	mov	dpl,r4
 	push	ar2
@@ -960,9 +1016,9 @@ _Serial_GetHex:
 ;	genIfx
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
-	jz	00110$
-;	Peephole 300	removed redundant label 00159$
-;	serial.c:95: buf[index] = c;
+	jz	00115$
+;	Peephole 300	removed redundant label 00170$
+;	serial.c:104: buf[index] = c;
 ;	genPlus
 ;	Peephole 236.g	used r2 instead of ar2
 	mov	a,r2
@@ -976,7 +1032,7 @@ _Serial_GetHex:
 ;     genFarPointerSet
 	mov	a,r4
 	movx	@dptr,a
-;	serial.c:96: ++index;
+;	serial.c:105: ++index;
 ;	genPlus
 	mov	dptr,#_Serial_GetHex_index_1_1
 ;     genPlusIncr
@@ -990,9 +1046,9 @@ _Serial_GetHex:
 	addc	a,r3
 	inc	dptr
 	movx	@dptr,a
-	ljmp	00118$
-00110$:
-;	serial.c:98: else if ( isalpha(c) && ((c >= 'A'  && c <= 'F') || (c >= 'a' && c <= 'f') )){
+	ljmp	00123$
+00115$:
+;	serial.c:107: else if ( isalpha(c) && ((c >= 'A'  && c <= 'F') || (c >= 'a' && c <= 'f') )){
 ;	genCall
 	mov	dpl,r4
 	push	ar4
@@ -1002,8 +1058,8 @@ _Serial_GetHex:
 ;	genIfx
 ;	genIfxJump
 ;	Peephole 108.b	removed ljmp by inverse jump logic
-	jnz	00108$
-;	Peephole 300	removed redundant label 00160$
+	jnz	00113$
+;	Peephole 300	removed redundant label 00171$
 ;	genCall
 	mov	dpl,r4
 	push	ar4
@@ -1014,9 +1070,9 @@ _Serial_GetHex:
 ;	genIfxJump
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 160.c	removed sjmp by inverse jump logic
-	jz	00102$
-;	Peephole 300	removed redundant label 00161$
-00108$:
+	jz	00107$
+;	Peephole 300	removed redundant label 00172$
+00113$:
 ;	genCmpLt
 ;	genCmp
 	clr	c
@@ -1028,8 +1084,8 @@ _Serial_GetHex:
 ;	Peephole 160.a	removed sjmp by inverse jump logic
 ;	genCmpGt
 ;	genCmp
-	jc	00107$
-;	Peephole 300	removed redundant label 00162$
+	jc	00112$
+;	Peephole 300	removed redundant label 00173$
 ;	Peephole 256.a	removed redundant clr c
 ;	Peephole 159	avoided xrl during execution
 	mov	a,#(0x46 ^ 0x80)
@@ -1038,9 +1094,9 @@ _Serial_GetHex:
 	subb	a,b
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
-	jnc	00101$
-;	Peephole 300	removed redundant label 00163$
-00107$:
+	jnc	00106$
+;	Peephole 300	removed redundant label 00174$
+00112$:
 ;	genCmpLt
 ;	genCmp
 	clr	c
@@ -1052,8 +1108,8 @@ _Serial_GetHex:
 ;	Peephole 160.a	removed sjmp by inverse jump logic
 ;	genCmpGt
 ;	genCmp
-	jc	00102$
-;	Peephole 300	removed redundant label 00164$
+	jc	00107$
+;	Peephole 300	removed redundant label 00175$
 ;	Peephole 256.a	removed redundant clr c
 ;	Peephole 159	avoided xrl during execution
 	mov	a,#(0x66 ^ 0x80)
@@ -1063,10 +1119,10 @@ _Serial_GetHex:
 ;	genIfxJump
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 160.a	removed sjmp by inverse jump logic
-	jc	00102$
-;	Peephole 300	removed redundant label 00165$
-00101$:
-;	serial.c:99: buf[index] = toupper(c);
+	jc	00107$
+;	Peephole 300	removed redundant label 00176$
+00106$:
+;	serial.c:108: buf[index] = toupper(c);
 ;	genAssign
 	mov	dptr,#_Serial_GetHex_index_1_1
 	movx	a,@dptr
@@ -1096,25 +1152,25 @@ _Serial_GetHex:
 ;	genIfx
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
-	jz	00136$
-;	Peephole 300	removed redundant label 00166$
+	jz	00141$
+;	Peephole 300	removed redundant label 00177$
 ;	genAnd
 	mov	a,#0xDF
 	anl	a,r4
 	mov	r5,a
 ;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00137$
-00136$:
+	sjmp	00142$
+00141$:
 ;	genAssign
 	mov	ar5,r4
-00137$:
+00142$:
 ;	genPointerSet
 ;     genFarPointerSet
 	mov	dpl,r2
 	mov	dph,r3
 	mov	a,r5
 	movx	@dptr,a
-;	serial.c:100: ++index;
+;	serial.c:109: ++index;
 ;	genPlus
 	mov	dptr,#_Serial_GetHex_index_1_1
 	movx	a,@dptr
@@ -1124,9 +1180,9 @@ _Serial_GetHex:
 	movx	a,@dptr
 	addc	a,#0x00
 	movx	@dptr,a
-	ljmp	00118$
-00102$:
-;	serial.c:103: printf("\r\nInvalid character. Enter only hex characters.");
+	ljmp	00123$
+00107$:
+;	serial.c:112: printf("\r\nInvalid character. Enter only hex characters.\r\n");
 ;	genIpush
 	mov	a,#__str_2
 	push	acc
@@ -1139,19 +1195,19 @@ _Serial_GetHex:
 	dec	sp
 	dec	sp
 	dec	sp
-	ljmp	00118$
-00120$:
-;	serial.c:107: result = 0;
+	ljmp	00123$
+00125$:
+;	serial.c:116: result = 0;
 ;	genAssign
 	mov	dptr,#_Serial_GetHex_result_1_1
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;	serial.c:108: while (index < max_length ){
+;	serial.c:117: while (index < max_length ){
 ;	genAssign
 	mov	r2,#0x00
 	mov	r3,#0x00
-00131$:
+00136$:
 ;	genCmpLt
 ;	genCmp
 	clr	c
@@ -1161,10 +1217,10 @@ _Serial_GetHex:
 	xrl	a,#0x80
 	subb	a,#0x80
 ;	genIfxJump
-	jc	00167$
-	ljmp	00133$
-00167$:
-;	serial.c:109: c = buf[index];
+	jc	00178$
+	ljmp	00138$
+00178$:
+;	serial.c:118: c = buf[index];
 ;	genPlus
 ;	Peephole 236.g	used r2 instead of ar2
 	mov	a,r2
@@ -1182,7 +1238,7 @@ _Serial_GetHex:
 	mov	dptr,#_Serial_GetHex_c_1_1
 ;	Peephole 100	removed redundant mov
 	movx	@dptr,a
-;	serial.c:110: if(isdigit(c))
+;	serial.c:119: if(isdigit(c))
 ;	genCall
 	mov	dpl,r4
 	push	ar2
@@ -1196,9 +1252,9 @@ _Serial_GetHex:
 ;	genIfx
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
-	jz	00129$
-;	Peephole 300	removed redundant label 00168$
-;	serial.c:111: num = c -'0';
+	jz	00134$
+;	Peephole 300	removed redundant label 00179$
+;	serial.c:120: num = c -'0';
 ;	genMinus
 	mov	a,r4
 	add	a,#0xd0
@@ -1206,9 +1262,9 @@ _Serial_GetHex:
 	mov	dptr,#_Serial_GetHex_num_1_1
 	movx	@dptr,a
 ;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00130$
-00129$:
-;	serial.c:112: else if(c>='a' && c<='f')
+	sjmp	00135$
+00134$:
+;	serial.c:121: else if(c>='a' && c<='f')
 ;	genCmpLt
 ;	genCmp
 	clr	c
@@ -1220,8 +1276,8 @@ _Serial_GetHex:
 ;	Peephole 160.a	removed sjmp by inverse jump logic
 ;	genCmpGt
 ;	genCmp
-	jc	00125$
-;	Peephole 300	removed redundant label 00169$
+	jc	00130$
+;	Peephole 300	removed redundant label 00180$
 ;	Peephole 256.a	removed redundant clr c
 ;	Peephole 159	avoided xrl during execution
 	mov	a,#(0x66 ^ 0x80)
@@ -1231,9 +1287,9 @@ _Serial_GetHex:
 ;	genIfxJump
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 160.a	removed sjmp by inverse jump logic
-	jc	00125$
-;	Peephole 300	removed redundant label 00170$
-;	serial.c:113: num = 10 + c - 'a';
+	jc	00130$
+;	Peephole 300	removed redundant label 00181$
+;	serial.c:122: num = 10 + c - 'a';
 ;	genPlus
 	mov	dptr,#_Serial_GetHex_num_1_1
 ;     genPlusIncr
@@ -1242,9 +1298,9 @@ _Serial_GetHex:
 	add	a,r4
 	movx	@dptr,a
 ;	Peephole 112.b	changed ljmp to sjmp
-	sjmp	00130$
-00125$:
-;	serial.c:114: else if(c>='A' && c<='F')
+	sjmp	00135$
+00130$:
+;	serial.c:123: else if(c>='A' && c<='F')
 ;	genAssign
 	mov	dptr,#_Serial_GetHex_c_1_1
 	movx	a,@dptr
@@ -1260,8 +1316,8 @@ _Serial_GetHex:
 ;	Peephole 160.a	removed sjmp by inverse jump logic
 ;	genCmpGt
 ;	genCmp
-	jc	00130$
-;	Peephole 300	removed redundant label 00171$
+	jc	00135$
+;	Peephole 300	removed redundant label 00182$
 ;	Peephole 256.a	removed redundant clr c
 ;	Peephole 159	avoided xrl during execution
 	mov	a,#(0x46 ^ 0x80)
@@ -1271,9 +1327,9 @@ _Serial_GetHex:
 ;	genIfxJump
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 160.a	removed sjmp by inverse jump logic
-	jc	00130$
-;	Peephole 300	removed redundant label 00172$
-;	serial.c:115: num = 10 + c - 'A';
+	jc	00135$
+;	Peephole 300	removed redundant label 00183$
+;	serial.c:124: num = 10 + c - 'A';
 ;	genPlus
 	mov	dptr,#_Serial_GetHex_num_1_1
 ;     genPlusIncr
@@ -1281,8 +1337,8 @@ _Serial_GetHex:
 ;	Peephole 236.a	used r4 instead of ar4
 	add	a,r4
 	movx	@dptr,a
-00130$:
-;	serial.c:116: result += num << (4*(1-index));
+00135$:
+;	serial.c:125: result += num << (4*(1-index));
 ;	genMinus
 	mov	a,#0x01
 	clr	c
@@ -1316,8 +1372,8 @@ _Serial_GetHex:
 	inc	b
 	mov	r4,ar6
 	mov	r5,#0x00
-	sjmp	00174$
-00173$:
+	sjmp	00185$
+00184$:
 	mov	a,r4
 ;	Peephole 254	optimized left shift
 	add	a,r4
@@ -1325,8 +1381,8 @@ _Serial_GetHex:
 	mov	a,r5
 	rlc	a
 	mov	r5,a
-00174$:
-	djnz	b,00173$
+00185$:
+	djnz	b,00184$
 ;	genAssign
 	mov	dptr,#_Serial_GetHex_result_1_1
 	movx	a,@dptr
@@ -1348,23 +1404,23 @@ _Serial_GetHex:
 	mov	dptr,#_Serial_GetHex_result_1_1
 	mov	a,r4
 	movx	@dptr,a
-;	serial.c:117: ++index;
+;	serial.c:126: ++index;
 ;	genPlus
 ;     genPlusIncr
 	inc	r2
-	cjne	r2,#0x00,00175$
+	cjne	r2,#0x00,00186$
 	inc	r3
-00175$:
-	ljmp	00131$
-00133$:
-;	serial.c:119: return result;
+00186$:
+	ljmp	00136$
+00138$:
+;	serial.c:128: return result;
 ;	genAssign
 	mov	dptr,#_Serial_GetHex_result_1_1
 	movx	a,@dptr
 ;	genRet
 ;	Peephole 234.a	loading dpl directly from a(ccumulator), r2 not set
 	mov	dpl,a
-;	Peephole 300	removed redundant label 00134$
+;	Peephole 300	removed redundant label 00139$
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'getstring'
@@ -1375,7 +1431,7 @@ _Serial_GetHex:
 ;c                         Allocated with name '_getstring_c_1_1'
 ;offset                    Allocated with name '_getstring_offset_1_1'
 ;------------------------------------------------------------
-;	serial.c:124: void getstring(unsigned char *buf, int length){
+;	serial.c:133: void getstring(unsigned char *buf, int length){
 ;	-----------------------------------------
 ;	 function getstring
 ;	-----------------------------------------
@@ -1392,7 +1448,7 @@ _getstring:
 	inc	dptr
 	mov	a,r2
 	movx	@dptr,a
-;	serial.c:127: c = getchar();
+;	serial.c:136: c = getchar();
 ;	genCall
 	lcall	_getchar
 	mov	r2,dpl
@@ -1400,11 +1456,11 @@ _getstring:
 	mov	dptr,#_getstring_c_1_1
 	mov	a,r2
 	movx	@dptr,a
-;	serial.c:128: putchar(c);
+;	serial.c:137: putchar(c);
 ;	genCall
 	mov	dpl,r2
 	lcall	_putchar
-;	serial.c:129: while(c != ENTER_KEY && offset < length){
+;	serial.c:138: while(c != ENTER_KEY && offset < length){
 ;	genAssign
 	mov	dptr,#_getstring_PARM_2
 	movx	a,@dptr
@@ -1450,7 +1506,7 @@ _getstring:
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00104$
 ;	Peephole 300	removed redundant label 00112$
-;	serial.c:130: buf[offset] = c;
+;	serial.c:139: buf[offset] = c;
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1471,7 +1527,7 @@ _getstring:
 	mov	b,r4
 	mov	a,r1
 	lcall	__gptrput
-;	serial.c:131: c = getchar();
+;	serial.c:140: c = getchar();
 ;	genCall
 	push	ar3
 	push	ar7
@@ -1485,7 +1541,7 @@ _getstring:
 	mov	dptr,#_getstring_c_1_1
 	mov	a,r2
 	movx	@dptr,a
-;	serial.c:132: putchar(c);
+;	serial.c:141: putchar(c);
 ;	genCall
 	mov	dpl,r2
 	push	ar2
@@ -1497,7 +1553,7 @@ _getstring:
 	pop	ar7
 	pop	ar3
 	pop	ar2
-;	serial.c:134: ++offset;
+;	serial.c:143: ++offset;
 ;	genPlus
 ;     genPlusIncr
 	inc	r7
@@ -1510,7 +1566,7 @@ _getstring:
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00102$
 00104$:
-;	serial.c:138: buf[offset] = '\0';
+;	serial.c:147: buf[offset] = '\0';
 ;	genAssign
 	mov	dptr,#_getstring_buf_1_1
 	movx	a,@dptr
@@ -1547,27 +1603,27 @@ _getstring:
 ;Allocation info for local variables in function 'Serial_Init'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	serial.c:144: void Serial_Init(void){
+;	serial.c:153: void Serial_Init(void){
 ;	-----------------------------------------
 ;	 function Serial_Init
 ;	-----------------------------------------
 _Serial_Init:
-;	serial.c:145: SCON = SCON_SERIAL_INIT;    //Init serial port
+;	serial.c:154: SCON = SCON_SERIAL_INIT;    //Init serial port
 ;	genAssign
 	mov	_SCON,#0x50
-;	serial.c:146: TMOD = TIMER1_TMOD_VAL;     // 8 bit auto-reload mode 2
+;	serial.c:155: TMOD = TIMER1_TMOD_VAL;     // 8 bit auto-reload mode 2
 ;	genAssign
 	mov	_TMOD,#0x20
-;	serial.c:147: TH1 = TIMER1_RELOAD_VAL;
+;	serial.c:156: TH1 = TIMER1_RELOAD_VAL;
 ;	genAssign
 	mov	_TH1,#0xFD
-;	serial.c:148: TL1 = TIMER1_RELOAD_VAL;  //Auto-Reload value for timer 1 baud-rate = 9600
+;	serial.c:157: TL1 = TIMER1_RELOAD_VAL;  //Auto-Reload value for timer 1 baud-rate = 9600
 ;	genAssign
 	mov	_TL1,#0xFD
-;	serial.c:150: TR1 = 1;
+;	serial.c:159: TR1 = 1;
 ;	genAssign
 	setb	_TR1
-;	serial.c:151: TI = 1; //Clear to start
+;	serial.c:160: TI = 1; //Clear to start
 ;	genAssign
 	setb	_TI
 ;	Peephole 300	removed redundant label 00101$
@@ -1581,10 +1637,14 @@ __str_1:
 	.db 0x0D
 	.db 0x0A
 	.ascii "Invalid character. Enter only digits."
+	.db 0x0D
+	.db 0x0A
 	.db 0x00
 __str_2:
 	.db 0x0D
 	.db 0x0A
 	.ascii "Invalid character. Enter only hex characters."
+	.db 0x0D
+	.db 0x0A
 	.db 0x00
 	.area XINIT   (CODE)

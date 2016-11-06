@@ -46,6 +46,17 @@ void LCD_DataWrite(uint8_t Data){
 
 
 /**
+ *  Puts c out to the LCD as two nibbles
+ */
+
+const ASCII_lookup[] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+void LCD_Puthex(char c){
+    LCD_Putch(ASCII_lookup[(c & 0xF0) >> 4]); //High nibble
+    LCD_Putch(ASCII_lookup[c & 0x0F]); //Low nibble
+}
+
+
+/**
  *  Polls the LCD busy flag. Function does not return until the LCD controller
  *  is ready to accept another command
  */

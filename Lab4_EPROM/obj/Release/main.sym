@@ -247,7 +247,13 @@ Symbol Table
     _KBE                                                        =  009D G
     _KBF                                                        =  009E G
     _KBLS                                                       =  009C G
+    _LCD_ClearScreen                                               **** GX
     _LCD_Init                                                      **** GX
+    _LCD_Putch                                                     **** GX
+    _LCD_Puthex                                                    **** GX
+    _LCD_Putstr                                                    **** GX
+    _LCD_gotoxy                                                    **** GX
+    _LCD_gotoxy_PARM_2                                             **** GX
     _OV                                                         =  00D2 G
     _P                                                          =  00D0 G
     _P0                                                         =  0080 G
@@ -395,7 +401,11 @@ Symbol Table
  15 __str_15                                                       021C R
  15 __str_16                                                       024D R
  15 __str_17                                                       0266 R
+ 15 __str_18                                                       028D R
+ 15 __str_19                                                       02A7 R
  15 __str_2                                                        001F R
+ 15 __str_20                                                       02AA R
+ 15 __str_21                                                       02BC R
  15 __str_3                                                        003D R
  15 __str_4                                                        0063 R
  15 __str_5                                                        008A R
@@ -407,7 +417,7 @@ Symbol Table
  14 _handleInput                                                   00F4 GR
   9 _handleInput_block_1_1                                         0001 R
   9 _handleInput_c_1_1                                             0000 R
- 14 _main                                                          032B GR
+ 14 _main                                                          048E GR
     _printf                                                        **** GX
     _putchar                                                       **** GX
     a                                                              00D6 
@@ -611,6 +621,6 @@ Area Table
   11 GSINIT5                                                                            size    0   flags 20
   12 GSINIT                                                                             size    0   flags 20
   13 GSFINAL                                                                            size    3   flags 20
-  14 CSEG                                                                               size  35B   flags 20
-  15 CONST                                                                              size  28D   flags 20
+  14 CSEG                                                                               size  4BE   flags 20
+  15 CONST                                                                              size  2D5   flags 20
   16 XINIT                                                                              size    0   flags 20

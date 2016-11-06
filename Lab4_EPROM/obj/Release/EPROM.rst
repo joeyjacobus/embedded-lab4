@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Sun Nov 06 13:26:28 2016
+                              4 ; This file generated Sun Nov 06 15:55:54 2016
                               5 ;--------------------------------------------------------
                               6 	.module EPROM
                               7 	.optsdcc -mmcs51 --model-large
@@ -561,14 +561,14 @@
    0085 C0 03               561 	push	ar3
    0087 C0 04               562 	push	ar4
                             563 ;	genIpush
-   0089 74 F5               564 	mov	a,#__str_0
+   0089 74 BB               564 	mov	a,#__str_0
    008B C0 E0               565 	push	acc
-   008D 74 15               566 	mov	a,#(__str_0 >> 8)
+   008D 74 17               566 	mov	a,#(__str_0 >> 8)
    008F C0 E0               567 	push	acc
    0091 74 80               568 	mov	a,#0x80
    0093 C0 E0               569 	push	acc
                             570 ;	genCall
-   0095 12 0D 3A            571 	lcall	_printf
+   0095 12 0F 00            571 	lcall	_printf
    0098 E5 81               572 	mov	a,sp
    009A 24 FB               573 	add	a,#0xfb
    009C F5 81               574 	mov	sp,a
@@ -752,12 +752,12 @@
                             752 ;
                             753 	.area CSEG    (CODE)
                             754 	.area CONST   (CODE)
-   15F5                     755 __str_0:
-   15F5 0D                  756 	.db 0x0D
-   15F6 0A                  757 	.db 0x0A
-   15F7 49 6E 76 61 6C 69   758 	.ascii "Invalid block number %d"
+   17BB                     755 __str_0:
+   17BB 0D                  756 	.db 0x0D
+   17BC 0A                  757 	.db 0x0A
+   17BD 49 6E 76 61 6C 69   758 	.ascii "Invalid block number %d"
         64 20 62 6C 6F 63
         6B 20 6E 75 6D 62
         65 72 20 25 64
-   160E 00                  759 	.db 0x00
+   17D4 00                  759 	.db 0x00
                             760 	.area XINIT   (CODE)

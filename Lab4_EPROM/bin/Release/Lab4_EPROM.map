@@ -54,8 +54,8 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      005C    s_GSINIT
      005C    s_GSINIT5
      005F    s_CSEG
-     0069    l_XSEG
-     0069    s_XISEG
+     006A    l_XSEG
+     006A    s_XISEG
      0073    l_DSEG
      0080    _P0
      0080    _P0_0
@@ -260,10 +260,10 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      00FD    _CCAP3H
      00FE    _CCAP4H
      0100    l_IRAM
-     03CC    l_CONST
-     1596    l_CSEG
-     15F5    s_CONST
-     19C1    s_XINIT
+     0438    l_CONST
+     175C    l_CSEG
+     17BB    s_CONST
+     1BF3    s_XINIT
 
 Hexadecimal
 
@@ -361,7 +361,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XSEG                               0000   0069 =    105. bytes (REL,CON,XDATA)
+XSEG                               0000   006A =    106. bytes (REL,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
@@ -369,20 +369,20 @@ XSEG                               0000   0069 =    105. bytes (REL,CON,XDATA)
   0D:0003    _EPROM_ByteWrite_PARM_2
   0D:0004    _EPROM_ByteWrite_PARM_3
   0D:0006    _EPROM_ByteRead_PARM_2
-  0D:000D    _LCD_gotoxy_PARM_2
-  0D:002D    _getstring_PARM_2
-  0D:0037    __gptrput_PARM_2
-  0D:0038    __mulint_PARM_2
-  0D:003C    _vprintf_PARM_2
-  0D:0050    __print_format_PARM_2
-  0D:0053    __print_format_PARM_3
-  0D:0056    __print_format_PARM_4
+  0D:000E    _LCD_gotoxy_PARM_2
+  0D:002E    _getstring_PARM_2
+  0D:0038    __gptrput_PARM_2
+  0D:0039    __mulint_PARM_2
+  0D:003D    _vprintf_PARM_2
+  0D:0051    __print_format_PARM_2
+  0D:0054    __print_format_PARM_3
+  0D:0057    __print_format_PARM_4
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XISEG                              0069   0000 =      0. bytes (REL,CON,XDATA)
+XISEG                              006A   0000 =      0. bytes (REL,CON,XDATA)
 
 Hexadecimal
 
@@ -455,7 +455,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               005F   1596 =   5526. bytes (REL,CON,CODE)
+CSEG                               005F   175C =   5980. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
@@ -476,53 +476,55 @@ CSEG                               005F   1596 =   5526. bytes (REL,CON,CODE)
   0C:01C9    _I2CRead
   0C:0208    _LCD_InstructionWrite
   0C:0227    _LCD_DataWrite
-  0C:0246    _LCD_Busywait
-  0C:025E    _LCD_ClearScreen
-  0C:0267    _LCD_gotoaddr
-  0C:0296    _LCD_gotoxy
-  0C:02CA    _LCD_Putch
-  0C:02DD    _LCD_Putstr
-  0C:03A0    _LCD_Init
-  0C:03B2    _LCD_Test
-  0C:03D2    __sdcc_program_startup
-  0C:03D7    __sdcc_external_startup
-  0C:03DE    _ShowMenu
-  0C:04C6    _handleInput
-  0C:06FD    _main
-  0C:072D    _putchar
-  0C:073F    _getchar
-  0C:0749    _Serial_GetInteger
-  0C:086E    _Serial_GetHex
-  0C:0A5D    _getstring
-  0C:0B1A    _Serial_Init
-  0C:0B2B    _isdigit
-  0C:0B48    _atoi
-  0C:0C7B    __gptrput
-  0C:0C94    __mulint
-  0C:0CB4    _islower
-  0C:0CD1    _isupper
-  0C:0CFB    _vprintf
-  0C:0D3A    _printf
-  0C:0E53    __print_format
-  0C:1586    _strlen
-  0C:15D9    __gptrget
+  0C:0246    _LCD_Puthex
+  0C:027F    _LCD_Busywait
+  0C:0297    _LCD_ClearScreen
+  0C:02A0    _LCD_gotoaddr
+  0C:02CF    _LCD_gotoxy
+  0C:0303    _LCD_Putch
+  0C:0316    _LCD_Putstr
+  0C:03D9    _LCD_Init
+  0C:03EB    _LCD_Test
+  0C:040B    __sdcc_program_startup
+  0C:0410    __sdcc_external_startup
+  0C:0417    _ShowMenu
+  0C:04FF    _handleInput
+  0C:0899    _main
+  0C:08C9    _putchar
+  0C:08DB    _getchar
+  0C:08E5    _Serial_GetInteger
+  0C:0A0A    _Serial_GetHex
+  0C:0C23    _getstring
+  0C:0CE0    _Serial_Init
+  0C:0CF1    _isdigit
+  0C:0D0E    _atoi
+  0C:0E41    __gptrput
+  0C:0E5A    __mulint
+  0C:0E7A    _islower
+  0C:0E97    _isupper
+  0C:0EC1    _vprintf
+  0C:0F00    _printf
+  0C:1019    __print_format
+  0C:174C    _strlen
+  0C:179F    __gptrget
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CONST                              15F5   03CC =    972. bytes (REL,CON,CODE)
+CONST                              17BB   0438 =   1080. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:160F    _LCD_Addr
-  0C:1611    _AddrMap
+  0C:17D5    _LCD_Addr
+  0C:17D7    _AddrMap
+  0C:1817    _ASCII_lookup
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XINIT                              19C1   0000 =      0. bytes (REL,CON,CODE)
+XINIT                              1BF3   0000 =      0. bytes (REL,CON,CODE)
 ASxxxx Linker V01.70 + NoICE + SDCC Feb 1999,  page 1.
 
 Files Linked      [ module(s) ]

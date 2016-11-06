@@ -87,8 +87,17 @@ uint8_t Serial_GetHex(void){
     while (index < max_length ){
         c = getchar();
         putchar(c);
-        if (c == ENTER_KEY)
+        if (c == ENTER_KEY){
+            if (index == 0){
+                buf[0] = 0;
+                buf[1] = 0;
+            }
+            else if(index == 1){
+                buf[1] = buf[0];
+                buf[0] = 0;
+            }
             break;
+        }
         else if (c == BACKSPACE_KEY)
             --index;
         else if ( isdigit(c) ){
