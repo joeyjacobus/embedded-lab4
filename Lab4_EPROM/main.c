@@ -81,7 +81,6 @@ void handleInput(char c){
             printf("\r\nRead %X from block %d address 0x%X\r\n", lcdData, block, address);
             break;
         case 'L':
-            printf("\r\nEnter an EEPROM block number from 0-7: ");
             getBlockAndAddress(&address, &block);
 
             lcdData = EPROM_ByteRead(address, block);
@@ -129,8 +128,66 @@ void handleInput(char c){
             }
             break;
         case 'Y':
+            printf("\r\n");
+
+
+            start_addr = 0x80;
+            printf("%x: ", start_addr);
+            for (i = 0; i < 16; ++i){
+                LCD_SetDDRAMAddress(start_addr);
+                lcdData = LCD_ReadRAM();
+                printf("%x ", lcdData);
+                start_addr++;
+            }
+            printf("\r\n");
+
+            start_addr = 0xc0;
+            printf("%x: ", start_addr);
+            for (i = 0; i < 16; ++i){
+                LCD_SetDDRAMAddress(start_addr);
+                lcdData = LCD_ReadRAM();
+                printf("%x ", lcdData);
+                start_addr++;
+            }
+            printf("\r\n");
+
+            start_addr = 0x90;
+            printf("%x: ", start_addr);
+            for (i = 0; i < 16; ++i){
+                LCD_SetDDRAMAddress(start_addr);
+                lcdData = LCD_ReadRAM();
+                printf("%x ", lcdData);
+                start_addr++;
+            }
+            printf("\r\n");
+
+            start_addr = 0xd0;
+            printf("%x: ", start_addr);
+            for (i = 0; i < 16; ++i){
+                LCD_SetDDRAMAddress(start_addr);
+                lcdData = LCD_ReadRAM();
+                printf("%x ", lcdData);
+                start_addr++;
+            }
+            printf("\r\n");
+
+
             break;
         case 'G':
+            printf("\r\n");
+            start_addr = 0x40;
+            //from 0x40 to 0x7F
+            while (start_addr < 0x80){
+                printf("%x: ", start_addr);
+                //Print 16 bytes per line
+                for (i = 0; i < 16; ++i){
+                    LCD_SetCGRAMAddress(start_addr);
+                    lcdData = LCD_ReadRAM();
+                    printf("%x ", lcdData);
+                    start_addr++;
+                }
+                printf("\r\n");
+            }
             break;
 	    case 'H':
             ShowMenu();

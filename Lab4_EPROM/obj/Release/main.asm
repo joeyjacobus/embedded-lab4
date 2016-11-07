@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Sun Nov 06 16:24:54 2016
+; This file generated Sun Nov 06 20:16:35 2016
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-large
@@ -897,43 +897,49 @@ _handleInput:
 	mov	r2,a
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x43,00138$
+	cjne	r2,#0x43,00174$
 	ljmp	00104$
-00138$:
+00174$:
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x44,00139$
+	cjne	r2,#0x44,00175$
 	ljmp	00105$
-00139$:
+00175$:
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x47,00140$
-;	Peephole 251.a	replaced ljmp to ret with ret
-	ret
-00140$:
+	cjne	r2,#0x47,00176$
+	ljmp	00118$
+00176$:
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x48,00141$
-	ljmp	00119$
-00141$:
+	cjne	r2,#0x48,00177$
+	ljmp	00122$
+00177$:
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x4C,00142$
+	cjne	r2,#0x4C,00178$
 	ljmp	00103$
-00142$:
+00178$:
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x52,00143$
+	cjne	r2,#0x52,00179$
 	ljmp	00102$
-00143$:
+00179$:
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x57,00144$
-	sjmp	00145$
-00144$:
+	cjne	r2,#0x57,00180$
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00101$
+00180$:
+;	genCmpEq
+;	gencjneshort
+	cjne	r2,#0x59,00181$
+	ljmp	00117$
+00181$:
 ;	Peephole 251.a	replaced ljmp to ret with ret
 	ret
-00145$:
+;	main.c:68: case 'W':
+00101$:
 ;	main.c:69: printf("\r\nWriting to EEPROM...");
 ;	genIpush
 	mov	a,#__str_13
@@ -1130,20 +1136,7 @@ _handleInput:
 	ret
 ;	main.c:83: case 'L':
 00103$:
-;	main.c:84: printf("\r\nEnter an EEPROM block number from 0-7: ");
-;	genIpush
-	mov	a,#__str_10
-	push	acc
-	mov	a,#(__str_10 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-;	genCall
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-;	main.c:85: getBlockAndAddress(&address, &block);
+;	main.c:84: getBlockAndAddress(&address, &block);
 ;	genCast
 	mov	dptr,#_getBlockAndAddress_PARM_2
 	mov	a,#_handleInput_block_1_1
@@ -1159,7 +1152,7 @@ _handleInput:
 	mov	dptr,#_handleInput_address_1_1
 	mov	b,#0x00
 	lcall	_getBlockAndAddress
-;	main.c:87: lcdData = EPROM_ByteRead(address, block);
+;	main.c:86: lcdData = EPROM_ByteRead(address, block);
 ;	genAssign
 	mov	dptr,#_handleInput_address_1_1
 	movx	a,@dptr
@@ -1176,7 +1169,7 @@ _handleInput:
 	mov	dpl,r2
 	lcall	_EPROM_ByteRead
 	mov	r2,dpl
-;	main.c:89: printf("\r\nEnter LCD row from 0-3:");
+;	main.c:88: printf("\r\nEnter LCD row from 0-3:");
 ;	genIpush
 	push	ar2
 	mov	a,#__str_18
@@ -1191,7 +1184,7 @@ _handleInput:
 	dec	sp
 	dec	sp
 	pop	ar2
-;	main.c:90: Lcd_row = Serial_GetInteger(1);
+;	main.c:89: Lcd_row = Serial_GetInteger(1);
 ;	genCall
 ;	Peephole 182.b	used 16 bit load of dptr
 	mov	dptr,#0x0001
@@ -1201,7 +1194,7 @@ _handleInput:
 	mov	r4,dph
 	pop	ar2
 ;	genCast
-;	main.c:92: LCD_gotoxy(Lcd_row, 0);
+;	main.c:91: LCD_gotoxy(Lcd_row, 0);
 ;	genAssign
 	mov	dptr,#_LCD_gotoxy_PARM_2
 ;	Peephole 181	changed mov to clr
@@ -1212,7 +1205,7 @@ _handleInput:
 	push	ar2
 	lcall	_LCD_gotoxy
 	pop	ar2
-;	main.c:93: LCD_Putch(block + '0');
+;	main.c:92: LCD_Putch(block + '0');
 ;	genAssign
 	mov	dptr,#_handleInput_block_1_1
 	movx	a,@dptr
@@ -1229,7 +1222,7 @@ _handleInput:
 	push	ar2
 	lcall	_LCD_Putch
 	pop	ar2
-;	main.c:94: LCD_Puthex(address);
+;	main.c:93: LCD_Puthex(address);
 ;	genAssign
 	mov	dptr,#_handleInput_address_1_1
 	movx	a,@dptr
@@ -1240,7 +1233,7 @@ _handleInput:
 	push	ar2
 	lcall	_LCD_Puthex
 	pop	ar2
-;	main.c:95: LCD_Putstr(": ");
+;	main.c:94: LCD_Putstr(": ");
 ;	genCall
 ;	Peephole 182.a	used 16 bit load of DPTR
 	mov	dptr,#__str_19
@@ -1248,11 +1241,11 @@ _handleInput:
 	push	ar2
 	lcall	_LCD_Putstr
 	pop	ar2
-;	main.c:96: LCD_Puthex(lcdData);
+;	main.c:95: LCD_Puthex(lcdData);
 ;	genCall
 	mov	dpl,r2
 	lcall	_LCD_Puthex
-;	main.c:98: printf("\r\nWrote to LCD!\r\n");
+;	main.c:97: printf("\r\nWrote to LCD!\r\n");
 ;	genIpush
 	mov	a,#__str_20
 	push	acc
@@ -1265,15 +1258,15 @@ _handleInput:
 	dec	sp
 	dec	sp
 	dec	sp
-;	main.c:99: break;
+;	main.c:98: break;
 ;	Peephole 251.a	replaced ljmp to ret with ret
 	ret
-;	main.c:100: case 'C':
+;	main.c:99: case 'C':
 00104$:
-;	main.c:101: LCD_ClearScreen();
+;	main.c:100: LCD_ClearScreen();
 ;	genCall
 	lcall	_LCD_ClearScreen
-;	main.c:102: printf("\r\nLCD Display Cleared!\r\n");
+;	main.c:101: printf("\r\nLCD Display Cleared!\r\n");
 ;	genIpush
 	mov	a,#__str_21
 	push	acc
@@ -1286,12 +1279,12 @@ _handleInput:
 	dec	sp
 	dec	sp
 	dec	sp
-;	main.c:103: break;
+;	main.c:102: break;
 ;	Peephole 251.a	replaced ljmp to ret with ret
 	ret
-;	main.c:104: case 'D':
+;	main.c:103: case 'D':
 00105$:
-;	main.c:105: printf("\r\nPerforming an EEPROM data dump\r\n");
+;	main.c:104: printf("\r\nPerforming an EEPROM data dump\r\n");
 ;	genIpush
 	mov	a,#__str_22
 	push	acc
@@ -1304,7 +1297,7 @@ _handleInput:
 	dec	sp
 	dec	sp
 	dec	sp
-;	main.c:106: printf("\r\nEnter the starting block and address");
+;	main.c:105: printf("\r\nEnter the starting block and address");
 ;	genIpush
 	mov	a,#__str_23
 	push	acc
@@ -1317,7 +1310,7 @@ _handleInput:
 	dec	sp
 	dec	sp
 	dec	sp
-;	main.c:107: getBlockAndAddress(&address, &block);
+;	main.c:106: getBlockAndAddress(&address, &block);
 ;	genCast
 	mov	dptr,#_getBlockAndAddress_PARM_2
 	mov	a,#_handleInput_block_1_1
@@ -1333,7 +1326,7 @@ _handleInput:
 	mov	dptr,#_handleInput_address_1_1
 	mov	b,#0x00
 	lcall	_getBlockAndAddress
-;	main.c:108: printf("\r\nEnter the ending block and address");
+;	main.c:107: printf("\r\nEnter the ending block and address");
 ;	genIpush
 	mov	a,#__str_24
 	push	acc
@@ -1346,7 +1339,7 @@ _handleInput:
 	dec	sp
 	dec	sp
 	dec	sp
-;	main.c:109: getBlockAndAddress(&end_address, &end_block);
+;	main.c:108: getBlockAndAddress(&end_address, &end_block);
 ;	genCast
 	mov	dptr,#_getBlockAndAddress_PARM_2
 	mov	a,#_handleInput_end_block_1_1
@@ -1362,7 +1355,7 @@ _handleInput:
 	mov	dptr,#_handleInput_end_address_1_1
 	mov	b,#0x00
 	lcall	_getBlockAndAddress
-;	main.c:110: start_addr =( block << 8) | address;
+;	main.c:109: start_addr =( block << 8) | address;
 ;	genAssign
 	mov	dptr,#_handleInput_block_1_1
 	movx	a,@dptr
@@ -1392,7 +1385,7 @@ _handleInput:
 	inc	dptr
 	mov	a,r3
 	movx	@dptr,a
-;	main.c:111: end_addr = (end_block << 8) | end_address;
+;	main.c:110: end_addr = (end_block << 8) | end_address;
 ;	genAssign
 	mov	dptr,#_handleInput_end_block_1_1
 	movx	a,@dptr
@@ -1422,7 +1415,7 @@ _handleInput:
 	inc	dptr
 	mov	a,r5
 	movx	@dptr,a
-;	main.c:112: if (start_addr > end_addr){
+;	main.c:111: if (start_addr > end_addr){
 ;	genAssign
 ;	genAssign
 ;	genCmpGt
@@ -1435,8 +1428,8 @@ _handleInput:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00107$
-;	Peephole 300	removed redundant label 00146$
-;	main.c:113: printf("\r\nInvalid addresses. End address must be after start address");
+;	Peephole 300	removed redundant label 00182$
+;	main.c:112: printf("\r\nInvalid addresses. End address must be after start address");
 ;	genIpush
 	mov	a,#__str_25
 	push	acc
@@ -1449,12 +1442,12 @@ _handleInput:
 	dec	sp
 	dec	sp
 	dec	sp
-;	main.c:114: return;
+;	main.c:113: return;
 ;	genRet
 ;	Peephole 251.a	replaced ljmp to ret with ret
 	ret
 00107$:
-;	main.c:116: printf("\r\n");
+;	main.c:115: printf("\r\n");
 ;	genIpush
 	mov	a,#__str_26
 	push	acc
@@ -1467,7 +1460,7 @@ _handleInput:
 	dec	sp
 	dec	sp
 	dec	sp
-;	main.c:117: while(start_addr <= end_addr){
+;	main.c:116: while(start_addr <= end_addr){
 ;	genAssign
 	mov	dptr,#_handleInput_end_addr_1_1
 	movx	a,@dptr
@@ -1494,11 +1487,11 @@ _handleInput:
 	mov	a,r5
 	subb	a,r7
 ;	genIfxJump
-	jnc	00147$
+	jnc	00183$
 ;	Peephole 251.a	replaced ljmp to ret with ret
 	ret
-00147$:
-;	main.c:118: printf("%x: ", start_addr);
+00183$:
+;	main.c:117: printf("%x: ", start_addr);
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1526,21 +1519,21 @@ _handleInput:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:120: for (i = 0; i < 16; ++i){
+;	main.c:119: for (i = 0; i < 16; ++i){
 ;	genAssign
 ;	genAssign
 	mov	r0,#0x00
 00110$:
 ;	genCmpLt
 ;	genCmp
-	cjne	r0,#0x10,00148$
-00148$:
+	cjne	r0,#0x10,00184$
+00184$:
 ;	genIfxJump
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 160.b	removed sjmp by inverse jump logic
-	jnc	00137$
-;	Peephole 300	removed redundant label 00149$
-;	main.c:121: lcdData = EPROM_ByteRead(start_addr & 0xFF, start_addr >> 8);
+	jnc	00168$
+;	Peephole 300	removed redundant label 00185$
+;	main.c:120: lcdData = EPROM_ByteRead(start_addr & 0xFF, start_addr >> 8);
 ;	genIpush
 	push	ar4
 	push	ar5
@@ -1568,7 +1561,7 @@ _handleInput:
 	pop	ar5
 	pop	ar3
 	pop	ar2
-;	main.c:122: printf("%x ", lcdData);
+;	main.c:121: printf("%x ", lcdData);
 ;	genCast
 	mov	r5,#0x00
 ;	genIpush
@@ -1600,14 +1593,14 @@ _handleInput:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	main.c:123: start_addr++;
+;	main.c:122: start_addr++;
 ;	genPlus
 ;     genPlusIncr
 	inc	r6
-	cjne	r6,#0x00,00150$
+	cjne	r6,#0x00,00186$
 	inc	r7
-00150$:
-;	main.c:124: if(start_addr > end_addr){
+00186$:
+;	main.c:123: if(start_addr > end_addr){
 ;	genCmpGt
 ;	genCmp
 	clr	c
@@ -1622,15 +1615,15 @@ _handleInput:
 ;	Peephole 129.c	optimized condition
 	pop	ar5
 	pop	ar4
-	jc	00137$
-;	Peephole 300	removed redundant label 00151$
-;	main.c:120: for (i = 0; i < 16; ++i){
+	jc	00168$
+;	Peephole 300	removed redundant label 00187$
+;	main.c:119: for (i = 0; i < 16; ++i){
 ;	genPlus
 ;     genPlusIncr
 	inc	r0
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00110$
-00137$:
+00168$:
 ;	genAssign
 	mov	dptr,#_handleInput_start_addr_1_1
 	mov	a,r6
@@ -1638,7 +1631,7 @@ _handleInput:
 	inc	dptr
 	mov	a,r7
 	movx	@dptr,a
-;	main.c:128: printf("\r\n");
+;	main.c:127: printf("\r\n");
 ;	genIpush
 	push	ar2
 	push	ar3
@@ -1660,11 +1653,575 @@ _handleInput:
 	pop	ar3
 	pop	ar2
 	ljmp	00114$
-;	main.c:135: case 'H':
-00119$:
-;	main.c:136: ShowMenu();
+;	main.c:130: case 'Y':
+00117$:
+;	main.c:131: printf("\r\n");
+;	genIpush
+	mov	a,#__str_26
+	push	acc
+	mov	a,#(__str_26 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
 ;	genCall
-;	main.c:140: }
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:135: printf("%x: ", start_addr);
+;	genIpush
+	mov	a,#0x80
+	push	acc
+;	Peephole 181	changed mov to clr
+	clr	a
+	push	acc
+;	genIpush
+	mov	a,#__str_27
+	push	acc
+	mov	a,#(__str_27 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+;	main.c:136: for (i = 0; i < 16; ++i){
+;	genAssign
+	mov	r2,#0x80
+	mov	r3,#0x00
+;	genAssign
+	mov	r4,#0x10
+00127$:
+;	main.c:137: LCD_SetDDRAMAddress(start_addr);
+;	genCast
+	mov	ar5,r2
+;	genCall
+	mov	dpl,r5
+	push	ar2
+	push	ar3
+	push	ar4
+	lcall	_LCD_SetDDRAMAddress
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:138: lcdData = LCD_ReadRAM();
+;	genCall
+	push	ar2
+	push	ar3
+	push	ar4
+	lcall	_LCD_ReadRAM
+	mov	r5,dpl
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:139: printf("%x ", lcdData);
+;	genCast
+	mov	r6,#0x00
+;	genIpush
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar6
+;	genIpush
+	mov	a,#__str_28
+	push	acc
+	mov	a,#(__str_28 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:140: start_addr++;
+;	genPlus
+;     genPlusIncr
+	inc	r2
+	cjne	r2,#0x00,00188$
+	inc	r3
+00188$:
+;	genDjnz
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 205	optimized misc jump sequence
+	djnz	r4,00127$
+;	Peephole 300	removed redundant label 00189$
+;	Peephole 300	removed redundant label 00190$
+;	main.c:136: for (i = 0; i < 16; ++i){
+;	main.c:142: printf("\r\n");
+;	genIpush
+	mov	a,#__str_26
+	push	acc
+	mov	a,#(__str_26 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:145: printf("%x: ", start_addr);
+;	genIpush
+	mov	a,#0xC0
+	push	acc
+;	Peephole 181	changed mov to clr
+	clr	a
+	push	acc
+;	genIpush
+	mov	a,#__str_27
+	push	acc
+	mov	a,#(__str_27 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+;	main.c:146: for (i = 0; i < 16; ++i){
+;	genAssign
+	mov	r2,#0xC0
+	mov	r3,#0x00
+;	genAssign
+	mov	r4,#0x10
+00130$:
+;	main.c:147: LCD_SetDDRAMAddress(start_addr);
+;	genCast
+	mov	ar5,r2
+;	genCall
+	mov	dpl,r5
+	push	ar2
+	push	ar3
+	push	ar4
+	lcall	_LCD_SetDDRAMAddress
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:148: lcdData = LCD_ReadRAM();
+;	genCall
+	push	ar2
+	push	ar3
+	push	ar4
+	lcall	_LCD_ReadRAM
+	mov	r5,dpl
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:149: printf("%x ", lcdData);
+;	genCast
+	mov	r6,#0x00
+;	genIpush
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar6
+;	genIpush
+	mov	a,#__str_28
+	push	acc
+	mov	a,#(__str_28 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:150: start_addr++;
+;	genPlus
+;     genPlusIncr
+	inc	r2
+	cjne	r2,#0x00,00191$
+	inc	r3
+00191$:
+;	genDjnz
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 205	optimized misc jump sequence
+	djnz	r4,00130$
+;	Peephole 300	removed redundant label 00192$
+;	Peephole 300	removed redundant label 00193$
+;	main.c:146: for (i = 0; i < 16; ++i){
+;	main.c:152: printf("\r\n");
+;	genIpush
+	mov	a,#__str_26
+	push	acc
+	mov	a,#(__str_26 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:155: printf("%x: ", start_addr);
+;	genIpush
+	mov	a,#0x90
+	push	acc
+;	Peephole 181	changed mov to clr
+	clr	a
+	push	acc
+;	genIpush
+	mov	a,#__str_27
+	push	acc
+	mov	a,#(__str_27 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+;	main.c:156: for (i = 0; i < 16; ++i){
+;	genAssign
+	mov	r2,#0x90
+	mov	r3,#0x00
+;	genAssign
+	mov	r4,#0x10
+00133$:
+;	main.c:157: LCD_SetDDRAMAddress(start_addr);
+;	genCast
+	mov	ar5,r2
+;	genCall
+	mov	dpl,r5
+	push	ar2
+	push	ar3
+	push	ar4
+	lcall	_LCD_SetDDRAMAddress
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:158: lcdData = LCD_ReadRAM();
+;	genCall
+	push	ar2
+	push	ar3
+	push	ar4
+	lcall	_LCD_ReadRAM
+	mov	r5,dpl
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:159: printf("%x ", lcdData);
+;	genCast
+	mov	r6,#0x00
+;	genIpush
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar6
+;	genIpush
+	mov	a,#__str_28
+	push	acc
+	mov	a,#(__str_28 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:160: start_addr++;
+;	genPlus
+;     genPlusIncr
+	inc	r2
+	cjne	r2,#0x00,00194$
+	inc	r3
+00194$:
+;	genDjnz
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 205	optimized misc jump sequence
+	djnz	r4,00133$
+;	Peephole 300	removed redundant label 00195$
+;	Peephole 300	removed redundant label 00196$
+;	main.c:156: for (i = 0; i < 16; ++i){
+;	main.c:162: printf("\r\n");
+;	genIpush
+	mov	a,#__str_26
+	push	acc
+	mov	a,#(__str_26 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:165: printf("%x: ", start_addr);
+;	genIpush
+	mov	a,#0xD0
+	push	acc
+;	Peephole 181	changed mov to clr
+	clr	a
+	push	acc
+;	genIpush
+	mov	a,#__str_27
+	push	acc
+	mov	a,#(__str_27 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+;	main.c:166: for (i = 0; i < 16; ++i){
+;	genAssign
+	mov	r2,#0xD0
+	mov	r3,#0x00
+;	genAssign
+	mov	r4,#0x10
+00136$:
+;	main.c:167: LCD_SetDDRAMAddress(start_addr);
+;	genCast
+	mov	ar5,r2
+;	genCall
+	mov	dpl,r5
+	push	ar2
+	push	ar3
+	push	ar4
+	lcall	_LCD_SetDDRAMAddress
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:168: lcdData = LCD_ReadRAM();
+;	genCall
+	push	ar2
+	push	ar3
+	push	ar4
+	lcall	_LCD_ReadRAM
+	mov	r5,dpl
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:169: printf("%x ", lcdData);
+;	genCast
+	mov	r6,#0x00
+;	genIpush
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar6
+;	genIpush
+	mov	a,#__str_28
+	push	acc
+	mov	a,#(__str_28 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:170: start_addr++;
+;	genPlus
+;     genPlusIncr
+	inc	r2
+	cjne	r2,#0x00,00197$
+	inc	r3
+00197$:
+;	genDjnz
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 205	optimized misc jump sequence
+	djnz	r4,00136$
+;	Peephole 300	removed redundant label 00198$
+;	Peephole 300	removed redundant label 00199$
+;	main.c:166: for (i = 0; i < 16; ++i){
+;	main.c:172: printf("\r\n");
+;	genIpush
+	mov	a,#__str_26
+	push	acc
+	mov	a,#(__str_26 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:175: break;
+;	Peephole 251.a	replaced ljmp to ret with ret
+	ret
+;	main.c:176: case 'G':
+00118$:
+;	main.c:177: printf("\r\n");
+;	genIpush
+	mov	a,#__str_26
+	push	acc
+	mov	a,#(__str_26 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+;	main.c:178: start_addr = 0x40;
+;	genAssign
+	mov	dptr,#_handleInput_start_addr_1_1
+	mov	a,#0x40
+	movx	@dptr,a
+	clr	a
+	inc	dptr
+	movx	@dptr,a
+;	main.c:180: while (start_addr < 0x80){
+00119$:
+;	genAssign
+	mov	dptr,#_handleInput_start_addr_1_1
+	movx	a,@dptr
+	mov	r2,a
+	inc	dptr
+	movx	a,@dptr
+	mov	r3,a
+;	genCmpLt
+;	genCmp
+	clr	c
+	mov	a,r2
+	subb	a,#0x80
+	mov	a,r3
+	subb	a,#0x00
+;	genIfxJump
+	jc	00200$
+;	Peephole 251.a	replaced ljmp to ret with ret
+	ret
+00200$:
+;	main.c:181: printf("%x: ", start_addr);
+;	genIpush
+	push	ar2
+	push	ar3
+	push	ar2
+	push	ar3
+;	genIpush
+	mov	a,#__str_27
+	push	acc
+	mov	a,#(__str_27 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	pop	ar3
+	pop	ar2
+;	main.c:183: for (i = 0; i < 16; ++i){
+;	genAssign
+;	genAssign
+	mov	r4,#0x10
+00139$:
+;	main.c:184: LCD_SetCGRAMAddress(start_addr);
+;	genCast
+	mov	ar5,r2
+;	genCall
+	mov	dpl,r5
+	push	ar2
+	push	ar3
+	push	ar4
+	lcall	_LCD_SetCGRAMAddress
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:185: lcdData = LCD_ReadRAM();
+;	genCall
+	push	ar2
+	push	ar3
+	push	ar4
+	lcall	_LCD_ReadRAM
+	mov	r5,dpl
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:186: printf("%x ", lcdData);
+;	genCast
+	mov	r6,#0x00
+;	genIpush
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar6
+;	genIpush
+	mov	a,#__str_28
+	push	acc
+	mov	a,#(__str_28 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	pop	ar4
+	pop	ar3
+	pop	ar2
+;	main.c:187: start_addr++;
+;	genPlus
+;     genPlusIncr
+	inc	r2
+	cjne	r2,#0x00,00201$
+	inc	r3
+00201$:
+;	genDjnz
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 205	optimized misc jump sequence
+	djnz	r4,00139$
+;	Peephole 300	removed redundant label 00202$
+;	Peephole 300	removed redundant label 00203$
+;	main.c:183: for (i = 0; i < 16; ++i){
+;	main.c:189: printf("\r\n");
+;	genAssign
+	mov	dptr,#_handleInput_start_addr_1_1
+	mov	a,r2
+	movx	@dptr,a
+	inc	dptr
+	mov	a,r3
+	movx	@dptr,a
+;	genIpush
+	mov	a,#__str_26
+	push	acc
+	mov	a,#(__str_26 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+;	genCall
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	ljmp	00119$
+;	main.c:192: case 'H':
+00122$:
+;	main.c:193: ShowMenu();
+;	genCall
+;	main.c:197: }
 ;	Peephole 253.b	replaced lcall/ret with ljmp
 	ljmp	_ShowMenu
 ;
@@ -1673,33 +2230,33 @@ _handleInput:
 ;------------------------------------------------------------
 ;c                         Allocated with name '_main_c_2_2'
 ;------------------------------------------------------------
-;	main.c:146: void main(void)
+;	main.c:203: void main(void)
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-;	main.c:148: Serial_Init();
+;	main.c:205: Serial_Init();
 ;	genCall
 	lcall	_Serial_Init
-;	main.c:149: EPROM_Init();
+;	main.c:206: EPROM_Init();
 ;	genCall
 	lcall	_EPROM_Init
-;	main.c:150: LCD_Init();
+;	main.c:207: LCD_Init();
 ;	genCall
 	lcall	_LCD_Init
-;	main.c:151: P1_3 = 1;
+;	main.c:208: P1_3 = 1;
 ;	genAssign
 	setb	_P1_3
-;	main.c:154: ShowMenu();
+;	main.c:211: ShowMenu();
 ;	genCall
 	lcall	_ShowMenu
-;	main.c:155: while(1){
+;	main.c:212: while(1){
 00104$:
-;	main.c:157: c = getchar ();
+;	main.c:214: c = getchar ();
 ;	genCall
 	lcall	_getchar
 	mov	r2,dpl
-;	main.c:158: if (c == ENTER_KEY){
+;	main.c:215: if (c == ENTER_KEY){
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
@@ -1708,20 +2265,20 @@ _main:
 ;	Peephole 200.b	removed redundant sjmp
 ;	Peephole 300	removed redundant label 00110$
 ;	Peephole 300	removed redundant label 00111$
-;	main.c:159: putchar('\n');
+;	main.c:216: putchar('\n');
 ;	genCall
 	mov	dpl,#0x0A
 	push	ar2
 	lcall	_putchar
 	pop	ar2
 00102$:
-;	main.c:161: putchar(c);
+;	main.c:218: putchar(c);
 ;	genCall
 	mov	dpl,r2
 	push	ar2
 	lcall	_putchar
 	pop	ar2
-;	main.c:162: handleInput(c);
+;	main.c:219: handleInput(c);
 ;	genCall
 	mov	dpl,r2
 	lcall	_handleInput

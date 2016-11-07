@@ -4,12 +4,34 @@
 #define WRITE 0
 #define READ 1
 
+
+#include <stdint.h>
+
 /**
  * Initializes the LCD interface
  */
 void LCD_Init(void);
 
 void LCD_Test(void);
+
+
+
+/**
+ *  Performs a data read on the last set ram selection
+ *  depending on the previous call to SetDDRAMAddress or SetCGRAMAddress
+ */
+uint8_t LCD_ReadRAM(void);
+
+/**
+ *  Sets the CGRAM Address
+ */
+void LCD_SetCGRAMAddress(uint8_t address);
+
+/**
+ *  Sets the DDRAM Address
+ */
+void LCD_SetDDRAMAddress(uint8_t address);
+
 
 /**
  *  Puts c out to the LCD as two nibbles

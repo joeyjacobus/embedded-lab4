@@ -8,7 +8,7 @@
 #define LCD_Clear 0x01
 #define LCD_DisplayOn 0x0F  //Display on with blinking and cursor
 #define LCD_SystemSet 0x38  //2 line display, 8 bit
-
+#define INSTRUCTION_CGRAM_SET 0x40
 
 #define INSTRUCTION 0
 #define DATA        1
@@ -43,7 +43,34 @@ void LCD_DataWrite(uint8_t Data){
     *LCD_Addr = Data;
 }
 
+/**
+ *  Sets the CGRAM Address
+ */
+void LCD_SetCGRAMAddress(uint8_t address){
+    LCD_Busywait();
+    address = address & 0xC0;   //mask off top two bits
+    LCD_InstructionWrite(address | 0x40);
+}
 
+/**
+ *  Sets the DDRAM Address
+ */
+void LCD_SetDDRAMAddress(uint8_t address){
+    LCD_Busywait();
+    address = address | 0x80;   //mask off top bit
+    LCD_InstructionWrite(address);
+}
+
+/**
+ *  Performs a data read on the last set ram selection
+ *  depending on the previous call to SetDDRAMAddress or SetCGRAMAddress
+ */
+uint8_t LCD_ReadRAM(void){
+    LCD_Busywait();
+    RW = READ;
+    RS = DATA;
+    return *LCD_Addr;
+}
 
 /**
  *  Puts c out to the LCD as two nibbles

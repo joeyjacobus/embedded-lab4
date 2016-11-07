@@ -252,6 +252,9 @@ Symbol Table
     _LCD_Putch                                                     **** GX
     _LCD_Puthex                                                    **** GX
     _LCD_Putstr                                                    **** GX
+    _LCD_ReadRAM                                                   **** GX
+    _LCD_SetCGRAMAddress                                           **** GX
+    _LCD_SetDDRAMAddress                                           **** GX
     _LCD_gotoxy                                                    **** GX
     _LCD_gotoxy_PARM_2                                             **** GX
     _OV                                                         =  00D2 G
@@ -434,7 +437,7 @@ Symbol Table
   9 _handleInput_end_address_1_1                                   000A R
   9 _handleInput_end_block_1_1                                     0008 R
   9 _handleInput_start_addr_1_1                                    000B R
- 14 _main                                                          05B6 GR
+ 14 _main                                                          08A8 GR
     _printf                                                        **** GX
     _putchar                                                       **** GX
     a                                                              00D6 
@@ -638,6 +641,6 @@ Area Table
   11 GSINIT5                                                                            size    0   flags 20
   12 GSINIT                                                                             size    0   flags 20
   13 GSFINAL                                                                            size    3   flags 20
-  14 CSEG                                                                               size  5E6   flags 20
+  14 CSEG                                                                               size  8D8   flags 20
   15 CONST                                                                              size  38D   flags 20
   16 XINIT                                                                              size    0   flags 20

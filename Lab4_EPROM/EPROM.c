@@ -4,6 +4,19 @@
 #include "I2C.h"
 #include <stdio.h>
 #include "LCD.h"
+
+uint8_t ACK_RETRY = 0;
+void RetryAck(uint8_t byte, uint8_t ack){
+    ACK_RETRY = 3;
+    while(ACK_RETRY > 0 && ack){
+        ack = I2CSend(byte);
+    }
+    if (ack){
+        printf("\r\nAck failed 3 times. System reset required. Entering infinite loop\r\n");
+        while(1);
+    }
+}
+
 /**
  * Changes the current address. Called by ByteWrite and ReadByte
  * block is a value <8, read=0 for write, 1 for read
@@ -21,6 +34,7 @@ void EPROM_SetBlock(uint8_t block, uint8_t read){
     byte |= (block << 1);   //Set bit 1,2,3 to the three bit block address
     I2CStart();
     ack = I2CSend(byte);
+    RetryAck(byte, ack);
 }
 
 
@@ -33,7 +47,9 @@ void EPROM_ByteWrite(uint8_t writeData, uint8_t address, uint8_t block){
     uint8_t ack;
     EPROM_SetBlock(block, WRITE);
     ack = I2CSend(address);
+    RetryAck(address, ack);
     ack = I2CSend(writeData);
+    RetryAck(writeData, ack);
     I2CStop();
 }
 
@@ -46,6 +62,7 @@ uint8_t EPROM_ByteRead(uint8_t address, uint8_t block){
     uint8_t ack;
     EPROM_SetBlock(block, WRITE);
     ack = I2CSend(address);
+    RetryAck(address, ack);
     I2CRestart(); //Restart
     EPROM_SetBlock(block, READ);
     value = I2CRead();

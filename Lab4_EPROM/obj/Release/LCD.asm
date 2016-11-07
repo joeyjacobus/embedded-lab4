@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Sun Nov 06 15:58:59 2016
+; This file generated Sun Nov 06 20:08:50 2016
 ;--------------------------------------------------------
 	.module LCD
 	.optsdcc -mmcs51 --model-large
@@ -211,6 +211,9 @@
 	.globl _SP
 	.globl _P0
 	.globl _LCD_gotoxy_PARM_2
+	.globl _LCD_SetCGRAMAddress
+	.globl _LCD_SetDDRAMAddress
+	.globl _LCD_ReadRAM
 	.globl _LCD_Puthex
 	.globl _LCD_Busywait
 	.globl _LCD_ClearScreen
@@ -457,6 +460,10 @@ _LCD_InstructionWrite_instruction_1_1:
 	.ds 1
 _LCD_DataWrite_Data_1_1:
 	.ds 1
+_LCD_SetCGRAMAddress_address_1_1:
+	.ds 1
+_LCD_SetDDRAMAddress_address_1_1:
+	.ds 1
 _LCD_Puthex_c_1_1:
 	.ds 1
 _LCD_gotoaddr_addr_1_1:
@@ -590,11 +597,123 @@ _LCD_DataWrite:
 ;	Peephole 300	removed redundant label 00101$
 	ret
 ;------------------------------------------------------------
+;Allocation info for local variables in function 'LCD_SetCGRAMAddress'
+;------------------------------------------------------------
+;address                   Allocated with name '_LCD_SetCGRAMAddress_address_1_1'
+;------------------------------------------------------------
+;	LCD.c:49: void LCD_SetCGRAMAddress(uint8_t address){
+;	-----------------------------------------
+;	 function LCD_SetCGRAMAddress
+;	-----------------------------------------
+_LCD_SetCGRAMAddress:
+;	genReceive
+	mov	a,dpl
+	mov	dptr,#_LCD_SetCGRAMAddress_address_1_1
+	movx	@dptr,a
+;	LCD.c:50: LCD_Busywait();
+;	genCall
+	lcall	_LCD_Busywait
+;	LCD.c:51: address = address & 0xC0;   //mask off top two bits
+;	genAssign
+;	genAnd
+	mov	dptr,#_LCD_SetCGRAMAddress_address_1_1
+	movx	a,@dptr
+	mov	r2,a
+;	Peephole 248.b	optimized and to xdata
+	anl	a,#0xC0
+	movx	@dptr,a
+;	LCD.c:52: LCD_InstructionWrite(address | 0x40);
+;	genAssign
+	mov	dptr,#_LCD_SetCGRAMAddress_address_1_1
+	movx	a,@dptr
+	mov	r2,a
+;	genOr
+	orl	ar2,#0x40
+;	genCall
+	mov	dpl,r2
+;	Peephole 253.b	replaced lcall/ret with ljmp
+	ljmp	_LCD_InstructionWrite
+;
+;------------------------------------------------------------
+;Allocation info for local variables in function 'LCD_SetDDRAMAddress'
+;------------------------------------------------------------
+;address                   Allocated with name '_LCD_SetDDRAMAddress_address_1_1'
+;------------------------------------------------------------
+;	LCD.c:58: void LCD_SetDDRAMAddress(uint8_t address){
+;	-----------------------------------------
+;	 function LCD_SetDDRAMAddress
+;	-----------------------------------------
+_LCD_SetDDRAMAddress:
+;	genReceive
+	mov	a,dpl
+	mov	dptr,#_LCD_SetDDRAMAddress_address_1_1
+	movx	@dptr,a
+;	LCD.c:59: LCD_Busywait();
+;	genCall
+	lcall	_LCD_Busywait
+;	LCD.c:60: address = address | 0x80;   //mask off top bit
+;	genAssign
+;	genOr
+	mov	dptr,#_LCD_SetDDRAMAddress_address_1_1
+	movx	a,@dptr
+	mov	r2,a
+;	Peephole 248.a	optimized or to xdata
+	orl	a,#0x80
+	movx	@dptr,a
+;	LCD.c:61: LCD_InstructionWrite(address);
+;	genAssign
+	mov	dptr,#_LCD_SetDDRAMAddress_address_1_1
+	movx	a,@dptr
+;	genCall
+	mov	r2,a
+;	Peephole 244.c	loading dpl from a instead of r2
+	mov	dpl,a
+;	Peephole 253.b	replaced lcall/ret with ljmp
+	ljmp	_LCD_InstructionWrite
+;
+;------------------------------------------------------------
+;Allocation info for local variables in function 'LCD_ReadRAM'
+;------------------------------------------------------------
+;------------------------------------------------------------
+;	LCD.c:68: uint8_t LCD_ReadRAM(void){
+;	-----------------------------------------
+;	 function LCD_ReadRAM
+;	-----------------------------------------
+_LCD_ReadRAM:
+;	LCD.c:69: LCD_Busywait();
+;	genCall
+	lcall	_LCD_Busywait
+;	LCD.c:70: RW = READ;
+;	genAssign
+	setb	_P1_4
+;	LCD.c:71: RS = DATA;
+;	genAssign
+	setb	_P1_5
+;	LCD.c:72: return *LCD_Addr;
+;	genAssign
+	mov	dptr,#_LCD_Addr
+	clr	a
+	movc	a,@a+dptr
+	mov	r2,a
+	mov	a,#0x01
+	movc	a,@a+dptr
+	mov	r3,a
+;	genPointerGet
+;	genFarPointerGet
+	mov	dpl,r2
+	mov	dph,r3
+	movx	a,@dptr
+;	genRet
+;	Peephole 234.a	loading dpl directly from a(ccumulator), r2 not set
+	mov	dpl,a
+;	Peephole 300	removed redundant label 00101$
+	ret
+;------------------------------------------------------------
 ;Allocation info for local variables in function 'LCD_Puthex'
 ;------------------------------------------------------------
 ;c                         Allocated with name '_LCD_Puthex_c_1_1'
 ;------------------------------------------------------------
-;	LCD.c:53: void LCD_Puthex(char c){
+;	LCD.c:80: void LCD_Puthex(char c){
 ;	-----------------------------------------
 ;	 function LCD_Puthex
 ;	-----------------------------------------
@@ -603,7 +722,7 @@ _LCD_Puthex:
 	mov	a,dpl
 	mov	dptr,#_LCD_Puthex_c_1_1
 	movx	@dptr,a
-;	LCD.c:54: LCD_Putch(ASCII_lookup[(c & 0xF0) >> 4]); //High nibble
+;	LCD.c:81: LCD_Putch(ASCII_lookup[(c & 0xF0) >> 4]); //High nibble
 ;	genAssign
 	mov	dptr,#_LCD_Puthex_c_1_1
 	movx	a,@dptr
@@ -644,7 +763,7 @@ _LCD_Puthex:
 	push	ar2
 	lcall	_LCD_Putch
 	pop	ar2
-;	LCD.c:55: LCD_Putch(ASCII_lookup[c & 0x0F]); //Low nibble
+;	LCD.c:82: LCD_Putch(ASCII_lookup[c & 0x0F]); //Low nibble
 ;	genAnd
 	anl	ar2,#0x0F
 ;	genLeftShift
@@ -677,18 +796,18 @@ _LCD_Puthex:
 ;Allocation info for local variables in function 'LCD_Busywait'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	LCD.c:63: void LCD_Busywait(void){
+;	LCD.c:90: void LCD_Busywait(void){
 ;	-----------------------------------------
 ;	 function LCD_Busywait
 ;	-----------------------------------------
 _LCD_Busywait:
-;	LCD.c:64: RW = READ;
+;	LCD.c:91: RW = READ;
 ;	genAssign
 	setb	_P1_4
-;	LCD.c:65: RS = INSTRUCTION;
+;	LCD.c:92: RS = INSTRUCTION;
 ;	genAssign
 	clr	_P1_5
-;	LCD.c:66: while (*LCD_Addr & 0x80){}
+;	LCD.c:93: while (*LCD_Addr & 0x80){}
 00101$:
 ;	genAssign
 	mov	dptr,#_LCD_Addr
@@ -716,15 +835,15 @@ _LCD_Busywait:
 ;Allocation info for local variables in function 'LCD_ClearScreen'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	LCD.c:72: void LCD_ClearScreen(void){
+;	LCD.c:99: void LCD_ClearScreen(void){
 ;	-----------------------------------------
 ;	 function LCD_ClearScreen
 ;	-----------------------------------------
 _LCD_ClearScreen:
-;	LCD.c:73: LCD_Busywait();
+;	LCD.c:100: LCD_Busywait();
 ;	genCall
 	lcall	_LCD_Busywait
-;	LCD.c:74: LCD_InstructionWrite(LCD_Clear);
+;	LCD.c:101: LCD_InstructionWrite(LCD_Clear);
 ;	genCall
 	mov	dpl,#0x01
 ;	Peephole 253.b	replaced lcall/ret with ljmp
@@ -735,7 +854,7 @@ _LCD_ClearScreen:
 ;------------------------------------------------------------
 ;addr                      Allocated with name '_LCD_gotoaddr_addr_1_1'
 ;------------------------------------------------------------
-;	LCD.c:82: void LCD_gotoaddr(unsigned char addr){
+;	LCD.c:109: void LCD_gotoaddr(unsigned char addr){
 ;	-----------------------------------------
 ;	 function LCD_gotoaddr
 ;	-----------------------------------------
@@ -744,7 +863,7 @@ _LCD_gotoaddr:
 	mov	a,dpl
 	mov	dptr,#_LCD_gotoaddr_addr_1_1
 	movx	@dptr,a
-;	LCD.c:84: if (addr > 128){
+;	LCD.c:111: if (addr > 128){
 ;	genAssign
 	mov	dptr,#_LCD_gotoaddr_addr_1_1
 	movx	a,@dptr
@@ -758,24 +877,24 @@ _LCD_gotoaddr:
 	add	a,#0xff - 0x80
 	jnc	00102$
 ;	Peephole 300	removed redundant label 00106$
-;	LCD.c:85: return;
+;	LCD.c:112: return;
 ;	genRet
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 251.b	replaced sjmp to ret with ret
 	ret
 00102$:
-;	LCD.c:87: LCD_Busywait();
+;	LCD.c:114: LCD_Busywait();
 ;	genCall
 	push	ar2
 	lcall	_LCD_Busywait
 	pop	ar2
-;	LCD.c:88: RW = WRITE;
+;	LCD.c:115: RW = WRITE;
 ;	genAssign
 	clr	_P1_4
-;	LCD.c:89: RS = INSTRUCTION;
+;	LCD.c:116: RS = INSTRUCTION;
 ;	genAssign
 	clr	_P1_5
-;	LCD.c:90: *LCD_Addr = (0x01 << 7) | addr;
+;	LCD.c:117: *LCD_Addr = (0x01 << 7) | addr;
 ;	genAssign
 	mov	dptr,#_LCD_Addr
 	clr	a
@@ -800,7 +919,7 @@ _LCD_gotoaddr:
 ;col                       Allocated with name '_LCD_gotoxy_PARM_2'
 ;row                       Allocated with name '_LCD_gotoxy_row_1_1'
 ;------------------------------------------------------------
-;	LCD.c:97: void LCD_gotoxy(unsigned char row, unsigned char col){
+;	LCD.c:124: void LCD_gotoxy(unsigned char row, unsigned char col){
 ;	-----------------------------------------
 ;	 function LCD_gotoxy
 ;	-----------------------------------------
@@ -809,7 +928,7 @@ _LCD_gotoxy:
 	mov	a,dpl
 	mov	dptr,#_LCD_gotoxy_row_1_1
 	movx	@dptr,a
-;	LCD.c:98: if (row > 3 || col > 0x0F){
+;	LCD.c:125: if (row > 3 || col > 0x0F){
 ;	genAssign
 	mov	dptr,#_LCD_gotoxy_row_1_1
 	movx	a,@dptr
@@ -838,13 +957,13 @@ _LCD_gotoxy:
 	jnc	00102$
 ;	Peephole 300	removed redundant label 00108$
 00101$:
-;	LCD.c:99: return;
+;	LCD.c:126: return;
 ;	genRet
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 251.b	replaced sjmp to ret with ret
 	ret
 00102$:
-;	LCD.c:101: LCD_gotoaddr(AddrMap[row][col]);
+;	LCD.c:128: LCD_gotoaddr(AddrMap[row][col]);
 ;	genLeftShift
 ;	genLeftShiftLiteral
 ;	genlshOne
@@ -887,7 +1006,7 @@ _LCD_gotoxy:
 ;------------------------------------------------------------
 ;cc                        Allocated with name '_LCD_Putch_cc_1_1'
 ;------------------------------------------------------------
-;	LCD.c:109: void LCD_Putch(char cc){
+;	LCD.c:136: void LCD_Putch(char cc){
 ;	-----------------------------------------
 ;	 function LCD_Putch
 ;	-----------------------------------------
@@ -896,10 +1015,10 @@ _LCD_Putch:
 	mov	a,dpl
 	mov	dptr,#_LCD_Putch_cc_1_1
 	movx	@dptr,a
-;	LCD.c:110: LCD_Busywait();
+;	LCD.c:137: LCD_Busywait();
 ;	genCall
 	lcall	_LCD_Busywait
-;	LCD.c:111: LCD_DataWrite(cc);
+;	LCD.c:138: LCD_DataWrite(cc);
 ;	genAssign
 	mov	dptr,#_LCD_Putch_cc_1_1
 	movx	a,@dptr
@@ -916,7 +1035,7 @@ _LCD_Putch:
 ;ss                        Allocated with name '_LCD_Putstr_ss_1_1'
 ;addr                      Allocated with name '_LCD_Putstr_addr_1_1'
 ;------------------------------------------------------------
-;	LCD.c:120: void LCD_Putstr(char *ss){
+;	LCD.c:147: void LCD_Putstr(char *ss){
 ;	-----------------------------------------
 ;	 function LCD_Putstr
 ;	-----------------------------------------
@@ -933,7 +1052,7 @@ _LCD_Putstr:
 	inc	dptr
 	mov	a,r2
 	movx	@dptr,a
-;	LCD.c:122: while(*ss){
+;	LCD.c:149: while(*ss){
 ;	genAssign
 	mov	dptr,#_LCD_Putstr_ss_1_1
 	movx	a,@dptr
@@ -959,7 +1078,7 @@ _LCD_Putstr:
 ;	Peephole 251.a	replaced ljmp to ret with ret
 	ret
 00118$:
-;	LCD.c:123: LCD_Putch(*ss);
+;	LCD.c:150: LCD_Putch(*ss);
 ;	genCall
 	mov	dpl,r5
 	push	ar2
@@ -969,7 +1088,7 @@ _LCD_Putstr:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	LCD.c:124: ss++;
+;	LCD.c:151: ss++;
 ;	genPlus
 ;     genPlusIncr
 	inc	r2
@@ -986,7 +1105,7 @@ _LCD_Putstr:
 	inc	dptr
 	mov	a,r4
 	movx	@dptr,a
-;	LCD.c:126: LCD_Busywait();
+;	LCD.c:153: LCD_Busywait();
 ;	genCall
 	push	ar2
 	push	ar3
@@ -995,13 +1114,13 @@ _LCD_Putstr:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	LCD.c:127: RW = READ;
+;	LCD.c:154: RW = READ;
 ;	genAssign
 	setb	_P1_4
-;	LCD.c:128: RS = INSTRUCTION;
+;	LCD.c:155: RS = INSTRUCTION;
 ;	genAssign
 	clr	_P1_5
-;	LCD.c:129: addr = *LCD_Addr & 0x7F;    //Mask off the busy bit, even though it should always be 0 here
+;	LCD.c:156: addr = *LCD_Addr & 0x7F;    //Mask off the busy bit, even though it should always be 0 here
 ;	genAssign
 	mov	dptr,#_LCD_Addr
 	clr	a
@@ -1018,7 +1137,7 @@ _LCD_Putstr:
 	mov	r5,a
 ;	genAnd
 	anl	ar5,#0x7F
-;	LCD.c:130: switch (addr){
+;	LCD.c:157: switch (addr){
 ;	genCmpEq
 ;	gencjneshort
 	cjne	r5,#0x10,00120$
@@ -1040,14 +1159,14 @@ _LCD_Putstr:
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
-;	LCD.c:131: case 0x10:
+;	LCD.c:158: case 0x10:
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 198.b	optimized misc jump sequence
 	cjne	r5,#0x64,00107$
 	sjmp	00104$
 ;	Peephole 300	removed redundant label 00123$
 00101$:
-;	LCD.c:132: LCD_gotoaddr(0x40);
+;	LCD.c:159: LCD_gotoaddr(0x40);
 ;	genCall
 	mov	dpl,#0x40
 	push	ar2
@@ -1057,11 +1176,11 @@ _LCD_Putstr:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	LCD.c:133: break;
+;	LCD.c:160: break;
 	ljmp	00107$
-;	LCD.c:134: case 0x50:
+;	LCD.c:161: case 0x50:
 00102$:
-;	LCD.c:135: LCD_gotoaddr(0x10);
+;	LCD.c:162: LCD_gotoaddr(0x10);
 ;	genCall
 	mov	dpl,#0x10
 	push	ar2
@@ -1071,11 +1190,11 @@ _LCD_Putstr:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	LCD.c:136: break;
+;	LCD.c:163: break;
 	ljmp	00107$
-;	LCD.c:137: case 0x24:
+;	LCD.c:164: case 0x24:
 00103$:
-;	LCD.c:138: LCD_gotoaddr(0x50);
+;	LCD.c:165: LCD_gotoaddr(0x50);
 ;	genCall
 	mov	dpl,#0x50
 	push	ar2
@@ -1085,35 +1204,35 @@ _LCD_Putstr:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	LCD.c:139: break;
+;	LCD.c:166: break;
 	ljmp	00107$
-;	LCD.c:140: case 0x64:
+;	LCD.c:167: case 0x64:
 00104$:
-;	LCD.c:141: return;
+;	LCD.c:168: return;
 ;	genRet
-;	LCD.c:144: }
+;	LCD.c:171: }
 ;	Peephole 300	removed redundant label 00110$
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'LCD_Init'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	LCD.c:153: void LCD_Init(void){
+;	LCD.c:180: void LCD_Init(void){
 ;	-----------------------------------------
 ;	 function LCD_Init
 ;	-----------------------------------------
 _LCD_Init:
-;	LCD.c:154: LCD_Busywait();
+;	LCD.c:181: LCD_Busywait();
 ;	genCall
 	lcall	_LCD_Busywait
-;	LCD.c:155: LCD_InstructionWrite(LCD_SystemSet);
+;	LCD.c:182: LCD_InstructionWrite(LCD_SystemSet);
 ;	genCall
 	mov	dpl,#0x38
 	lcall	_LCD_InstructionWrite
-;	LCD.c:156: LCD_Busywait();
+;	LCD.c:183: LCD_Busywait();
 ;	genCall
 	lcall	_LCD_Busywait
-;	LCD.c:157: LCD_InstructionWrite(LCD_DisplayOn);
+;	LCD.c:184: LCD_InstructionWrite(LCD_DisplayOn);
 ;	genCall
 	mov	dpl,#0x0F
 ;	Peephole 253.b	replaced lcall/ret with ljmp
@@ -1123,22 +1242,22 @@ _LCD_Init:
 ;Allocation info for local variables in function 'LCD_Test'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	LCD.c:164: void LCD_Test(void){
+;	LCD.c:191: void LCD_Test(void){
 ;	-----------------------------------------
 ;	 function LCD_Test
 ;	-----------------------------------------
 _LCD_Test:
-;	LCD.c:167: LCD_Busywait();
+;	LCD.c:194: LCD_Busywait();
 ;	genCall
 	lcall	_LCD_Busywait
-;	LCD.c:169: LCD_InstructionWrite(LCD_Clear);
+;	LCD.c:196: LCD_InstructionWrite(LCD_Clear);
 ;	genCall
 	mov	dpl,#0x01
 	lcall	_LCD_InstructionWrite
-;	LCD.c:170: LCD_Busywait();
+;	LCD.c:197: LCD_Busywait();
 ;	genCall
 	lcall	_LCD_Busywait
-;	LCD.c:172: LCD_gotoxy(0,0);
+;	LCD.c:199: LCD_gotoxy(0,0);
 ;	genAssign
 	mov	dptr,#_LCD_gotoxy_PARM_2
 ;	Peephole 181	changed mov to clr
@@ -1147,7 +1266,7 @@ _LCD_Test:
 ;	genCall
 	mov	dpl,#0x00
 	lcall	_LCD_gotoxy
-;	LCD.c:173: LCD_Putstr("abcdefghijklnopqrstuvwxyz123456789abcdefghijklmnopqrstuvwxyz12345678987654321");
+;	LCD.c:200: LCD_Putstr("abcdefghijklnopqrstuvwxyz123456789abcdefghijklmnopqrstuvwxyz12345678987654321");
 ;	genCall
 ;	Peephole 182.a	used 16 bit load of DPTR
 	mov	dptr,#__str_0

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1478474691 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\main.c
+1478478488 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\main.c
 	<mcs51/8051.h>
 	"at89c51ed2.h"
 	"LCD.h"
@@ -8,12 +8,13 @@
 	"EPROM.h"
 	"I2C.h"
 
-1478472734 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\lcd.h
+1478476381 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\lcd.h
+	<stdint.h>
 
 1478469616 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\serial.h
 	<stdint.h>
 
-1478473137 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\lcd.c
+1478487988 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\lcd.c
 	"LCD.h"
 	<stdint.h>
 	"at89c51ed2.h"
@@ -27,7 +28,7 @@
 	<stdlib.h>
 	"serial.h"
 
-1478463986 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\eprom.c
+1478488495 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\eprom.c
 	"at89c51ed2.h"
 	<stdint.h>
 	"I2C.h"
