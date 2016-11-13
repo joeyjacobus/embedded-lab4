@@ -174,8 +174,6 @@ Symbol Table
     _ACC                                                        =  00E0 G
     _AUXR                                                       =  008E G
     _AUXR1                                                      =  00A2 G
-  9 _ActiveAlarms                                                  0006 GR
-  8 _AlarmCount                                                    0001 GR
     _B                                                          =  00F0 G
     _BDRCON                                                     =  009B G
     _BRL                                                        =  009A G
@@ -201,7 +199,10 @@ Symbol Table
     _CCF4                                                       =  00DC G
     _CCON                                                       =  00D8 G
     _CF                                                         =  00DF G
-  6 _CG_Accessed                                                   0000 GR
+    _CG_Accessed                                                   **** GX
+ 13 _CG_CharacterWrite                                             01E4 GR
+  8 _CG_CharacterWrite_PARM_2                                      0013 GR
+  8 _CG_CharacterWrite_index_1_1                                   0016 R
     _CH                                                         =  00F9 G
     _CKCKON0                                                    =  008F G
     _CKCKON1                                                    =  008F G
@@ -212,14 +213,16 @@ Symbol Table
     _CR                                                         =  00DE G
     _CY                                                         =  00D7 G
     _C_T2                                                       =  00C9 G
- 13 _Clock_NewAlarm                                                0000 GR
-  8 _Clock_NewAlarm_alarm_duration_1_1                             0007 R
- 13 _Clock_Reset                                                   0463 GR
- 13 _Clock_Start                                                   045F GR
- 13 _Clock_Stop                                                    045B GR
+ 13 _Custom_DrawFlag                                               0264 GR
+  8 _Custom_DrawFlag_map_1_1                                       0017 R
+ 13 _Custom_New                                                    0053 GR
+  8 _Custom_New_addr_1_1                                           0011 R
+  8 _Custom_New_c_1_1                                              0012 R
+  8 _Custom_New_map_1_1                                            0009 R
+ 13 _Custom_Show                                                   0043 GR
+  8 _Custom_Show_addr_1_1                                          0008 R
     _DPH                                                        =  0083 G
     _DPL                                                        =  0082 G
-    _DisableFlag                                                   **** GX
     _EA                                                         =  00AF G
     _EC                                                         =  00AE G
     _EECON                                                      =  00D2 G
@@ -231,7 +234,6 @@ Symbol Table
     _EX1                                                        =  00AA G
     _EXEN2                                                      =  00CB G
     _EXF2                                                       =  00CE G
-    _ExpiredAlarms                                                 **** GX
     _F0                                                         =  00D5 G
     _F1                                                         =  00D1 G
     _IE                                                         =  00A8 G
@@ -246,16 +248,18 @@ Symbol Table
     _IPH1                                                       =  00B3 G
     _IPL0                                                       =  00B8 G
     _IPL1                                                       =  00B2 G
-  9 _ISR_Count                                                     0000 GR
     _IT0                                                        =  0088 G
     _IT1                                                        =  008A G
     _KBE                                                        =  009D G
     _KBF                                                        =  009E G
     _KBLS                                                       =  009C G
+    _LCD_ClearScreen                                               **** GX
+    _LCD_DisplayDisable                                            **** GX
+    _LCD_DisplayEnable                                             **** GX
     _LCD_Putch                                                     **** GX
-    _LCD_Putstr                                                    **** GX
     _LCD_ReadAddr                                                  **** GX
-    _LCD_gotoaddr                                                  **** GX
+    _LCD_SetCGRAMAddress                                           **** GX
+    _LCD_SetDDRAMAddress                                           **** GX
     _LCD_gotoxy                                                    **** GX
     _LCD_gotoxy_PARM_2                                             **** GX
     _OV                                                         =  00D2 G
@@ -350,7 +354,8 @@ Symbol Table
     _SPCON                                                      =  00C3 G
     _SPDAT                                                      =  00C5 G
     _SPSTA                                                      =  00C4 G
-  8 _Saved_Address                                                 0000 GR
+    _Saved_Address                                                 **** GX
+    _Serial_GetInteger                                             **** GX
     _T0                                                         =  00B4 G
     _T1                                                         =  00B5 G
     _T2CON                                                      =  00C8 G
@@ -381,29 +386,21 @@ Symbol Table
     _TR1                                                        =  008E G
     _TR2                                                        =  00CA G
     _TXD                                                        =  00B1 G
-  9 _TimeMinsOnes                                                  0004 GR
-  9 _TimeMinsTens                                                  0005 GR
-  9 _TimeSecsOnes                                                  0002 GR
-  9 _TimeSecsTens                                                  0003 GR
-  9 _TimeTenths                                                    0001 GR
- 13 _Timer0_Init                                                   047C GR
- 13 _TimerRedraw                                                   03F8 GR
+ 13 _TestWrite                                                     0000 GR
+  8 _TestWrite_map_1_1                                             0000 R
+    _TimerRedraw                                                   **** GX
     _WDTPRG                                                     =  00A7 G
     _WDTRST                                                     =  00A6 G
     _WR                                                         =  00B6 G
+    __gptrget                                                      **** GX
  14 __str_0                                                        0000 R
- 14 __str_1                                                        002B R
- 14 __str_2                                                        0057 R
- 15 __xinit__ActiveAlarms                                          0006 R
- 15 __xinit__ISR_Count                                             0000 R
- 15 __xinit__TimeMinsOnes                                          0004 R
- 15 __xinit__TimeMinsTens                                          0005 R
- 15 __xinit__TimeSecsOnes                                          0002 R
- 15 __xinit__TimeSecsTens                                          0003 R
- 15 __xinit__TimeTenths                                            0001 R
+ 14 __str_1                                                        001D R
+ 14 __str_2                                                        003A R
+ 14 __str_3                                                        006A R
+ 14 __str_4                                                        006D R
+    _getchar                                                       **** GX
     _printf                                                        **** GX
- 13 _timer0                                                        0084 GR
-  6 _timer0_updateAlarms_1_1                                       0001 R
+    _putchar                                                       **** GX
     a                                                              00D6 
     ac                                                             00D6 
     acc                                                            00E0 
@@ -591,10 +588,10 @@ Area Table
    3 DSEG                                                                               size    0   flags 0
    4 OSEG                                                                               size    0   flags 4
    5 ISEG                                                                               size    0   flags 0
-   6 BSEG                                                                               size    2   flags 80
+   6 BSEG                                                                               size    0   flags 80
    7 PSEG                                                                               size    0   flags 50
-   8 XSEG                                                                               size    9   flags 40
-   9 XISEG                                                                              size    9   flags 40
+   8 XSEG                                                                               size   1F   flags 40
+   9 XISEG                                                                              size    0   flags 40
    A HOME                                                                               size    0   flags 20
    B GSINIT0                                                                            size    0   flags 20
    C GSINIT1                                                                            size    0   flags 20
@@ -602,8 +599,8 @@ Area Table
    E GSINIT3                                                                            size    0   flags 20
    F GSINIT4                                                                            size    0   flags 20
   10 GSINIT5                                                                            size    0   flags 20
-  11 GSINIT                                                                             size    2   flags 20
+  11 GSINIT                                                                             size    0   flags 20
   12 GSFINAL                                                                            size    0   flags 20
-  13 CSEG                                                                               size  4A2   flags 20
-  14 CONST                                                                              size   66   flags 20
-  15 XINIT                                                                              size    9   flags 20
+  13 CSEG                                                                               size  534   flags 20
+  14 CONST                                                                              size   84   flags 20
+  15 XINIT                                                                              size    0   flags 20

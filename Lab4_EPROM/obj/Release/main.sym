@@ -202,12 +202,13 @@ Symbol Table
     _CCON                                                       =  00D8 G
     _CF                                                         =  00DF G
     _CG_Accessed                                                   **** GX
+ 14 _CG_Menu                                                       00E8 GR
     _CH                                                         =  00F9 G
     _CKCKON0                                                    =  008F G
     _CKCKON1                                                    =  008F G
     _CKRL                                                       =  0097 G
     _CL                                                         =  00E9 G
- 14 _CLOCK_Menu                                                    0BA0 GR
+ 14 _CLOCK_Menu                                                    0D00 GR
     _CMOD                                                       =  00D9 G
     _CP_RL2                                                     =  00C8 G
     _CR                                                         =  00DE G
@@ -217,13 +218,16 @@ Symbol Table
     _Clock_Reset                                                   **** GX
     _Clock_Start                                                   **** GX
     _Clock_Stop                                                    **** GX
+    _Custom_DrawFlag                                               **** GX
+    _Custom_New                                                    **** GX
+    _Custom_Show                                                   **** GX
     _DPH                                                        =  0083 G
     _DPL                                                        =  0082 G
   7 _DisableFlag                                                   0000 GR
     _EA                                                         =  00AF G
     _EC                                                         =  00AE G
     _EECON                                                      =  00D2 G
- 14 _EEPROM_Menu                                                   0421 GR
+ 14 _EEPROM_Menu                                                   08B0 GR
     _EPROM_ByteRead                                                **** GX
     _EPROM_ByteRead_PARM_2                                         **** GX
     _EPROM_ByteWrite                                               **** GX
@@ -260,7 +264,7 @@ Symbol Table
     _KBLS                                                       =  009C G
     _LCD_ClearScreen                                               **** GX
     _LCD_Init                                                      **** GX
- 14 _LCD_Menu                                                      00E8 GR
+ 14 _LCD_Menu                                                      023D GR
     _LCD_Putch                                                     **** GX
     _LCD_Puthex                                                    **** GX
     _LCD_Putstr                                                    **** GX
@@ -271,7 +275,7 @@ Symbol Table
     _LCD_gotoaddr                                                  **** GX
     _LCD_gotoxy                                                    **** GX
     _LCD_gotoxy_PARM_2                                             **** GX
- 14 _MainMenu                                                      0EEB GR
+ 14 _MainMenu                                                      104B GR
     _OV                                                         =  00D2 G
     _P                                                          =  00D0 G
     _P0                                                         =  0080 G
@@ -398,6 +402,7 @@ Symbol Table
     _TR1                                                        =  008E G
     _TR2                                                        =  00CA G
     _TXD                                                        =  00B1 G
+    _TestWrite                                                     **** GX
     _Timer0_Init                                                   **** GX
     _TimerRedraw                                                   **** GX
     _WDTPRG                                                     =  00A7 G
@@ -415,102 +420,114 @@ Symbol Table
   5 __start__stack                                                 0000 GR
  15 __str_0                                                        0000 R
  15 __str_1                                                        002A R
- 15 __str_10                                                       0144 R
- 15 __str_11                                                       0169 R
- 15 __str_12                                                       0193 R
- 15 __str_13                                                       01BD R
- 15 __str_14                                                       01E2 R
- 15 __str_15                                                       01F7 R
- 15 __str_16                                                       0218 R
- 15 __str_17                                                       0230 R
- 15 __str_18                                                       0249 R
- 15 __str_19                                                       0272 R
+ 15 __str_10                                                       0169 R
+ 15 __str_11                                                       0186 R
+ 15 __str_12                                                       01A8 R
+ 15 __str_13                                                       01B6 R
+ 15 __str_14                                                       01E4 R
+ 15 __str_15                                                       0202 R
+ 15 __str_16                                                       021D R
+ 15 __str_17                                                       0238 R
+ 15 __str_18                                                       0253 R
+ 15 __str_19                                                       0278 R
  15 __str_2                                                        005D R
  15 __str_20                                                       02A2 R
- 15 __str_21                                                       02B4 R
- 15 __str_22                                                       02CD R
- 15 __str_23                                                       02DE R
- 15 __str_24                                                       0304 R
- 15 __str_25                                                       032B R
- 15 __str_26                                                       0355 R
- 15 __str_27                                                       037C R
- 15 __str_28                                                       0393 R
- 15 __str_29                                                       03BE R
+ 15 __str_21                                                       02CC R
+ 15 __str_22                                                       02E1 R
+ 15 __str_23                                                       0302 R
+ 15 __str_24                                                       031A R
+ 15 __str_25                                                       0333 R
+ 15 __str_26                                                       035C R
+ 15 __str_27                                                       038C R
+ 15 __str_28                                                       039E R
+ 15 __str_29                                                       03B7 R
  15 __str_3                                                        0084 R
- 15 __str_30                                                       03EF R
- 15 __str_31                                                       0408 R
- 15 __str_32                                                       042F R
- 15 __str_33                                                       0449 R
- 15 __str_34                                                       044C R
- 15 __str_35                                                       045E R
- 15 __str_36                                                       0481 R
- 15 __str_37                                                       04A8 R
- 15 __str_38                                                       04CD R
- 15 __str_39                                                       050A R
- 15 __str_4                                                        0092 R
- 15 __str_40                                                       050D R
- 15 __str_41                                                       0512 R
- 15 __str_42                                                       0516 R
- 15 __str_43                                                       0526 R
- 15 __str_44                                                       0544 R
- 15 __str_45                                                       0569 R
- 15 __str_46                                                       058D R
- 15 __str_47                                                       05AF R
- 15 __str_48                                                       05D8 R
- 15 __str_49                                                       05F8 R
- 15 __str_5                                                        00A7 R
- 15 __str_50                                                       0619 R
+ 15 __str_30                                                       03BA R
+ 15 __str_31                                                       03BF R
+ 15 __str_32                                                       03C3 R
+ 15 __str_33                                                       03D4 R
+ 15 __str_34                                                       03FA R
+ 15 __str_35                                                       0421 R
+ 15 __str_36                                                       044B R
+ 15 __str_37                                                       0472 R
+ 15 __str_38                                                       0489 R
+ 15 __str_39                                                       04B4 R
+ 15 __str_4                                                        009F R
+ 15 __str_40                                                       04E5 R
+ 15 __str_41                                                       04FE R
+ 15 __str_42                                                       0525 R
+ 15 __str_43                                                       053F R
+ 15 __str_44                                                       0542 R
+ 15 __str_45                                                       0554 R
+ 15 __str_46                                                       0577 R
+ 15 __str_47                                                       059E R
+ 15 __str_48                                                       05C3 R
+ 15 __str_49                                                       0600 R
+ 15 __str_5                                                        00B4 R
+ 15 __str_50                                                       0610 R
  15 __str_51                                                       062E R
- 15 __str_52                                                       0643 R
- 15 __str_53                                                       0659 R
- 15 __str_54                                                       067A R
- 15 __str_55                                                       0693 R
- 15 __str_56                                                       06AD R
- 15 __str_57                                                       06DA R
- 15 __str_58                                                       06F0 R
- 15 __str_59                                                       071C R
- 15 __str_6                                                        00D5 R
- 15 __str_60                                                       0731 R
- 15 __str_61                                                       0743 R
- 15 __str_62                                                       0750 R
- 15 __str_63                                                       0772 R
- 15 __str_64                                                       0798 R
- 15 __str_65                                                       07C1 R
- 15 __str_66                                                       07EB R
- 15 __str_67                                                       0824 R
- 15 __str_68                                                       0833 R
- 15 __str_69                                                       084A R
- 15 __str_7                                                        00F3 R
- 15 __str_8                                                        010E R
- 15 __str_9                                                        0129 R
+ 15 __str_52                                                       0653 R
+ 15 __str_53                                                       0677 R
+ 15 __str_54                                                       0699 R
+ 15 __str_55                                                       06C2 R
+ 15 __str_56                                                       06E2 R
+ 15 __str_57                                                       0703 R
+ 15 __str_58                                                       0718 R
+ 15 __str_59                                                       072D R
+ 15 __str_6                                                        00D7 R
+ 15 __str_60                                                       0743 R
+ 15 __str_61                                                       0764 R
+ 15 __str_62                                                       077D R
+ 15 __str_63                                                       0797 R
+ 15 __str_64                                                       07C4 R
+ 15 __str_65                                                       07DA R
+ 15 __str_66                                                       0806 R
+ 15 __str_67                                                       081B R
+ 15 __str_68                                                       082D R
+ 15 __str_69                                                       083A R
+ 15 __str_7                                                        00FA R
+ 15 __str_70                                                       085C R
+ 15 __str_71                                                       0882 R
+ 15 __str_72                                                       08AB R
+ 15 __str_73                                                       08D3 R
+ 15 __str_74                                                       0903 R
+ 15 __str_75                                                       093C R
+ 15 __str_76                                                       094B R
+ 15 __str_77                                                       0962 R
+ 15 __str_8                                                        0122 R
+ 15 __str_9                                                        0144 R
  16 __xinit__ExpiredAlarms                                         0001 R
  16 __xinit__mode                                                  0000 R
  14 _getBlockAndAddress                                            000C GR
   9 _getBlockAndAddress_PARM_2                                     0000 GR
   9 _getBlockAndAddress_address_1_1                                0003 R
     _getchar                                                       **** GX
- 14 _handleCLOCKMode                                               0C73 GR
-  9 _handleCLOCKMode_c_1_1                                         0078 R
-  9 _handleCLOCKMode_i_1_1                                         0079 R
- 14 _handleEEPROMMode                                              04B5 GR
-  9 _handleEEPROMMode_address_1_1                                  0072 R
-  9 _handleEEPROMMode_block_1_1                                    0070 R
-  9 _handleEEPROMMode_c_1_1                                        006F R
-  9 _handleEEPROMMode_end_addr_1_1                                 0076 R
-  9 _handleEEPROMMode_end_address_1_1                              0073 R
-  9 _handleEEPROMMode_end_block_1_1                                0071 R
-  9 _handleEEPROMMode_start_addr_1_1                               0074 R
- 14 _handleInput                                                   0FBD GR
-  9 _handleInput_c_1_1                                             007B R
- 14 _handleLCDMode                                                 01D0 GR
-  9 _handleLCDMode_c_1_1                                           0006 R
-  9 _handleLCDMode_col_1_1                                         0009 R
-  9 _handleLCDMode_row_1_1                                         0007 R
-  9 _handleLCDMode_str_1_1                                         000B R
- 14 _handleMAINMode                                                0F7F GR
-  9 _handleMAINMode_c_1_1                                          007A R
- 14 _main                                                          1008 GR
-  9 _main_i_2_2                                                    007C R
+ 14 _handleCGMode                                                  017C GR
+  9 _handleCGMode_addr_1_1                                         0007 R
+  9 _handleCGMode_c_1_1                                            0006 R
+ 14 _handleCLOCKMode                                               0DD3 GR
+  9 _handleCLOCKMode_c_1_1                                         007C R
+  9 _handleCLOCKMode_i_1_1                                         007D R
+ 14 _handleEEPROMMode                                              0944 GR
+  9 _handleEEPROMMode_address_1_1                                  0076 R
+  9 _handleEEPROMMode_block_1_1                                    0074 R
+  9 _handleEEPROMMode_c_1_1                                        0073 R
+  9 _handleEEPROMMode_end_addr_1_1                                 007A R
+  9 _handleEEPROMMode_end_address_1_1                              0077 R
+  9 _handleEEPROMMode_end_block_1_1                                0075 R
+  9 _handleEEPROMMode_start_addr_1_1                               0078 R
+ 14 _handleInput                                                   1140 GR
+  9 _handleInput_c_1_1                                             007F R
+ 14 _handleLCDMode                                                 0325 GR
+  9 _handleLCDMode_c_1_1                                           0008 R
+  9 _handleLCDMode_col_1_1                                         000B R
+  9 _handleLCDMode_row_1_1                                         0009 R
+  9 _handleLCDMode_start_addr_1_1                                  0071 R
+  9 _handleLCDMode_str_1_1                                         000D R
+ 14 _handleMAINMode                                                10F4 GR
+  9 _handleMAINMode_c_1_1                                          007E R
+ 14 _main                                                          1198 GR
+  9 _main_i_2_2                                                    0080 R
   A _mode                                                          0000 GR
     _printf                                                        **** GX
     _putchar                                                       **** GX
@@ -705,7 +722,7 @@ Area Table
    6 ISEG                                                                               size    0   flags 0
    7 BSEG                                                                               size    1   flags 80
    8 PSEG                                                                               size    0   flags 50
-   9 XSEG                                                                               size   7D   flags 40
+   9 XSEG                                                                               size   81   flags 40
    A XISEG                                                                              size    4   flags 40
    B HOME                                                                               size    E   flags 20
    C GSINIT0                                                                            size    0   flags 20
@@ -716,6 +733,6 @@ Area Table
   11 GSINIT5                                                                            size    0   flags 20
   12 GSINIT                                                                             size    2   flags 20
   13 GSFINAL                                                                            size    3   flags 20
-  14 CSEG                                                                               size 11CA   flags 20
-  15 CONST                                                                              size  859   flags 20
+  14 CSEG                                                                               size 1364   flags 20
+  15 CONST                                                                              size  971   flags 20
   16 XINIT                                                                              size    4   flags 20

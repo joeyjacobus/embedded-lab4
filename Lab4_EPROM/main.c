@@ -15,6 +15,7 @@
 #include "I2C.h"
 #include "Timer.h"
 #include <stdbool.h>
+#include "Custom.h"
 
 
 #define AUXR_ENABLE_XRAM_MASK 0x0C
@@ -23,6 +24,7 @@
 #define LCD_MODE    1
 #define EEPROM_MODE 2
 #define CLOCK_MODE  3
+#define CG_MODE     4
 
 void timer0(void) __interrupt(1);
 
@@ -65,6 +67,55 @@ void getBlockAndAddress(uint8_t *address, uint8_t *block){
     *address = Serial_GetHex();
 }
 
+void CG_Menu(void){
+    printf("\r\nIn Custom Character Mode");
+    printf("\r\nPress 'H' for help");
+    printf("\r\nPress 'T' to test to custom code");
+    printf("\r\nPress 'N' to add a new character");
+    printf("\r\nPress 'S' to print a custom character");
+    printf("\r\nPress 'F' to draw a flag to LCD");
+    printf("\r\nPress 'r' to return to main menu\r\n");
+}
+
+
+void handleCGMode(char c){
+    uint8_t addr;
+    switch(c){
+        case 'T':
+            TestWrite();
+            LCD_gotoxy(0,3);
+            LCD_Putch(0x00);
+            break;
+        case 'N':
+            Custom_New();
+            break;
+        case 'S':
+            printf("\r\nEnter an address from 0-7:");
+            addr = Serial_GetInteger(2);
+            while( addr > 7){
+                printf("\r\nEnter an address from 0-7:");
+                addr = Serial_GetInteger(2);
+            }
+            Custom_Show(addr);
+            printf("\r\nWrote custom character to LCD\r\n");
+            break;
+        case 'F':
+            Custom_DrawFlag();
+            break;
+        case 'r':
+            mode = MAIN_MODE;
+            MainMenu();
+            break;
+        case 'H':
+            CG_Menu();
+            break;
+        default:
+            break;
+    }
+}
+
+
+
 void LCD_Menu(void){
     printf("\r\nIn LCD Mode");
     printf("\r\nPress 'H' for help");
@@ -86,6 +137,8 @@ void handleLCDMode(char c){
     uint8_t address;
     char str[100];
     uint8_t i;
+    uint8_t lcdData;
+    uint16_t start_addr;
     switch(c){
          case 'I':
             printf("\r\nInitializing LCD\r\n");
@@ -142,9 +195,83 @@ void handleLCDMode(char c){
             break;
         case 'C':
             LCD_ClearScreen();
-
             TimerRedraw();
+            LCD_gotoxy(0,0);    //Start at 0,0
             printf("\r\nLCD Display Cleared!\r\n");
+            break;
+          case 'Y':
+            printf("\r\n");
+
+            start_addr = 0x80;
+            printf("%x: ", start_addr);
+            for (i = 0; i < 16; ++i){
+                LCD_SetDDRAMAddress(start_addr);
+                lcdData = LCD_ReadRAM();
+                printf("%x ", lcdData);
+                start_addr++;
+            }
+            printf("\r\n");
+
+            start_addr = 0xc0;
+            printf("%x: ", start_addr);
+            for (i = 0; i < 16; ++i){
+                LCD_SetDDRAMAddress(start_addr);
+                lcdData = LCD_ReadRAM();
+                printf("%x ", lcdData);
+                start_addr++;
+            }
+            printf("\r\n");
+
+            start_addr = 0x90;
+            printf("%x: ", start_addr);
+            for (i = 0; i < 16; ++i){
+                LCD_SetDDRAMAddress(start_addr);
+                lcdData = LCD_ReadRAM();
+                printf("%x ", lcdData);
+                start_addr++;
+            }
+            printf("\r\n");
+
+            start_addr = 0xd0;
+            printf("%x: ", start_addr);
+            for (i = 0; i < 16; ++i){
+                LCD_SetDDRAMAddress(start_addr);
+                lcdData = LCD_ReadRAM();
+                printf("%x ", lcdData);
+                start_addr++;
+            }
+            printf("\r\n");
+
+
+            break;
+        case 'G':
+            printf("\r\n");
+
+            EA = 0;     //Disable interrupts temporarily. Shared globals
+            Saved_Address = LCD_ReadAddr();
+            CG_Accessed = true;
+            EA = 1;
+
+
+            start_addr = 0x40;
+            //from 0x40 to 0x7F
+            while (start_addr < 0x80){
+                printf("%x: ", start_addr);
+                //Print 16 bytes per line
+                for (i = 0; i < 16; ++i){
+                    LCD_SetCGRAMAddress(start_addr);
+                    lcdData = LCD_ReadRAM();
+                    printf("%x ", lcdData);
+                    start_addr++;
+                }
+                printf("\r\n");
+            }
+            //Set back to DDRAM
+            LCD_SetDDRAMAddress(Saved_Address);
+            EA = 0;
+            CG_Accessed = false;
+            EA = 1;
+            TimerRedraw();
             break;
         case 'r':
             mode = MAIN_MODE;
@@ -238,81 +365,7 @@ void handleEEPROMMode(char c){
                 printf("\r\n");
             }
             break;
-        case 'Y':
-            printf("\r\n");
 
-
-            start_addr = 0x80;
-            printf("%x: ", start_addr);
-            for (i = 0; i < 16; ++i){
-                LCD_SetDDRAMAddress(start_addr);
-                lcdData = LCD_ReadRAM();
-                printf("%x ", lcdData);
-                start_addr++;
-            }
-            printf("\r\n");
-
-            start_addr = 0xc0;
-            printf("%x: ", start_addr);
-            for (i = 0; i < 16; ++i){
-                LCD_SetDDRAMAddress(start_addr);
-                lcdData = LCD_ReadRAM();
-                printf("%x ", lcdData);
-                start_addr++;
-            }
-            printf("\r\n");
-
-            start_addr = 0x90;
-            printf("%x: ", start_addr);
-            for (i = 0; i < 16; ++i){
-                LCD_SetDDRAMAddress(start_addr);
-                lcdData = LCD_ReadRAM();
-                printf("%x ", lcdData);
-                start_addr++;
-            }
-            printf("\r\n");
-
-            start_addr = 0xd0;
-            printf("%x: ", start_addr);
-            for (i = 0; i < 16; ++i){
-                LCD_SetDDRAMAddress(start_addr);
-                lcdData = LCD_ReadRAM();
-                printf("%x ", lcdData);
-                start_addr++;
-            }
-            printf("\r\n");
-
-
-            break;
-        case 'G':
-            printf("\r\n");
-
-            EA = 0;     //Disable interrupts temporarily. Shared globals
-            Saved_Address = LCD_ReadAddr();
-            CG_Accessed = true;
-            EA = 1;
-
-
-            start_addr = 0x40;
-            //from 0x40 to 0x7F
-            while (start_addr < 0x80){
-                printf("%x: ", start_addr);
-                //Print 16 bytes per line
-                for (i = 0; i < 16; ++i){
-                    LCD_SetCGRAMAddress(start_addr);
-                    lcdData = LCD_ReadRAM();
-                    printf("%x ", lcdData);
-                    start_addr++;
-                }
-                printf("\r\n");
-            }
-            //Set back to DDRAM
-            LCD_SetDDRAMAddress(Saved_Address);
-            EA = 0;
-            CG_Accessed = false;
-            EA = 1;
-            TimerRedraw();
-            break;
         case 'r':
             mode = MAIN_MODE;
             MainMenu();
@@ -411,7 +464,8 @@ void MainMenu(void){
     printf("\r\nPress 'H' to show the help menu");
     printf("\r\nPress 'L' to enter LCD control mode");
     printf("\r\nPress 'E' to enter EEPROM control mode");
-    printf("\r\nPress 'C' to enter Clock control mode\r\n");
+    printf("\r\nPress 'C' to enter Clock control mode");
+    printf("\r\nPress 'G' to enter Custom Code control mode\r\n");
 }
 
 void handleMAINMode(char c){
@@ -431,6 +485,10 @@ void handleMAINMode(char c){
             mode = CLOCK_MODE;
             CLOCK_Menu();
             break;
+        case 'G':
+            mode = CG_MODE;
+            CG_Menu();
+            break;
         default:
             break;
     }
@@ -441,7 +499,6 @@ void handleMAINMode(char c){
  *  Handles a given character input
  */
 void handleInput(char c){
-
     switch(mode){
         case MAIN_MODE:
             handleMAINMode(c);
@@ -455,20 +512,10 @@ void handleInput(char c){
         case CLOCK_MODE:
             handleCLOCKMode(c);
             break;
-    }
-
-    /**
-    switch (c){
-
-
-
-	    case 'H':
-            ShowMenu();
-            break;
-	    default:
+        case CG_MODE:
+            handleCGMode(c);
             break;
     }
-    */
 }
 
 
@@ -483,6 +530,7 @@ void main(void)
     //LCD_Test();
     Timer0_Init();
     mode = MAIN_MODE;
+    LCD_gotoxy(0,0);    //Start at 0,0
     MainMenu();
     while(1){
         char c;

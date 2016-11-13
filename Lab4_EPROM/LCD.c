@@ -13,6 +13,7 @@
 
 #define LCD_Clear 0x01
 #define LCD_DisplayOn 0x0F  //Display on with blinking and cursor
+#define LCD_DisplayOff 0x08  //Display off no blinking and cursor
 #define LCD_SystemSet 0x38  //2 line display, 8 bit
 #define INSTRUCTION_CGRAM_SET 0x40
 
@@ -55,7 +56,7 @@ void LCD_DataWrite(uint8_t Data){
  */
 void LCD_SetCGRAMAddress(uint8_t address){
     LCD_Busywait();
-    address = address & 0xC0;   //mask off top two bits
+    address = address & 0x3F;   //mask off top two bits
     LCD_InstructionWrite(address | 0x40);
 }
 
@@ -139,6 +140,7 @@ void LCD_gotoaddr(unsigned char addr){
  *  of the LCD screen.
  */
 void LCD_gotoxy(unsigned char row, unsigned char col){
+    LCD_Busywait();
     if (row > 3 || col > 0x0F){
         return;
     }
@@ -201,6 +203,20 @@ void LCD_Init(void){
     LCD_InstructionWrite(LCD_DisplayOn);
 }
 
+/**
+ *turns on the display and blink
+ */
+void LCD_DisplayEnable(void){
+    LCD_Busywait();
+    LCD_InstructionWrite(LCD_DisplayOn);
+}
+
+/**
+ * turns of the display and blink
+ */void LCD_DisplayDisable(void){
+    LCD_Busywait();
+    LCD_InstructionWrite(LCD_DisplayOff);
+}
 
 /**
  *  Test function

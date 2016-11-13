@@ -87,4 +87,15 @@ void LCD_Putch(char cc);
  */
 void LCD_Putstr(char *ss);
 
+/**
+ *turns on the display and blink
+ */
+void LCD_DisplayEnable(void);
+
+/**
+ * turns of the display and blink
+ */
+void LCD_DisplayDisable(void);
+
+
 #endif // LCD_H_INCLUDED

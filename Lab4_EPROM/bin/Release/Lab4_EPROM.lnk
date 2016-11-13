@@ -13,6 +13,7 @@
 -l libint
 -l liblong
 -l libfloat
+obj\Release\Custom.rel
 obj\Release\EPROM.rel
 obj\Release\I2c.rel
 obj\Release\LCD.rel

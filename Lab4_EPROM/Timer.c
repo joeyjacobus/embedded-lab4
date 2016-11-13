@@ -147,8 +147,12 @@ void timer0(void) __interrupt(1){
                     AlarmCount[i]--;
                     if(AlarmCount[i] == 0){
                         //printf("\r\nAlarm %d is going off!!!, press 'D' to disable\r\n", i);
-                        LCD_gotoxy(0,0);
-                        LCD_Putstr("Disable Alarm!");
+
+                        //Can only write to LCD if not in the middle of a CGRAM access
+                        if(!CG_Accessed){
+                            LCD_gotoxy(0,0);
+                            LCD_Putstr("Disable Alarm!");
+                        }
                         ExpiredAlarms[i] = 1;
                         DisableFlag = true;
                     }
@@ -214,6 +218,7 @@ void Timer0_Init(void){
     P1_2 =  0;
 
     ISR_Count = 0;
+    ExpiredAlarms[0] = 0; ExpiredAlarms[1] = 0; ExpiredAlarms[2] = 0;
 
     Clock_Reset();
 
