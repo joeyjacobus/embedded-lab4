@@ -1,3 +1,11 @@
+/*
+    Author: Joey Jacobus
+    Date: 11/8/2016
+    Embedded Systems Design University of Colorado at Boulder
+    Lab 4
+ */
+
+
 #ifndef LCD_H_INCLUDED
 #define LCD_H_INCLUDED
 

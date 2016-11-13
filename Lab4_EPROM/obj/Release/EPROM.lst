@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Sun Nov 06 20:15:01 2016
+                              4 ; This file generated Sat Nov 12 13:41:18 2016
                               5 ;--------------------------------------------------------
                               6 	.module EPROM
                               7 	.optsdcc -mmcs51 --model-large
@@ -507,7 +507,7 @@
                             507 ;ack                       Allocated with name '_RetryAck_PARM_2'
                             508 ;byte                      Allocated with name '_RetryAck_byte_1_1'
                             509 ;------------------------------------------------------------
-                            510 ;	EPROM.c:9: void RetryAck(uint8_t byte, uint8_t ack){
+                            510 ;	EPROM.c:15: void RetryAck(uint8_t byte, uint8_t ack){
                             511 ;	-----------------------------------------
                             512 ;	 function RetryAck
                             513 ;	-----------------------------------------
@@ -524,12 +524,12 @@
    0000 E5 82               524 	mov	a,dpl
    0002 90s00r01            525 	mov	dptr,#_RetryAck_byte_1_1
    0005 F0                  526 	movx	@dptr,a
-                            527 ;	EPROM.c:10: ACK_RETRY = 3;
+                            527 ;	EPROM.c:16: ACK_RETRY = 3;
                             528 ;	genAssign
    0006 90s00r00            529 	mov	dptr,#_ACK_RETRY
    0009 74 03               530 	mov	a,#0x03
    000B F0                  531 	movx	@dptr,a
-                            532 ;	EPROM.c:11: while(ACK_RETRY > 0 && ack){
+                            532 ;	EPROM.c:17: while(ACK_RETRY > 0 && ack){
                             533 ;	genAssign
    000C 90s00r01            534 	mov	dptr,#_RetryAck_byte_1_1
    000F E0                  535 	movx	a,@dptr
@@ -555,7 +555,7 @@
                             555 ;	Peephole 108.c	removed ljmp by inverse jump logic
    001D 60 11               556 	jz	00104$
                             557 ;	Peephole 300	removed redundant label 00118$
-                            558 ;	EPROM.c:12: ack = I2CSend(byte);
+                            558 ;	EPROM.c:18: ack = I2CSend(byte);
                             559 ;	genCall
    001F 8A 82               560 	mov	dpl,r2
    0021 C0 02               561 	push	ar2
@@ -568,7 +568,7 @@
                             568 ;	Peephole 112.b	changed ljmp to sjmp
    002E 80 E1               569 	sjmp	00102$
    0030                     570 00104$:
-                            571 ;	EPROM.c:14: if (ack){
+                            571 ;	EPROM.c:20: if (ack){
                             572 ;	genAssign
    0030 90s00r00            573 	mov	dptr,#_RetryAck_PARM_2
    0033 E0                  574 	movx	a,@dptr
@@ -579,7 +579,7 @@
                             579 ;	Peephole 108.c	removed ljmp by inverse jump logic
    0035 60 17               580 	jz	00110$
                             581 ;	Peephole 300	removed redundant label 00119$
-                            582 ;	EPROM.c:15: printf("\r\nAck failed 3 times. System reset required. Entering infinite loop\r\n");
+                            582 ;	EPROM.c:21: printf("\r\nAck failed 3 times. System reset required. Entering infinite loop\r\n");
                             583 ;	genIpush
    0037 74r00               584 	mov	a,#__str_0
    0039 C0 E0               585 	push	acc
@@ -592,7 +592,7 @@
    0046 15 81               592 	dec	sp
    0048 15 81               593 	dec	sp
    004A 15 81               594 	dec	sp
-                            595 ;	EPROM.c:16: while(1);
+                            595 ;	EPROM.c:22: while(1);
    004C                     596 00106$:
                             597 ;	Peephole 112.b	changed ljmp to sjmp
    004C 80 FE               598 	sjmp	00106$
@@ -606,7 +606,7 @@
                             606 ;byte                      Allocated with name '_EPROM_SetBlock_byte_1_1'
                             607 ;ack                       Allocated with name '_EPROM_SetBlock_ack_1_1'
                             608 ;------------------------------------------------------------
-                            609 ;	EPROM.c:24: void EPROM_SetBlock(uint8_t block, uint8_t read){
+                            609 ;	EPROM.c:30: void EPROM_SetBlock(uint8_t block, uint8_t read){
                             610 ;	-----------------------------------------
                             611 ;	 function EPROM_SetBlock
                             612 ;	-----------------------------------------
@@ -615,12 +615,12 @@
    004F E5 82               615 	mov	a,dpl
    0051 90s00r03            616 	mov	dptr,#_EPROM_SetBlock_block_1_1
    0054 F0                  617 	movx	@dptr,a
-                            618 ;	EPROM.c:25: uint8_t byte = 0xA0;
+                            618 ;	EPROM.c:31: uint8_t byte = 0xA0;
                             619 ;	genAssign
    0055 90s00r04            620 	mov	dptr,#_EPROM_SetBlock_byte_1_1
    0058 74 A0               621 	mov	a,#0xA0
    005A F0                  622 	movx	@dptr,a
-                            623 ;	EPROM.c:27: if (read){
+                            623 ;	EPROM.c:33: if (read){
                             624 ;	genAssign
    005B 90s00r02            625 	mov	dptr,#_EPROM_SetBlock_PARM_2
    005E E0                  626 	movx	a,@dptr
@@ -631,13 +631,13 @@
                             631 ;	Peephole 108.c	removed ljmp by inverse jump logic
    0060 60 06               632 	jz	00102$
                             633 ;	Peephole 300	removed redundant label 00109$
-                            634 ;	EPROM.c:28: byte |= 0x01;   //set the read bit
+                            634 ;	EPROM.c:34: byte |= 0x01;   //set the read bit
                             635 ;	genAssign
    0062 90s00r04            636 	mov	dptr,#_EPROM_SetBlock_byte_1_1
    0065 74 A1               637 	mov	a,#0xA1
    0067 F0                  638 	movx	@dptr,a
    0068                     639 00102$:
-                            640 ;	EPROM.c:30: if(block > 7){
+                            640 ;	EPROM.c:36: if(block > 7){
                             641 ;	genAssign
    0068 90s00r03            642 	mov	dptr,#_EPROM_SetBlock_block_1_1
    006B E0                  643 	movx	a,@dptr
@@ -651,7 +651,7 @@
    006D 24 F8               651 	add	a,#0xff - 0x07
    006F 50 1E               652 	jnc	00104$
                             653 ;	Peephole 300	removed redundant label 00110$
-                            654 ;	EPROM.c:31: printf("\r\nInvalid block number %d", block);
+                            654 ;	EPROM.c:37: printf("\r\nInvalid block number %d", block);
                             655 ;	genCast
    0071 8A 03               656 	mov	ar3,r2
    0073 7C 00               657 	mov	r4,#0x00
@@ -670,13 +670,13 @@
    0088 E5 81               670 	mov	a,sp
    008A 24 FB               671 	add	a,#0xfb
    008C F5 81               672 	mov	sp,a
-                            673 ;	EPROM.c:32: return;
+                            673 ;	EPROM.c:38: return;
                             674 ;	genRet
                             675 ;	Peephole 112.b	changed ljmp to sjmp
                             676 ;	Peephole 251.b	replaced sjmp to ret with ret
    008E 22                  677 	ret
    008F                     678 00104$:
-                            679 ;	EPROM.c:34: byte |= (block << 1);   //Set bit 1,2,3 to the three bit block address
+                            679 ;	EPROM.c:40: byte |= (block << 1);   //Set bit 1,2,3 to the three bit block address
                             680 ;	genLeftShift
                             681 ;	genLeftShiftLiteral
                             682 ;	genlshOne
@@ -692,10 +692,10 @@
                             692 ;	Peephole 248.a	optimized or to xdata
    0097 4A                  693 	orl	a,r2
    0098 F0                  694 	movx	@dptr,a
-                            695 ;	EPROM.c:35: I2CStart();
+                            695 ;	EPROM.c:41: I2CStart();
                             696 ;	genCall
    0099 12s00r00            697 	lcall	_I2CStart
-                            698 ;	EPROM.c:36: ack = I2CSend(byte);
+                            698 ;	EPROM.c:42: ack = I2CSend(byte);
                             699 ;	genAssign
    009C 90s00r04            700 	mov	dptr,#_EPROM_SetBlock_byte_1_1
    009F E0                  701 	movx	a,@dptr
@@ -707,7 +707,7 @@
    00A5 12s00r00            707 	lcall	_I2CSend
    00A8 AB 82               708 	mov	r3,dpl
    00AA D0 02               709 	pop	ar2
-                            710 ;	EPROM.c:37: RetryAck(byte, ack);
+                            710 ;	EPROM.c:43: RetryAck(byte, ack);
                             711 ;	genAssign
    00AC 90s00r00            712 	mov	dptr,#_RetryAck_PARM_2
    00AF EB                  713 	mov	a,r3
@@ -725,7 +725,7 @@
                             725 ;writeData                 Allocated with name '_EPROM_ByteWrite_writeData_1_1'
                             726 ;ack                       Allocated with name '_EPROM_ByteWrite_ack_1_1'
                             727 ;------------------------------------------------------------
-                            728 ;	EPROM.c:46: void EPROM_ByteWrite(uint8_t writeData, uint8_t address, uint8_t block){
+                            728 ;	EPROM.c:52: void EPROM_ByteWrite(uint8_t writeData, uint8_t address, uint8_t block){
                             729 ;	-----------------------------------------
                             730 ;	 function EPROM_ByteWrite
                             731 ;	-----------------------------------------
@@ -734,7 +734,7 @@
    00B6 E5 82               734 	mov	a,dpl
    00B8 90s00r07            735 	mov	dptr,#_EPROM_ByteWrite_writeData_1_1
    00BB F0                  736 	movx	@dptr,a
-                            737 ;	EPROM.c:48: EPROM_SetBlock(block, WRITE);
+                            737 ;	EPROM.c:54: EPROM_SetBlock(block, WRITE);
                             738 ;	genAssign
    00BC 90s00r06            739 	mov	dptr,#_EPROM_ByteWrite_PARM_3
    00BF E0                  740 	movx	a,@dptr
@@ -747,7 +747,7 @@
                             747 ;	genCall
    00C6 8A 82               748 	mov	dpl,r2
    00C8 12s00r4F            749 	lcall	_EPROM_SetBlock
-                            750 ;	EPROM.c:49: ack = I2CSend(address);
+                            750 ;	EPROM.c:55: ack = I2CSend(address);
                             751 ;	genAssign
    00CB 90s00r05            752 	mov	dptr,#_EPROM_ByteWrite_PARM_2
    00CE E0                  753 	movx	a,@dptr
@@ -759,7 +759,7 @@
    00D4 12s00r00            759 	lcall	_I2CSend
    00D7 AB 82               760 	mov	r3,dpl
    00D9 D0 02               761 	pop	ar2
-                            762 ;	EPROM.c:50: RetryAck(address, ack);
+                            762 ;	EPROM.c:56: RetryAck(address, ack);
                             763 ;	genAssign
    00DB 90s00r00            764 	mov	dptr,#_RetryAck_PARM_2
    00DE EB                  765 	mov	a,r3
@@ -767,7 +767,7 @@
                             767 ;	genCall
    00E0 8A 82               768 	mov	dpl,r2
    00E2 12s00r00            769 	lcall	_RetryAck
-                            770 ;	EPROM.c:51: ack = I2CSend(writeData);
+                            770 ;	EPROM.c:57: ack = I2CSend(writeData);
                             771 ;	genAssign
    00E5 90s00r07            772 	mov	dptr,#_EPROM_ByteWrite_writeData_1_1
    00E8 E0                  773 	movx	a,@dptr
@@ -779,7 +779,7 @@
    00EE 12s00r00            779 	lcall	_I2CSend
    00F1 AB 82               780 	mov	r3,dpl
    00F3 D0 02               781 	pop	ar2
-                            782 ;	EPROM.c:52: RetryAck(writeData, ack);
+                            782 ;	EPROM.c:58: RetryAck(writeData, ack);
                             783 ;	genAssign
    00F5 90s00r00            784 	mov	dptr,#_RetryAck_PARM_2
    00F8 EB                  785 	mov	a,r3
@@ -787,7 +787,7 @@
                             787 ;	genCall
    00FA 8A 82               788 	mov	dpl,r2
    00FC 12s00r00            789 	lcall	_RetryAck
-                            790 ;	EPROM.c:53: I2CStop();
+                            790 ;	EPROM.c:59: I2CStop();
                             791 ;	genCall
                             792 ;	Peephole 253.b	replaced lcall/ret with ljmp
    00FF 02s00r00            793 	ljmp	_I2CStop
@@ -800,7 +800,7 @@
                             800 ;value                     Allocated with name '_EPROM_ByteRead_value_1_1'
                             801 ;ack                       Allocated with name '_EPROM_ByteRead_ack_1_1'
                             802 ;------------------------------------------------------------
-                            803 ;	EPROM.c:60: uint8_t EPROM_ByteRead(uint8_t address, uint8_t block){
+                            803 ;	EPROM.c:66: uint8_t EPROM_ByteRead(uint8_t address, uint8_t block){
                             804 ;	-----------------------------------------
                             805 ;	 function EPROM_ByteRead
                             806 ;	-----------------------------------------
@@ -809,7 +809,7 @@
    0102 E5 82               809 	mov	a,dpl
    0104 90s00r09            810 	mov	dptr,#_EPROM_ByteRead_address_1_1
    0107 F0                  811 	movx	@dptr,a
-                            812 ;	EPROM.c:63: EPROM_SetBlock(block, WRITE);
+                            812 ;	EPROM.c:69: EPROM_SetBlock(block, WRITE);
                             813 ;	genAssign
    0108 90s00r08            814 	mov	dptr,#_EPROM_ByteRead_PARM_2
    010B E0                  815 	movx	a,@dptr
@@ -824,7 +824,7 @@
    0114 C0 02               824 	push	ar2
    0116 12s00r4F            825 	lcall	_EPROM_SetBlock
    0119 D0 02               826 	pop	ar2
-                            827 ;	EPROM.c:64: ack = I2CSend(address);
+                            827 ;	EPROM.c:70: ack = I2CSend(address);
                             828 ;	genAssign
    011B 90s00r09            829 	mov	dptr,#_EPROM_ByteRead_address_1_1
    011E E0                  830 	movx	a,@dptr
@@ -838,7 +838,7 @@
    0129 AC 82               838 	mov	r4,dpl
    012B D0 03               839 	pop	ar3
    012D D0 02               840 	pop	ar2
-                            841 ;	EPROM.c:65: RetryAck(address, ack);
+                            841 ;	EPROM.c:71: RetryAck(address, ack);
                             842 ;	genAssign
    012F 90s00r00            843 	mov	dptr,#_RetryAck_PARM_2
    0132 EC                  844 	mov	a,r4
@@ -848,12 +848,12 @@
    0136 C0 02               848 	push	ar2
    0138 12s00r00            849 	lcall	_RetryAck
    013B D0 02               850 	pop	ar2
-                            851 ;	EPROM.c:66: I2CRestart(); //Restart
+                            851 ;	EPROM.c:72: I2CRestart(); //Restart
                             852 ;	genCall
    013D C0 02               853 	push	ar2
    013F 12s00r00            854 	lcall	_I2CRestart
    0142 D0 02               855 	pop	ar2
-                            856 ;	EPROM.c:67: EPROM_SetBlock(block, READ);
+                            856 ;	EPROM.c:73: EPROM_SetBlock(block, READ);
                             857 ;	genAssign
    0144 90s00r02            858 	mov	dptr,#_EPROM_SetBlock_PARM_2
    0147 74 01               859 	mov	a,#0x01
@@ -861,21 +861,21 @@
                             861 ;	genCall
    014A 8A 82               862 	mov	dpl,r2
    014C 12s00r4F            863 	lcall	_EPROM_SetBlock
-                            864 ;	EPROM.c:68: value = I2CRead();
+                            864 ;	EPROM.c:74: value = I2CRead();
                             865 ;	genCall
    014F 12s00r00            866 	lcall	_I2CRead
    0152 AA 82               867 	mov	r2,dpl
-                            868 ;	EPROM.c:69: I2CNak();
+                            868 ;	EPROM.c:75: I2CNak();
                             869 ;	genCall
    0154 C0 02               870 	push	ar2
    0156 12s00r00            871 	lcall	_I2CNak
    0159 D0 02               872 	pop	ar2
-                            873 ;	EPROM.c:70: I2CStop();
+                            873 ;	EPROM.c:76: I2CStop();
                             874 ;	genCall
    015B C0 02               875 	push	ar2
    015D 12s00r00            876 	lcall	_I2CStop
    0160 D0 02               877 	pop	ar2
-                            878 ;	EPROM.c:71: return value;
+                            878 ;	EPROM.c:77: return value;
                             879 ;	genRet
    0162 8A 82               880 	mov	dpl,r2
                             881 ;	Peephole 300	removed redundant label 00101$
@@ -884,12 +884,12 @@
                             884 ;Allocation info for local variables in function 'EPROM_Init'
                             885 ;------------------------------------------------------------
                             886 ;------------------------------------------------------------
-                            887 ;	EPROM.c:78: void EPROM_Init(void){
+                            887 ;	EPROM.c:84: void EPROM_Init(void){
                             888 ;	-----------------------------------------
                             889 ;	 function EPROM_Init
                             890 ;	-----------------------------------------
    0165                     891 _EPROM_Init:
-                            892 ;	EPROM.c:79: I2CInit();
+                            892 ;	EPROM.c:85: I2CInit();
                             893 ;	genCall
                             894 ;	Peephole 253.b	replaced lcall/ret with ljmp
    0165 02s00r00            895 	ljmp	_I2CInit

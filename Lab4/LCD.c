@@ -1,3 +1,9 @@
+/*
+    Author: Joey Jacobus
+    Date: 11/8/2016
+    Embedded Systems Design University of Colorado at Boulder
+    Lab 4
+ */
 
 #include "LCD.h"
 #include <stdint.h>
@@ -125,10 +131,10 @@ void LCD_Putstr(char *ss){
             case 0x50:
                 LCD_gotoaddr(0x10);
                 break;
-            case 0x24:
+            case 0x20:
                 LCD_gotoaddr(0x50);
                 break;
-            case 0x64:
+            case 0x60:
                 return;
             default:
                 break;

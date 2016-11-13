@@ -245,27 +245,28 @@ Symbol Table
     _KBLS                                                       =  009C G
  14 _LCD_Addr                                                      0000 GR
  13 _LCD_Busywait                                                  00C9 GR
- 13 _LCD_ClearScreen                                               00E1 GR
+ 13 _LCD_ClearScreen                                               00FE GR
  13 _LCD_DataWrite                                                 001F GR
   8 _LCD_DataWrite_Data_1_1                                        0001 R
- 13 _LCD_Init                                                      0223 GR
+ 13 _LCD_Init                                                      0240 GR
  13 _LCD_InstructionWrite                                          0000 GR
   8 _LCD_InstructionWrite_instruction_1_1                          0000 R
- 13 _LCD_Putch                                                     014D GR
+ 13 _LCD_Putch                                                     016A GR
   8 _LCD_Putch_cc_1_1                                              0008 R
  13 _LCD_Puthex                                                    0090 GR
   8 _LCD_Puthex_c_1_1                                              0004 R
- 13 _LCD_Putstr                                                    0160 GR
+ 13 _LCD_Putstr                                                    017D GR
   8 _LCD_Putstr_ss_1_1                                             0009 R
+ 13 _LCD_ReadAddr                                                  00E1 GR
  13 _LCD_ReadRAM                                                   0077 GR
  13 _LCD_SetCGRAMAddress                                           003E GR
   8 _LCD_SetCGRAMAddress_address_1_1                               0002 R
  13 _LCD_SetDDRAMAddress                                           005C GR
   8 _LCD_SetDDRAMAddress_address_1_1                               0003 R
- 13 _LCD_Test                                                      0235 GR
- 13 _LCD_gotoaddr                                                  00EA GR
+ 13 _LCD_Test                                                      0252 GR
+ 13 _LCD_gotoaddr                                                  0107 GR
   8 _LCD_gotoaddr_addr_1_1                                         0005 R
- 13 _LCD_gotoxy                                                    0119 GR
+ 13 _LCD_gotoxy                                                    0136 GR
   8 _LCD_gotoxy_PARM_2                                             0006 GR
   8 _LCD_gotoxy_row_1_1                                            0007 R
     _OV                                                         =  00D2 G
@@ -595,6 +596,6 @@ Area Table
   10 GSINIT5                                                                            size    0   flags 20
   11 GSINIT                                                                             size    0   flags 20
   12 GSFINAL                                                                            size    0   flags 20
-  13 CSEG                                                                               size  255   flags 20
+  13 CSEG                                                                               size  272   flags 20
   14 CONST                                                                              size   B0   flags 20
   15 XINIT                                                                              size    0   flags 20

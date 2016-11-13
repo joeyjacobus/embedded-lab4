@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Sun Nov 06 12:03:36 2016
+; This file generated Tue Nov 08 21:43:52 2016
 ;--------------------------------------------------------
 	.module I2c
 	.optsdcc -mmcs51 --model-large
@@ -488,7 +488,7 @@ _I2CRead_Data_1_1:
 ;------------------------------------------------------------
 ;i                         Allocated with name '_Clock_Delay_i_1_1'
 ;------------------------------------------------------------
-;	I2c.c:13: void Clock_Delay(void){
+;	I2c.c:19: void Clock_Delay(void){
 ;	-----------------------------------------
 ;	 function Clock_Delay
 ;	-----------------------------------------
@@ -501,7 +501,7 @@ _Clock_Delay:
 	ar7 = 0x07
 	ar0 = 0x00
 	ar1 = 0x01
-;	I2c.c:16: while(i > 0){
+;	I2c.c:22: while(i > 0){
 ;	genAssign
 	mov	r2,#0x6F
 00101$:
@@ -511,7 +511,7 @@ _Clock_Delay:
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00104$
 ;	Peephole 300	removed redundant label 00109$
-;	I2c.c:17: i--;
+;	I2c.c:23: i--;
 ;	genMinus
 ;	genMinusDec
 	dec	r2
@@ -523,15 +523,15 @@ _Clock_Delay:
 ;Allocation info for local variables in function 'Clock_High'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	I2c.c:21: void Clock_High(void){
+;	I2c.c:27: void Clock_High(void){
 ;	-----------------------------------------
 ;	 function Clock_High
 ;	-----------------------------------------
 _Clock_High:
-;	I2c.c:22: Clock_Delay();
+;	I2c.c:28: Clock_Delay();
 ;	genCall
 	lcall	_Clock_Delay
-;	I2c.c:23: SCL = 1;
+;	I2c.c:29: SCL = 1;
 ;	genAssign
 	setb	_P1_1
 ;	Peephole 300	removed redundant label 00101$
@@ -540,15 +540,15 @@ _Clock_High:
 ;Allocation info for local variables in function 'Clock_Low'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	I2c.c:26: void Clock_Low(void){
+;	I2c.c:32: void Clock_Low(void){
 ;	-----------------------------------------
 ;	 function Clock_Low
 ;	-----------------------------------------
 _Clock_Low:
-;	I2c.c:27: Clock_Delay();
+;	I2c.c:33: Clock_Delay();
 ;	genCall
 	lcall	_Clock_Delay
-;	I2c.c:28: SCL = 0;
+;	I2c.c:34: SCL = 0;
 ;	genAssign
 	clr	_P1_1
 ;	Peephole 300	removed redundant label 00101$
@@ -557,15 +557,15 @@ _Clock_Low:
 ;Allocation info for local variables in function 'I2CInit'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	I2c.c:38: void I2CInit()
+;	I2c.c:44: void I2CInit()
 ;	-----------------------------------------
 ;	 function I2CInit
 ;	-----------------------------------------
 _I2CInit:
-;	I2c.c:40: SDA = 1;
+;	I2c.c:46: SDA = 1;
 ;	genAssign
 	setb	_P1_0
-;	I2c.c:41: Clock_High();
+;	I2c.c:47: Clock_High();
 ;	genCall
 ;	Peephole 253.b	replaced lcall/ret with ljmp
 	ljmp	_Clock_High
@@ -574,15 +574,15 @@ _I2CInit:
 ;Allocation info for local variables in function 'I2CStart'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	I2c.c:44: void I2CStart()
+;	I2c.c:50: void I2CStart()
 ;	-----------------------------------------
 ;	 function I2CStart
 ;	-----------------------------------------
 _I2CStart:
-;	I2c.c:46: SDA = 0;
+;	I2c.c:52: SDA = 0;
 ;	genAssign
 	clr	_P1_0
-;	I2c.c:47: Clock_Low();
+;	I2c.c:53: Clock_Low();
 ;	genCall
 ;	Peephole 253.b	replaced lcall/ret with ljmp
 	ljmp	_Clock_Low
@@ -591,21 +591,21 @@ _I2CStart:
 ;Allocation info for local variables in function 'I2CRestart'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	I2c.c:50: void I2CRestart()
+;	I2c.c:56: void I2CRestart()
 ;	-----------------------------------------
 ;	 function I2CRestart
 ;	-----------------------------------------
 _I2CRestart:
-;	I2c.c:52: SDA = 1;
+;	I2c.c:58: SDA = 1;
 ;	genAssign
 	setb	_P1_0
-;	I2c.c:53: Clock_High();
+;	I2c.c:59: Clock_High();
 ;	genCall
 	lcall	_Clock_High
-;	I2c.c:54: SDA = 0;
+;	I2c.c:60: SDA = 0;
 ;	genAssign
 	clr	_P1_0
-;	I2c.c:55: Clock_Low();
+;	I2c.c:61: Clock_Low();
 ;	genCall
 ;	Peephole 253.b	replaced lcall/ret with ljmp
 	ljmp	_Clock_Low
@@ -614,21 +614,21 @@ _I2CRestart:
 ;Allocation info for local variables in function 'I2CStop'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	I2c.c:58: void I2CStop()
+;	I2c.c:64: void I2CStop()
 ;	-----------------------------------------
 ;	 function I2CStop
 ;	-----------------------------------------
 _I2CStop:
-;	I2c.c:60: Clock_Low();
+;	I2c.c:66: Clock_Low();
 ;	genCall
 	lcall	_Clock_Low
-;	I2c.c:61: SDA = 0;
+;	I2c.c:67: SDA = 0;
 ;	genAssign
 	clr	_P1_0
-;	I2c.c:62: Clock_High();
+;	I2c.c:68: Clock_High();
 ;	genCall
 	lcall	_Clock_High
-;	I2c.c:63: SDA = 1;
+;	I2c.c:69: SDA = 1;
 ;	genAssign
 	setb	_P1_0
 ;	Peephole 300	removed redundant label 00101$
@@ -637,21 +637,21 @@ _I2CStop:
 ;Allocation info for local variables in function 'I2CAck'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	I2c.c:66: void I2CAck()
+;	I2c.c:72: void I2CAck()
 ;	-----------------------------------------
 ;	 function I2CAck
 ;	-----------------------------------------
 _I2CAck:
-;	I2c.c:68: SDA = 0;
+;	I2c.c:74: SDA = 0;
 ;	genAssign
 	clr	_P1_0
-;	I2c.c:69: Clock_High();
+;	I2c.c:75: Clock_High();
 ;	genCall
 	lcall	_Clock_High
-;	I2c.c:70: Clock_Low();
+;	I2c.c:76: Clock_Low();
 ;	genCall
 	lcall	_Clock_Low
-;	I2c.c:71: SDA = 1;
+;	I2c.c:77: SDA = 1;
 ;	genAssign
 	setb	_P1_0
 ;	Peephole 300	removed redundant label 00101$
@@ -660,21 +660,21 @@ _I2CAck:
 ;Allocation info for local variables in function 'I2CNak'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	I2c.c:74: void I2CNak()
+;	I2c.c:80: void I2CNak()
 ;	-----------------------------------------
 ;	 function I2CNak
 ;	-----------------------------------------
 _I2CNak:
-;	I2c.c:76: SDA = 1;
+;	I2c.c:82: SDA = 1;
 ;	genAssign
 	setb	_P1_0
-;	I2c.c:77: Clock_High();
+;	I2c.c:83: Clock_High();
 ;	genCall
 	lcall	_Clock_High
-;	I2c.c:78: Clock_Low();
+;	I2c.c:84: Clock_Low();
 ;	genCall
 	lcall	_Clock_Low
-;	I2c.c:79: SDA = 1;
+;	I2c.c:85: SDA = 1;
 ;	genAssign
 	setb	_P1_0
 ;	Peephole 300	removed redundant label 00101$
@@ -686,7 +686,7 @@ _I2CNak:
 ;i                         Allocated with name '_I2CSend_i_1_1'
 ;ack_bit                   Allocated with name '_I2CSend_ack_bit_1_1'
 ;------------------------------------------------------------
-;	I2c.c:82: unsigned char I2CSend(unsigned char Data)
+;	I2c.c:88: unsigned char I2CSend(unsigned char Data)
 ;	-----------------------------------------
 ;	 function I2CSend
 ;	-----------------------------------------
@@ -695,7 +695,7 @@ _I2CSend:
 	mov	a,dpl
 	mov	dptr,#_I2CSend_Data_1_1
 	movx	@dptr,a
-;	I2c.c:85: for (i = 0; i < 8; i++) {
+;	I2c.c:91: for (i = 0; i < 8; i++) {
 ;	genAssign
 	mov	r2,#0x00
 00104$:
@@ -707,7 +707,7 @@ _I2CSend:
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00107$
 ;	Peephole 300	removed redundant label 00115$
-;	I2c.c:86: if ((Data & 0x80) == 0)
+;	I2c.c:92: if ((Data & 0x80) == 0)
 ;	genAssign
 	mov	dptr,#_I2CSend_Data_1_1
 	movx	a,@dptr
@@ -718,27 +718,27 @@ _I2CSend:
 ;	Peephole 108.e	removed ljmp by inverse jump logic
 	jb	acc.7,00102$
 ;	Peephole 300	removed redundant label 00116$
-;	I2c.c:87: SDA = 0;
+;	I2c.c:93: SDA = 0;
 ;	genAssign
 	clr	_P1_0
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00103$
 00102$:
-;	I2c.c:89: SDA = 1;
+;	I2c.c:95: SDA = 1;
 ;	genAssign
 	setb	_P1_0
 00103$:
-;	I2c.c:90: Clock_High();
+;	I2c.c:96: Clock_High();
 ;	genCall
 	push	ar2
 	lcall	_Clock_High
 	pop	ar2
-;	I2c.c:91: Clock_Low();
+;	I2c.c:97: Clock_Low();
 ;	genCall
 	push	ar2
 	lcall	_Clock_Low
 	pop	ar2
-;	I2c.c:92: Data<<=1;
+;	I2c.c:98: Data<<=1;
 ;	genAssign
 	mov	dptr,#_I2CSend_Data_1_1
 	movx	a,@dptr
@@ -753,31 +753,31 @@ _I2CSend:
 	mov	dptr,#_I2CSend_Data_1_1
 ;	Peephole 100	removed redundant mov
 	movx	@dptr,a
-;	I2c.c:85: for (i = 0; i < 8; i++) {
+;	I2c.c:91: for (i = 0; i < 8; i++) {
 ;	genPlus
 ;     genPlusIncr
 	inc	r2
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00104$
 00107$:
-;	I2c.c:94: SDA = 1;
+;	I2c.c:100: SDA = 1;
 ;	genAssign
 	setb	_P1_0
-;	I2c.c:95: Clock_High();
+;	I2c.c:101: Clock_High();
 ;	genCall
 	lcall	_Clock_High
-;	I2c.c:96: ack_bit = SDA;
+;	I2c.c:102: ack_bit = SDA;
 ;	genAssign
 	clr	a
 	mov	c,_P1_0
 	rlc	a
 	mov	r2,a
-;	I2c.c:97: Clock_Low();
+;	I2c.c:103: Clock_Low();
 ;	genCall
 	push	ar2
 	lcall	_Clock_Low
 	pop	ar2
-;	I2c.c:98: return ack_bit;
+;	I2c.c:104: return ack_bit;
 ;	genRet
 	mov	dpl,r2
 ;	Peephole 300	removed redundant label 00108$
@@ -788,18 +788,18 @@ _I2CSend:
 ;i                         Allocated with name '_I2CRead_i_1_1'
 ;Data                      Allocated with name '_I2CRead_Data_1_1'
 ;------------------------------------------------------------
-;	I2c.c:101: unsigned char I2CRead()
+;	I2c.c:107: unsigned char I2CRead()
 ;	-----------------------------------------
 ;	 function I2CRead
 ;	-----------------------------------------
 _I2CRead:
-;	I2c.c:103: unsigned char i, Data=0;
+;	I2c.c:109: unsigned char i, Data=0;
 ;	genAssign
 	mov	dptr,#_I2CRead_Data_1_1
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;	I2c.c:104: for (i = 0; i < 8; i++) {
+;	I2c.c:110: for (i = 0; i < 8; i++) {
 ;	genAssign
 	mov	r2,#0x00
 00105$:
@@ -811,18 +811,18 @@ _I2CRead:
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00108$
 ;	Peephole 300	removed redundant label 00117$
-;	I2c.c:105: Clock_High();
+;	I2c.c:111: Clock_High();
 ;	genCall
 	push	ar2
 	lcall	_Clock_High
 	pop	ar2
-;	I2c.c:106: if(SDA)
+;	I2c.c:112: if(SDA)
 ;	genIfx
 ;	genIfxJump
 ;	Peephole 108.d	removed ljmp by inverse jump logic
 	jnb	_P1_0,00102$
 ;	Peephole 300	removed redundant label 00118$
-;	I2c.c:107: Data |=1;
+;	I2c.c:113: Data |=1;
 ;	genAssign
 ;	genOr
 	mov	dptr,#_I2CRead_Data_1_1
@@ -832,7 +832,7 @@ _I2CRead:
 	orl	a,#0x01
 	movx	@dptr,a
 00102$:
-;	I2c.c:108: if(i<7)
+;	I2c.c:114: if(i<7)
 ;	genCmpLt
 ;	genCmp
 	cjne	r2,#0x07,00119$
@@ -841,7 +841,7 @@ _I2CRead:
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00104$
 ;	Peephole 300	removed redundant label 00120$
-;	I2c.c:109: Data<<=1;
+;	I2c.c:115: Data<<=1;
 ;	genAssign
 	mov	dptr,#_I2CRead_Data_1_1
 	movx	a,@dptr
@@ -857,19 +857,19 @@ _I2CRead:
 ;	Peephole 100	removed redundant mov
 	movx	@dptr,a
 00104$:
-;	I2c.c:110: Clock_Low();
+;	I2c.c:116: Clock_Low();
 ;	genCall
 	push	ar2
 	lcall	_Clock_Low
 	pop	ar2
-;	I2c.c:104: for (i = 0; i < 8; i++) {
+;	I2c.c:110: for (i = 0; i < 8; i++) {
 ;	genPlus
 ;     genPlusIncr
 	inc	r2
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00105$
 00108$:
-;	I2c.c:112: return Data;
+;	I2c.c:118: return Data;
 ;	genAssign
 	mov	dptr,#_I2CRead_Data_1_1
 	movx	a,@dptr

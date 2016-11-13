@@ -1,19 +1,20 @@
 # depslib dependency file v1.0
-1478396855 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4\lcd.c
+1478738348 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4\lcd.c
 	"LCD.h"
 	<stdint.h>
 	"at89c51ed2.h"
 	<stdio.h>
 
-1478396860 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4\lcd.h
+1478666536 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4\lcd.h
 
-1478388575 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4\main.c
+1478738171 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4\main.c
 	<mcs51/8051.h>
 	"at89c51ed2.h"
-	<stdio.h>
 	"LCD.h"
+	"serial.h"
+	<stdio.h>
 
-1476334361 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4\serial.c
+1478666596 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4\serial.c
 	<mcs51/8051.h>
 	"at89c51ed2.h"
 	<stdio.h>
@@ -21,5 +22,6 @@
 	<stdlib.h>
 	"serial.h"
 
-1478396807 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4\serial.h
+1478666624 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4\serial.h
+	<stdint.h>
 

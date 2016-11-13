@@ -1,9 +1,15 @@
+/*
+    Author: Joey Jacobus
+    Date: 11/8/2016
+    Embedded Systems Design University of Colorado at Boulder
+    Lab 4
+ */
 
 #include "LCD.h"
 #include <stdint.h>
 #include "at89c51ed2.h"
 #include <stdio.h>
-
+#include <stdbool.h>
 
 #define LCD_Clear 0x01
 #define LCD_DisplayOn 0x0F  //Display on with blinking and cursor
@@ -17,6 +23,7 @@
 #define RS P1_5
 
 uint8_t xdata* const LCD_Addr = (uint8_t xdata*)0xE000;
+
 
 const char AddrMap [4][16] = {
                            {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0C,0x0D,0x0E,0x0F},
@@ -91,6 +98,16 @@ void LCD_Busywait(void){
     RW = READ;
     RS = INSTRUCTION;
     while (*LCD_Addr & 0x80){}
+}
+
+/**
+ *  Returns the LCD address
+ */
+uint8_t LCD_ReadAddr(void){
+    LCD_Busywait();
+    RW = READ;
+    RS = INSTRUCTION;
+    return *LCD_Addr & 0x7F;    //Only lower 7 bits are address
 }
 
 /**

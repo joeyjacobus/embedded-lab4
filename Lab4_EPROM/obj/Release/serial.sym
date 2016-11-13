@@ -333,7 +333,7 @@ Symbol Table
     _SPCON                                                      =  00C3 G
     _SPDAT                                                      =  00C5 G
     _SPSTA                                                      =  00C4 G
- 13 _Serial_GetHex                                                 0141 GR
+ 13 _Serial_GetHex                                                 0147 GR
   8 _Serial_GetHex_buf_1_1                                         0011 R
   8 _Serial_GetHex_c_1_1                                           0010 R
   8 _Serial_GetHex_index_1_1                                       0013 R
@@ -343,7 +343,7 @@ Symbol Table
   8 _Serial_GetInteger_buf_1_1                                     0003 R
   8 _Serial_GetInteger_index_1_1                                   000E R
   8 _Serial_GetInteger_max_length_1_1                              0001 R
- 13 _Serial_Init                                                   0417 GR
+ 13 _Serial_Init                                                   041D GR
     _T0                                                         =  00B4 G
     _T1                                                         =  00B5 G
     _T2CON                                                      =  00C8 G
@@ -383,7 +383,7 @@ Symbol Table
  14 __str_2                                                        005C R
     _atoi                                                          **** GX
  13 _getchar                                                       0012 GR
- 13 _getstring                                                     035A GR
+ 13 _getstring                                                     0360 GR
   8 _getstring_PARM_2                                              0017 GR
   8 _getstring_buf_1_1                                             0019 R
   8 _getstring_c_1_1                                               001C R
@@ -594,6 +594,6 @@ Area Table
   10 GSINIT5                                                                            size    0   flags 20
   11 GSINIT                                                                             size    0   flags 20
   12 GSFINAL                                                                            size    0   flags 20
-  13 CSEG                                                                               size  428   flags 20
+  13 CSEG                                                                               size  42E   flags 20
   14 CONST                                                                              size   8E   flags 20
   15 XINIT                                                                              size    0   flags 20

@@ -1,0 +1,1769 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.6.0 #4309 (Jul 28 2006)
+                              4 ; This file generated Sat Nov 12 19:36:39 2016
+                              5 ;--------------------------------------------------------
+                              6 	.module Timer
+                              7 	.optsdcc -mmcs51 --model-large
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _Timer0_Init
+                             13 	.globl _Clock_Reset
+                             14 	.globl _Clock_Start
+                             15 	.globl _Clock_Stop
+                             16 	.globl _TimerRedraw
+                             17 	.globl _timer0
+                             18 	.globl _Clock_NewAlarm
+                             19 	.globl _P5_7
+                             20 	.globl _P5_6
+                             21 	.globl _P5_5
+                             22 	.globl _P5_4
+                             23 	.globl _P5_3
+                             24 	.globl _P5_2
+                             25 	.globl _P5_1
+                             26 	.globl _P5_0
+                             27 	.globl _P4_7
+                             28 	.globl _P4_6
+                             29 	.globl _P4_5
+                             30 	.globl _P4_4
+                             31 	.globl _P4_3
+                             32 	.globl _P4_2
+                             33 	.globl _P4_1
+                             34 	.globl _P4_0
+                             35 	.globl _PX0L
+                             36 	.globl _PT0L
+                             37 	.globl _PX1L
+                             38 	.globl _PT1L
+                             39 	.globl _PLS
+                             40 	.globl _PT2L
+                             41 	.globl _PPCL
+                             42 	.globl _EC
+                             43 	.globl _CCF0
+                             44 	.globl _CCF1
+                             45 	.globl _CCF2
+                             46 	.globl _CCF3
+                             47 	.globl _CCF4
+                             48 	.globl _CR
+                             49 	.globl _CF
+                             50 	.globl _TF2
+                             51 	.globl _EXF2
+                             52 	.globl _RCLK
+                             53 	.globl _TCLK
+                             54 	.globl _EXEN2
+                             55 	.globl _TR2
+                             56 	.globl _C_T2
+                             57 	.globl _CP_RL2
+                             58 	.globl _T2CON_7
+                             59 	.globl _T2CON_6
+                             60 	.globl _T2CON_5
+                             61 	.globl _T2CON_4
+                             62 	.globl _T2CON_3
+                             63 	.globl _T2CON_2
+                             64 	.globl _T2CON_1
+                             65 	.globl _T2CON_0
+                             66 	.globl _PT2
+                             67 	.globl _ET2
+                             68 	.globl _CY
+                             69 	.globl _AC
+                             70 	.globl _F0
+                             71 	.globl _RS1
+                             72 	.globl _RS0
+                             73 	.globl _OV
+                             74 	.globl _F1
+                             75 	.globl _P
+                             76 	.globl _PS
+                             77 	.globl _PT1
+                             78 	.globl _PX1
+                             79 	.globl _PT0
+                             80 	.globl _PX0
+                             81 	.globl _RD
+                             82 	.globl _WR
+                             83 	.globl _T1
+                             84 	.globl _T0
+                             85 	.globl _INT1
+                             86 	.globl _INT0
+                             87 	.globl _TXD
+                             88 	.globl _RXD
+                             89 	.globl _P3_7
+                             90 	.globl _P3_6
+                             91 	.globl _P3_5
+                             92 	.globl _P3_4
+                             93 	.globl _P3_3
+                             94 	.globl _P3_2
+                             95 	.globl _P3_1
+                             96 	.globl _P3_0
+                             97 	.globl _EA
+                             98 	.globl _ES
+                             99 	.globl _ET1
+                            100 	.globl _EX1
+                            101 	.globl _ET0
+                            102 	.globl _EX0
+                            103 	.globl _P2_7
+                            104 	.globl _P2_6
+                            105 	.globl _P2_5
+                            106 	.globl _P2_4
+                            107 	.globl _P2_3
+                            108 	.globl _P2_2
+                            109 	.globl _P2_1
+                            110 	.globl _P2_0
+                            111 	.globl _SM0
+                            112 	.globl _SM1
+                            113 	.globl _SM2
+                            114 	.globl _REN
+                            115 	.globl _TB8
+                            116 	.globl _RB8
+                            117 	.globl _TI
+                            118 	.globl _RI
+                            119 	.globl _P1_7
+                            120 	.globl _P1_6
+                            121 	.globl _P1_5
+                            122 	.globl _P1_4
+                            123 	.globl _P1_3
+                            124 	.globl _P1_2
+                            125 	.globl _P1_1
+                            126 	.globl _P1_0
+                            127 	.globl _TF1
+                            128 	.globl _TR1
+                            129 	.globl _TF0
+                            130 	.globl _TR0
+                            131 	.globl _IE1
+                            132 	.globl _IT1
+                            133 	.globl _IE0
+                            134 	.globl _IT0
+                            135 	.globl _P0_7
+                            136 	.globl _P0_6
+                            137 	.globl _P0_5
+                            138 	.globl _P0_4
+                            139 	.globl _P0_3
+                            140 	.globl _P0_2
+                            141 	.globl _P0_1
+                            142 	.globl _P0_0
+                            143 	.globl _EECON
+                            144 	.globl _KBF
+                            145 	.globl _KBE
+                            146 	.globl _KBLS
+                            147 	.globl _BRL
+                            148 	.globl _BDRCON
+                            149 	.globl _T2MOD
+                            150 	.globl _SPDAT
+                            151 	.globl _SPSTA
+                            152 	.globl _SPCON
+                            153 	.globl _SADEN
+                            154 	.globl _SADDR
+                            155 	.globl _WDTPRG
+                            156 	.globl _WDTRST
+                            157 	.globl _P5
+                            158 	.globl _P4
+                            159 	.globl _IPH1
+                            160 	.globl _IPL1
+                            161 	.globl _IPH0
+                            162 	.globl _IPL0
+                            163 	.globl _IEN1
+                            164 	.globl _IEN0
+                            165 	.globl _CMOD
+                            166 	.globl _CL
+                            167 	.globl _CH
+                            168 	.globl _CCON
+                            169 	.globl _CCAPM4
+                            170 	.globl _CCAPM3
+                            171 	.globl _CCAPM2
+                            172 	.globl _CCAPM1
+                            173 	.globl _CCAPM0
+                            174 	.globl _CCAP4L
+                            175 	.globl _CCAP3L
+                            176 	.globl _CCAP2L
+                            177 	.globl _CCAP1L
+                            178 	.globl _CCAP0L
+                            179 	.globl _CCAP4H
+                            180 	.globl _CCAP3H
+                            181 	.globl _CCAP2H
+                            182 	.globl _CCAP1H
+                            183 	.globl _CCAP0H
+                            184 	.globl _CKCKON1
+                            185 	.globl _CKCKON0
+                            186 	.globl _CKRL
+                            187 	.globl _AUXR1
+                            188 	.globl _AUXR
+                            189 	.globl _TH2
+                            190 	.globl _TL2
+                            191 	.globl _RCAP2H
+                            192 	.globl _RCAP2L
+                            193 	.globl _T2CON
+                            194 	.globl _B
+                            195 	.globl _ACC
+                            196 	.globl _PSW
+                            197 	.globl _IP
+                            198 	.globl _P3
+                            199 	.globl _IE
+                            200 	.globl _P2
+                            201 	.globl _SBUF
+                            202 	.globl _SCON
+                            203 	.globl _P1
+                            204 	.globl _TH1
+                            205 	.globl _TH0
+                            206 	.globl _TL1
+                            207 	.globl _TL0
+                            208 	.globl _TMOD
+                            209 	.globl _TCON
+                            210 	.globl _PCON
+                            211 	.globl _DPH
+                            212 	.globl _DPL
+                            213 	.globl _SP
+                            214 	.globl _P0
+                            215 	.globl _ActiveAlarms
+                            216 	.globl _TimeMinsTens
+                            217 	.globl _TimeMinsOnes
+                            218 	.globl _TimeSecsTens
+                            219 	.globl _TimeSecsOnes
+                            220 	.globl _TimeTenths
+                            221 	.globl _ISR_Count
+                            222 	.globl _AlarmCount
+                            223 	.globl _Saved_Address
+                            224 	.globl _CG_Accessed
+                            225 ;--------------------------------------------------------
+                            226 ; special function registers
+                            227 ;--------------------------------------------------------
+                            228 	.area RSEG    (DATA)
+                    0080    229 _P0	=	0x0080
+                    0081    230 _SP	=	0x0081
+                    0082    231 _DPL	=	0x0082
+                    0083    232 _DPH	=	0x0083
+                    0087    233 _PCON	=	0x0087
+                    0088    234 _TCON	=	0x0088
+                    0089    235 _TMOD	=	0x0089
+                    008A    236 _TL0	=	0x008a
+                    008B    237 _TL1	=	0x008b
+                    008C    238 _TH0	=	0x008c
+                    008D    239 _TH1	=	0x008d
+                    0090    240 _P1	=	0x0090
+                    0098    241 _SCON	=	0x0098
+                    0099    242 _SBUF	=	0x0099
+                    00A0    243 _P2	=	0x00a0
+                    00A8    244 _IE	=	0x00a8
+                    00B0    245 _P3	=	0x00b0
+                    00B8    246 _IP	=	0x00b8
+                    00D0    247 _PSW	=	0x00d0
+                    00E0    248 _ACC	=	0x00e0
+                    00F0    249 _B	=	0x00f0
+                    00C8    250 _T2CON	=	0x00c8
+                    00CA    251 _RCAP2L	=	0x00ca
+                    00CB    252 _RCAP2H	=	0x00cb
+                    00CC    253 _TL2	=	0x00cc
+                    00CD    254 _TH2	=	0x00cd
+                    008E    255 _AUXR	=	0x008e
+                    00A2    256 _AUXR1	=	0x00a2
+                    0097    257 _CKRL	=	0x0097
+                    008F    258 _CKCKON0	=	0x008f
+                    008F    259 _CKCKON1	=	0x008f
+                    00FA    260 _CCAP0H	=	0x00fa
+                    00FB    261 _CCAP1H	=	0x00fb
+                    00FC    262 _CCAP2H	=	0x00fc
+                    00FD    263 _CCAP3H	=	0x00fd
+                    00FE    264 _CCAP4H	=	0x00fe
+                    00EA    265 _CCAP0L	=	0x00ea
+                    00EB    266 _CCAP1L	=	0x00eb
+                    00EC    267 _CCAP2L	=	0x00ec
+                    00ED    268 _CCAP3L	=	0x00ed
+                    00EE    269 _CCAP4L	=	0x00ee
+                    00DA    270 _CCAPM0	=	0x00da
+                    00DB    271 _CCAPM1	=	0x00db
+                    00DC    272 _CCAPM2	=	0x00dc
+                    00DD    273 _CCAPM3	=	0x00dd
+                    00DE    274 _CCAPM4	=	0x00de
+                    00D8    275 _CCON	=	0x00d8
+                    00F9    276 _CH	=	0x00f9
+                    00E9    277 _CL	=	0x00e9
+                    00D9    278 _CMOD	=	0x00d9
+                    00A8    279 _IEN0	=	0x00a8
+                    00B1    280 _IEN1	=	0x00b1
+                    00B8    281 _IPL0	=	0x00b8
+                    00B7    282 _IPH0	=	0x00b7
+                    00B2    283 _IPL1	=	0x00b2
+                    00B3    284 _IPH1	=	0x00b3
+                    00C0    285 _P4	=	0x00c0
+                    00D8    286 _P5	=	0x00d8
+                    00A6    287 _WDTRST	=	0x00a6
+                    00A7    288 _WDTPRG	=	0x00a7
+                    00A9    289 _SADDR	=	0x00a9
+                    00B9    290 _SADEN	=	0x00b9
+                    00C3    291 _SPCON	=	0x00c3
+                    00C4    292 _SPSTA	=	0x00c4
+                    00C5    293 _SPDAT	=	0x00c5
+                    00C9    294 _T2MOD	=	0x00c9
+                    009B    295 _BDRCON	=	0x009b
+                    009A    296 _BRL	=	0x009a
+                    009C    297 _KBLS	=	0x009c
+                    009D    298 _KBE	=	0x009d
+                    009E    299 _KBF	=	0x009e
+                    00D2    300 _EECON	=	0x00d2
+                            301 ;--------------------------------------------------------
+                            302 ; special function bits
+                            303 ;--------------------------------------------------------
+                            304 	.area RSEG    (DATA)
+                    0080    305 _P0_0	=	0x0080
+                    0081    306 _P0_1	=	0x0081
+                    0082    307 _P0_2	=	0x0082
+                    0083    308 _P0_3	=	0x0083
+                    0084    309 _P0_4	=	0x0084
+                    0085    310 _P0_5	=	0x0085
+                    0086    311 _P0_6	=	0x0086
+                    0087    312 _P0_7	=	0x0087
+                    0088    313 _IT0	=	0x0088
+                    0089    314 _IE0	=	0x0089
+                    008A    315 _IT1	=	0x008a
+                    008B    316 _IE1	=	0x008b
+                    008C    317 _TR0	=	0x008c
+                    008D    318 _TF0	=	0x008d
+                    008E    319 _TR1	=	0x008e
+                    008F    320 _TF1	=	0x008f
+                    0090    321 _P1_0	=	0x0090
+                    0091    322 _P1_1	=	0x0091
+                    0092    323 _P1_2	=	0x0092
+                    0093    324 _P1_3	=	0x0093
+                    0094    325 _P1_4	=	0x0094
+                    0095    326 _P1_5	=	0x0095
+                    0096    327 _P1_6	=	0x0096
+                    0097    328 _P1_7	=	0x0097
+                    0098    329 _RI	=	0x0098
+                    0099    330 _TI	=	0x0099
+                    009A    331 _RB8	=	0x009a
+                    009B    332 _TB8	=	0x009b
+                    009C    333 _REN	=	0x009c
+                    009D    334 _SM2	=	0x009d
+                    009E    335 _SM1	=	0x009e
+                    009F    336 _SM0	=	0x009f
+                    00A0    337 _P2_0	=	0x00a0
+                    00A1    338 _P2_1	=	0x00a1
+                    00A2    339 _P2_2	=	0x00a2
+                    00A3    340 _P2_3	=	0x00a3
+                    00A4    341 _P2_4	=	0x00a4
+                    00A5    342 _P2_5	=	0x00a5
+                    00A6    343 _P2_6	=	0x00a6
+                    00A7    344 _P2_7	=	0x00a7
+                    00A8    345 _EX0	=	0x00a8
+                    00A9    346 _ET0	=	0x00a9
+                    00AA    347 _EX1	=	0x00aa
+                    00AB    348 _ET1	=	0x00ab
+                    00AC    349 _ES	=	0x00ac
+                    00AF    350 _EA	=	0x00af
+                    00B0    351 _P3_0	=	0x00b0
+                    00B1    352 _P3_1	=	0x00b1
+                    00B2    353 _P3_2	=	0x00b2
+                    00B3    354 _P3_3	=	0x00b3
+                    00B4    355 _P3_4	=	0x00b4
+                    00B5    356 _P3_5	=	0x00b5
+                    00B6    357 _P3_6	=	0x00b6
+                    00B7    358 _P3_7	=	0x00b7
+                    00B0    359 _RXD	=	0x00b0
+                    00B1    360 _TXD	=	0x00b1
+                    00B2    361 _INT0	=	0x00b2
+                    00B3    362 _INT1	=	0x00b3
+                    00B4    363 _T0	=	0x00b4
+                    00B5    364 _T1	=	0x00b5
+                    00B6    365 _WR	=	0x00b6
+                    00B7    366 _RD	=	0x00b7
+                    00B8    367 _PX0	=	0x00b8
+                    00B9    368 _PT0	=	0x00b9
+                    00BA    369 _PX1	=	0x00ba
+                    00BB    370 _PT1	=	0x00bb
+                    00BC    371 _PS	=	0x00bc
+                    00D0    372 _P	=	0x00d0
+                    00D1    373 _F1	=	0x00d1
+                    00D2    374 _OV	=	0x00d2
+                    00D3    375 _RS0	=	0x00d3
+                    00D4    376 _RS1	=	0x00d4
+                    00D5    377 _F0	=	0x00d5
+                    00D6    378 _AC	=	0x00d6
+                    00D7    379 _CY	=	0x00d7
+                    00AD    380 _ET2	=	0x00ad
+                    00BD    381 _PT2	=	0x00bd
+                    00C8    382 _T2CON_0	=	0x00c8
+                    00C9    383 _T2CON_1	=	0x00c9
+                    00CA    384 _T2CON_2	=	0x00ca
+                    00CB    385 _T2CON_3	=	0x00cb
+                    00CC    386 _T2CON_4	=	0x00cc
+                    00CD    387 _T2CON_5	=	0x00cd
+                    00CE    388 _T2CON_6	=	0x00ce
+                    00CF    389 _T2CON_7	=	0x00cf
+                    00C8    390 _CP_RL2	=	0x00c8
+                    00C9    391 _C_T2	=	0x00c9
+                    00CA    392 _TR2	=	0x00ca
+                    00CB    393 _EXEN2	=	0x00cb
+                    00CC    394 _TCLK	=	0x00cc
+                    00CD    395 _RCLK	=	0x00cd
+                    00CE    396 _EXF2	=	0x00ce
+                    00CF    397 _TF2	=	0x00cf
+                    00DF    398 _CF	=	0x00df
+                    00DE    399 _CR	=	0x00de
+                    00DC    400 _CCF4	=	0x00dc
+                    00DB    401 _CCF3	=	0x00db
+                    00DA    402 _CCF2	=	0x00da
+                    00D9    403 _CCF1	=	0x00d9
+                    00D8    404 _CCF0	=	0x00d8
+                    00AE    405 _EC	=	0x00ae
+                    00BE    406 _PPCL	=	0x00be
+                    00BD    407 _PT2L	=	0x00bd
+                    00BC    408 _PLS	=	0x00bc
+                    00BB    409 _PT1L	=	0x00bb
+                    00BA    410 _PX1L	=	0x00ba
+                    00B9    411 _PT0L	=	0x00b9
+                    00B8    412 _PX0L	=	0x00b8
+                    00C0    413 _P4_0	=	0x00c0
+                    00C1    414 _P4_1	=	0x00c1
+                    00C2    415 _P4_2	=	0x00c2
+                    00C3    416 _P4_3	=	0x00c3
+                    00C4    417 _P4_4	=	0x00c4
+                    00C5    418 _P4_5	=	0x00c5
+                    00C6    419 _P4_6	=	0x00c6
+                    00C7    420 _P4_7	=	0x00c7
+                    00D8    421 _P5_0	=	0x00d8
+                    00D9    422 _P5_1	=	0x00d9
+                    00DA    423 _P5_2	=	0x00da
+                    00DB    424 _P5_3	=	0x00db
+                    00DC    425 _P5_4	=	0x00dc
+                    00DD    426 _P5_5	=	0x00dd
+                    00DE    427 _P5_6	=	0x00de
+                    00DF    428 _P5_7	=	0x00df
+                            429 ;--------------------------------------------------------
+                            430 ; overlayable register banks
+                            431 ;--------------------------------------------------------
+                            432 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     433 	.ds 8
+                            434 ;--------------------------------------------------------
+                            435 ; internal ram data
+                            436 ;--------------------------------------------------------
+                            437 	.area DSEG    (DATA)
+                            438 ;--------------------------------------------------------
+                            439 ; overlayable items in internal ram 
+                            440 ;--------------------------------------------------------
+                            441 	.area OSEG    (OVR,DATA)
+                            442 ;--------------------------------------------------------
+                            443 ; indirectly addressable internal ram data
+                            444 ;--------------------------------------------------------
+                            445 	.area ISEG    (DATA)
+                            446 ;--------------------------------------------------------
+                            447 ; bit data
+                            448 ;--------------------------------------------------------
+                            449 	.area BSEG    (BIT)
+   0000                     450 _CG_Accessed::
+   0000                     451 	.ds 1
+   0001                     452 _timer0_updateAlarms_1_1:
+   0001                     453 	.ds 1
+                            454 ;--------------------------------------------------------
+                            455 ; paged external ram data
+                            456 ;--------------------------------------------------------
+                            457 	.area PSEG    (PAG,XDATA)
+                            458 ;--------------------------------------------------------
+                            459 ; external ram data
+                            460 ;--------------------------------------------------------
+                            461 	.area XSEG    (XDATA)
+   0000                     462 _Saved_Address::
+   0000                     463 	.ds 1
+   0001                     464 _AlarmCount::
+   0001                     465 	.ds 6
+   0007                     466 _Clock_NewAlarm_alarm_duration_1_1:
+   0007                     467 	.ds 2
+                            468 ;--------------------------------------------------------
+                            469 ; external initialized ram data
+                            470 ;--------------------------------------------------------
+                            471 	.area XISEG   (XDATA)
+   0000                     472 _ISR_Count::
+   0000                     473 	.ds 1
+   0001                     474 _TimeTenths::
+   0001                     475 	.ds 1
+   0002                     476 _TimeSecsOnes::
+   0002                     477 	.ds 1
+   0003                     478 _TimeSecsTens::
+   0003                     479 	.ds 1
+   0004                     480 _TimeMinsOnes::
+   0004                     481 	.ds 1
+   0005                     482 _TimeMinsTens::
+   0005                     483 	.ds 1
+   0006                     484 _ActiveAlarms::
+   0006                     485 	.ds 3
+                            486 	.area HOME    (CODE)
+                            487 	.area GSINIT0 (CODE)
+                            488 	.area GSINIT1 (CODE)
+                            489 	.area GSINIT2 (CODE)
+                            490 	.area GSINIT3 (CODE)
+                            491 	.area GSINIT4 (CODE)
+                            492 	.area GSINIT5 (CODE)
+                            493 	.area GSINIT  (CODE)
+                            494 	.area GSFINAL (CODE)
+                            495 	.area CSEG    (CODE)
+                            496 ;--------------------------------------------------------
+                            497 ; global & static initialisations
+                            498 ;--------------------------------------------------------
+                            499 	.area HOME    (CODE)
+                            500 	.area GSINIT  (CODE)
+                            501 	.area GSFINAL (CODE)
+                            502 	.area GSINIT  (CODE)
+                            503 ;	Timer.c:16: bool CG_Accessed = false;
+                            504 ;	genAssign
+   0000 C2*00               505 	clr	_CG_Accessed
+                            506 ;--------------------------------------------------------
+                            507 ; Home
+                            508 ;--------------------------------------------------------
+                            509 	.area HOME    (CODE)
+                            510 	.area CSEG    (CODE)
+                            511 ;--------------------------------------------------------
+                            512 ; code
+                            513 ;--------------------------------------------------------
+                            514 	.area CSEG    (CODE)
+                            515 ;------------------------------------------------------------
+                            516 ;Allocation info for local variables in function 'Clock_NewAlarm'
+                            517 ;------------------------------------------------------------
+                            518 ;alarm_duration            Allocated with name '_Clock_NewAlarm_alarm_duration_1_1'
+                            519 ;i                         Allocated with name '_Clock_NewAlarm_i_1_1'
+                            520 ;------------------------------------------------------------
+                            521 ;	Timer.c:33: void Clock_NewAlarm(uint16_t alarm_duration){
+                            522 ;	-----------------------------------------
+                            523 ;	 function Clock_NewAlarm
+                            524 ;	-----------------------------------------
+   0000                     525 _Clock_NewAlarm:
+                    0002    526 	ar2 = 0x02
+                    0003    527 	ar3 = 0x03
+                    0004    528 	ar4 = 0x04
+                    0005    529 	ar5 = 0x05
+                    0006    530 	ar6 = 0x06
+                    0007    531 	ar7 = 0x07
+                    0000    532 	ar0 = 0x00
+                    0001    533 	ar1 = 0x01
+                            534 ;	genReceive
+   0000 AA 83               535 	mov	r2,dph
+   0002 E5 82               536 	mov	a,dpl
+   0004 90s00r07            537 	mov	dptr,#_Clock_NewAlarm_alarm_duration_1_1
+   0007 F0                  538 	movx	@dptr,a
+   0008 A3                  539 	inc	dptr
+   0009 EA                  540 	mov	a,r2
+   000A F0                  541 	movx	@dptr,a
+                            542 ;	Timer.c:36: for (i = 0; i < 3; ++i){
+                            543 ;	genAssign
+   000B 7A 00               544 	mov	r2,#0x00
+   000D                     545 00103$:
+                            546 ;	genCmpLt
+                            547 ;	genCmp
+   000D BA 03 00            548 	cjne	r2,#0x03,00116$
+   0010                     549 00116$:
+                            550 ;	genIfxJump
+                            551 ;	Peephole 108.a	removed ljmp by inverse jump logic
+   0010 50 12               552 	jnc	00106$
+                            553 ;	Peephole 300	removed redundant label 00117$
+                            554 ;	Timer.c:37: if(!ActiveAlarms[i]){
+                            555 ;	genPlus
+                            556 ;	Peephole 236.g	used r2 instead of ar2
+   0012 EA                  557 	mov	a,r2
+   0013 24r06               558 	add	a,#_ActiveAlarms
+   0015 FB                  559 	mov	r3,a
+                            560 ;	Peephole 181	changed mov to clr
+   0016 E4                  561 	clr	a
+   0017 34s00               562 	addc	a,#(_ActiveAlarms >> 8)
+   0019 FC                  563 	mov	r4,a
+                            564 ;	genPointerGet
+                            565 ;	genFarPointerGet
+   001A 8B 82               566 	mov	dpl,r3
+   001C 8C 83               567 	mov	dph,r4
+   001E E0                  568 	movx	a,@dptr
+                            569 ;	genIfxJump
+                            570 ;	Peephole 108.c	removed ljmp by inverse jump logic
+   001F 60 03               571 	jz	00106$
+                            572 ;	Peephole 300	removed redundant label 00118$
+                            573 ;	Timer.c:36: for (i = 0; i < 3; ++i){
+                            574 ;	genPlus
+                            575 ;     genPlusIncr
+   0021 0A                  576 	inc	r2
+                            577 ;	Peephole 112.b	changed ljmp to sjmp
+   0022 80 E9               578 	sjmp	00103$
+   0024                     579 00106$:
+                            580 ;	Timer.c:41: if (i == 3){
+                            581 ;	genCmpEq
+                            582 ;	gencjneshort
+                            583 ;	Peephole 112.b	changed ljmp to sjmp
+                            584 ;	Peephole 198.b	optimized misc jump sequence
+   0024 BA 03 16            585 	cjne	r2,#0x03,00108$
+                            586 ;	Peephole 200.b	removed redundant sjmp
+                            587 ;	Peephole 300	removed redundant label 00119$
+                            588 ;	Peephole 300	removed redundant label 00120$
+                            589 ;	Timer.c:42: printf("\r\nAll alarms busy, cannot create new alarm");
+                            590 ;	genIpush
+   0027 74r00               591 	mov	a,#__str_0
+   0029 C0 E0               592 	push	acc
+   002B 74s00               593 	mov	a,#(__str_0 >> 8)
+   002D C0 E0               594 	push	acc
+   002F 74 80               595 	mov	a,#0x80
+   0031 C0 E0               596 	push	acc
+                            597 ;	genCall
+   0033 12s00r00            598 	lcall	_printf
+   0036 15 81               599 	dec	sp
+   0038 15 81               600 	dec	sp
+   003A 15 81               601 	dec	sp
+                            602 ;	Timer.c:43: return;
+                            603 ;	genRet
+                            604 ;	Peephole 112.b	changed ljmp to sjmp
+                            605 ;	Peephole 251.b	replaced sjmp to ret with ret
+   003C 22                  606 	ret
+   003D                     607 00108$:
+                            608 ;	Timer.c:45: ActiveAlarms[i] = 1;
+                            609 ;	genPlus
+                            610 ;	Peephole 236.g	used r2 instead of ar2
+   003D EA                  611 	mov	a,r2
+   003E 24r06               612 	add	a,#_ActiveAlarms
+   0040 F5 82               613 	mov	dpl,a
+                            614 ;	Peephole 181	changed mov to clr
+   0042 E4                  615 	clr	a
+   0043 34s00               616 	addc	a,#(_ActiveAlarms >> 8)
+   0045 F5 83               617 	mov	dph,a
+                            618 ;	genPointerSet
+                            619 ;     genFarPointerSet
+   0047 74 01               620 	mov	a,#0x01
+   0049 F0                  621 	movx	@dptr,a
+                            622 ;	Timer.c:46: AlarmCount[i] = alarm_duration;
+                            623 ;	genLeftShift
+                            624 ;	genLeftShiftLiteral
+                            625 ;	genlshOne
+   004A EA                  626 	mov	a,r2
+                            627 ;	Peephole 254	optimized left shift
+   004B 2A                  628 	add	a,r2
+                            629 ;	genPlus
+                            630 ;	Peephole 177.b	removed redundant mov
+                            631 ;	Peephole 215	removed some moves
+   004C 24r01               632 	add	a,#_AlarmCount
+   004E FB                  633 	mov	r3,a
+                            634 ;	Peephole 181	changed mov to clr
+   004F E4                  635 	clr	a
+   0050 34s00               636 	addc	a,#(_AlarmCount >> 8)
+   0052 FC                  637 	mov	r4,a
+                            638 ;	genAssign
+   0053 90s00r07            639 	mov	dptr,#_Clock_NewAlarm_alarm_duration_1_1
+   0056 E0                  640 	movx	a,@dptr
+   0057 FD                  641 	mov	r5,a
+   0058 A3                  642 	inc	dptr
+   0059 E0                  643 	movx	a,@dptr
+   005A FE                  644 	mov	r6,a
+                            645 ;	genPointerSet
+                            646 ;     genFarPointerSet
+   005B 8B 82               647 	mov	dpl,r3
+   005D 8C 83               648 	mov	dph,r4
+   005F ED                  649 	mov	a,r5
+   0060 F0                  650 	movx	@dptr,a
+   0061 A3                  651 	inc	dptr
+   0062 EE                  652 	mov	a,r6
+   0063 F0                  653 	movx	@dptr,a
+                            654 ;	Timer.c:47: printf("\r\nCreated a new alarm %d with duration %u\r\n", i, alarm_duration);
+                            655 ;	genCast
+   0064 7B 00               656 	mov	r3,#0x00
+                            657 ;	genIpush
+   0066 C0 05               658 	push	ar5
+   0068 C0 06               659 	push	ar6
+                            660 ;	genIpush
+   006A C0 02               661 	push	ar2
+   006C C0 03               662 	push	ar3
+                            663 ;	genIpush
+   006E 74r2B               664 	mov	a,#__str_1
+   0070 C0 E0               665 	push	acc
+   0072 74s00               666 	mov	a,#(__str_1 >> 8)
+   0074 C0 E0               667 	push	acc
+   0076 74 80               668 	mov	a,#0x80
+   0078 C0 E0               669 	push	acc
+                            670 ;	genCall
+   007A 12s00r00            671 	lcall	_printf
+   007D E5 81               672 	mov	a,sp
+   007F 24 F9               673 	add	a,#0xf9
+   0081 F5 81               674 	mov	sp,a
+                            675 ;	Peephole 300	removed redundant label 00109$
+   0083 22                  676 	ret
+                            677 ;------------------------------------------------------------
+                            678 ;Allocation info for local variables in function 'timer0'
+                            679 ;------------------------------------------------------------
+                            680 ;addr                      Allocated with name '_timer0_addr_1_1'
+                            681 ;i                         Allocated with name '_timer0_i_1_1'
+                            682 ;------------------------------------------------------------
+                            683 ;	Timer.c:52: void timer0(void) __interrupt(1){
+                            684 ;	-----------------------------------------
+                            685 ;	 function timer0
+                            686 ;	-----------------------------------------
+   0084                     687 _timer0:
+   0084 C0 E0               688 	push	acc
+   0086 C0 F0               689 	push	b
+   0088 C0 82               690 	push	dpl
+   008A C0 83               691 	push	dph
+   008C C0 02               692 	push	(0+2)
+   008E C0 03               693 	push	(0+3)
+   0090 C0 04               694 	push	(0+4)
+   0092 C0 05               695 	push	(0+5)
+   0094 C0 06               696 	push	(0+6)
+   0096 C0 07               697 	push	(0+7)
+   0098 C0 00               698 	push	(0+0)
+   009A C0 01               699 	push	(0+1)
+   009C C0 D0               700 	push	psw
+   009E 75 D0 00            701 	mov	psw,#0x00
+                            702 ;	Timer.c:55: bool updateAlarms = false;
+                            703 ;	genAssign
+   00A1 C2*01               704 	clr	_timer0_updateAlarms_1_1
+                            705 ;	Timer.c:58: if (ISR_Count < 2 ){
+                            706 ;	genAssign
+   00A3 90s00r00            707 	mov	dptr,#_ISR_Count
+   00A6 E0                  708 	movx	a,@dptr
+   00A7 FA                  709 	mov	r2,a
+                            710 ;	genCmpLt
+                            711 ;	genCmp
+   00A8 BA 02 00            712 	cjne	r2,#0x02,00160$
+   00AB                     713 00160$:
+                            714 ;	genIfxJump
+                            715 ;	Peephole 108.a	removed ljmp by inverse jump logic
+   00AB 50 0A               716 	jnc	00137$
+                            717 ;	Peephole 300	removed redundant label 00161$
+                            718 ;	Timer.c:59: ISR_Count++;
+                            719 ;	genPlus
+   00AD 90s00r00            720 	mov	dptr,#_ISR_Count
+                            721 ;     genPlusIncr
+   00B0 74 01               722 	mov	a,#0x01
+                            723 ;	Peephole 236.a	used r2 instead of ar2
+   00B2 2A                  724 	add	a,r2
+   00B3 F0                  725 	movx	@dptr,a
+   00B4 02s03rD1            726 	ljmp	00138$
+   00B7                     727 00137$:
+                            728 ;	Timer.c:61: P1_2 = !P1_2;
+                            729 ;	genNot
+   00B7 B2 92               730 	cpl	_P1_2
+                            731 ;	Timer.c:63: if(CG_Accessed){
+                            732 ;	genIfx
+                            733 ;	genIfxJump
+   00B9 20*00 03            734 	jb	_CG_Accessed,00162$
+   00BC 02s01r5A            735 	ljmp	00122$
+   00BF                     736 00162$:
+                            737 ;	Timer.c:64: TimeTenths++;
+                            738 ;	genAssign
+   00BF 90s00r01            739 	mov	dptr,#_TimeTenths
+   00C2 E0                  740 	movx	a,@dptr
+   00C3 FA                  741 	mov	r2,a
+                            742 ;	genPlus
+   00C4 90s00r01            743 	mov	dptr,#_TimeTenths
+                            744 ;     genPlusIncr
+   00C7 74 01               745 	mov	a,#0x01
+                            746 ;	Peephole 236.a	used r2 instead of ar2
+   00C9 2A                  747 	add	a,r2
+   00CA F0                  748 	movx	@dptr,a
+                            749 ;	Timer.c:65: if(TimeTenths == 10){
+                            750 ;	genAssign
+   00CB 90s00r01            751 	mov	dptr,#_TimeTenths
+   00CE E0                  752 	movx	a,@dptr
+   00CF FA                  753 	mov	r2,a
+                            754 ;	genCmpEq
+                            755 ;	gencjneshort
+   00D0 BA 0A 02            756 	cjne	r2,#0x0A,00163$
+   00D3 80 03               757 	sjmp	00164$
+   00D5                     758 00163$:
+   00D5 02s03r4B            759 	ljmp	00123$
+   00D8                     760 00164$:
+                            761 ;	Timer.c:66: TimeTenths = 0;
+                            762 ;	genAssign
+   00D8 90s00r01            763 	mov	dptr,#_TimeTenths
+                            764 ;	Peephole 181	changed mov to clr
+   00DB E4                  765 	clr	a
+   00DC F0                  766 	movx	@dptr,a
+                            767 ;	Timer.c:67: TimeSecsOnes++;
+                            768 ;	genAssign
+   00DD 90s00r02            769 	mov	dptr,#_TimeSecsOnes
+   00E0 E0                  770 	movx	a,@dptr
+   00E1 FA                  771 	mov	r2,a
+                            772 ;	genPlus
+   00E2 90s00r02            773 	mov	dptr,#_TimeSecsOnes
+                            774 ;     genPlusIncr
+   00E5 74 01               775 	mov	a,#0x01
+                            776 ;	Peephole 236.a	used r2 instead of ar2
+   00E7 2A                  777 	add	a,r2
+   00E8 F0                  778 	movx	@dptr,a
+                            779 ;	Timer.c:68: updateAlarms = true;
+                            780 ;	genAssign
+   00E9 D2*01               781 	setb	_timer0_updateAlarms_1_1
+                            782 ;	Timer.c:69: if(TimeSecsOnes == 10){
+                            783 ;	genAssign
+   00EB 90s00r02            784 	mov	dptr,#_TimeSecsOnes
+   00EE E0                  785 	movx	a,@dptr
+   00EF FA                  786 	mov	r2,a
+                            787 ;	genCmpEq
+                            788 ;	gencjneshort
+   00F0 BA 0A 02            789 	cjne	r2,#0x0A,00165$
+   00F3 80 03               790 	sjmp	00166$
+   00F5                     791 00165$:
+   00F5 02s03r4B            792 	ljmp	00123$
+   00F8                     793 00166$:
+                            794 ;	Timer.c:70: TimeSecsOnes = 0;
+                            795 ;	genAssign
+   00F8 90s00r02            796 	mov	dptr,#_TimeSecsOnes
+                            797 ;	Peephole 181	changed mov to clr
+   00FB E4                  798 	clr	a
+   00FC F0                  799 	movx	@dptr,a
+                            800 ;	Timer.c:71: TimeSecsTens++;
+                            801 ;	genAssign
+   00FD 90s00r03            802 	mov	dptr,#_TimeSecsTens
+   0100 E0                  803 	movx	a,@dptr
+   0101 FA                  804 	mov	r2,a
+                            805 ;	genPlus
+   0102 90s00r03            806 	mov	dptr,#_TimeSecsTens
+                            807 ;     genPlusIncr
+   0105 74 01               808 	mov	a,#0x01
+                            809 ;	Peephole 236.a	used r2 instead of ar2
+   0107 2A                  810 	add	a,r2
+   0108 F0                  811 	movx	@dptr,a
+                            812 ;	Timer.c:72: if(TimeSecsTens == 6){
+                            813 ;	genAssign
+   0109 90s00r03            814 	mov	dptr,#_TimeSecsTens
+   010C E0                  815 	movx	a,@dptr
+   010D FA                  816 	mov	r2,a
+                            817 ;	genCmpEq
+                            818 ;	gencjneshort
+   010E BA 06 02            819 	cjne	r2,#0x06,00167$
+   0111 80 03               820 	sjmp	00168$
+   0113                     821 00167$:
+   0113 02s03r4B            822 	ljmp	00123$
+   0116                     823 00168$:
+                            824 ;	Timer.c:73: TimeSecsTens = 0;
+                            825 ;	genAssign
+   0116 90s00r03            826 	mov	dptr,#_TimeSecsTens
+                            827 ;	Peephole 181	changed mov to clr
+   0119 E4                  828 	clr	a
+   011A F0                  829 	movx	@dptr,a
+                            830 ;	Timer.c:74: TimeMinsOnes++;
+                            831 ;	genAssign
+   011B 90s00r04            832 	mov	dptr,#_TimeMinsOnes
+   011E E0                  833 	movx	a,@dptr
+   011F FA                  834 	mov	r2,a
+                            835 ;	genPlus
+   0120 90s00r04            836 	mov	dptr,#_TimeMinsOnes
+                            837 ;     genPlusIncr
+   0123 74 01               838 	mov	a,#0x01
+                            839 ;	Peephole 236.a	used r2 instead of ar2
+   0125 2A                  840 	add	a,r2
+   0126 F0                  841 	movx	@dptr,a
+                            842 ;	Timer.c:75: if (TimeMinsOnes == 10){
+                            843 ;	genAssign
+   0127 90s00r04            844 	mov	dptr,#_TimeMinsOnes
+   012A E0                  845 	movx	a,@dptr
+   012B FA                  846 	mov	r2,a
+                            847 ;	genCmpEq
+                            848 ;	gencjneshort
+   012C BA 0A 02            849 	cjne	r2,#0x0A,00169$
+   012F 80 03               850 	sjmp	00170$
+   0131                     851 00169$:
+   0131 02s03r4B            852 	ljmp	00123$
+   0134                     853 00170$:
+                            854 ;	Timer.c:76: TimeMinsOnes = 0;
+                            855 ;	genAssign
+   0134 90s00r04            856 	mov	dptr,#_TimeMinsOnes
+                            857 ;	Peephole 181	changed mov to clr
+   0137 E4                  858 	clr	a
+   0138 F0                  859 	movx	@dptr,a
+                            860 ;	Timer.c:77: TimeMinsTens++;
+                            861 ;	genAssign
+   0139 90s00r05            862 	mov	dptr,#_TimeMinsTens
+   013C E0                  863 	movx	a,@dptr
+   013D FA                  864 	mov	r2,a
+                            865 ;	genPlus
+   013E 90s00r05            866 	mov	dptr,#_TimeMinsTens
+                            867 ;     genPlusIncr
+   0141 74 01               868 	mov	a,#0x01
+                            869 ;	Peephole 236.a	used r2 instead of ar2
+   0143 2A                  870 	add	a,r2
+   0144 F0                  871 	movx	@dptr,a
+                            872 ;	Timer.c:78: if (TimeMinsTens == 10){
+                            873 ;	genAssign
+   0145 90s00r05            874 	mov	dptr,#_TimeMinsTens
+   0148 E0                  875 	movx	a,@dptr
+   0149 FA                  876 	mov	r2,a
+                            877 ;	genCmpEq
+                            878 ;	gencjneshort
+   014A BA 0A 02            879 	cjne	r2,#0x0A,00171$
+   014D 80 03               880 	sjmp	00172$
+   014F                     881 00171$:
+   014F 02s03r4B            882 	ljmp	00123$
+   0152                     883 00172$:
+                            884 ;	Timer.c:79: TimeMinsTens = 0;
+                            885 ;	genAssign
+   0152 90s00r05            886 	mov	dptr,#_TimeMinsTens
+                            887 ;	Peephole 181	changed mov to clr
+   0155 E4                  888 	clr	a
+   0156 F0                  889 	movx	@dptr,a
+   0157 02s03r4B            890 	ljmp	00123$
+   015A                     891 00122$:
+                            892 ;	Timer.c:88: addr = LCD_ReadAddr();      //Save old address
+                            893 ;	genCall
+   015A 12s00r00            894 	lcall	_LCD_ReadAddr
+   015D AA 82               895 	mov	r2,dpl
+                            896 ;	Timer.c:90: TimeTenths++;
+                            897 ;	genAssign
+   015F 90s00r01            898 	mov	dptr,#_TimeTenths
+   0162 E0                  899 	movx	a,@dptr
+   0163 FB                  900 	mov	r3,a
+                            901 ;	genPlus
+   0164 90s00r01            902 	mov	dptr,#_TimeTenths
+                            903 ;     genPlusIncr
+   0167 74 01               904 	mov	a,#0x01
+                            905 ;	Peephole 236.a	used r3 instead of ar3
+   0169 2B                  906 	add	a,r3
+   016A F0                  907 	movx	@dptr,a
+                            908 ;	Timer.c:91: LCD_gotoxy(3, 15);
+                            909 ;	genAssign
+   016B 90s00r00            910 	mov	dptr,#_LCD_gotoxy_PARM_2
+   016E 74 0F               911 	mov	a,#0x0F
+   0170 F0                  912 	movx	@dptr,a
+                            913 ;	genCall
+   0171 75 82 03            914 	mov	dpl,#0x03
+   0174 C0 02               915 	push	ar2
+   0176 12s00r00            916 	lcall	_LCD_gotoxy
+   0179 D0 02               917 	pop	ar2
+                            918 ;	Timer.c:92: LCD_Putch(TimeTenths + 0x30);
+                            919 ;	genAssign
+   017B 90s00r01            920 	mov	dptr,#_TimeTenths
+   017E E0                  921 	movx	a,@dptr
+   017F FB                  922 	mov	r3,a
+                            923 ;	genPlus
+                            924 ;     genPlusIncr
+   0180 74 30               925 	mov	a,#0x30
+                            926 ;	Peephole 236.a	used r3 instead of ar3
+   0182 2B                  927 	add	a,r3
+                            928 ;	genCall
+   0183 FB                  929 	mov	r3,a
+                            930 ;	Peephole 244.c	loading dpl from a instead of r3
+   0184 F5 82               931 	mov	dpl,a
+   0186 C0 02               932 	push	ar2
+   0188 12s00r00            933 	lcall	_LCD_Putch
+   018B D0 02               934 	pop	ar2
+                            935 ;	Timer.c:94: if(TimeTenths == 10){
+                            936 ;	genAssign
+   018D 90s00r01            937 	mov	dptr,#_TimeTenths
+   0190 E0                  938 	movx	a,@dptr
+   0191 FB                  939 	mov	r3,a
+                            940 ;	genCmpEq
+                            941 ;	gencjneshort
+   0192 BB 0A 02            942 	cjne	r3,#0x0A,00173$
+   0195 80 03               943 	sjmp	00174$
+   0197                     944 00173$:
+   0197 02s03r46            945 	ljmp	00120$
+   019A                     946 00174$:
+                            947 ;	Timer.c:95: TimeTenths = 0;
+                            948 ;	genAssign
+   019A 90s00r01            949 	mov	dptr,#_TimeTenths
+                            950 ;	Peephole 181	changed mov to clr
+   019D E4                  951 	clr	a
+   019E F0                  952 	movx	@dptr,a
+                            953 ;	Timer.c:96: LCD_gotoxy(3, 15);
+                            954 ;	genAssign
+   019F 90s00r00            955 	mov	dptr,#_LCD_gotoxy_PARM_2
+   01A2 74 0F               956 	mov	a,#0x0F
+   01A4 F0                  957 	movx	@dptr,a
+                            958 ;	genCall
+   01A5 75 82 03            959 	mov	dpl,#0x03
+   01A8 C0 02               960 	push	ar2
+   01AA 12s00r00            961 	lcall	_LCD_gotoxy
+   01AD D0 02               962 	pop	ar2
+                            963 ;	Timer.c:97: LCD_Putch(TimeTenths + 0x30);
+                            964 ;	genAssign
+   01AF 90s00r01            965 	mov	dptr,#_TimeTenths
+   01B2 E0                  966 	movx	a,@dptr
+   01B3 FB                  967 	mov	r3,a
+                            968 ;	genPlus
+                            969 ;     genPlusIncr
+   01B4 74 30               970 	mov	a,#0x30
+                            971 ;	Peephole 236.a	used r3 instead of ar3
+   01B6 2B                  972 	add	a,r3
+                            973 ;	genCall
+   01B7 FB                  974 	mov	r3,a
+                            975 ;	Peephole 244.c	loading dpl from a instead of r3
+   01B8 F5 82               976 	mov	dpl,a
+   01BA C0 02               977 	push	ar2
+   01BC 12s00r00            978 	lcall	_LCD_Putch
+   01BF D0 02               979 	pop	ar2
+                            980 ;	Timer.c:99: TimeSecsOnes++;
+                            981 ;	genAssign
+   01C1 90s00r02            982 	mov	dptr,#_TimeSecsOnes
+   01C4 E0                  983 	movx	a,@dptr
+   01C5 FB                  984 	mov	r3,a
+                            985 ;	genPlus
+   01C6 90s00r02            986 	mov	dptr,#_TimeSecsOnes
+                            987 ;     genPlusIncr
+   01C9 74 01               988 	mov	a,#0x01
+                            989 ;	Peephole 236.a	used r3 instead of ar3
+   01CB 2B                  990 	add	a,r3
+   01CC F0                  991 	movx	@dptr,a
+                            992 ;	Timer.c:100: updateAlarms = true;
+                            993 ;	genAssign
+   01CD D2*01               994 	setb	_timer0_updateAlarms_1_1
+                            995 ;	Timer.c:101: LCD_gotoxy(3, 13);
+                            996 ;	genAssign
+   01CF 90s00r00            997 	mov	dptr,#_LCD_gotoxy_PARM_2
+   01D2 74 0D               998 	mov	a,#0x0D
+   01D4 F0                  999 	movx	@dptr,a
+                           1000 ;	genCall
+   01D5 75 82 03           1001 	mov	dpl,#0x03
+   01D8 C0 02              1002 	push	ar2
+   01DA 12s00r00           1003 	lcall	_LCD_gotoxy
+   01DD D0 02              1004 	pop	ar2
+                           1005 ;	Timer.c:102: LCD_Putch(TimeSecsOnes + 0x30);
+                           1006 ;	genAssign
+   01DF 90s00r02           1007 	mov	dptr,#_TimeSecsOnes
+   01E2 E0                 1008 	movx	a,@dptr
+   01E3 FB                 1009 	mov	r3,a
+                           1010 ;	genPlus
+                           1011 ;     genPlusIncr
+   01E4 74 30              1012 	mov	a,#0x30
+                           1013 ;	Peephole 236.a	used r3 instead of ar3
+   01E6 2B                 1014 	add	a,r3
+                           1015 ;	genCall
+   01E7 FB                 1016 	mov	r3,a
+                           1017 ;	Peephole 244.c	loading dpl from a instead of r3
+   01E8 F5 82              1018 	mov	dpl,a
+   01EA C0 02              1019 	push	ar2
+   01EC 12s00r00           1020 	lcall	_LCD_Putch
+   01EF D0 02              1021 	pop	ar2
+                           1022 ;	Timer.c:103: if(TimeSecsOnes == 10){
+                           1023 ;	genAssign
+   01F1 90s00r02           1024 	mov	dptr,#_TimeSecsOnes
+   01F4 E0                 1025 	movx	a,@dptr
+   01F5 FB                 1026 	mov	r3,a
+                           1027 ;	genCmpEq
+                           1028 ;	gencjneshort
+   01F6 BB 0A 02           1029 	cjne	r3,#0x0A,00175$
+   01F9 80 03              1030 	sjmp	00176$
+   01FB                    1031 00175$:
+   01FB 02s03r46           1032 	ljmp	00120$
+   01FE                    1033 00176$:
+                           1034 ;	Timer.c:104: TimeSecsOnes = 0;
+                           1035 ;	genAssign
+   01FE 90s00r02           1036 	mov	dptr,#_TimeSecsOnes
+                           1037 ;	Peephole 181	changed mov to clr
+   0201 E4                 1038 	clr	a
+   0202 F0                 1039 	movx	@dptr,a
+                           1040 ;	Timer.c:105: LCD_gotoxy(3, 13);
+                           1041 ;	genAssign
+   0203 90s00r00           1042 	mov	dptr,#_LCD_gotoxy_PARM_2
+   0206 74 0D              1043 	mov	a,#0x0D
+   0208 F0                 1044 	movx	@dptr,a
+                           1045 ;	genCall
+   0209 75 82 03           1046 	mov	dpl,#0x03
+   020C C0 02              1047 	push	ar2
+   020E 12s00r00           1048 	lcall	_LCD_gotoxy
+   0211 D0 02              1049 	pop	ar2
+                           1050 ;	Timer.c:106: LCD_Putch(TimeSecsOnes + 0x30);
+                           1051 ;	genAssign
+   0213 90s00r02           1052 	mov	dptr,#_TimeSecsOnes
+   0216 E0                 1053 	movx	a,@dptr
+   0217 FB                 1054 	mov	r3,a
+                           1055 ;	genPlus
+                           1056 ;     genPlusIncr
+   0218 74 30              1057 	mov	a,#0x30
+                           1058 ;	Peephole 236.a	used r3 instead of ar3
+   021A 2B                 1059 	add	a,r3
+                           1060 ;	genCall
+   021B FB                 1061 	mov	r3,a
+                           1062 ;	Peephole 244.c	loading dpl from a instead of r3
+   021C F5 82              1063 	mov	dpl,a
+   021E C0 02              1064 	push	ar2
+   0220 12s00r00           1065 	lcall	_LCD_Putch
+   0223 D0 02              1066 	pop	ar2
+                           1067 ;	Timer.c:108: TimeSecsTens++;
+                           1068 ;	genAssign
+   0225 90s00r03           1069 	mov	dptr,#_TimeSecsTens
+   0228 E0                 1070 	movx	a,@dptr
+   0229 FB                 1071 	mov	r3,a
+                           1072 ;	genPlus
+   022A 90s00r03           1073 	mov	dptr,#_TimeSecsTens
+                           1074 ;     genPlusIncr
+   022D 74 01              1075 	mov	a,#0x01
+                           1076 ;	Peephole 236.a	used r3 instead of ar3
+   022F 2B                 1077 	add	a,r3
+   0230 F0                 1078 	movx	@dptr,a
+                           1079 ;	Timer.c:109: LCD_gotoxy(3, 12);
+                           1080 ;	genAssign
+   0231 90s00r00           1081 	mov	dptr,#_LCD_gotoxy_PARM_2
+   0234 74 0C              1082 	mov	a,#0x0C
+   0236 F0                 1083 	movx	@dptr,a
+                           1084 ;	genCall
+   0237 75 82 03           1085 	mov	dpl,#0x03
+   023A C0 02              1086 	push	ar2
+   023C 12s00r00           1087 	lcall	_LCD_gotoxy
+   023F D0 02              1088 	pop	ar2
+                           1089 ;	Timer.c:110: LCD_Putch(TimeSecsTens + 0x30);
+                           1090 ;	genAssign
+   0241 90s00r03           1091 	mov	dptr,#_TimeSecsTens
+   0244 E0                 1092 	movx	a,@dptr
+   0245 FB                 1093 	mov	r3,a
+                           1094 ;	genPlus
+                           1095 ;     genPlusIncr
+   0246 74 30              1096 	mov	a,#0x30
+                           1097 ;	Peephole 236.a	used r3 instead of ar3
+   0248 2B                 1098 	add	a,r3
+                           1099 ;	genCall
+   0249 FB                 1100 	mov	r3,a
+                           1101 ;	Peephole 244.c	loading dpl from a instead of r3
+   024A F5 82              1102 	mov	dpl,a
+   024C C0 02              1103 	push	ar2
+   024E 12s00r00           1104 	lcall	_LCD_Putch
+   0251 D0 02              1105 	pop	ar2
+                           1106 ;	Timer.c:112: if(TimeSecsTens == 6){
+                           1107 ;	genAssign
+   0253 90s00r03           1108 	mov	dptr,#_TimeSecsTens
+   0256 E0                 1109 	movx	a,@dptr
+   0257 FB                 1110 	mov	r3,a
+                           1111 ;	genCmpEq
+                           1112 ;	gencjneshort
+   0258 BB 06 02           1113 	cjne	r3,#0x06,00177$
+   025B 80 03              1114 	sjmp	00178$
+   025D                    1115 00177$:
+   025D 02s03r46           1116 	ljmp	00120$
+   0260                    1117 00178$:
+                           1118 ;	Timer.c:113: TimeSecsTens = 0;
+                           1119 ;	genAssign
+   0260 90s00r03           1120 	mov	dptr,#_TimeSecsTens
+                           1121 ;	Peephole 181	changed mov to clr
+   0263 E4                 1122 	clr	a
+   0264 F0                 1123 	movx	@dptr,a
+                           1124 ;	Timer.c:114: LCD_gotoxy(3, 12);
+                           1125 ;	genAssign
+   0265 90s00r00           1126 	mov	dptr,#_LCD_gotoxy_PARM_2
+   0268 74 0C              1127 	mov	a,#0x0C
+   026A F0                 1128 	movx	@dptr,a
+                           1129 ;	genCall
+   026B 75 82 03           1130 	mov	dpl,#0x03
+   026E C0 02              1131 	push	ar2
+   0270 12s00r00           1132 	lcall	_LCD_gotoxy
+   0273 D0 02              1133 	pop	ar2
+                           1134 ;	Timer.c:115: LCD_Putch(TimeSecsTens + 0x30);
+                           1135 ;	genAssign
+   0275 90s00r03           1136 	mov	dptr,#_TimeSecsTens
+   0278 E0                 1137 	movx	a,@dptr
+   0279 FB                 1138 	mov	r3,a
+                           1139 ;	genPlus
+                           1140 ;     genPlusIncr
+   027A 74 30              1141 	mov	a,#0x30
+                           1142 ;	Peephole 236.a	used r3 instead of ar3
+   027C 2B                 1143 	add	a,r3
+                           1144 ;	genCall
+   027D FB                 1145 	mov	r3,a
+                           1146 ;	Peephole 244.c	loading dpl from a instead of r3
+   027E F5 82              1147 	mov	dpl,a
+   0280 C0 02              1148 	push	ar2
+   0282 12s00r00           1149 	lcall	_LCD_Putch
+   0285 D0 02              1150 	pop	ar2
+                           1151 ;	Timer.c:117: TimeMinsOnes++;
+                           1152 ;	genAssign
+   0287 90s00r04           1153 	mov	dptr,#_TimeMinsOnes
+   028A E0                 1154 	movx	a,@dptr
+   028B FB                 1155 	mov	r3,a
+                           1156 ;	genPlus
+   028C 90s00r04           1157 	mov	dptr,#_TimeMinsOnes
+                           1158 ;     genPlusIncr
+   028F 74 01              1159 	mov	a,#0x01
+                           1160 ;	Peephole 236.a	used r3 instead of ar3
+   0291 2B                 1161 	add	a,r3
+   0292 F0                 1162 	movx	@dptr,a
+                           1163 ;	Timer.c:118: LCD_gotoxy(3, 10);
+                           1164 ;	genAssign
+   0293 90s00r00           1165 	mov	dptr,#_LCD_gotoxy_PARM_2
+   0296 74 0A              1166 	mov	a,#0x0A
+   0298 F0                 1167 	movx	@dptr,a
+                           1168 ;	genCall
+   0299 75 82 03           1169 	mov	dpl,#0x03
+   029C C0 02              1170 	push	ar2
+   029E 12s00r00           1171 	lcall	_LCD_gotoxy
+   02A1 D0 02              1172 	pop	ar2
+                           1173 ;	Timer.c:119: LCD_Putch(TimeMinsOnes + 0x30);
+                           1174 ;	genAssign
+   02A3 90s00r04           1175 	mov	dptr,#_TimeMinsOnes
+   02A6 E0                 1176 	movx	a,@dptr
+   02A7 FB                 1177 	mov	r3,a
+                           1178 ;	genPlus
+                           1179 ;     genPlusIncr
+   02A8 74 30              1180 	mov	a,#0x30
+                           1181 ;	Peephole 236.a	used r3 instead of ar3
+   02AA 2B                 1182 	add	a,r3
+                           1183 ;	genCall
+   02AB FB                 1184 	mov	r3,a
+                           1185 ;	Peephole 244.c	loading dpl from a instead of r3
+   02AC F5 82              1186 	mov	dpl,a
+   02AE C0 02              1187 	push	ar2
+   02B0 12s00r00           1188 	lcall	_LCD_Putch
+   02B3 D0 02              1189 	pop	ar2
+                           1190 ;	Timer.c:120: if (TimeMinsOnes == 10){
+                           1191 ;	genAssign
+   02B5 90s00r04           1192 	mov	dptr,#_TimeMinsOnes
+   02B8 E0                 1193 	movx	a,@dptr
+   02B9 FB                 1194 	mov	r3,a
+                           1195 ;	genCmpEq
+                           1196 ;	gencjneshort
+   02BA BB 0A 02           1197 	cjne	r3,#0x0A,00179$
+   02BD 80 03              1198 	sjmp	00180$
+   02BF                    1199 00179$:
+   02BF 02s03r46           1200 	ljmp	00120$
+   02C2                    1201 00180$:
+                           1202 ;	Timer.c:121: TimeMinsOnes = 0;
+                           1203 ;	genAssign
+   02C2 90s00r04           1204 	mov	dptr,#_TimeMinsOnes
+                           1205 ;	Peephole 181	changed mov to clr
+   02C5 E4                 1206 	clr	a
+   02C6 F0                 1207 	movx	@dptr,a
+                           1208 ;	Timer.c:122: LCD_gotoxy(3, 10);
+                           1209 ;	genAssign
+   02C7 90s00r00           1210 	mov	dptr,#_LCD_gotoxy_PARM_2
+   02CA 74 0A              1211 	mov	a,#0x0A
+   02CC F0                 1212 	movx	@dptr,a
+                           1213 ;	genCall
+   02CD 75 82 03           1214 	mov	dpl,#0x03
+   02D0 C0 02              1215 	push	ar2
+   02D2 12s00r00           1216 	lcall	_LCD_gotoxy
+   02D5 D0 02              1217 	pop	ar2
+                           1218 ;	Timer.c:123: LCD_Putch(TimeMinsOnes + 0x30);
+                           1219 ;	genAssign
+   02D7 90s00r04           1220 	mov	dptr,#_TimeMinsOnes
+   02DA E0                 1221 	movx	a,@dptr
+   02DB FB                 1222 	mov	r3,a
+                           1223 ;	genPlus
+                           1224 ;     genPlusIncr
+   02DC 74 30              1225 	mov	a,#0x30
+                           1226 ;	Peephole 236.a	used r3 instead of ar3
+   02DE 2B                 1227 	add	a,r3
+                           1228 ;	genCall
+   02DF FB                 1229 	mov	r3,a
+                           1230 ;	Peephole 244.c	loading dpl from a instead of r3
+   02E0 F5 82              1231 	mov	dpl,a
+   02E2 C0 02              1232 	push	ar2
+   02E4 12s00r00           1233 	lcall	_LCD_Putch
+   02E7 D0 02              1234 	pop	ar2
+                           1235 ;	Timer.c:125: TimeMinsTens++;
+                           1236 ;	genAssign
+   02E9 90s00r05           1237 	mov	dptr,#_TimeMinsTens
+   02EC E0                 1238 	movx	a,@dptr
+   02ED FB                 1239 	mov	r3,a
+                           1240 ;	genPlus
+   02EE 90s00r05           1241 	mov	dptr,#_TimeMinsTens
+                           1242 ;     genPlusIncr
+   02F1 74 01              1243 	mov	a,#0x01
+                           1244 ;	Peephole 236.a	used r3 instead of ar3
+   02F3 2B                 1245 	add	a,r3
+   02F4 F0                 1246 	movx	@dptr,a
+                           1247 ;	Timer.c:126: LCD_gotoxy(3, 9);
+                           1248 ;	genAssign
+   02F5 90s00r00           1249 	mov	dptr,#_LCD_gotoxy_PARM_2
+   02F8 74 09              1250 	mov	a,#0x09
+   02FA F0                 1251 	movx	@dptr,a
+                           1252 ;	genCall
+   02FB 75 82 03           1253 	mov	dpl,#0x03
+   02FE C0 02              1254 	push	ar2
+   0300 12s00r00           1255 	lcall	_LCD_gotoxy
+   0303 D0 02              1256 	pop	ar2
+                           1257 ;	Timer.c:127: LCD_Putch(TimeMinsTens + 0x30);
+                           1258 ;	genAssign
+   0305 90s00r05           1259 	mov	dptr,#_TimeMinsTens
+   0308 E0                 1260 	movx	a,@dptr
+   0309 FB                 1261 	mov	r3,a
+                           1262 ;	genPlus
+                           1263 ;     genPlusIncr
+   030A 74 30              1264 	mov	a,#0x30
+                           1265 ;	Peephole 236.a	used r3 instead of ar3
+   030C 2B                 1266 	add	a,r3
+                           1267 ;	genCall
+   030D FB                 1268 	mov	r3,a
+                           1269 ;	Peephole 244.c	loading dpl from a instead of r3
+   030E F5 82              1270 	mov	dpl,a
+   0310 C0 02              1271 	push	ar2
+   0312 12s00r00           1272 	lcall	_LCD_Putch
+   0315 D0 02              1273 	pop	ar2
+                           1274 ;	Timer.c:128: if (TimeMinsTens == 10){
+                           1275 ;	genAssign
+   0317 90s00r05           1276 	mov	dptr,#_TimeMinsTens
+   031A E0                 1277 	movx	a,@dptr
+   031B FB                 1278 	mov	r3,a
+                           1279 ;	genCmpEq
+                           1280 ;	gencjneshort
+                           1281 ;	Peephole 112.b	changed ljmp to sjmp
+                           1282 ;	Peephole 198.b	optimized misc jump sequence
+   031C BB 0A 27           1283 	cjne	r3,#0x0A,00120$
+                           1284 ;	Peephole 200.b	removed redundant sjmp
+                           1285 ;	Peephole 300	removed redundant label 00181$
+                           1286 ;	Peephole 300	removed redundant label 00182$
+                           1287 ;	Timer.c:129: TimeMinsTens = 0;
+                           1288 ;	genAssign
+   031F 90s00r05           1289 	mov	dptr,#_TimeMinsTens
+                           1290 ;	Peephole 181	changed mov to clr
+   0322 E4                 1291 	clr	a
+   0323 F0                 1292 	movx	@dptr,a
+                           1293 ;	Timer.c:130: LCD_gotoxy(3, 9);
+                           1294 ;	genAssign
+   0324 90s00r00           1295 	mov	dptr,#_LCD_gotoxy_PARM_2
+   0327 74 09              1296 	mov	a,#0x09
+   0329 F0                 1297 	movx	@dptr,a
+                           1298 ;	genCall
+   032A 75 82 03           1299 	mov	dpl,#0x03
+   032D C0 02              1300 	push	ar2
+   032F 12s00r00           1301 	lcall	_LCD_gotoxy
+   0332 D0 02              1302 	pop	ar2
+                           1303 ;	Timer.c:131: LCD_Putch(TimeMinsTens + 0x30);
+                           1304 ;	genAssign
+   0334 90s00r05           1305 	mov	dptr,#_TimeMinsTens
+   0337 E0                 1306 	movx	a,@dptr
+   0338 FB                 1307 	mov	r3,a
+                           1308 ;	genPlus
+                           1309 ;     genPlusIncr
+   0339 74 30              1310 	mov	a,#0x30
+                           1311 ;	Peephole 236.a	used r3 instead of ar3
+   033B 2B                 1312 	add	a,r3
+                           1313 ;	genCall
+   033C FB                 1314 	mov	r3,a
+                           1315 ;	Peephole 244.c	loading dpl from a instead of r3
+   033D F5 82              1316 	mov	dpl,a
+   033F C0 02              1317 	push	ar2
+   0341 12s00r00           1318 	lcall	_LCD_Putch
+   0344 D0 02              1319 	pop	ar2
+   0346                    1320 00120$:
+                           1321 ;	Timer.c:137: LCD_gotoaddr(addr);
+                           1322 ;	genCall
+   0346 8A 82              1323 	mov	dpl,r2
+   0348 12s00r00           1324 	lcall	_LCD_gotoaddr
+   034B                    1325 00123$:
+                           1326 ;	Timer.c:139: ISR_Count = 0;
+                           1327 ;	genAssign
+   034B 90s00r00           1328 	mov	dptr,#_ISR_Count
+                           1329 ;	Peephole 181	changed mov to clr
+   034E E4                 1330 	clr	a
+   034F F0                 1331 	movx	@dptr,a
+                           1332 ;	Timer.c:141: if (updateAlarms){
+                           1333 ;	genIfx
+                           1334 ;	genIfxJump
+   0350 20*01 03           1335 	jb	_timer0_updateAlarms_1_1,00183$
+   0353 02s03rD1           1336 	ljmp	00138$
+   0356                    1337 00183$:
+                           1338 ;	Timer.c:142: for (i = 0; i < 3; ++i){
+                           1339 ;	genAssign
+   0356 7A 00              1340 	mov	r2,#0x00
+   0358                    1341 00130$:
+                           1342 ;	genCmpLt
+                           1343 ;	genCmp
+   0358 BA 03 00           1344 	cjne	r2,#0x03,00184$
+   035B                    1345 00184$:
+                           1346 ;	genIfxJump
+   035B 40 03              1347 	jc	00185$
+   035D 02s03rD1           1348 	ljmp	00138$
+   0360                    1349 00185$:
+                           1350 ;	Timer.c:143: if(ActiveAlarms[i]){
+                           1351 ;	genPlus
+                           1352 ;	Peephole 236.g	used r2 instead of ar2
+   0360 EA                 1353 	mov	a,r2
+   0361 24r06              1354 	add	a,#_ActiveAlarms
+   0363 FB                 1355 	mov	r3,a
+                           1356 ;	Peephole 181	changed mov to clr
+   0364 E4                 1357 	clr	a
+   0365 34s00              1358 	addc	a,#(_ActiveAlarms >> 8)
+   0367 FC                 1359 	mov	r4,a
+                           1360 ;	genPointerGet
+                           1361 ;	genFarPointerGet
+   0368 8B 82              1362 	mov	dpl,r3
+   036A 8C 83              1363 	mov	dph,r4
+   036C E0                 1364 	movx	a,@dptr
+                           1365 ;	genIfxJump
+                           1366 ;	Peephole 108.c	removed ljmp by inverse jump logic
+   036D 60 5E              1367 	jz	00132$
+                           1368 ;	Peephole 300	removed redundant label 00186$
+                           1369 ;	Timer.c:144: if(ExpiredAlarms[i]){
+                           1370 ;	genPlus
+                           1371 ;	Peephole 236.g	used r2 instead of ar2
+   036F EA                 1372 	mov	a,r2
+   0370 24r00              1373 	add	a,#_ExpiredAlarms
+   0372 FB                 1374 	mov	r3,a
+                           1375 ;	Peephole 181	changed mov to clr
+   0373 E4                 1376 	clr	a
+   0374 34s00              1377 	addc	a,#(_ExpiredAlarms >> 8)
+   0376 FC                 1378 	mov	r4,a
+                           1379 ;	genPointerGet
+                           1380 ;	genFarPointerGet
+   0377 8B 82              1381 	mov	dpl,r3
+   0379 8C 83              1382 	mov	dph,r4
+   037B E0                 1383 	movx	a,@dptr
+                           1384 ;	genIfxJump
+                           1385 ;	Peephole 108.b	removed ljmp by inverse jump logic
+   037C 70 4F              1386 	jnz	00132$
+                           1387 ;	Peephole 300	removed redundant label 00187$
+                           1388 ;	Timer.c:147: AlarmCount[i]--;
+                           1389 ;	genLeftShift
+                           1390 ;	genLeftShiftLiteral
+                           1391 ;	genlshOne
+   037E EA                 1392 	mov	a,r2
+                           1393 ;	Peephole 254	optimized left shift
+   037F 2A                 1394 	add	a,r2
+                           1395 ;	genPlus
+                           1396 ;	Peephole 177.b	removed redundant mov
+                           1397 ;	Peephole 215	removed some moves
+   0380 24r01              1398 	add	a,#_AlarmCount
+   0382 FB                 1399 	mov	r3,a
+                           1400 ;	Peephole 181	changed mov to clr
+   0383 E4                 1401 	clr	a
+   0384 34s00              1402 	addc	a,#(_AlarmCount >> 8)
+   0386 FC                 1403 	mov	r4,a
+                           1404 ;	genPointerGet
+                           1405 ;	genFarPointerGet
+   0387 8B 82              1406 	mov	dpl,r3
+   0389 8C 83              1407 	mov	dph,r4
+   038B E0                 1408 	movx	a,@dptr
+   038C FD                 1409 	mov	r5,a
+   038D A3                 1410 	inc	dptr
+   038E E0                 1411 	movx	a,@dptr
+   038F FE                 1412 	mov	r6,a
+                           1413 ;	genMinus
+                           1414 ;	genMinusDec
+   0390 1D                 1415 	dec	r5
+   0391 BD FF 01           1416 	cjne	r5,#0xff,00188$
+   0394 1E                 1417 	dec	r6
+   0395                    1418 00188$:
+                           1419 ;	genPointerSet
+                           1420 ;     genFarPointerSet
+   0395 8B 82              1421 	mov	dpl,r3
+   0397 8C 83              1422 	mov	dph,r4
+   0399 ED                 1423 	mov	a,r5
+   039A F0                 1424 	movx	@dptr,a
+   039B A3                 1425 	inc	dptr
+   039C EE                 1426 	mov	a,r6
+   039D F0                 1427 	movx	@dptr,a
+                           1428 ;	Timer.c:148: if(AlarmCount[i] == 0){
+                           1429 ;	genIfx
+   039E ED                 1430 	mov	a,r5
+   039F 4E                 1431 	orl	a,r6
+                           1432 ;	genIfxJump
+                           1433 ;	Peephole 108.b	removed ljmp by inverse jump logic
+   03A0 70 2B              1434 	jnz	00132$
+                           1435 ;	Peephole 300	removed redundant label 00189$
+                           1436 ;	Timer.c:150: LCD_gotoxy(0,0);
+                           1437 ;	genAssign
+   03A2 90s00r00           1438 	mov	dptr,#_LCD_gotoxy_PARM_2
+                           1439 ;	Peephole 181	changed mov to clr
+   03A5 E4                 1440 	clr	a
+   03A6 F0                 1441 	movx	@dptr,a
+                           1442 ;	genCall
+   03A7 75 82 00           1443 	mov	dpl,#0x00
+   03AA C0 02              1444 	push	ar2
+   03AC 12s00r00           1445 	lcall	_LCD_gotoxy
+   03AF D0 02              1446 	pop	ar2
+                           1447 ;	Timer.c:151: LCD_Putstr("Disable Alarm!");
+                           1448 ;	genCall
+                           1449 ;	Peephole 182.a	used 16 bit load of DPTR
+   03B1 90s00r57           1450 	mov	dptr,#__str_2
+   03B4 75 F0 80           1451 	mov	b,#0x80
+   03B7 C0 02              1452 	push	ar2
+   03B9 12s00r00           1453 	lcall	_LCD_Putstr
+   03BC D0 02              1454 	pop	ar2
+                           1455 ;	Timer.c:152: ExpiredAlarms[i] = 1;
+                           1456 ;	genPlus
+                           1457 ;	Peephole 236.g	used r2 instead of ar2
+   03BE EA                 1458 	mov	a,r2
+   03BF 24r00              1459 	add	a,#_ExpiredAlarms
+   03C1 F5 82              1460 	mov	dpl,a
+                           1461 ;	Peephole 181	changed mov to clr
+   03C3 E4                 1462 	clr	a
+   03C4 34s00              1463 	addc	a,#(_ExpiredAlarms >> 8)
+   03C6 F5 83              1464 	mov	dph,a
+                           1465 ;	genPointerSet
+                           1466 ;     genFarPointerSet
+   03C8 74 01              1467 	mov	a,#0x01
+   03CA F0                 1468 	movx	@dptr,a
+                           1469 ;	Timer.c:153: DisableFlag = true;
+                           1470 ;	genAssign
+   03CB D2*00              1471 	setb	_DisableFlag
+   03CD                    1472 00132$:
+                           1473 ;	Timer.c:142: for (i = 0; i < 3; ++i){
+                           1474 ;	genPlus
+                           1475 ;     genPlusIncr
+   03CD 0A                 1476 	inc	r2
+   03CE 02s03r58           1477 	ljmp	00130$
+                           1478 ;	Timer.c:157: updateAlarms = false;
+   03D1                    1479 00138$:
+                           1480 ;	Timer.c:160: TH0 = Timer0_High_Calibrated;
+                           1481 ;	genAssign
+   03D1 75 8C 87           1482 	mov	_TH0,#0x87
+                           1483 ;	Timer.c:161: TL0 = Timer0_Low_Calibrated;
+                           1484 ;	genAssign
+   03D4 75 8A FF           1485 	mov	_TL0,#0xFF
+                           1486 ;	Timer.c:162: TCON |= 0x10;    //Start timer 0
+                           1487 ;	genOr
+   03D7 43 88 10           1488 	orl	_TCON,#0x10
+                           1489 ;	Peephole 300	removed redundant label 00139$
+   03DA D0 D0              1490 	pop	psw
+   03DC D0 01              1491 	pop	(0+1)
+   03DE D0 00              1492 	pop	(0+0)
+   03E0 D0 07              1493 	pop	(0+7)
+   03E2 D0 06              1494 	pop	(0+6)
+   03E4 D0 05              1495 	pop	(0+5)
+   03E6 D0 04              1496 	pop	(0+4)
+   03E8 D0 03              1497 	pop	(0+3)
+   03EA D0 02              1498 	pop	(0+2)
+   03EC D0 83              1499 	pop	dph
+   03EE D0 82              1500 	pop	dpl
+   03F0 D0 F0              1501 	pop	b
+   03F2 D0 E0              1502 	pop	acc
+   03F4 32                 1503 	reti
+                           1504 ;------------------------------------------------------------
+                           1505 ;Allocation info for local variables in function 'TimerRedraw'
+                           1506 ;------------------------------------------------------------
+                           1507 ;------------------------------------------------------------
+                           1508 ;	Timer.c:167: void TimerRedraw(void){
+                           1509 ;	-----------------------------------------
+                           1510 ;	 function TimerRedraw
+                           1511 ;	-----------------------------------------
+   03F5                    1512 _TimerRedraw:
+                           1513 ;	Timer.c:169: EA = 0; //Disable interrupts temporarily
+                           1514 ;	genAssign
+   03F5 C2 AF              1515 	clr	_EA
+                           1516 ;	Timer.c:170: LCD_gotoxy(3,9);
+                           1517 ;	genAssign
+   03F7 90s00r00           1518 	mov	dptr,#_LCD_gotoxy_PARM_2
+   03FA 74 09              1519 	mov	a,#0x09
+   03FC F0                 1520 	movx	@dptr,a
+                           1521 ;	genCall
+   03FD 75 82 03           1522 	mov	dpl,#0x03
+   0400 12s00r00           1523 	lcall	_LCD_gotoxy
+                           1524 ;	Timer.c:171: LCD_Putch(TimeMinsTens + 0x30);
+                           1525 ;	genAssign
+   0403 90s00r05           1526 	mov	dptr,#_TimeMinsTens
+   0406 E0                 1527 	movx	a,@dptr
+   0407 FA                 1528 	mov	r2,a
+                           1529 ;	genPlus
+                           1530 ;     genPlusIncr
+   0408 74 30              1531 	mov	a,#0x30
+                           1532 ;	Peephole 236.a	used r2 instead of ar2
+   040A 2A                 1533 	add	a,r2
+                           1534 ;	genCall
+   040B FA                 1535 	mov	r2,a
+                           1536 ;	Peephole 244.c	loading dpl from a instead of r2
+   040C F5 82              1537 	mov	dpl,a
+   040E 12s00r00           1538 	lcall	_LCD_Putch
+                           1539 ;	Timer.c:172: LCD_Putch(TimeMinsOnes + 0x30);
+                           1540 ;	genAssign
+   0411 90s00r04           1541 	mov	dptr,#_TimeMinsOnes
+   0414 E0                 1542 	movx	a,@dptr
+   0415 FA                 1543 	mov	r2,a
+                           1544 ;	genPlus
+                           1545 ;     genPlusIncr
+   0416 74 30              1546 	mov	a,#0x30
+                           1547 ;	Peephole 236.a	used r2 instead of ar2
+   0418 2A                 1548 	add	a,r2
+                           1549 ;	genCall
+   0419 FA                 1550 	mov	r2,a
+                           1551 ;	Peephole 244.c	loading dpl from a instead of r2
+   041A F5 82              1552 	mov	dpl,a
+   041C 12s00r00           1553 	lcall	_LCD_Putch
+                           1554 ;	Timer.c:173: LCD_Putch(':');
+                           1555 ;	genCall
+   041F 75 82 3A           1556 	mov	dpl,#0x3A
+   0422 12s00r00           1557 	lcall	_LCD_Putch
+                           1558 ;	Timer.c:174: LCD_Putch(TimeSecsTens + 0x30);
+                           1559 ;	genAssign
+   0425 90s00r03           1560 	mov	dptr,#_TimeSecsTens
+   0428 E0                 1561 	movx	a,@dptr
+   0429 FA                 1562 	mov	r2,a
+                           1563 ;	genPlus
+                           1564 ;     genPlusIncr
+   042A 74 30              1565 	mov	a,#0x30
+                           1566 ;	Peephole 236.a	used r2 instead of ar2
+   042C 2A                 1567 	add	a,r2
+                           1568 ;	genCall
+   042D FA                 1569 	mov	r2,a
+                           1570 ;	Peephole 244.c	loading dpl from a instead of r2
+   042E F5 82              1571 	mov	dpl,a
+   0430 12s00r00           1572 	lcall	_LCD_Putch
+                           1573 ;	Timer.c:175: LCD_Putch(TimeSecsOnes + 0x30);
+                           1574 ;	genAssign
+   0433 90s00r02           1575 	mov	dptr,#_TimeSecsOnes
+   0436 E0                 1576 	movx	a,@dptr
+   0437 FA                 1577 	mov	r2,a
+                           1578 ;	genPlus
+                           1579 ;     genPlusIncr
+   0438 74 30              1580 	mov	a,#0x30
+                           1581 ;	Peephole 236.a	used r2 instead of ar2
+   043A 2A                 1582 	add	a,r2
+                           1583 ;	genCall
+   043B FA                 1584 	mov	r2,a
+                           1585 ;	Peephole 244.c	loading dpl from a instead of r2
+   043C F5 82              1586 	mov	dpl,a
+   043E 12s00r00           1587 	lcall	_LCD_Putch
+                           1588 ;	Timer.c:176: LCD_Putch('.');
+                           1589 ;	genCall
+   0441 75 82 2E           1590 	mov	dpl,#0x2E
+   0444 12s00r00           1591 	lcall	_LCD_Putch
+                           1592 ;	Timer.c:177: LCD_Putch(TimeTenths + 0x30);
+                           1593 ;	genAssign
+   0447 90s00r01           1594 	mov	dptr,#_TimeTenths
+   044A E0                 1595 	movx	a,@dptr
+   044B FA                 1596 	mov	r2,a
+                           1597 ;	genPlus
+                           1598 ;     genPlusIncr
+   044C 74 30              1599 	mov	a,#0x30
+                           1600 ;	Peephole 236.a	used r2 instead of ar2
+   044E 2A                 1601 	add	a,r2
+                           1602 ;	genCall
+   044F FA                 1603 	mov	r2,a
+                           1604 ;	Peephole 244.c	loading dpl from a instead of r2
+   0450 F5 82              1605 	mov	dpl,a
+   0452 12s00r00           1606 	lcall	_LCD_Putch
+                           1607 ;	Timer.c:178: EA = 1;
+                           1608 ;	genAssign
+   0455 D2 AF              1609 	setb	_EA
+                           1610 ;	Peephole 300	removed redundant label 00101$
+   0457 22                 1611 	ret
+                           1612 ;------------------------------------------------------------
+                           1613 ;Allocation info for local variables in function 'Clock_Stop'
+                           1614 ;------------------------------------------------------------
+                           1615 ;------------------------------------------------------------
+                           1616 ;	Timer.c:183: void Clock_Stop(void){
+                           1617 ;	-----------------------------------------
+                           1618 ;	 function Clock_Stop
+                           1619 ;	-----------------------------------------
+   0458                    1620 _Clock_Stop:
+                           1621 ;	Timer.c:184: IE &= ~0x02;    //Clear Timer0 interrupt bit
+                           1622 ;	genAnd
+   0458 53 A8 FD           1623 	anl	_IE,#0xFD
+                           1624 ;	Peephole 300	removed redundant label 00101$
+   045B 22                 1625 	ret
+                           1626 ;------------------------------------------------------------
+                           1627 ;Allocation info for local variables in function 'Clock_Start'
+                           1628 ;------------------------------------------------------------
+                           1629 ;------------------------------------------------------------
+                           1630 ;	Timer.c:188: void Clock_Start(void){
+                           1631 ;	-----------------------------------------
+                           1632 ;	 function Clock_Start
+                           1633 ;	-----------------------------------------
+   045C                    1634 _Clock_Start:
+                           1635 ;	Timer.c:189: IE |= 0x82;      //Enable intterupts for timer 0
+                           1636 ;	genOr
+   045C 43 A8 82           1637 	orl	_IE,#0x82
+                           1638 ;	Peephole 300	removed redundant label 00101$
+   045F 22                 1639 	ret
+                           1640 ;------------------------------------------------------------
+                           1641 ;Allocation info for local variables in function 'Clock_Reset'
+                           1642 ;------------------------------------------------------------
+                           1643 ;------------------------------------------------------------
+                           1644 ;	Timer.c:193: void Clock_Reset(void){
+                           1645 ;	-----------------------------------------
+                           1646 ;	 function Clock_Reset
+                           1647 ;	-----------------------------------------
+   0460                    1648 _Clock_Reset:
+                           1649 ;	Timer.c:194: TimeTenths = 0;
+                           1650 ;	genAssign
+   0460 90s00r01           1651 	mov	dptr,#_TimeTenths
+                           1652 ;	Peephole 181	changed mov to clr
+                           1653 ;	Timer.c:195: TimeSecsOnes = 0;
+                           1654 ;	genAssign
+                           1655 ;	Peephole 181	changed mov to clr
+                           1656 ;	Peephole 219.a	removed redundant clear
+                           1657 ;	Timer.c:196: TimeSecsTens = 0;
+                           1658 ;	genAssign
+                           1659 ;	Peephole 181	changed mov to clr
+                           1660 ;	Timer.c:197: TimeMinsOnes = 0;
+                           1661 ;	genAssign
+                           1662 ;	Peephole 181	changed mov to clr
+                           1663 ;	Peephole 219.a	removed redundant clear
+   0463 E4                 1664 	clr	a
+   0464 F0                 1665 	movx	@dptr,a
+   0465 90s00r02           1666 	mov	dptr,#_TimeSecsOnes
+   0468 F0                 1667 	movx	@dptr,a
+   0469 90s00r03           1668 	mov	dptr,#_TimeSecsTens
+                           1669 ;	Peephole 219.b	removed redundant clear
+   046C F0                 1670 	movx	@dptr,a
+   046D 90s00r04           1671 	mov	dptr,#_TimeMinsOnes
+   0470 F0                 1672 	movx	@dptr,a
+                           1673 ;	Timer.c:198: TimeMinsTens = 0;
+                           1674 ;	genAssign
+   0471 90s00r05           1675 	mov	dptr,#_TimeMinsTens
+                           1676 ;	Peephole 181	changed mov to clr
+   0474 E4                 1677 	clr	a
+   0475 F0                 1678 	movx	@dptr,a
+                           1679 ;	Timer.c:199: TimerRedraw();
+                           1680 ;	genCall
+                           1681 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   0476 02s03rF5           1682 	ljmp	_TimerRedraw
+                           1683 ;
+                           1684 ;------------------------------------------------------------
+                           1685 ;Allocation info for local variables in function 'Timer0_Init'
+                           1686 ;------------------------------------------------------------
+                           1687 ;------------------------------------------------------------
+                           1688 ;	Timer.c:208: void Timer0_Init(void){
+                           1689 ;	-----------------------------------------
+                           1690 ;	 function Timer0_Init
+                           1691 ;	-----------------------------------------
+   0479                    1692 _Timer0_Init:
+                           1693 ;	Timer.c:209: TMOD |= 0x01;    //16-bit mode
+                           1694 ;	genOr
+   0479 43 89 01           1695 	orl	_TMOD,#0x01
+                           1696 ;	Timer.c:210: TH0 = Timer0_High_Calibrated;
+                           1697 ;	genAssign
+   047C 75 8C 87           1698 	mov	_TH0,#0x87
+                           1699 ;	Timer.c:211: TL0 = Timer0_Low_Calibrated;
+                           1700 ;	genAssign
+   047F 75 8A FF           1701 	mov	_TL0,#0xFF
+                           1702 ;	Timer.c:213: IE |= 0x82;      //Enable intterupts for timer 0
+                           1703 ;	genOr
+   0482 43 A8 82           1704 	orl	_IE,#0x82
+                           1705 ;	Timer.c:214: P1_2 =  0;
+                           1706 ;	genAssign
+   0485 C2 92              1707 	clr	_P1_2
+                           1708 ;	Timer.c:216: ISR_Count = 0;
+                           1709 ;	genAssign
+   0487 90s00r00           1710 	mov	dptr,#_ISR_Count
+                           1711 ;	Peephole 181	changed mov to clr
+   048A E4                 1712 	clr	a
+   048B F0                 1713 	movx	@dptr,a
+                           1714 ;	Timer.c:218: Clock_Reset();
+                           1715 ;	genCall
+   048C 12s04r60           1716 	lcall	_Clock_Reset
+                           1717 ;	Timer.c:220: TCON |= 0x10;    //Start timer 0
+                           1718 ;	genOr
+   048F 43 88 10           1719 	orl	_TCON,#0x10
+                           1720 ;	Peephole 300	removed redundant label 00101$
+   0492 22                 1721 	ret
+                           1722 	.area CSEG    (CODE)
+                           1723 	.area CONST   (CODE)
+   0000                    1724 __str_0:
+   0000 0D                 1725 	.db 0x0D
+   0001 0A                 1726 	.db 0x0A
+   0002 41 6C 6C 20 61 6C  1727 	.ascii "All alarms busy, cannot create new alarm"
+        61 72 6D 73 20 62
+        75 73 79 2C 20 63
+        61 6E 6E 6F 74 20
+        63 72 65 61 74 65
+        20 6E 65 77 20 61
+        6C 61 72 6D
+   002A 00                 1728 	.db 0x00
+   002B                    1729 __str_1:
+   002B 0D                 1730 	.db 0x0D
+   002C 0A                 1731 	.db 0x0A
+   002D 43 72 65 61 74 65  1732 	.ascii "Created a new alarm %d with duration %u"
+        64 20 61 20 6E 65
+        77 20 61 6C 61 72
+        6D 20 25 64 20 77
+        69 74 68 20 64 75
+        72 61 74 69 6F 6E
+        20 25 75
+   0054 0D                 1733 	.db 0x0D
+   0055 0A                 1734 	.db 0x0A
+   0056 00                 1735 	.db 0x00
+   0057                    1736 __str_2:
+   0057 44 69 73 61 62 6C  1737 	.ascii "Disable Alarm!"
+        65 20 41 6C 61 72
+        6D 21
+   0065 00                 1738 	.db 0x00
+                           1739 	.area XINIT   (CODE)
+   0000                    1740 __xinit__ISR_Count:
+   0000 00                 1741 	.db #0x00
+   0001                    1742 __xinit__TimeTenths:
+   0001 00                 1743 	.db #0x00
+   0002                    1744 __xinit__TimeSecsOnes:
+   0002 00                 1745 	.db #0x00
+   0003                    1746 __xinit__TimeSecsTens:
+   0003 00                 1747 	.db #0x00
+   0004                    1748 __xinit__TimeMinsOnes:
+   0004 00                 1749 	.db #0x00
+   0005                    1750 __xinit__TimeMinsTens:
+   0005 00                 1751 	.db #0x00
+   0006                    1752 __xinit__ActiveAlarms:
+   0006 00                 1753 	.db #0x00
+   0007 00                 1754 	.db #0x00
+   0008 00                 1755 	.db #0x00

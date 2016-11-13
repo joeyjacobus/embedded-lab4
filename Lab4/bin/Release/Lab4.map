@@ -50,8 +50,6 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      0022    s_SSEG
      002A    l_GSINIT4
      0032    s_GSINIT4
-     0059    l_XSEG
-     0059    s_XISEG
      005C    s_GSFINAL
      005C    s_GSINIT
      005C    s_GSINIT5
@@ -184,6 +182,8 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      00C4    _SPSTA
      00C5    _P4_5
      00C5    _SPDAT
+     00C5    l_XSEG
+     00C5    s_XISEG
      00C6    _P4_6
      00C7    _P4_7
      00C8    _CP_RL2
@@ -260,10 +260,10 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      00FD    _CCAP3H
      00FE    _CCAP4H
      0100    l_IRAM
-     037E    l_CONST
-     1161    l_CSEG
-     11C0    s_CONST
-     153E    s_XINIT
+     037A    l_CONST
+     13CD    l_CSEG
+     142C    s_CONST
+     17A6    s_XINIT
 
 Hexadecimal
 
@@ -361,24 +361,24 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XSEG                               0000   0059 =     89. bytes (REL,CON,XDATA)
+XSEG                               0000   00C5 =    197. bytes (REL,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
   0D:0003    _LCD_gotoxy_PARM_2
-  0D:001E    _getstring_PARM_2
-  0D:0028    __gptrput_PARM_2
-  0D:0029    __mulint_PARM_2
-  0D:002B    _vprintf_PARM_2
-  0D:003F    __print_format_PARM_2
-  0D:0042    __print_format_PARM_3
-  0D:0045    __print_format_PARM_4
+  0D:0089    _getstring_PARM_2
+  0D:0093    __gptrput_PARM_2
+  0D:0094    __mulint_PARM_2
+  0D:0098    _vprintf_PARM_2
+  0D:00AC    __print_format_PARM_2
+  0D:00AF    __print_format_PARM_3
+  0D:00B2    __print_format_PARM_4
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XISEG                              0059   0000 =      0. bytes (REL,CON,XDATA)
+XISEG                              00C5   0000 =      0. bytes (REL,CON,XDATA)
 
 Hexadecimal
 
@@ -451,7 +451,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               005F   1161 =   4449. bytes (REL,CON,CODE)
+CSEG                               005F   13CD =   5069. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
@@ -468,40 +468,42 @@ CSEG                               005F   1161 =   4449. bytes (REL,CON,CODE)
   0C:0229    __sdcc_program_startup
   0C:022E    __sdcc_external_startup
   0C:0235    _ShowMenu
-  0C:02F3    _handleInput
-  0C:04E1    _main
-  0C:050B    _putchar
-  0C:051D    _getchar
-  0C:0527    _Serial_GetInteger
-  0C:0645    _getstring
-  0C:0702    _Serial_Init
-  0C:0713    _isdigit
-  0C:0730    _atoi
-  0C:0863    __gptrput
-  0C:087C    __mulint
-  0C:08A9    _vprintf
-  0C:08E8    _printf
-  0C:0A01    __print_format
-  0C:1134    _strlen
-  0C:1187    __gptrget
-  0C:11A3    _islower
+  0C:0308    _handleInput
+  0C:0510    _main
+  0C:053A    _putchar
+  0C:054C    _getchar
+  0C:0556    _Serial_GetInteger
+  0C:067B    _Serial_GetHex
+  0C:0894    _getstring
+  0C:0951    _Serial_Init
+  0C:0962    _isdigit
+  0C:097F    _atoi
+  0C:0AB2    __gptrput
+  0C:0ACB    __mulint
+  0C:0AEB    _islower
+  0C:0B08    _isupper
+  0C:0B32    _vprintf
+  0C:0B71    _printf
+  0C:0C8A    __print_format
+  0C:13BD    _strlen
+  0C:1410    __gptrget
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CONST                              11C0   037E =    894. bytes (REL,CON,CODE)
+CONST                              142C   037A =    890. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:11C0    _LCD_Addr
-  0C:11C2    _AddrMap
+  0C:142C    _LCD_Addr
+  0C:142E    _AddrMap
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XINIT                              153E   0000 =      0. bytes (REL,CON,CODE)
+XINIT                              17A6   0000 =      0. bytes (REL,CON,CODE)
 ASxxxx Linker V01.70 + NoICE + SDCC Feb 1999,  page 1.
 
 Files Linked      [ module(s) ]
@@ -519,13 +521,14 @@ C:\Program Files (x86)\SDCC\bin\..\lib\large/mcs51.lib    [     crtxinit.rel ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [         _gptrput ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/libint.lib    [          _mulint ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/mcs51.lib    [    crtxclear.rel ]
+C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [         _islower ]
+C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [         _isupper ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [          vprintf ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [     printf_large ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/mcs51.lib    [   crtpagesfr.rel ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [          _strlen ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/mcs51.lib    [     crtstart.rel ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [         _gptrget ]
-C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [         _islower ]
 C:\Program Files (x86)\SDCC\bin\..\lib\large/libsdcc.lib    [              _bp ]
 
 ASxxxx Linker V01.70 + NoICE + SDCC Feb 1999,  page 2.

@@ -1,9 +1,10 @@
-/**
- *  Lab 3
- *  Author: Joey Jacobus
- *  October 2016
- *  Embedded Systems Design - University of Colorado at Boulder
+/*
+    Author: Joey Jacobus
+    Date: 11/8/2016
+    Embedded Systems Design University of Colorado at Boulder
+    Lab 4
  */
+
 
 #ifndef SERIAL_H_INCLUDED
 #define SERIAL_H_INCLUDED

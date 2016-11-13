@@ -1,3 +1,11 @@
+/*
+    Author: Joey Jacobus
+    Date: 11/8/2016
+    Embedded Systems Design University of Colorado at Boulder
+    Lab 4
+ */
+
+
 #ifndef LCD_H_INCLUDED
 #define LCD_H_INCLUDED
 
@@ -31,7 +39,10 @@ void LCD_SetCGRAMAddress(uint8_t address);
  *  Sets the DDRAM Address
  */
 void LCD_SetDDRAMAddress(uint8_t address);
-
+/**
+ *  Returns the LCD address
+ */
+uint8_t LCD_ReadAddr(void);
 
 /**
  *  Puts c out to the LCD as two nibbles

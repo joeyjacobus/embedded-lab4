@@ -1,0 +1,31 @@
+Name     Lab4;
+PartNo   ESD001;
+Date     11/5/2016;
+Revision 01;
+Designer Joey Jacobus;
+Company  University of Colorado - Boulder;
+Assembly None;
+Location None;
+Device   g16v8a;
+
+/* *************** INPUT PINS *********************/
+PIN 2   = a12; /*                                 */ 
+PIN 3   = a13; /*                                 */ 
+PIN 5   = a14; /*                                 */ 
+PIN 6   = a15; /*                                  */ 
+PIN 9   = RD; /*                                 */ 
+PIN 8   = PSEN; /*                                 */ 
+PIN 7   = WR;   
+
+/* *************** OUTPUT PINS *********************/
+PIN 12   = READ; /*                                 */ 
+PIN 13   = CSPERIPH; /* Chip select for peripherals */ 
+PIN 14   = CSROM;	/* Chip Select for ROM */
+PIN 15   = CSRAM;	/* Chip select for RAM */
+PIN 16   = LATCHEN;
+
+READ = RD & PSEN;
+CSPERIPH = a15 & a14 & a13 & !a12 & !(RD & WR)  ; /* RD/WR to address 0xExxx accesses LCD */
+CSROM = a15;
+CSRAM = !(a15 & !(a14 & a13 & a12));	
+LATCHEN = !a15 & !WR;

@@ -1,8 +1,8 @@
-/**
- *  Lab 3
- *  Author: Joey Jacobus
- *  October 2016
- *  Embedded Systems Design - University of Colorado at Boulder
+/*
+    Author: Joey Jacobus
+    Date: 11/8/2016
+    Embedded Systems Design University of Colorado at Boulder
+    Lab 4
  */
 
 
@@ -53,8 +53,10 @@ int Serial_GetInteger(int max_length){
     while (index < max_length ){
             c = getchar();
             putchar(c);
-            if (c == ENTER_KEY)
+            if (c == ENTER_KEY){
+                putchar('\n');
                 break;
+            }
             else if (c == BACKSPACE_KEY)
                 --index;
             else if (c == 'q' || c == 'Q'){

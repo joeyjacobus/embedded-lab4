@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1478478488 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\main.c
+1479001321 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\main.c
 	<mcs51/8051.h>
 	"at89c51ed2.h"
 	"LCD.h"
@@ -7,20 +7,23 @@
 	<stdio.h>
 	"EPROM.h"
 	"I2C.h"
+	"Timer.h"
+	<stdbool.h>
 
-1478476381 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\lcd.h
+1478983275 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\lcd.h
 	<stdint.h>
 
-1478469616 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\serial.h
+1478666624 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\serial.h
 	<stdint.h>
 
-1478487988 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\lcd.c
+1478994351 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\lcd.c
 	"LCD.h"
 	<stdint.h>
 	"at89c51ed2.h"
 	<stdio.h>
+	<stdbool.h>
 
-1478473319 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\serial.c
+1478997218 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\serial.c
 	<mcs51/8051.h>
 	"at89c51ed2.h"
 	<stdio.h>
@@ -28,19 +31,29 @@
 	<stdlib.h>
 	"serial.h"
 
-1478488495 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\eprom.c
+1478666567 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\eprom.c
 	"at89c51ed2.h"
 	<stdint.h>
 	"I2C.h"
 	<stdio.h>
 	"LCD.h"
 
-1478455448 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\i2c.h
+1478666609 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\i2c.h
 
-1478455374 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\i2c.c
+1478666574 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\i2c.c
 	"at89c51ed2.h"
 	<stdint.h>
 
-1478459147 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\eprom.h
+1478666602 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\eprom.h
 	<stdint.h>
+
+1479001095 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\timer.c
+	<mcs51/8051.h>
+	"at89c51ed2.h"
+	<stdio.h>
+	<stdint.h>
+	<stdbool.h>
+	"LCD.h"
+
+1478995193 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\timer.h
 
