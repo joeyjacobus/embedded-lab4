@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "LCD.h"
+#include "PCF8574.h"
 
 #define Timer0_High_Value 0xFF - 0xB4
 #define Timer0_Low_Value 0xFF - 0x00
@@ -26,6 +27,9 @@ uint8_t ActiveAlarms[] = {0, 0, 0};
 uint16_t AlarmCount[3];
 extern uint8_t ExpiredAlarms[];
 extern bool DisableFlag;
+
+uint8_t ButtonCount = 0;
+extern uint8_t PCF_ButtonPressed;
 
 /**
  *  Creates a new alarm
@@ -161,6 +165,29 @@ void timer0(void) __interrupt(1){
             updateAlarms = false;
         }
     }
+
+    if(PCF_ButtonPressed){
+        if (PCF_ButtonPressed < 3){
+            PCF_ButtonPressed++;
+        }
+        else{
+            PCF_ButtonPressed = 0;
+            LCD_gotoxy(3,0);
+            ButtonCount++;
+
+            if(ButtonCount > 15){
+                ButtonCount = 0;
+            }
+            if(ButtonCount > 9){
+                LCD_Putch(ButtonCount + 55);    //Output hex value
+            }
+            else{
+                LCD_Putch(ButtonCount + 0x30);  //Output decimal value
+            }
+            PCF_OutputCount(ButtonCount);
+        }
+    }
+
     TH0 = Timer0_High_Calibrated;
     TL0 = Timer0_Low_Calibrated;
     TCON |= 0x10;    //Start timer 0
@@ -218,6 +245,7 @@ void Timer0_Init(void){
     P1_2 =  0;
 
     ISR_Count = 0;
+    ButtonCount = 0;
     ExpiredAlarms[0] = 0; ExpiredAlarms[1] = 0; ExpiredAlarms[2] = 0;
 
     Clock_Reset();

@@ -16,7 +16,7 @@
 #include "Timer.h"
 #include <stdbool.h>
 #include "Custom.h"
-
+#include "PCF8574.h"
 
 #define AUXR_ENABLE_XRAM_MASK 0x0C
 
@@ -25,8 +25,10 @@
 #define EEPROM_MODE 2
 #define CLOCK_MODE  3
 #define CG_MODE     4
+#define PCF_MODE    5
 
 void timer0(void) __interrupt(1);
+void ext1(void) __interrupt(2);
 
 uint8_t mode = MAIN_MODE;
 
@@ -35,6 +37,7 @@ extern uint8_t ActiveAlarms[];
 extern uint16_t AlarmCount[];
 bool DisableFlag = false;
 
+extern uint8_t ButtonCount;
 extern bool CG_Accessed;
 extern uint8_t Saved_Address;
 
@@ -66,6 +69,60 @@ void getBlockAndAddress(uint8_t *address, uint8_t *block){
     printf("\r\nEnter an EEPROM Word address in hex:");
     *address = Serial_GetHex();
 }
+
+
+void PCF_Menu(void){
+    printf("\r\nIn Custom Character Mode");
+    printf("\r\nPress 'H' for help");
+    printf("\r\nPress 'O' to set pin to output low");
+    printf("\r\nPress 'I' to set pin to input/output value high");
+    printf("\r\nPress 'S' to view status of the pins");
+    printf("\r\nPress 'r' to return to main menu\r\n");
+}
+
+
+void handlePCFMode(char c){
+    uint8_t pin;
+    switch(c){
+        case 'O':
+            printf("\r\nEnter a pin from 0-7 to set as output low: ");
+            pin = Serial_GetInteger(1);
+            if (pin == 1){
+                printf("\r\nSorry, can't change pin 1 to output low.\r\n");
+                return;
+            }
+            PCF_SetOutputLow(pin);
+            break;
+        case 'I':
+            printf("\r\nEnter a pin from 0-7 to set as input/output value high: ");
+            pin = Serial_GetInteger(1);
+            PCF_SetInputOutput(pin);
+            break;
+        case 'S':
+            PCF_PrintState();
+            break;
+        case 'R':
+            EA = 0;
+            printf("/r/nCounter reset\r\n");
+            ButtonCount = 0;
+            LCD_gotoxy(3,0);
+            LCD_Putch(ButtonCount + 0x30);  //Output decimal value
+            PCF_OutputCount(ButtonCount);
+            EA = 1;
+            break;
+        case 'r':
+            mode = MAIN_MODE;
+            MainMenu();
+            break;
+        case 'H':
+            PCF_Menu();
+            break;
+        default:
+            break;
+    }
+}
+
+
 
 void CG_Menu(void){
     printf("\r\nIn Custom Character Mode");
@@ -465,7 +522,8 @@ void MainMenu(void){
     printf("\r\nPress 'L' to enter LCD control mode");
     printf("\r\nPress 'E' to enter EEPROM control mode");
     printf("\r\nPress 'C' to enter Clock control mode");
-    printf("\r\nPress 'G' to enter Custom Code control mode\r\n");
+    printf("\r\nPress 'G' to enter Custom Code control mode");
+    printf("\r\nPress 'P' to enter PCF I/O expander control mode\r\n");
 }
 
 void handleMAINMode(char c){
@@ -489,6 +547,9 @@ void handleMAINMode(char c){
             mode = CG_MODE;
             CG_Menu();
             break;
+        case 'P':
+            mode = PCF_MODE;
+            PCF_Menu();
         default:
             break;
     }
@@ -515,6 +576,9 @@ void handleInput(char c){
         case CG_MODE:
             handleCGMode(c);
             break;
+        case PCF_MODE:
+            handlePCFMode(c);
+            break;
     }
 }
 
@@ -525,6 +589,7 @@ void main(void)
 {
     Serial_Init();
     EPROM_Init();
+    PCF_Init();
     LCD_Init();
     P1_3 = 1;
     //LCD_Test();

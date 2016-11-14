@@ -18,6 +18,7 @@ obj\Release\EPROM.rel
 obj\Release\I2c.rel
 obj\Release\LCD.rel
 obj\Release\main.rel
+obj\Release\PCF8574.rel
 obj\Release\serial.rel
 obj\Release\Timer.rel
 

@@ -33,28 +33,28 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      0008    s_REG_BANK_1
      000A    l_GSINIT2
      000D    l_BSEG
-     000E    l_HOME
-     000E    l_XINIT
-     000E    l_XISEG
-     000E    s_GSINIT0
      0010    s_REG_BANK_2
-     0011    s_GSINIT1
-     0011    s_GSINIT2
+     0011    l_XINIT
+     0011    l_XISEG
+     0016    l_HOME
+     0016    s_GSINIT0
      0018    s_REG_BANK_3
-     001B    s_GSINIT3
+     0019    s_GSINIT1
+     0019    s_GSINIT2
      0020    s_BSEG_BYTES
      0022    l_GSINIT3
      0022    s_BIT_BANK
      0022    s_OSEG
      0022    s_RSEG
      0022    s_SSEG
+     0023    s_GSINIT3
      002A    l_GSINIT4
-     003D    s_GSINIT4
-     0067    s_GSINIT
-     0067    s_GSINIT5
-     006B    s_GSFINAL
-     006E    s_CSEG
+     0045    s_GSINIT4
+     006F    s_GSINIT
+     006F    s_GSINIT5
      0073    l_DSEG
+     0073    s_GSFINAL
+     0076    s_CSEG
      0080    _P0
      0080    _P0_0
      0080    s_ISEG
@@ -258,12 +258,12 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      00FD    _CCAP3H
      00FE    _CCAP4H
      0100    l_IRAM
-     0114    l_XSEG
-     0114    s_XISEG
-     0C04    l_CONST
-     30F5    l_CSEG
-     3163    s_CONST
-     3D67    s_XINIT
+     0118    l_XSEG
+     0118    s_XISEG
+     0DD0    l_CONST
+     34E1    l_CSEG
+     3557    s_CONST
+     4327    s_XINIT
 
 Hexadecimal
 
@@ -366,7 +366,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XSEG                               0000   0114 =    276. bytes (REL,CON,XDATA)
+XSEG                               0000   0118 =    280. bytes (REL,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
@@ -378,205 +378,218 @@ XSEG                               0000   0114 =    276. bytes (REL,CON,XDATA)
   0D:0027    _EPROM_ByteRead_PARM_2
   0D:0031    _LCD_gotoxy_PARM_2
   0D:0037    _getBlockAndAddress_PARM_2
-  0D:00CF    _getstring_PARM_2
-  0D:00D5    _Saved_Address
-  0D:00D6    _AlarmCount
-  0D:00E2    __gptrput_PARM_2
-  0D:00E3    __mulint_PARM_2
-  0D:00E7    _vprintf_PARM_2
-  0D:00FB    __print_format_PARM_2
-  0D:00FE    __print_format_PARM_3
-  0D:0101    __print_format_PARM_4
+  0D:00D3    _getstring_PARM_2
+  0D:00D9    _Saved_Address
+  0D:00DA    _AlarmCount
+  0D:00E6    __gptrput_PARM_2
+  0D:00E7    __mulint_PARM_2
+  0D:00EB    _vprintf_PARM_2
+  0D:00FF    __print_format_PARM_2
+  0D:0102    __print_format_PARM_3
+  0D:0105    __print_format_PARM_4
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XISEG                              0114   000E =     14. bytes (REL,CON,XDATA)
+XISEG                              0118   0011 =     17. bytes (REL,CON,XDATA)
 
       Value  Global
    --------  --------------------------------
-  0D:0114    _ACK_RETRY
-  0D:0115    _mode
-  0D:0116    _ExpiredAlarms
-  0D:0119    _ISR_Count
-  0D:011A    _TimeTenths
-  0D:011B    _TimeSecsOnes
-  0D:011C    _TimeSecsTens
-  0D:011D    _TimeMinsOnes
-  0D:011E    _TimeMinsTens
-  0D:011F    _ActiveAlarms
+  0D:0118    _ACK_RETRY
+  0D:0119    _mode
+  0D:011A    _ExpiredAlarms
+  0D:011D    _PCF_Config
+  0D:011E    _PCF_ButtonPressed
+  0D:011F    _ISR_Count
+  0D:0120    _TimeTenths
+  0D:0121    _TimeSecsOnes
+  0D:0122    _TimeSecsTens
+  0D:0123    _TimeMinsOnes
+  0D:0124    _TimeMinsTens
+  0D:0125    _ActiveAlarms
+  0D:0128    _ButtonCount
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-HOME                               0000   000E =     14. bytes (REL,CON,CODE)
+HOME                               0000   0016 =     22. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT0                            000E   0003 =      3. bytes (REL,CON,CODE)
+GSINIT0                            0016   0003 =      3. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:000E    __sdcc_gsinit_startup
+  0C:0016    __sdcc_gsinit_startup
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT1                            0011   0000 =      0. bytes (REL,CON,CODE)
+GSINIT1                            0019   0000 =      0. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT2                            0011   000A =     10. bytes (REL,CON,CODE)
+GSINIT2                            0019   000A =     10. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT3                            001B   0022 =     34. bytes (REL,CON,CODE)
+GSINIT3                            0023   0022 =     34. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:001B    __mcs51_genXINIT
+  0C:0023    __mcs51_genXINIT
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT4                            003D   002A =     42. bytes (REL,CON,CODE)
+GSINIT4                            0045   002A =     42. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:003D    __mcs51_genRAMCLEAR
-  0C:0043    __mcs51_genXRAMCLEAR
+  0C:0045    __mcs51_genRAMCLEAR
+  0C:004B    __mcs51_genXRAMCLEAR
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT5                            0067   0000 =      0. bytes (REL,CON,CODE)
+GSINIT5                            006F   0000 =      0. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT                             0067   0004 =      4. bytes (REL,CON,CODE)
+GSINIT                             006F   0004 =      4. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSFINAL                            006B   0003 =      3. bytes (REL,CON,CODE)
+GSFINAL                            0073   0003 =      3. bytes (REL,CON,CODE)
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               006E   30F5 =  12533. bytes (REL,CON,CODE)
+CSEG                               0076   34E1 =  13537. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:006E    _TestWrite
-  0C:00B1    _Custom_Show
-  0C:00C1    _Custom_New
-  0C:0252    _CG_CharacterWrite
-  0C:02D2    _Custom_DrawFlag
-  0C:05A2    _RetryAck
-  0C:05F1    _EPROM_SetBlock
-  0C:0658    _EPROM_ByteWrite
-  0C:06A4    _EPROM_ByteRead
-  0C:0707    _EPROM_Init
-  0C:070A    _Clock_Delay
-  0C:0713    _Clock_High
-  0C:0719    _Clock_Low
-  0C:071F    _I2CInit
-  0C:0724    _I2CStart
-  0C:0729    _I2CRestart
-  0C:0733    _I2CStop
-  0C:073E    _I2CAck
-  0C:0749    _I2CNak
-  0C:0754    _I2CSend
-  0C:079F    _I2CRead
-  0C:07DE    _LCD_InstructionWrite
-  0C:07FD    _LCD_DataWrite
-  0C:081C    _LCD_SetCGRAMAddress
-  0C:083A    _LCD_SetDDRAMAddress
-  0C:0855    _LCD_ReadRAM
-  0C:086E    _LCD_Puthex
-  0C:08A7    _LCD_Busywait
-  0C:08BF    _LCD_ReadAddr
-  0C:08DC    _LCD_ClearScreen
-  0C:08E5    _LCD_gotoaddr
-  0C:0914    _LCD_gotoxy
-  0C:094B    _LCD_Putch
-  0C:095E    _LCD_Putstr
-  0C:0A21    _LCD_Init
-  0C:0A33    _LCD_DisplayEnable
-  0C:0A3C    _LCD_DisplayDisable
-  0C:0A45    _LCD_Test
-  0C:0A65    __sdcc_program_startup
-  0C:0A6A    __sdcc_external_startup
-  0C:0A71    _getBlockAndAddress
-  0C:0B4D    _CG_Menu
-  0C:0BE1    _handleCGMode
-  0C:0CA2    _LCD_Menu
-  0C:0D8A    _handleLCDMode
-  0C:1315    _EEPROM_Menu
-  0C:13A9    _handleEEPROMMode
-  0C:1765    _CLOCK_Menu
-  0C:1838    _handleCLOCKMode
-  0C:1AB0    _MainMenu
-  0C:1B59    _handleMAINMode
-  0C:1BA5    _handleInput
-  0C:1BFD    _main
-  0C:1DC9    _putchar
-  0C:1DDB    _getchar
-  0C:1DE5    _Serial_GetInteger
-  0C:1F10    _Serial_GetHex
-  0C:2129    _getstring
-  0C:21E6    _Serial_Init
-  0C:21F7    _Clock_NewAlarm
-  0C:227B    _timer0
-  0C:25EF    _TimerRedraw
-  0C:2652    _Clock_Stop
-  0C:2656    _Clock_Start
-  0C:265A    _Clock_Reset
-  0C:2673    _Timer0_Init
-  0C:2699    _isdigit
-  0C:26B6    _atoi
-  0C:27E9    __gptrput
-  0C:2802    __mulint
-  0C:2822    _islower
-  0C:283F    _isupper
-  0C:2869    _vprintf
-  0C:28A8    _printf
-  0C:29C1    __print_format
-  0C:30F4    _strlen
-  0C:3147    __gptrget
+  0C:0076    _TestWrite
+  0C:00B9    _Custom_Show
+  0C:00C9    _Custom_New
+  0C:025A    _CG_CharacterWrite
+  0C:02DA    _Custom_DrawFlag
+  0C:05AA    _RetryAck
+  0C:05F9    _EPROM_SetBlock
+  0C:0660    _EPROM_ByteWrite
+  0C:06AC    _EPROM_ByteRead
+  0C:070F    _EPROM_Init
+  0C:0712    _Clock_Delay
+  0C:071B    _Clock_High
+  0C:0721    _Clock_Low
+  0C:0727    _I2CInit
+  0C:072C    _I2CStart
+  0C:0731    _I2CRestart
+  0C:073B    _I2CStop
+  0C:0746    _I2CAck
+  0C:0751    _I2CNak
+  0C:075C    _I2CSend
+  0C:07A7    _I2CRead
+  0C:07E6    _LCD_InstructionWrite
+  0C:0805    _LCD_DataWrite
+  0C:0824    _LCD_SetCGRAMAddress
+  0C:0842    _LCD_SetDDRAMAddress
+  0C:085D    _LCD_ReadRAM
+  0C:0876    _LCD_Puthex
+  0C:08AF    _LCD_Busywait
+  0C:08C7    _LCD_ReadAddr
+  0C:08E4    _LCD_ClearScreen
+  0C:08ED    _LCD_gotoaddr
+  0C:091C    _LCD_gotoxy
+  0C:0953    _LCD_Putch
+  0C:0966    _LCD_Putstr
+  0C:0A29    _LCD_Init
+  0C:0A3B    _LCD_DisplayEnable
+  0C:0A44    _LCD_DisplayDisable
+  0C:0A4D    _LCD_Test
+  0C:0A6D    __sdcc_program_startup
+  0C:0A72    __sdcc_external_startup
+  0C:0A79    _getBlockAndAddress
+  0C:0B55    _PCF_Menu
+  0C:0BD4    _handlePCFMode
+  0C:0CAC    _CG_Menu
+  0C:0D40    _handleCGMode
+  0C:0E01    _LCD_Menu
+  0C:0EE9    _handleLCDMode
+  0C:1474    _EEPROM_Menu
+  0C:1508    _handleEEPROMMode
+  0C:18C4    _CLOCK_Menu
+  0C:1997    _handleCLOCKMode
+  0C:1C0F    _MainMenu
+  0C:1CCD    _handleMAINMode
+  0C:1D27    _handleInput
+  0C:1D8C    _main
+  0C:1F5B    _ext1
+  0C:1F6E    _PCF_ReadDevice
+  0C:1F8D    _PCF_UpdateDevice
+  0C:1FA3    _PCF_PrintState
+  0C:20A9    _PCF_SetOutputLow
+  0C:20CD    _PCF_SetInputOutput
+  0C:20F0    _PCF_OutputCount
+  0C:213B    _PCF_Init
+  0C:2153    _putchar
+  0C:2165    _getchar
+  0C:216F    _Serial_GetInteger
+  0C:229A    _Serial_GetHex
+  0C:24B3    _getstring
+  0C:2570    _Serial_Init
+  0C:2581    _Clock_NewAlarm
+  0C:2605    _timer0
+  0C:29DE    _TimerRedraw
+  0C:2A41    _Clock_Stop
+  0C:2A45    _Clock_Start
+  0C:2A49    _Clock_Reset
+  0C:2A62    _Timer0_Init
+  0C:2A8D    _isdigit
+  0C:2AAA    _atoi
+  0C:2BDD    __gptrput
+  0C:2BF6    __mulint
+  0C:2C16    _islower
+  0C:2C33    _isupper
+  0C:2C5D    _vprintf
+  0C:2C9C    _printf
+  0C:2DB5    __print_format
+  0C:34E8    _strlen
+  0C:353B    __gptrget
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CONST                              3163   0C04 =   3076. bytes (REL,CON,CODE)
+CONST                              3557   0DD0 =   3536. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:3247    _LCD_Addr
-  0C:3249    _AddrMap
-  0C:3289    _ASCII_lookup
+  0C:363B    _LCD_Addr
+  0C:363D    _AddrMap
+  0C:367D    _ASCII_lookup
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XINIT                              3D67   000E =     14. bytes (REL,CON,CODE)
+XINIT                              4327   0011 =     17. bytes (REL,CON,CODE)
 ASxxxx Linker V01.70 + NoICE + SDCC Feb 1999,  page 1.
 
 Files Linked      [ module(s) ]
@@ -586,6 +599,7 @@ obj\Release\EPROM.rel
 obj\Release\I2c.rel
 obj\Release\LCD.rel
 obj\Release\main.rel
+obj\Release\PCF8574.rel
 obj\Release\serial.rel
 obj\Release\Timer.rel
 

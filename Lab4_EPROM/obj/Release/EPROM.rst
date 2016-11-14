@@ -473,8 +473,8 @@
                             473 ; external initialized ram data
                             474 ;--------------------------------------------------------
                             475 	.area XISEG   (XDATA)
-   0114                     476 _ACK_RETRY::
-   0114                     477 	.ds 1
+   0118                     476 _ACK_RETRY::
+   0118                     477 	.ds 1
                             478 	.area HOME    (CODE)
                             479 	.area GSINIT0 (CODE)
                             480 	.area GSINIT1 (CODE)
@@ -511,7 +511,7 @@
                             511 ;	-----------------------------------------
                             512 ;	 function RetryAck
                             513 ;	-----------------------------------------
-   05A2                     514 _RetryAck:
+   05AA                     514 _RetryAck:
                     0002    515 	ar2 = 0x02
                     0003    516 	ar3 = 0x03
                     0004    517 	ar4 = 0x04
@@ -521,83 +521,83 @@
                     0000    521 	ar0 = 0x00
                     0001    522 	ar1 = 0x01
                             523 ;	genReceive
-   05A2 E5 82               524 	mov	a,dpl
-   05A4 90 00 20            525 	mov	dptr,#_RetryAck_byte_1_1
-   05A7 F0                  526 	movx	@dptr,a
+   05AA E5 82               524 	mov	a,dpl
+   05AC 90 00 20            525 	mov	dptr,#_RetryAck_byte_1_1
+   05AF F0                  526 	movx	@dptr,a
                             527 ;	EPROM.c:16: ACK_RETRY = 3;
                             528 ;	genAssign
-   05A8 90 01 14            529 	mov	dptr,#_ACK_RETRY
-   05AB 74 03               530 	mov	a,#0x03
-   05AD F0                  531 	movx	@dptr,a
+   05B0 90 01 18            529 	mov	dptr,#_ACK_RETRY
+   05B3 74 03               530 	mov	a,#0x03
+   05B5 F0                  531 	movx	@dptr,a
                             532 ;	EPROM.c:17: while(ACK_RETRY > 0 && ack){
                             533 ;	genAssign
-   05AE 90 00 20            534 	mov	dptr,#_RetryAck_byte_1_1
-   05B1 E0                  535 	movx	a,@dptr
-   05B2 FA                  536 	mov	r2,a
-   05B3                     537 00102$:
+   05B6 90 00 20            534 	mov	dptr,#_RetryAck_byte_1_1
+   05B9 E0                  535 	movx	a,@dptr
+   05BA FA                  536 	mov	r2,a
+   05BB                     537 00102$:
                             538 ;	genAssign
-   05B3 90 01 14            539 	mov	dptr,#_ACK_RETRY
-   05B6 E0                  540 	movx	a,@dptr
+   05BB 90 01 18            539 	mov	dptr,#_ACK_RETRY
+   05BE E0                  540 	movx	a,@dptr
                             541 ;	genIfx
-   05B7 FB                  542 	mov	r3,a
+   05BF FB                  542 	mov	r3,a
                             543 ;	Peephole 105	removed redundant mov
                             544 ;	genIfxJump
                             545 ;	Peephole 108.c	removed ljmp by inverse jump logic
-   05B8 60 18               546 	jz	00104$
+   05C0 60 18               546 	jz	00104$
                             547 ;	Peephole 300	removed redundant label 00117$
                             548 ;	genAssign
-   05BA 90 00 1F            549 	mov	dptr,#_RetryAck_PARM_2
-   05BD E0                  550 	movx	a,@dptr
+   05C2 90 00 1F            549 	mov	dptr,#_RetryAck_PARM_2
+   05C5 E0                  550 	movx	a,@dptr
                             551 ;	genIfx
-   05BE FB                  552 	mov	r3,a
+   05C6 FB                  552 	mov	r3,a
                             553 ;	Peephole 105	removed redundant mov
                             554 ;	genIfxJump
                             555 ;	Peephole 108.c	removed ljmp by inverse jump logic
-   05BF 60 11               556 	jz	00104$
+   05C7 60 11               556 	jz	00104$
                             557 ;	Peephole 300	removed redundant label 00118$
                             558 ;	EPROM.c:18: ack = I2CSend(byte);
                             559 ;	genCall
-   05C1 8A 82               560 	mov	dpl,r2
-   05C3 C0 02               561 	push	ar2
-   05C5 12 07 54            562 	lcall	_I2CSend
-   05C8 E5 82               563 	mov	a,dpl
-   05CA D0 02               564 	pop	ar2
+   05C9 8A 82               560 	mov	dpl,r2
+   05CB C0 02               561 	push	ar2
+   05CD 12 07 5C            562 	lcall	_I2CSend
+   05D0 E5 82               563 	mov	a,dpl
+   05D2 D0 02               564 	pop	ar2
                             565 ;	genAssign
-   05CC 90 00 1F            566 	mov	dptr,#_RetryAck_PARM_2
-   05CF F0                  567 	movx	@dptr,a
+   05D4 90 00 1F            566 	mov	dptr,#_RetryAck_PARM_2
+   05D7 F0                  567 	movx	@dptr,a
                             568 ;	Peephole 112.b	changed ljmp to sjmp
-   05D0 80 E1               569 	sjmp	00102$
-   05D2                     570 00104$:
+   05D8 80 E1               569 	sjmp	00102$
+   05DA                     570 00104$:
                             571 ;	EPROM.c:20: if (ack){
                             572 ;	genAssign
-   05D2 90 00 1F            573 	mov	dptr,#_RetryAck_PARM_2
-   05D5 E0                  574 	movx	a,@dptr
+   05DA 90 00 1F            573 	mov	dptr,#_RetryAck_PARM_2
+   05DD E0                  574 	movx	a,@dptr
                             575 ;	genIfx
-   05D6 FA                  576 	mov	r2,a
+   05DE FA                  576 	mov	r2,a
                             577 ;	Peephole 105	removed redundant mov
                             578 ;	genIfxJump
                             579 ;	Peephole 108.c	removed ljmp by inverse jump logic
-   05D7 60 17               580 	jz	00110$
+   05DF 60 17               580 	jz	00110$
                             581 ;	Peephole 300	removed redundant label 00119$
                             582 ;	EPROM.c:21: printf("\r\nAck failed 3 times. System reset required. Entering infinite loop\r\n");
                             583 ;	genIpush
-   05D9 74 E7               584 	mov	a,#__str_0
-   05DB C0 E0               585 	push	acc
-   05DD 74 31               586 	mov	a,#(__str_0 >> 8)
-   05DF C0 E0               587 	push	acc
-   05E1 74 80               588 	mov	a,#0x80
-   05E3 C0 E0               589 	push	acc
+   05E1 74 DB               584 	mov	a,#__str_0
+   05E3 C0 E0               585 	push	acc
+   05E5 74 35               586 	mov	a,#(__str_0 >> 8)
+   05E7 C0 E0               587 	push	acc
+   05E9 74 80               588 	mov	a,#0x80
+   05EB C0 E0               589 	push	acc
                             590 ;	genCall
-   05E5 12 28 A8            591 	lcall	_printf
-   05E8 15 81               592 	dec	sp
-   05EA 15 81               593 	dec	sp
-   05EC 15 81               594 	dec	sp
+   05ED 12 2C 9C            591 	lcall	_printf
+   05F0 15 81               592 	dec	sp
+   05F2 15 81               593 	dec	sp
+   05F4 15 81               594 	dec	sp
                             595 ;	EPROM.c:22: while(1);
-   05EE                     596 00106$:
+   05F6                     596 00106$:
                             597 ;	Peephole 112.b	changed ljmp to sjmp
-   05EE 80 FE               598 	sjmp	00106$
-   05F0                     599 00110$:
-   05F0 22                  600 	ret
+   05F6 80 FE               598 	sjmp	00106$
+   05F8                     599 00110$:
+   05F8 22                  600 	ret
                             601 ;------------------------------------------------------------
                             602 ;Allocation info for local variables in function 'EPROM_SetBlock'
                             603 ;------------------------------------------------------------
@@ -610,112 +610,112 @@
                             610 ;	-----------------------------------------
                             611 ;	 function EPROM_SetBlock
                             612 ;	-----------------------------------------
-   05F1                     613 _EPROM_SetBlock:
+   05F9                     613 _EPROM_SetBlock:
                             614 ;	genReceive
-   05F1 E5 82               615 	mov	a,dpl
-   05F3 90 00 22            616 	mov	dptr,#_EPROM_SetBlock_block_1_1
-   05F6 F0                  617 	movx	@dptr,a
+   05F9 E5 82               615 	mov	a,dpl
+   05FB 90 00 22            616 	mov	dptr,#_EPROM_SetBlock_block_1_1
+   05FE F0                  617 	movx	@dptr,a
                             618 ;	EPROM.c:31: uint8_t byte = 0xA0;
                             619 ;	genAssign
-   05F7 90 00 23            620 	mov	dptr,#_EPROM_SetBlock_byte_1_1
-   05FA 74 A0               621 	mov	a,#0xA0
-   05FC F0                  622 	movx	@dptr,a
+   05FF 90 00 23            620 	mov	dptr,#_EPROM_SetBlock_byte_1_1
+   0602 74 A0               621 	mov	a,#0xA0
+   0604 F0                  622 	movx	@dptr,a
                             623 ;	EPROM.c:33: if (read){
                             624 ;	genAssign
-   05FD 90 00 21            625 	mov	dptr,#_EPROM_SetBlock_PARM_2
-   0600 E0                  626 	movx	a,@dptr
+   0605 90 00 21            625 	mov	dptr,#_EPROM_SetBlock_PARM_2
+   0608 E0                  626 	movx	a,@dptr
                             627 ;	genIfx
-   0601 FA                  628 	mov	r2,a
+   0609 FA                  628 	mov	r2,a
                             629 ;	Peephole 105	removed redundant mov
                             630 ;	genIfxJump
                             631 ;	Peephole 108.c	removed ljmp by inverse jump logic
-   0602 60 06               632 	jz	00102$
+   060A 60 06               632 	jz	00102$
                             633 ;	Peephole 300	removed redundant label 00109$
                             634 ;	EPROM.c:34: byte |= 0x01;   //set the read bit
                             635 ;	genAssign
-   0604 90 00 23            636 	mov	dptr,#_EPROM_SetBlock_byte_1_1
-   0607 74 A1               637 	mov	a,#0xA1
-   0609 F0                  638 	movx	@dptr,a
-   060A                     639 00102$:
+   060C 90 00 23            636 	mov	dptr,#_EPROM_SetBlock_byte_1_1
+   060F 74 A1               637 	mov	a,#0xA1
+   0611 F0                  638 	movx	@dptr,a
+   0612                     639 00102$:
                             640 ;	EPROM.c:36: if(block > 7){
                             641 ;	genAssign
-   060A 90 00 22            642 	mov	dptr,#_EPROM_SetBlock_block_1_1
-   060D E0                  643 	movx	a,@dptr
+   0612 90 00 22            642 	mov	dptr,#_EPROM_SetBlock_block_1_1
+   0615 E0                  643 	movx	a,@dptr
                             644 ;	genCmpGt
                             645 ;	genCmp
                             646 ;	genIfxJump
                             647 ;	Peephole 108.a	removed ljmp by inverse jump logic
                             648 ;	Peephole 132.b	optimized genCmpGt by inverse logic (acc differs)
-   060E FA                  649 	mov  r2,a
+   0616 FA                  649 	mov  r2,a
                             650 ;	Peephole 177.a	removed redundant mov
-   060F 24 F8               651 	add	a,#0xff - 0x07
-   0611 50 1E               652 	jnc	00104$
+   0617 24 F8               651 	add	a,#0xff - 0x07
+   0619 50 1E               652 	jnc	00104$
                             653 ;	Peephole 300	removed redundant label 00110$
                             654 ;	EPROM.c:37: printf("\r\nInvalid block number %d", block);
                             655 ;	genCast
-   0613 8A 03               656 	mov	ar3,r2
-   0615 7C 00               657 	mov	r4,#0x00
+   061B 8A 03               656 	mov	ar3,r2
+   061D 7C 00               657 	mov	r4,#0x00
                             658 ;	genIpush
-   0617 C0 03               659 	push	ar3
-   0619 C0 04               660 	push	ar4
+   061F C0 03               659 	push	ar3
+   0621 C0 04               660 	push	ar4
                             661 ;	genIpush
-   061B 74 2D               662 	mov	a,#__str_1
-   061D C0 E0               663 	push	acc
-   061F 74 32               664 	mov	a,#(__str_1 >> 8)
-   0621 C0 E0               665 	push	acc
-   0623 74 80               666 	mov	a,#0x80
-   0625 C0 E0               667 	push	acc
+   0623 74 21               662 	mov	a,#__str_1
+   0625 C0 E0               663 	push	acc
+   0627 74 36               664 	mov	a,#(__str_1 >> 8)
+   0629 C0 E0               665 	push	acc
+   062B 74 80               666 	mov	a,#0x80
+   062D C0 E0               667 	push	acc
                             668 ;	genCall
-   0627 12 28 A8            669 	lcall	_printf
-   062A E5 81               670 	mov	a,sp
-   062C 24 FB               671 	add	a,#0xfb
-   062E F5 81               672 	mov	sp,a
+   062F 12 2C 9C            669 	lcall	_printf
+   0632 E5 81               670 	mov	a,sp
+   0634 24 FB               671 	add	a,#0xfb
+   0636 F5 81               672 	mov	sp,a
                             673 ;	EPROM.c:38: return;
                             674 ;	genRet
                             675 ;	Peephole 112.b	changed ljmp to sjmp
                             676 ;	Peephole 251.b	replaced sjmp to ret with ret
-   0630 22                  677 	ret
-   0631                     678 00104$:
+   0638 22                  677 	ret
+   0639                     678 00104$:
                             679 ;	EPROM.c:40: byte |= (block << 1);   //Set bit 1,2,3 to the three bit block address
                             680 ;	genLeftShift
                             681 ;	genLeftShiftLiteral
                             682 ;	genlshOne
-   0631 EA                  683 	mov	a,r2
+   0639 EA                  683 	mov	a,r2
                             684 ;	Peephole 254	optimized left shift
-   0632 2A                  685 	add	a,r2
-   0633 FA                  686 	mov	r2,a
+   063A 2A                  685 	add	a,r2
+   063B FA                  686 	mov	r2,a
                             687 ;	genAssign
                             688 ;	genOr
-   0634 90 00 23            689 	mov	dptr,#_EPROM_SetBlock_byte_1_1
-   0637 E0                  690 	movx	a,@dptr
-   0638 FB                  691 	mov	r3,a
+   063C 90 00 23            689 	mov	dptr,#_EPROM_SetBlock_byte_1_1
+   063F E0                  690 	movx	a,@dptr
+   0640 FB                  691 	mov	r3,a
                             692 ;	Peephole 248.a	optimized or to xdata
-   0639 4A                  693 	orl	a,r2
-   063A F0                  694 	movx	@dptr,a
+   0641 4A                  693 	orl	a,r2
+   0642 F0                  694 	movx	@dptr,a
                             695 ;	EPROM.c:41: I2CStart();
                             696 ;	genCall
-   063B 12 07 24            697 	lcall	_I2CStart
+   0643 12 07 2C            697 	lcall	_I2CStart
                             698 ;	EPROM.c:42: ack = I2CSend(byte);
                             699 ;	genAssign
-   063E 90 00 23            700 	mov	dptr,#_EPROM_SetBlock_byte_1_1
-   0641 E0                  701 	movx	a,@dptr
+   0646 90 00 23            700 	mov	dptr,#_EPROM_SetBlock_byte_1_1
+   0649 E0                  701 	movx	a,@dptr
                             702 ;	genCall
-   0642 FA                  703 	mov	r2,a
+   064A FA                  703 	mov	r2,a
                             704 ;	Peephole 244.c	loading dpl from a instead of r2
-   0643 F5 82               705 	mov	dpl,a
-   0645 C0 02               706 	push	ar2
-   0647 12 07 54            707 	lcall	_I2CSend
-   064A AB 82               708 	mov	r3,dpl
-   064C D0 02               709 	pop	ar2
+   064B F5 82               705 	mov	dpl,a
+   064D C0 02               706 	push	ar2
+   064F 12 07 5C            707 	lcall	_I2CSend
+   0652 AB 82               708 	mov	r3,dpl
+   0654 D0 02               709 	pop	ar2
                             710 ;	EPROM.c:43: RetryAck(byte, ack);
                             711 ;	genAssign
-   064E 90 00 1F            712 	mov	dptr,#_RetryAck_PARM_2
-   0651 EB                  713 	mov	a,r3
-   0652 F0                  714 	movx	@dptr,a
+   0656 90 00 1F            712 	mov	dptr,#_RetryAck_PARM_2
+   0659 EB                  713 	mov	a,r3
+   065A F0                  714 	movx	@dptr,a
                             715 ;	genCall
-   0653 8A 82               716 	mov	dpl,r2
+   065B 8A 82               716 	mov	dpl,r2
                             717 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   0655 02 05 A2            718 	ljmp	_RetryAck
+   065D 02 05 AA            718 	ljmp	_RetryAck
                             719 ;
                             720 ;------------------------------------------------------------
                             721 ;Allocation info for local variables in function 'EPROM_ByteWrite'
@@ -729,68 +729,68 @@
                             729 ;	-----------------------------------------
                             730 ;	 function EPROM_ByteWrite
                             731 ;	-----------------------------------------
-   0658                     732 _EPROM_ByteWrite:
+   0660                     732 _EPROM_ByteWrite:
                             733 ;	genReceive
-   0658 E5 82               734 	mov	a,dpl
-   065A 90 00 26            735 	mov	dptr,#_EPROM_ByteWrite_writeData_1_1
-   065D F0                  736 	movx	@dptr,a
+   0660 E5 82               734 	mov	a,dpl
+   0662 90 00 26            735 	mov	dptr,#_EPROM_ByteWrite_writeData_1_1
+   0665 F0                  736 	movx	@dptr,a
                             737 ;	EPROM.c:54: EPROM_SetBlock(block, WRITE);
                             738 ;	genAssign
-   065E 90 00 25            739 	mov	dptr,#_EPROM_ByteWrite_PARM_3
-   0661 E0                  740 	movx	a,@dptr
-   0662 FA                  741 	mov	r2,a
+   0666 90 00 25            739 	mov	dptr,#_EPROM_ByteWrite_PARM_3
+   0669 E0                  740 	movx	a,@dptr
+   066A FA                  741 	mov	r2,a
                             742 ;	genAssign
-   0663 90 00 21            743 	mov	dptr,#_EPROM_SetBlock_PARM_2
+   066B 90 00 21            743 	mov	dptr,#_EPROM_SetBlock_PARM_2
                             744 ;	Peephole 181	changed mov to clr
-   0666 E4                  745 	clr	a
-   0667 F0                  746 	movx	@dptr,a
+   066E E4                  745 	clr	a
+   066F F0                  746 	movx	@dptr,a
                             747 ;	genCall
-   0668 8A 82               748 	mov	dpl,r2
-   066A 12 05 F1            749 	lcall	_EPROM_SetBlock
+   0670 8A 82               748 	mov	dpl,r2
+   0672 12 05 F9            749 	lcall	_EPROM_SetBlock
                             750 ;	EPROM.c:55: ack = I2CSend(address);
                             751 ;	genAssign
-   066D 90 00 24            752 	mov	dptr,#_EPROM_ByteWrite_PARM_2
-   0670 E0                  753 	movx	a,@dptr
+   0675 90 00 24            752 	mov	dptr,#_EPROM_ByteWrite_PARM_2
+   0678 E0                  753 	movx	a,@dptr
                             754 ;	genCall
-   0671 FA                  755 	mov	r2,a
+   0679 FA                  755 	mov	r2,a
                             756 ;	Peephole 244.c	loading dpl from a instead of r2
-   0672 F5 82               757 	mov	dpl,a
-   0674 C0 02               758 	push	ar2
-   0676 12 07 54            759 	lcall	_I2CSend
-   0679 AB 82               760 	mov	r3,dpl
-   067B D0 02               761 	pop	ar2
+   067A F5 82               757 	mov	dpl,a
+   067C C0 02               758 	push	ar2
+   067E 12 07 5C            759 	lcall	_I2CSend
+   0681 AB 82               760 	mov	r3,dpl
+   0683 D0 02               761 	pop	ar2
                             762 ;	EPROM.c:56: RetryAck(address, ack);
                             763 ;	genAssign
-   067D 90 00 1F            764 	mov	dptr,#_RetryAck_PARM_2
-   0680 EB                  765 	mov	a,r3
-   0681 F0                  766 	movx	@dptr,a
+   0685 90 00 1F            764 	mov	dptr,#_RetryAck_PARM_2
+   0688 EB                  765 	mov	a,r3
+   0689 F0                  766 	movx	@dptr,a
                             767 ;	genCall
-   0682 8A 82               768 	mov	dpl,r2
-   0684 12 05 A2            769 	lcall	_RetryAck
+   068A 8A 82               768 	mov	dpl,r2
+   068C 12 05 AA            769 	lcall	_RetryAck
                             770 ;	EPROM.c:57: ack = I2CSend(writeData);
                             771 ;	genAssign
-   0687 90 00 26            772 	mov	dptr,#_EPROM_ByteWrite_writeData_1_1
-   068A E0                  773 	movx	a,@dptr
+   068F 90 00 26            772 	mov	dptr,#_EPROM_ByteWrite_writeData_1_1
+   0692 E0                  773 	movx	a,@dptr
                             774 ;	genCall
-   068B FA                  775 	mov	r2,a
+   0693 FA                  775 	mov	r2,a
                             776 ;	Peephole 244.c	loading dpl from a instead of r2
-   068C F5 82               777 	mov	dpl,a
-   068E C0 02               778 	push	ar2
-   0690 12 07 54            779 	lcall	_I2CSend
-   0693 AB 82               780 	mov	r3,dpl
-   0695 D0 02               781 	pop	ar2
+   0694 F5 82               777 	mov	dpl,a
+   0696 C0 02               778 	push	ar2
+   0698 12 07 5C            779 	lcall	_I2CSend
+   069B AB 82               780 	mov	r3,dpl
+   069D D0 02               781 	pop	ar2
                             782 ;	EPROM.c:58: RetryAck(writeData, ack);
                             783 ;	genAssign
-   0697 90 00 1F            784 	mov	dptr,#_RetryAck_PARM_2
-   069A EB                  785 	mov	a,r3
-   069B F0                  786 	movx	@dptr,a
+   069F 90 00 1F            784 	mov	dptr,#_RetryAck_PARM_2
+   06A2 EB                  785 	mov	a,r3
+   06A3 F0                  786 	movx	@dptr,a
                             787 ;	genCall
-   069C 8A 82               788 	mov	dpl,r2
-   069E 12 05 A2            789 	lcall	_RetryAck
+   06A4 8A 82               788 	mov	dpl,r2
+   06A6 12 05 AA            789 	lcall	_RetryAck
                             790 ;	EPROM.c:59: I2CStop();
                             791 ;	genCall
                             792 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   06A1 02 07 33            793 	ljmp	_I2CStop
+   06A9 02 07 3B            793 	ljmp	_I2CStop
                             794 ;
                             795 ;------------------------------------------------------------
                             796 ;Allocation info for local variables in function 'EPROM_ByteRead'
@@ -804,82 +804,82 @@
                             804 ;	-----------------------------------------
                             805 ;	 function EPROM_ByteRead
                             806 ;	-----------------------------------------
-   06A4                     807 _EPROM_ByteRead:
+   06AC                     807 _EPROM_ByteRead:
                             808 ;	genReceive
-   06A4 E5 82               809 	mov	a,dpl
-   06A6 90 00 28            810 	mov	dptr,#_EPROM_ByteRead_address_1_1
-   06A9 F0                  811 	movx	@dptr,a
+   06AC E5 82               809 	mov	a,dpl
+   06AE 90 00 28            810 	mov	dptr,#_EPROM_ByteRead_address_1_1
+   06B1 F0                  811 	movx	@dptr,a
                             812 ;	EPROM.c:69: EPROM_SetBlock(block, WRITE);
                             813 ;	genAssign
-   06AA 90 00 27            814 	mov	dptr,#_EPROM_ByteRead_PARM_2
-   06AD E0                  815 	movx	a,@dptr
-   06AE FA                  816 	mov	r2,a
+   06B2 90 00 27            814 	mov	dptr,#_EPROM_ByteRead_PARM_2
+   06B5 E0                  815 	movx	a,@dptr
+   06B6 FA                  816 	mov	r2,a
                             817 ;	genAssign
-   06AF 90 00 21            818 	mov	dptr,#_EPROM_SetBlock_PARM_2
+   06B7 90 00 21            818 	mov	dptr,#_EPROM_SetBlock_PARM_2
                             819 ;	Peephole 181	changed mov to clr
-   06B2 E4                  820 	clr	a
-   06B3 F0                  821 	movx	@dptr,a
+   06BA E4                  820 	clr	a
+   06BB F0                  821 	movx	@dptr,a
                             822 ;	genCall
-   06B4 8A 82               823 	mov	dpl,r2
-   06B6 C0 02               824 	push	ar2
-   06B8 12 05 F1            825 	lcall	_EPROM_SetBlock
-   06BB D0 02               826 	pop	ar2
+   06BC 8A 82               823 	mov	dpl,r2
+   06BE C0 02               824 	push	ar2
+   06C0 12 05 F9            825 	lcall	_EPROM_SetBlock
+   06C3 D0 02               826 	pop	ar2
                             827 ;	EPROM.c:70: ack = I2CSend(address);
                             828 ;	genAssign
-   06BD 90 00 28            829 	mov	dptr,#_EPROM_ByteRead_address_1_1
-   06C0 E0                  830 	movx	a,@dptr
+   06C5 90 00 28            829 	mov	dptr,#_EPROM_ByteRead_address_1_1
+   06C8 E0                  830 	movx	a,@dptr
                             831 ;	genCall
-   06C1 FB                  832 	mov	r3,a
+   06C9 FB                  832 	mov	r3,a
                             833 ;	Peephole 244.c	loading dpl from a instead of r3
-   06C2 F5 82               834 	mov	dpl,a
-   06C4 C0 02               835 	push	ar2
-   06C6 C0 03               836 	push	ar3
-   06C8 12 07 54            837 	lcall	_I2CSend
-   06CB AC 82               838 	mov	r4,dpl
-   06CD D0 03               839 	pop	ar3
-   06CF D0 02               840 	pop	ar2
+   06CA F5 82               834 	mov	dpl,a
+   06CC C0 02               835 	push	ar2
+   06CE C0 03               836 	push	ar3
+   06D0 12 07 5C            837 	lcall	_I2CSend
+   06D3 AC 82               838 	mov	r4,dpl
+   06D5 D0 03               839 	pop	ar3
+   06D7 D0 02               840 	pop	ar2
                             841 ;	EPROM.c:71: RetryAck(address, ack);
                             842 ;	genAssign
-   06D1 90 00 1F            843 	mov	dptr,#_RetryAck_PARM_2
-   06D4 EC                  844 	mov	a,r4
-   06D5 F0                  845 	movx	@dptr,a
+   06D9 90 00 1F            843 	mov	dptr,#_RetryAck_PARM_2
+   06DC EC                  844 	mov	a,r4
+   06DD F0                  845 	movx	@dptr,a
                             846 ;	genCall
-   06D6 8B 82               847 	mov	dpl,r3
-   06D8 C0 02               848 	push	ar2
-   06DA 12 05 A2            849 	lcall	_RetryAck
-   06DD D0 02               850 	pop	ar2
+   06DE 8B 82               847 	mov	dpl,r3
+   06E0 C0 02               848 	push	ar2
+   06E2 12 05 AA            849 	lcall	_RetryAck
+   06E5 D0 02               850 	pop	ar2
                             851 ;	EPROM.c:72: I2CRestart(); //Restart
                             852 ;	genCall
-   06DF C0 02               853 	push	ar2
-   06E1 12 07 29            854 	lcall	_I2CRestart
-   06E4 D0 02               855 	pop	ar2
+   06E7 C0 02               853 	push	ar2
+   06E9 12 07 31            854 	lcall	_I2CRestart
+   06EC D0 02               855 	pop	ar2
                             856 ;	EPROM.c:73: EPROM_SetBlock(block, READ);
                             857 ;	genAssign
-   06E6 90 00 21            858 	mov	dptr,#_EPROM_SetBlock_PARM_2
-   06E9 74 01               859 	mov	a,#0x01
-   06EB F0                  860 	movx	@dptr,a
+   06EE 90 00 21            858 	mov	dptr,#_EPROM_SetBlock_PARM_2
+   06F1 74 01               859 	mov	a,#0x01
+   06F3 F0                  860 	movx	@dptr,a
                             861 ;	genCall
-   06EC 8A 82               862 	mov	dpl,r2
-   06EE 12 05 F1            863 	lcall	_EPROM_SetBlock
+   06F4 8A 82               862 	mov	dpl,r2
+   06F6 12 05 F9            863 	lcall	_EPROM_SetBlock
                             864 ;	EPROM.c:74: value = I2CRead();
                             865 ;	genCall
-   06F1 12 07 9F            866 	lcall	_I2CRead
-   06F4 AA 82               867 	mov	r2,dpl
+   06F9 12 07 A7            866 	lcall	_I2CRead
+   06FC AA 82               867 	mov	r2,dpl
                             868 ;	EPROM.c:75: I2CNak();
                             869 ;	genCall
-   06F6 C0 02               870 	push	ar2
-   06F8 12 07 49            871 	lcall	_I2CNak
-   06FB D0 02               872 	pop	ar2
+   06FE C0 02               870 	push	ar2
+   0700 12 07 51            871 	lcall	_I2CNak
+   0703 D0 02               872 	pop	ar2
                             873 ;	EPROM.c:76: I2CStop();
                             874 ;	genCall
-   06FD C0 02               875 	push	ar2
-   06FF 12 07 33            876 	lcall	_I2CStop
-   0702 D0 02               877 	pop	ar2
+   0705 C0 02               875 	push	ar2
+   0707 12 07 3B            876 	lcall	_I2CStop
+   070A D0 02               877 	pop	ar2
                             878 ;	EPROM.c:77: return value;
                             879 ;	genRet
-   0704 8A 82               880 	mov	dpl,r2
+   070C 8A 82               880 	mov	dpl,r2
                             881 ;	Peephole 300	removed redundant label 00101$
-   0706 22                  882 	ret
+   070E 22                  882 	ret
                             883 ;------------------------------------------------------------
                             884 ;Allocation info for local variables in function 'EPROM_Init'
                             885 ;------------------------------------------------------------
@@ -888,18 +888,18 @@
                             888 ;	-----------------------------------------
                             889 ;	 function EPROM_Init
                             890 ;	-----------------------------------------
-   0707                     891 _EPROM_Init:
+   070F                     891 _EPROM_Init:
                             892 ;	EPROM.c:85: I2CInit();
                             893 ;	genCall
                             894 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   0707 02 07 1F            895 	ljmp	_I2CInit
+   070F 02 07 27            895 	ljmp	_I2CInit
                             896 ;
                             897 	.area CSEG    (CODE)
                             898 	.area CONST   (CODE)
-   31E7                     899 __str_0:
-   31E7 0D                  900 	.db 0x0D
-   31E8 0A                  901 	.db 0x0A
-   31E9 41 63 6B 20 66 61   902 	.ascii "Ack failed 3 times. System reset required. Entering infini"
+   35DB                     899 __str_0:
+   35DB 0D                  900 	.db 0x0D
+   35DC 0A                  901 	.db 0x0A
+   35DD 41 63 6B 20 66 61   902 	.ascii "Ack failed 3 times. System reset required. Entering infini"
         69 6C 65 64 20 33
         20 74 69 6D 65 73
         2E 20 53 79 73 74
@@ -909,19 +909,19 @@
         20 45 6E 74 65 72
         69 6E 67 20 69 6E
         66 69 6E 69
-   3223 74 65 20 6C 6F 6F   903 	.ascii "te loop"
+   3617 74 65 20 6C 6F 6F   903 	.ascii "te loop"
         70
-   322A 0D                  904 	.db 0x0D
-   322B 0A                  905 	.db 0x0A
-   322C 00                  906 	.db 0x00
-   322D                     907 __str_1:
-   322D 0D                  908 	.db 0x0D
-   322E 0A                  909 	.db 0x0A
-   322F 49 6E 76 61 6C 69   910 	.ascii "Invalid block number %d"
+   361E 0D                  904 	.db 0x0D
+   361F 0A                  905 	.db 0x0A
+   3620 00                  906 	.db 0x00
+   3621                     907 __str_1:
+   3621 0D                  908 	.db 0x0D
+   3622 0A                  909 	.db 0x0A
+   3623 49 6E 76 61 6C 69   910 	.ascii "Invalid block number %d"
         64 20 62 6C 6F 63
         6B 20 6E 75 6D 62
         65 72 20 25 64
-   3246 00                  911 	.db 0x00
+   363A 00                  911 	.db 0x00
                             912 	.area XINIT   (CODE)
-   3D67                     913 __xinit__ACK_RETRY:
-   3D67 00                  914 	.db #0x00
+   4327                     913 __xinit__ACK_RETRY:
+   4327 00                  914 	.db #0x00

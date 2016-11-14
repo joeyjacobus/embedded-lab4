@@ -1,0 +1,1054 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.6.0 #4309 (Jul 28 2006)
+                              4 ; This file generated Sun Nov 13 18:32:33 2016
+                              5 ;--------------------------------------------------------
+                              6 	.module PCF8574
+                              7 	.optsdcc -mmcs51 --model-large
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _PCF_Init
+                             13 	.globl _PCF_OutputCount
+                             14 	.globl _PCF_SetInputOutput
+                             15 	.globl _PCF_SetOutputLow
+                             16 	.globl _PCF_PrintState
+                             17 	.globl _PCF_UpdateDevice
+                             18 	.globl _PCF_ReadDevice
+                             19 	.globl _ext1
+                             20 	.globl _P5_7
+                             21 	.globl _P5_6
+                             22 	.globl _P5_5
+                             23 	.globl _P5_4
+                             24 	.globl _P5_3
+                             25 	.globl _P5_2
+                             26 	.globl _P5_1
+                             27 	.globl _P5_0
+                             28 	.globl _P4_7
+                             29 	.globl _P4_6
+                             30 	.globl _P4_5
+                             31 	.globl _P4_4
+                             32 	.globl _P4_3
+                             33 	.globl _P4_2
+                             34 	.globl _P4_1
+                             35 	.globl _P4_0
+                             36 	.globl _PX0L
+                             37 	.globl _PT0L
+                             38 	.globl _PX1L
+                             39 	.globl _PT1L
+                             40 	.globl _PLS
+                             41 	.globl _PT2L
+                             42 	.globl _PPCL
+                             43 	.globl _EC
+                             44 	.globl _CCF0
+                             45 	.globl _CCF1
+                             46 	.globl _CCF2
+                             47 	.globl _CCF3
+                             48 	.globl _CCF4
+                             49 	.globl _CR
+                             50 	.globl _CF
+                             51 	.globl _TF2
+                             52 	.globl _EXF2
+                             53 	.globl _RCLK
+                             54 	.globl _TCLK
+                             55 	.globl _EXEN2
+                             56 	.globl _TR2
+                             57 	.globl _C_T2
+                             58 	.globl _CP_RL2
+                             59 	.globl _T2CON_7
+                             60 	.globl _T2CON_6
+                             61 	.globl _T2CON_5
+                             62 	.globl _T2CON_4
+                             63 	.globl _T2CON_3
+                             64 	.globl _T2CON_2
+                             65 	.globl _T2CON_1
+                             66 	.globl _T2CON_0
+                             67 	.globl _PT2
+                             68 	.globl _ET2
+                             69 	.globl _CY
+                             70 	.globl _AC
+                             71 	.globl _F0
+                             72 	.globl _RS1
+                             73 	.globl _RS0
+                             74 	.globl _OV
+                             75 	.globl _F1
+                             76 	.globl _P
+                             77 	.globl _PS
+                             78 	.globl _PT1
+                             79 	.globl _PX1
+                             80 	.globl _PT0
+                             81 	.globl _PX0
+                             82 	.globl _RD
+                             83 	.globl _WR
+                             84 	.globl _T1
+                             85 	.globl _T0
+                             86 	.globl _INT1
+                             87 	.globl _INT0
+                             88 	.globl _TXD
+                             89 	.globl _RXD
+                             90 	.globl _P3_7
+                             91 	.globl _P3_6
+                             92 	.globl _P3_5
+                             93 	.globl _P3_4
+                             94 	.globl _P3_3
+                             95 	.globl _P3_2
+                             96 	.globl _P3_1
+                             97 	.globl _P3_0
+                             98 	.globl _EA
+                             99 	.globl _ES
+                            100 	.globl _ET1
+                            101 	.globl _EX1
+                            102 	.globl _ET0
+                            103 	.globl _EX0
+                            104 	.globl _P2_7
+                            105 	.globl _P2_6
+                            106 	.globl _P2_5
+                            107 	.globl _P2_4
+                            108 	.globl _P2_3
+                            109 	.globl _P2_2
+                            110 	.globl _P2_1
+                            111 	.globl _P2_0
+                            112 	.globl _SM0
+                            113 	.globl _SM1
+                            114 	.globl _SM2
+                            115 	.globl _REN
+                            116 	.globl _TB8
+                            117 	.globl _RB8
+                            118 	.globl _TI
+                            119 	.globl _RI
+                            120 	.globl _P1_7
+                            121 	.globl _P1_6
+                            122 	.globl _P1_5
+                            123 	.globl _P1_4
+                            124 	.globl _P1_3
+                            125 	.globl _P1_2
+                            126 	.globl _P1_1
+                            127 	.globl _P1_0
+                            128 	.globl _TF1
+                            129 	.globl _TR1
+                            130 	.globl _TF0
+                            131 	.globl _TR0
+                            132 	.globl _IE1
+                            133 	.globl _IT1
+                            134 	.globl _IE0
+                            135 	.globl _IT0
+                            136 	.globl _P0_7
+                            137 	.globl _P0_6
+                            138 	.globl _P0_5
+                            139 	.globl _P0_4
+                            140 	.globl _P0_3
+                            141 	.globl _P0_2
+                            142 	.globl _P0_1
+                            143 	.globl _P0_0
+                            144 	.globl _EECON
+                            145 	.globl _KBF
+                            146 	.globl _KBE
+                            147 	.globl _KBLS
+                            148 	.globl _BRL
+                            149 	.globl _BDRCON
+                            150 	.globl _T2MOD
+                            151 	.globl _SPDAT
+                            152 	.globl _SPSTA
+                            153 	.globl _SPCON
+                            154 	.globl _SADEN
+                            155 	.globl _SADDR
+                            156 	.globl _WDTPRG
+                            157 	.globl _WDTRST
+                            158 	.globl _P5
+                            159 	.globl _P4
+                            160 	.globl _IPH1
+                            161 	.globl _IPL1
+                            162 	.globl _IPH0
+                            163 	.globl _IPL0
+                            164 	.globl _IEN1
+                            165 	.globl _IEN0
+                            166 	.globl _CMOD
+                            167 	.globl _CL
+                            168 	.globl _CH
+                            169 	.globl _CCON
+                            170 	.globl _CCAPM4
+                            171 	.globl _CCAPM3
+                            172 	.globl _CCAPM2
+                            173 	.globl _CCAPM1
+                            174 	.globl _CCAPM0
+                            175 	.globl _CCAP4L
+                            176 	.globl _CCAP3L
+                            177 	.globl _CCAP2L
+                            178 	.globl _CCAP1L
+                            179 	.globl _CCAP0L
+                            180 	.globl _CCAP4H
+                            181 	.globl _CCAP3H
+                            182 	.globl _CCAP2H
+                            183 	.globl _CCAP1H
+                            184 	.globl _CCAP0H
+                            185 	.globl _CKCKON1
+                            186 	.globl _CKCKON0
+                            187 	.globl _CKRL
+                            188 	.globl _AUXR1
+                            189 	.globl _AUXR
+                            190 	.globl _TH2
+                            191 	.globl _TL2
+                            192 	.globl _RCAP2H
+                            193 	.globl _RCAP2L
+                            194 	.globl _T2CON
+                            195 	.globl _B
+                            196 	.globl _ACC
+                            197 	.globl _PSW
+                            198 	.globl _IP
+                            199 	.globl _P3
+                            200 	.globl _IE
+                            201 	.globl _P2
+                            202 	.globl _SBUF
+                            203 	.globl _SCON
+                            204 	.globl _P1
+                            205 	.globl _TH1
+                            206 	.globl _TH0
+                            207 	.globl _TL1
+                            208 	.globl _TL0
+                            209 	.globl _TMOD
+                            210 	.globl _TCON
+                            211 	.globl _PCON
+                            212 	.globl _DPH
+                            213 	.globl _DPL
+                            214 	.globl _SP
+                            215 	.globl _P0
+                            216 	.globl _PCF_ButtonPressed
+                            217 	.globl _PCF_Config
+                            218 ;--------------------------------------------------------
+                            219 ; special function registers
+                            220 ;--------------------------------------------------------
+                            221 	.area RSEG    (DATA)
+                    0080    222 _P0	=	0x0080
+                    0081    223 _SP	=	0x0081
+                    0082    224 _DPL	=	0x0082
+                    0083    225 _DPH	=	0x0083
+                    0087    226 _PCON	=	0x0087
+                    0088    227 _TCON	=	0x0088
+                    0089    228 _TMOD	=	0x0089
+                    008A    229 _TL0	=	0x008a
+                    008B    230 _TL1	=	0x008b
+                    008C    231 _TH0	=	0x008c
+                    008D    232 _TH1	=	0x008d
+                    0090    233 _P1	=	0x0090
+                    0098    234 _SCON	=	0x0098
+                    0099    235 _SBUF	=	0x0099
+                    00A0    236 _P2	=	0x00a0
+                    00A8    237 _IE	=	0x00a8
+                    00B0    238 _P3	=	0x00b0
+                    00B8    239 _IP	=	0x00b8
+                    00D0    240 _PSW	=	0x00d0
+                    00E0    241 _ACC	=	0x00e0
+                    00F0    242 _B	=	0x00f0
+                    00C8    243 _T2CON	=	0x00c8
+                    00CA    244 _RCAP2L	=	0x00ca
+                    00CB    245 _RCAP2H	=	0x00cb
+                    00CC    246 _TL2	=	0x00cc
+                    00CD    247 _TH2	=	0x00cd
+                    008E    248 _AUXR	=	0x008e
+                    00A2    249 _AUXR1	=	0x00a2
+                    0097    250 _CKRL	=	0x0097
+                    008F    251 _CKCKON0	=	0x008f
+                    008F    252 _CKCKON1	=	0x008f
+                    00FA    253 _CCAP0H	=	0x00fa
+                    00FB    254 _CCAP1H	=	0x00fb
+                    00FC    255 _CCAP2H	=	0x00fc
+                    00FD    256 _CCAP3H	=	0x00fd
+                    00FE    257 _CCAP4H	=	0x00fe
+                    00EA    258 _CCAP0L	=	0x00ea
+                    00EB    259 _CCAP1L	=	0x00eb
+                    00EC    260 _CCAP2L	=	0x00ec
+                    00ED    261 _CCAP3L	=	0x00ed
+                    00EE    262 _CCAP4L	=	0x00ee
+                    00DA    263 _CCAPM0	=	0x00da
+                    00DB    264 _CCAPM1	=	0x00db
+                    00DC    265 _CCAPM2	=	0x00dc
+                    00DD    266 _CCAPM3	=	0x00dd
+                    00DE    267 _CCAPM4	=	0x00de
+                    00D8    268 _CCON	=	0x00d8
+                    00F9    269 _CH	=	0x00f9
+                    00E9    270 _CL	=	0x00e9
+                    00D9    271 _CMOD	=	0x00d9
+                    00A8    272 _IEN0	=	0x00a8
+                    00B1    273 _IEN1	=	0x00b1
+                    00B8    274 _IPL0	=	0x00b8
+                    00B7    275 _IPH0	=	0x00b7
+                    00B2    276 _IPL1	=	0x00b2
+                    00B3    277 _IPH1	=	0x00b3
+                    00C0    278 _P4	=	0x00c0
+                    00D8    279 _P5	=	0x00d8
+                    00A6    280 _WDTRST	=	0x00a6
+                    00A7    281 _WDTPRG	=	0x00a7
+                    00A9    282 _SADDR	=	0x00a9
+                    00B9    283 _SADEN	=	0x00b9
+                    00C3    284 _SPCON	=	0x00c3
+                    00C4    285 _SPSTA	=	0x00c4
+                    00C5    286 _SPDAT	=	0x00c5
+                    00C9    287 _T2MOD	=	0x00c9
+                    009B    288 _BDRCON	=	0x009b
+                    009A    289 _BRL	=	0x009a
+                    009C    290 _KBLS	=	0x009c
+                    009D    291 _KBE	=	0x009d
+                    009E    292 _KBF	=	0x009e
+                    00D2    293 _EECON	=	0x00d2
+                            294 ;--------------------------------------------------------
+                            295 ; special function bits
+                            296 ;--------------------------------------------------------
+                            297 	.area RSEG    (DATA)
+                    0080    298 _P0_0	=	0x0080
+                    0081    299 _P0_1	=	0x0081
+                    0082    300 _P0_2	=	0x0082
+                    0083    301 _P0_3	=	0x0083
+                    0084    302 _P0_4	=	0x0084
+                    0085    303 _P0_5	=	0x0085
+                    0086    304 _P0_6	=	0x0086
+                    0087    305 _P0_7	=	0x0087
+                    0088    306 _IT0	=	0x0088
+                    0089    307 _IE0	=	0x0089
+                    008A    308 _IT1	=	0x008a
+                    008B    309 _IE1	=	0x008b
+                    008C    310 _TR0	=	0x008c
+                    008D    311 _TF0	=	0x008d
+                    008E    312 _TR1	=	0x008e
+                    008F    313 _TF1	=	0x008f
+                    0090    314 _P1_0	=	0x0090
+                    0091    315 _P1_1	=	0x0091
+                    0092    316 _P1_2	=	0x0092
+                    0093    317 _P1_3	=	0x0093
+                    0094    318 _P1_4	=	0x0094
+                    0095    319 _P1_5	=	0x0095
+                    0096    320 _P1_6	=	0x0096
+                    0097    321 _P1_7	=	0x0097
+                    0098    322 _RI	=	0x0098
+                    0099    323 _TI	=	0x0099
+                    009A    324 _RB8	=	0x009a
+                    009B    325 _TB8	=	0x009b
+                    009C    326 _REN	=	0x009c
+                    009D    327 _SM2	=	0x009d
+                    009E    328 _SM1	=	0x009e
+                    009F    329 _SM0	=	0x009f
+                    00A0    330 _P2_0	=	0x00a0
+                    00A1    331 _P2_1	=	0x00a1
+                    00A2    332 _P2_2	=	0x00a2
+                    00A3    333 _P2_3	=	0x00a3
+                    00A4    334 _P2_4	=	0x00a4
+                    00A5    335 _P2_5	=	0x00a5
+                    00A6    336 _P2_6	=	0x00a6
+                    00A7    337 _P2_7	=	0x00a7
+                    00A8    338 _EX0	=	0x00a8
+                    00A9    339 _ET0	=	0x00a9
+                    00AA    340 _EX1	=	0x00aa
+                    00AB    341 _ET1	=	0x00ab
+                    00AC    342 _ES	=	0x00ac
+                    00AF    343 _EA	=	0x00af
+                    00B0    344 _P3_0	=	0x00b0
+                    00B1    345 _P3_1	=	0x00b1
+                    00B2    346 _P3_2	=	0x00b2
+                    00B3    347 _P3_3	=	0x00b3
+                    00B4    348 _P3_4	=	0x00b4
+                    00B5    349 _P3_5	=	0x00b5
+                    00B6    350 _P3_6	=	0x00b6
+                    00B7    351 _P3_7	=	0x00b7
+                    00B0    352 _RXD	=	0x00b0
+                    00B1    353 _TXD	=	0x00b1
+                    00B2    354 _INT0	=	0x00b2
+                    00B3    355 _INT1	=	0x00b3
+                    00B4    356 _T0	=	0x00b4
+                    00B5    357 _T1	=	0x00b5
+                    00B6    358 _WR	=	0x00b6
+                    00B7    359 _RD	=	0x00b7
+                    00B8    360 _PX0	=	0x00b8
+                    00B9    361 _PT0	=	0x00b9
+                    00BA    362 _PX1	=	0x00ba
+                    00BB    363 _PT1	=	0x00bb
+                    00BC    364 _PS	=	0x00bc
+                    00D0    365 _P	=	0x00d0
+                    00D1    366 _F1	=	0x00d1
+                    00D2    367 _OV	=	0x00d2
+                    00D3    368 _RS0	=	0x00d3
+                    00D4    369 _RS1	=	0x00d4
+                    00D5    370 _F0	=	0x00d5
+                    00D6    371 _AC	=	0x00d6
+                    00D7    372 _CY	=	0x00d7
+                    00AD    373 _ET2	=	0x00ad
+                    00BD    374 _PT2	=	0x00bd
+                    00C8    375 _T2CON_0	=	0x00c8
+                    00C9    376 _T2CON_1	=	0x00c9
+                    00CA    377 _T2CON_2	=	0x00ca
+                    00CB    378 _T2CON_3	=	0x00cb
+                    00CC    379 _T2CON_4	=	0x00cc
+                    00CD    380 _T2CON_5	=	0x00cd
+                    00CE    381 _T2CON_6	=	0x00ce
+                    00CF    382 _T2CON_7	=	0x00cf
+                    00C8    383 _CP_RL2	=	0x00c8
+                    00C9    384 _C_T2	=	0x00c9
+                    00CA    385 _TR2	=	0x00ca
+                    00CB    386 _EXEN2	=	0x00cb
+                    00CC    387 _TCLK	=	0x00cc
+                    00CD    388 _RCLK	=	0x00cd
+                    00CE    389 _EXF2	=	0x00ce
+                    00CF    390 _TF2	=	0x00cf
+                    00DF    391 _CF	=	0x00df
+                    00DE    392 _CR	=	0x00de
+                    00DC    393 _CCF4	=	0x00dc
+                    00DB    394 _CCF3	=	0x00db
+                    00DA    395 _CCF2	=	0x00da
+                    00D9    396 _CCF1	=	0x00d9
+                    00D8    397 _CCF0	=	0x00d8
+                    00AE    398 _EC	=	0x00ae
+                    00BE    399 _PPCL	=	0x00be
+                    00BD    400 _PT2L	=	0x00bd
+                    00BC    401 _PLS	=	0x00bc
+                    00BB    402 _PT1L	=	0x00bb
+                    00BA    403 _PX1L	=	0x00ba
+                    00B9    404 _PT0L	=	0x00b9
+                    00B8    405 _PX0L	=	0x00b8
+                    00C0    406 _P4_0	=	0x00c0
+                    00C1    407 _P4_1	=	0x00c1
+                    00C2    408 _P4_2	=	0x00c2
+                    00C3    409 _P4_3	=	0x00c3
+                    00C4    410 _P4_4	=	0x00c4
+                    00C5    411 _P4_5	=	0x00c5
+                    00C6    412 _P4_6	=	0x00c6
+                    00C7    413 _P4_7	=	0x00c7
+                    00D8    414 _P5_0	=	0x00d8
+                    00D9    415 _P5_1	=	0x00d9
+                    00DA    416 _P5_2	=	0x00da
+                    00DB    417 _P5_3	=	0x00db
+                    00DC    418 _P5_4	=	0x00dc
+                    00DD    419 _P5_5	=	0x00dd
+                    00DE    420 _P5_6	=	0x00de
+                    00DF    421 _P5_7	=	0x00df
+                            422 ;--------------------------------------------------------
+                            423 ; overlayable register banks
+                            424 ;--------------------------------------------------------
+                            425 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     426 	.ds 8
+                            427 ;--------------------------------------------------------
+                            428 ; internal ram data
+                            429 ;--------------------------------------------------------
+                            430 	.area DSEG    (DATA)
+                            431 ;--------------------------------------------------------
+                            432 ; overlayable items in internal ram 
+                            433 ;--------------------------------------------------------
+                            434 	.area OSEG    (OVR,DATA)
+                            435 ;--------------------------------------------------------
+                            436 ; indirectly addressable internal ram data
+                            437 ;--------------------------------------------------------
+                            438 	.area ISEG    (DATA)
+                            439 ;--------------------------------------------------------
+                            440 ; bit data
+                            441 ;--------------------------------------------------------
+                            442 	.area BSEG    (BIT)
+                            443 ;--------------------------------------------------------
+                            444 ; paged external ram data
+                            445 ;--------------------------------------------------------
+                            446 	.area PSEG    (PAG,XDATA)
+                            447 ;--------------------------------------------------------
+                            448 ; external ram data
+                            449 ;--------------------------------------------------------
+                            450 	.area XSEG    (XDATA)
+   00B9                     451 _PCF_SetOutputLow_pin_1_1:
+   00B9                     452 	.ds 1
+   00BA                     453 _PCF_SetInputOutput_pin_1_1:
+   00BA                     454 	.ds 1
+   00BB                     455 _PCF_OutputCount_count_1_1:
+   00BB                     456 	.ds 1
+                            457 ;--------------------------------------------------------
+                            458 ; external initialized ram data
+                            459 ;--------------------------------------------------------
+                            460 	.area XISEG   (XDATA)
+   011D                     461 _PCF_Config::
+   011D                     462 	.ds 1
+   011E                     463 _PCF_ButtonPressed::
+   011E                     464 	.ds 1
+                            465 	.area HOME    (CODE)
+                            466 	.area GSINIT0 (CODE)
+                            467 	.area GSINIT1 (CODE)
+                            468 	.area GSINIT2 (CODE)
+                            469 	.area GSINIT3 (CODE)
+                            470 	.area GSINIT4 (CODE)
+                            471 	.area GSINIT5 (CODE)
+                            472 	.area GSINIT  (CODE)
+                            473 	.area GSFINAL (CODE)
+                            474 	.area CSEG    (CODE)
+                            475 ;--------------------------------------------------------
+                            476 ; global & static initialisations
+                            477 ;--------------------------------------------------------
+                            478 	.area HOME    (CODE)
+                            479 	.area GSINIT  (CODE)
+                            480 	.area GSFINAL (CODE)
+                            481 	.area GSINIT  (CODE)
+                            482 ;--------------------------------------------------------
+                            483 ; Home
+                            484 ;--------------------------------------------------------
+                            485 	.area HOME    (CODE)
+                            486 	.area CSEG    (CODE)
+                            487 ;--------------------------------------------------------
+                            488 ; code
+                            489 ;--------------------------------------------------------
+                            490 	.area CSEG    (CODE)
+                            491 ;------------------------------------------------------------
+                            492 ;Allocation info for local variables in function 'ext1'
+                            493 ;------------------------------------------------------------
+                            494 ;------------------------------------------------------------
+                            495 ;	PCF8574.c:20: void ext1(void) __interrupt(2){
+                            496 ;	-----------------------------------------
+                            497 ;	 function ext1
+                            498 ;	-----------------------------------------
+   1F5B                     499 _ext1:
+                    0002    500 	ar2 = 0x02
+                    0003    501 	ar3 = 0x03
+                    0004    502 	ar4 = 0x04
+                    0005    503 	ar5 = 0x05
+                    0006    504 	ar6 = 0x06
+                    0007    505 	ar7 = 0x07
+                    0000    506 	ar0 = 0x00
+                    0001    507 	ar1 = 0x01
+   1F5B C0 E0               508 	push	acc
+   1F5D C0 82               509 	push	dpl
+   1F5F C0 83               510 	push	dph
+                            511 ;	PCF8574.c:21: PCF_ButtonPressed = 1;
+                            512 ;	genAssign
+   1F61 90 01 1E            513 	mov	dptr,#_PCF_ButtonPressed
+   1F64 74 01               514 	mov	a,#0x01
+   1F66 F0                  515 	movx	@dptr,a
+                            516 ;	Peephole 300	removed redundant label 00101$
+   1F67 D0 83               517 	pop	dph
+   1F69 D0 82               518 	pop	dpl
+   1F6B D0 E0               519 	pop	acc
+   1F6D 32                  520 	reti
+                            521 ;	eliminated unneeded push/pop psw
+                            522 ;	eliminated unneeded push/pop b
+                            523 ;------------------------------------------------------------
+                            524 ;Allocation info for local variables in function 'PCF_ReadDevice'
+                            525 ;------------------------------------------------------------
+                            526 ;value                     Allocated with name '_PCF_ReadDevice_value_1_1'
+                            527 ;ack                       Allocated with name '_PCF_ReadDevice_ack_1_1'
+                            528 ;------------------------------------------------------------
+                            529 ;	PCF8574.c:28: uint8_t PCF_ReadDevice(void){
+                            530 ;	-----------------------------------------
+                            531 ;	 function PCF_ReadDevice
+                            532 ;	-----------------------------------------
+   1F6E                     533 _PCF_ReadDevice:
+                            534 ;	PCF8574.c:31: I2CStart();
+                            535 ;	genCall
+   1F6E 12 07 2C            536 	lcall	_I2CStart
+                            537 ;	PCF8574.c:32: ack = I2CSend(PCF_ADDRESS | READ);
+                            538 ;	genCall
+   1F71 75 82 71            539 	mov	dpl,#0x71
+   1F74 12 07 5C            540 	lcall	_I2CSend
+                            541 ;	PCF8574.c:33: value = I2CRead();
+                            542 ;	genCall
+   1F77 12 07 A7            543 	lcall	_I2CRead
+   1F7A AA 82               544 	mov	r2,dpl
+                            545 ;	PCF8574.c:34: I2CNak();
+                            546 ;	genCall
+   1F7C C0 02               547 	push	ar2
+   1F7E 12 07 51            548 	lcall	_I2CNak
+   1F81 D0 02               549 	pop	ar2
+                            550 ;	PCF8574.c:35: I2CStop();
+                            551 ;	genCall
+   1F83 C0 02               552 	push	ar2
+   1F85 12 07 3B            553 	lcall	_I2CStop
+   1F88 D0 02               554 	pop	ar2
+                            555 ;	PCF8574.c:36: return value;
+                            556 ;	genRet
+   1F8A 8A 82               557 	mov	dpl,r2
+                            558 ;	Peephole 300	removed redundant label 00101$
+   1F8C 22                  559 	ret
+                            560 ;------------------------------------------------------------
+                            561 ;Allocation info for local variables in function 'PCF_UpdateDevice'
+                            562 ;------------------------------------------------------------
+                            563 ;ack                       Allocated with name '_PCF_UpdateDevice_ack_1_1'
+                            564 ;------------------------------------------------------------
+                            565 ;	PCF8574.c:42: void PCF_UpdateDevice(void){
+                            566 ;	-----------------------------------------
+                            567 ;	 function PCF_UpdateDevice
+                            568 ;	-----------------------------------------
+   1F8D                     569 _PCF_UpdateDevice:
+                            570 ;	PCF8574.c:44: I2CStart();
+                            571 ;	genCall
+   1F8D 12 07 2C            572 	lcall	_I2CStart
+                            573 ;	PCF8574.c:45: ack = I2CSend(PCF_ADDRESS | WRITE);
+                            574 ;	genCall
+   1F90 75 82 70            575 	mov	dpl,#0x70
+   1F93 12 07 5C            576 	lcall	_I2CSend
+                            577 ;	PCF8574.c:46: ack = I2CSend(PCF_Config);
+                            578 ;	genAssign
+   1F96 90 01 1D            579 	mov	dptr,#_PCF_Config
+   1F99 E0                  580 	movx	a,@dptr
+                            581 ;	genCall
+   1F9A FA                  582 	mov	r2,a
+                            583 ;	Peephole 244.c	loading dpl from a instead of r2
+   1F9B F5 82               584 	mov	dpl,a
+   1F9D 12 07 5C            585 	lcall	_I2CSend
+                            586 ;	PCF8574.c:47: I2CStop();
+                            587 ;	genCall
+                            588 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   1FA0 02 07 3B            589 	ljmp	_I2CStop
+                            590 ;
+                            591 ;------------------------------------------------------------
+                            592 ;Allocation info for local variables in function 'PCF_PrintState'
+                            593 ;------------------------------------------------------------
+                            594 ;state                     Allocated with name '_PCF_PrintState_state_1_1'
+                            595 ;value                     Allocated with name '_PCF_PrintState_value_1_1'
+                            596 ;i                         Allocated with name '_PCF_PrintState_i_1_1'
+                            597 ;------------------------------------------------------------
+                            598 ;	PCF8574.c:54: void PCF_PrintState(void){
+                            599 ;	-----------------------------------------
+                            600 ;	 function PCF_PrintState
+                            601 ;	-----------------------------------------
+   1FA3                     602 _PCF_PrintState:
+                            603 ;	PCF8574.c:56: uint8_t value = PCF_ReadDevice();
+                            604 ;	genCall
+   1FA3 12 1F 6E            605 	lcall	_PCF_ReadDevice
+   1FA6 AA 82               606 	mov	r2,dpl
+                            607 ;	PCF8574.c:58: printf("\r\nRead value %x\r\n", value);
+                            608 ;	genCast
+   1FA8 7B 00               609 	mov	r3,#0x00
+                            610 ;	genIpush
+   1FAA C0 02               611 	push	ar2
+   1FAC C0 03               612 	push	ar3
+   1FAE C0 02               613 	push	ar2
+   1FB0 C0 03               614 	push	ar3
+                            615 ;	genIpush
+   1FB2 74 B7               616 	mov	a,#__str_0
+   1FB4 C0 E0               617 	push	acc
+   1FB6 74 41               618 	mov	a,#(__str_0 >> 8)
+   1FB8 C0 E0               619 	push	acc
+   1FBA 74 80               620 	mov	a,#0x80
+   1FBC C0 E0               621 	push	acc
+                            622 ;	genCall
+   1FBE 12 2C 9C            623 	lcall	_printf
+   1FC1 E5 81               624 	mov	a,sp
+   1FC3 24 FB               625 	add	a,#0xfb
+   1FC5 F5 81               626 	mov	sp,a
+   1FC7 D0 03               627 	pop	ar3
+   1FC9 D0 02               628 	pop	ar2
+                            629 ;	PCF8574.c:59: printf("\r\nState of pins on I/O expander:");
+                            630 ;	genIpush
+   1FCB C0 02               631 	push	ar2
+   1FCD C0 03               632 	push	ar3
+   1FCF 74 C9               633 	mov	a,#__str_1
+   1FD1 C0 E0               634 	push	acc
+   1FD3 74 41               635 	mov	a,#(__str_1 >> 8)
+   1FD5 C0 E0               636 	push	acc
+   1FD7 74 80               637 	mov	a,#0x80
+   1FD9 C0 E0               638 	push	acc
+                            639 ;	genCall
+   1FDB 12 2C 9C            640 	lcall	_printf
+   1FDE 15 81               641 	dec	sp
+   1FE0 15 81               642 	dec	sp
+   1FE2 15 81               643 	dec	sp
+   1FE4 D0 03               644 	pop	ar3
+   1FE6 D0 02               645 	pop	ar2
+                            646 ;	PCF8574.c:60: for(i = 0; i < 8; ++i){
+                            647 ;	genAssign
+   1FE8 7C 00               648 	mov	r4,#0x00
+   1FEA                     649 00104$:
+                            650 ;	genCmpLt
+                            651 ;	genCmp
+   1FEA BC 08 00            652 	cjne	r4,#0x08,00114$
+   1FED                     653 00114$:
+                            654 ;	genIfxJump
+   1FED 40 03               655 	jc	00115$
+   1FEF 02 20 93            656 	ljmp	00107$
+   1FF2                     657 00115$:
+                            658 ;	PCF8574.c:61: if(PCF_Config & (0x01 << i))
+                            659 ;	genLeftShift
+   1FF2 8C F0               660 	mov	b,r4
+   1FF4 05 F0               661 	inc	b
+   1FF6 74 01               662 	mov	a,#0x01
+   1FF8 80 02               663 	sjmp	00118$
+   1FFA                     664 00116$:
+   1FFA 25 E0               665 	add	a,acc
+   1FFC                     666 00118$:
+   1FFC D5 F0 FB            667 	djnz	b,00116$
+   1FFF FD                  668 	mov	r5,a
+                            669 ;	genAssign
+   2000 90 01 1D            670 	mov	dptr,#_PCF_Config
+   2003 E0                  671 	movx	a,@dptr
+   2004 FE                  672 	mov	r6,a
+                            673 ;	genAnd
+   2005 ED                  674 	mov	a,r5
+   2006 5E                  675 	anl	a,r6
+                            676 ;	genIfx
+                            677 ;	genIfxJump
+                            678 ;	Peephole 108.c	removed ljmp by inverse jump logic
+   2007 60 5D               679 	jz	00102$
+                            680 ;	Peephole 300	removed redundant label 00119$
+                            681 ;	PCF8574.c:62: printf("\r\nPin %d: Input/Output value: %d", i, ((value & (0x01 << i)) >> i));
+                            682 ;	genCast
+   2009 8C 05               683 	mov	ar5,r4
+   200B 7E 00               684 	mov	r6,#0x00
+                            685 ;	genLeftShift
+   200D 8C F0               686 	mov	b,r4
+   200F 05 F0               687 	inc	b
+   2011 7F 01               688 	mov	r7,#0x01
+   2013 78 00               689 	mov	r0,#0x00
+   2015 80 06               690 	sjmp	00121$
+   2017                     691 00120$:
+   2017 EF                  692 	mov	a,r7
+                            693 ;	Peephole 254	optimized left shift
+   2018 2F                  694 	add	a,r7
+   2019 FF                  695 	mov	r7,a
+   201A E8                  696 	mov	a,r0
+   201B 33                  697 	rlc	a
+   201C F8                  698 	mov	r0,a
+   201D                     699 00121$:
+   201D D5 F0 F7            700 	djnz	b,00120$
+                            701 ;	genAnd
+   2020 EA                  702 	mov	a,r2
+   2021 52 07               703 	anl	ar7,a
+   2023 EB                  704 	mov	a,r3
+   2024 52 00               705 	anl	ar0,a
+                            706 ;	genRightShift
+                            707 ;	genSignedRightShift
+   2026 8C F0               708 	mov	b,r4
+   2028 05 F0               709 	inc	b
+   202A E8                  710 	mov	a,r0
+   202B 33                  711 	rlc	a
+   202C 92 D2               712 	mov	ov,c
+   202E 80 08               713 	sjmp	00123$
+   2030                     714 00122$:
+   2030 A2 D2               715 	mov	c,ov
+   2032 E8                  716 	mov	a,r0
+   2033 13                  717 	rrc	a
+   2034 F8                  718 	mov	r0,a
+   2035 EF                  719 	mov	a,r7
+   2036 13                  720 	rrc	a
+   2037 FF                  721 	mov	r7,a
+   2038                     722 00123$:
+   2038 D5 F0 F5            723 	djnz	b,00122$
+                            724 ;	genIpush
+   203B C0 02               725 	push	ar2
+   203D C0 03               726 	push	ar3
+   203F C0 04               727 	push	ar4
+   2041 C0 07               728 	push	ar7
+   2043 C0 00               729 	push	ar0
+                            730 ;	genIpush
+   2045 C0 05               731 	push	ar5
+   2047 C0 06               732 	push	ar6
+                            733 ;	genIpush
+   2049 74 EA               734 	mov	a,#__str_2
+   204B C0 E0               735 	push	acc
+   204D 74 41               736 	mov	a,#(__str_2 >> 8)
+   204F C0 E0               737 	push	acc
+   2051 74 80               738 	mov	a,#0x80
+   2053 C0 E0               739 	push	acc
+                            740 ;	genCall
+   2055 12 2C 9C            741 	lcall	_printf
+   2058 E5 81               742 	mov	a,sp
+   205A 24 F9               743 	add	a,#0xf9
+   205C F5 81               744 	mov	sp,a
+   205E D0 04               745 	pop	ar4
+   2060 D0 03               746 	pop	ar3
+   2062 D0 02               747 	pop	ar2
+                            748 ;	Peephole 112.b	changed ljmp to sjmp
+   2064 80 29               749 	sjmp	00106$
+   2066                     750 00102$:
+                            751 ;	PCF8574.c:64: printf("\r\nPin %d: Output value: 0", i);
+                            752 ;	genCast
+   2066 8C 05               753 	mov	ar5,r4
+   2068 7E 00               754 	mov	r6,#0x00
+                            755 ;	genIpush
+   206A C0 02               756 	push	ar2
+   206C C0 03               757 	push	ar3
+   206E C0 04               758 	push	ar4
+   2070 C0 05               759 	push	ar5
+   2072 C0 06               760 	push	ar6
+                            761 ;	genIpush
+   2074 74 0B               762 	mov	a,#__str_3
+   2076 C0 E0               763 	push	acc
+   2078 74 42               764 	mov	a,#(__str_3 >> 8)
+   207A C0 E0               765 	push	acc
+   207C 74 80               766 	mov	a,#0x80
+   207E C0 E0               767 	push	acc
+                            768 ;	genCall
+   2080 12 2C 9C            769 	lcall	_printf
+   2083 E5 81               770 	mov	a,sp
+   2085 24 FB               771 	add	a,#0xfb
+   2087 F5 81               772 	mov	sp,a
+   2089 D0 04               773 	pop	ar4
+   208B D0 03               774 	pop	ar3
+   208D D0 02               775 	pop	ar2
+   208F                     776 00106$:
+                            777 ;	PCF8574.c:60: for(i = 0; i < 8; ++i){
+                            778 ;	genPlus
+                            779 ;     genPlusIncr
+   208F 0C                  780 	inc	r4
+   2090 02 1F EA            781 	ljmp	00104$
+   2093                     782 00107$:
+                            783 ;	PCF8574.c:66: printf("\r\n");
+                            784 ;	genIpush
+   2093 74 25               785 	mov	a,#__str_4
+   2095 C0 E0               786 	push	acc
+   2097 74 42               787 	mov	a,#(__str_4 >> 8)
+   2099 C0 E0               788 	push	acc
+   209B 74 80               789 	mov	a,#0x80
+   209D C0 E0               790 	push	acc
+                            791 ;	genCall
+   209F 12 2C 9C            792 	lcall	_printf
+   20A2 15 81               793 	dec	sp
+   20A4 15 81               794 	dec	sp
+   20A6 15 81               795 	dec	sp
+                            796 ;	Peephole 300	removed redundant label 00108$
+   20A8 22                  797 	ret
+                            798 ;------------------------------------------------------------
+                            799 ;Allocation info for local variables in function 'PCF_SetOutputLow'
+                            800 ;------------------------------------------------------------
+                            801 ;pin                       Allocated with name '_PCF_SetOutputLow_pin_1_1'
+                            802 ;------------------------------------------------------------
+                            803 ;	PCF8574.c:73: void PCF_SetOutputLow(uint8_t pin){
+                            804 ;	-----------------------------------------
+                            805 ;	 function PCF_SetOutputLow
+                            806 ;	-----------------------------------------
+   20A9                     807 _PCF_SetOutputLow:
+                            808 ;	genReceive
+   20A9 E5 82               809 	mov	a,dpl
+   20AB 90 00 B9            810 	mov	dptr,#_PCF_SetOutputLow_pin_1_1
+   20AE F0                  811 	movx	@dptr,a
+                            812 ;	PCF8574.c:74: PCF_Config &= ~(1 << pin);
+                            813 ;	genAssign
+   20AF 90 00 B9            814 	mov	dptr,#_PCF_SetOutputLow_pin_1_1
+   20B2 E0                  815 	movx	a,@dptr
+   20B3 FA                  816 	mov	r2,a
+                            817 ;	genLeftShift
+   20B4 8A F0               818 	mov	b,r2
+   20B6 05 F0               819 	inc	b
+   20B8 74 01               820 	mov	a,#0x01
+   20BA 80 02               821 	sjmp	00105$
+   20BC                     822 00103$:
+   20BC 25 E0               823 	add	a,acc
+   20BE                     824 00105$:
+   20BE D5 F0 FB            825 	djnz	b,00103$
+                            826 ;	genCpl
+                            827 ;	Peephole 105	removed redundant mov
+                            828 ;	Peephole 184	removed redundant mov
+   20C1 F4                  829 	cpl	a
+   20C2 FA                  830 	mov	r2,a
+                            831 ;	genAssign
+                            832 ;	genAnd
+   20C3 90 01 1D            833 	mov	dptr,#_PCF_Config
+   20C6 E0                  834 	movx	a,@dptr
+   20C7 FB                  835 	mov	r3,a
+                            836 ;	Peephole 248.b	optimized and to xdata
+   20C8 5A                  837 	anl	a,r2
+   20C9 F0                  838 	movx	@dptr,a
+                            839 ;	PCF8574.c:75: PCF_UpdateDevice();
+                            840 ;	genCall
+                            841 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   20CA 02 1F 8D            842 	ljmp	_PCF_UpdateDevice
+                            843 ;
+                            844 ;------------------------------------------------------------
+                            845 ;Allocation info for local variables in function 'PCF_SetInputOutput'
+                            846 ;------------------------------------------------------------
+                            847 ;pin                       Allocated with name '_PCF_SetInputOutput_pin_1_1'
+                            848 ;------------------------------------------------------------
+                            849 ;	PCF8574.c:81: void PCF_SetInputOutput(uint8_t pin){
+                            850 ;	-----------------------------------------
+                            851 ;	 function PCF_SetInputOutput
+                            852 ;	-----------------------------------------
+   20CD                     853 _PCF_SetInputOutput:
+                            854 ;	genReceive
+   20CD E5 82               855 	mov	a,dpl
+   20CF 90 00 BA            856 	mov	dptr,#_PCF_SetInputOutput_pin_1_1
+   20D2 F0                  857 	movx	@dptr,a
+                            858 ;	PCF8574.c:82: PCF_Config |= INPUT << pin;
+                            859 ;	genAssign
+   20D3 90 00 BA            860 	mov	dptr,#_PCF_SetInputOutput_pin_1_1
+   20D6 E0                  861 	movx	a,@dptr
+   20D7 FA                  862 	mov	r2,a
+                            863 ;	genLeftShift
+   20D8 8A F0               864 	mov	b,r2
+   20DA 05 F0               865 	inc	b
+   20DC 74 01               866 	mov	a,#0x01
+   20DE 80 02               867 	sjmp	00105$
+   20E0                     868 00103$:
+   20E0 25 E0               869 	add	a,acc
+   20E2                     870 00105$:
+   20E2 D5 F0 FB            871 	djnz	b,00103$
+   20E5 FA                  872 	mov	r2,a
+                            873 ;	genAssign
+                            874 ;	genOr
+   20E6 90 01 1D            875 	mov	dptr,#_PCF_Config
+   20E9 E0                  876 	movx	a,@dptr
+   20EA FB                  877 	mov	r3,a
+                            878 ;	Peephole 248.a	optimized or to xdata
+   20EB 4A                  879 	orl	a,r2
+   20EC F0                  880 	movx	@dptr,a
+                            881 ;	PCF8574.c:83: PCF_UpdateDevice();
+                            882 ;	genCall
+                            883 ;	Peephole 253.b	replaced lcall/ret with ljmp
+   20ED 02 1F 8D            884 	ljmp	_PCF_UpdateDevice
+                            885 ;
+                            886 ;------------------------------------------------------------
+                            887 ;Allocation info for local variables in function 'PCF_OutputCount'
+                            888 ;------------------------------------------------------------
+                            889 ;count                     Allocated with name '_PCF_OutputCount_count_1_1'
+                            890 ;i                         Allocated with name '_PCF_OutputCount_i_1_1'
+                            891 ;------------------------------------------------------------
+                            892 ;	PCF8574.c:90: void PCF_OutputCount(uint8_t count){
+                            893 ;	-----------------------------------------
+                            894 ;	 function PCF_OutputCount
+                            895 ;	-----------------------------------------
+   20F0                     896 _PCF_OutputCount:
+                            897 ;	genReceive
+   20F0 E5 82               898 	mov	a,dpl
+   20F2 90 00 BB            899 	mov	dptr,#_PCF_OutputCount_count_1_1
+   20F5 F0                  900 	movx	@dptr,a
+                            901 ;	PCF8574.c:92: for (i = 0; i < 4; ++i){
+                            902 ;	genAssign
+   20F6 90 00 BB            903 	mov	dptr,#_PCF_OutputCount_count_1_1
+   20F9 E0                  904 	movx	a,@dptr
+   20FA FA                  905 	mov	r2,a
+                            906 ;	genAssign
+   20FB 7B 00               907 	mov	r3,#0x00
+   20FD                     908 00104$:
+                            909 ;	genCmpLt
+                            910 ;	genCmp
+   20FD BB 04 00            911 	cjne	r3,#0x04,00114$
+   2100                     912 00114$:
+                            913 ;	genIfxJump
+                            914 ;	Peephole 108.a	removed ljmp by inverse jump logic
+   2100 50 38               915 	jnc	00108$
+                            916 ;	Peephole 300	removed redundant label 00115$
+                            917 ;	PCF8574.c:93: if ( count & (0x01 << i) )  //
+                            918 ;	genLeftShift
+   2102 8B F0               919 	mov	b,r3
+   2104 05 F0               920 	inc	b
+   2106 74 01               921 	mov	a,#0x01
+   2108 80 02               922 	sjmp	00118$
+   210A                     923 00116$:
+   210A 25 E0               924 	add	a,acc
+   210C                     925 00118$:
+   210C D5 F0 FB            926 	djnz	b,00116$
+                            927 ;	genAnd
+   210F FC                  928 	mov	r4,a
+                            929 ;	Peephole 105	removed redundant mov
+   2110 5A                  930 	anl	a,r2
+                            931 ;	genIfx
+                            932 ;	genIfxJump
+                            933 ;	Peephole 108.c	removed ljmp by inverse jump logic
+   2111 60 13               934 	jz	00102$
+                            935 ;	Peephole 300	removed redundant label 00119$
+                            936 ;	PCF8574.c:94: PCF_SetInputOutput(i + 4); //Bits 7-4
+                            937 ;	genPlus
+                            938 ;     genPlusIncr
+   2113 74 04               939 	mov	a,#0x04
+                            940 ;	Peephole 236.a	used r3 instead of ar3
+   2115 2B                  941 	add	a,r3
+                            942 ;	genCall
+   2116 FC                  943 	mov	r4,a
+                            944 ;	Peephole 244.c	loading dpl from a instead of r4
+   2117 F5 82               945 	mov	dpl,a
+   2119 C0 02               946 	push	ar2
+   211B C0 03               947 	push	ar3
+   211D 12 20 CD            948 	lcall	_PCF_SetInputOutput
+   2120 D0 03               949 	pop	ar3
+   2122 D0 02               950 	pop	ar2
+                            951 ;	Peephole 112.b	changed ljmp to sjmp
+   2124 80 11               952 	sjmp	00106$
+   2126                     953 00102$:
+                            954 ;	PCF8574.c:96: PCF_SetOutputLow(i+4);
+                            955 ;	genPlus
+                            956 ;     genPlusIncr
+   2126 74 04               957 	mov	a,#0x04
+                            958 ;	Peephole 236.a	used r3 instead of ar3
+   2128 2B                  959 	add	a,r3
+                            960 ;	genCall
+   2129 FC                  961 	mov	r4,a
+                            962 ;	Peephole 244.c	loading dpl from a instead of r4
+   212A F5 82               963 	mov	dpl,a
+   212C C0 02               964 	push	ar2
+   212E C0 03               965 	push	ar3
+   2130 12 20 A9            966 	lcall	_PCF_SetOutputLow
+   2133 D0 03               967 	pop	ar3
+   2135 D0 02               968 	pop	ar2
+   2137                     969 00106$:
+                            970 ;	PCF8574.c:92: for (i = 0; i < 4; ++i){
+                            971 ;	genPlus
+                            972 ;     genPlusIncr
+   2137 0B                  973 	inc	r3
+                            974 ;	Peephole 112.b	changed ljmp to sjmp
+   2138 80 C3               975 	sjmp	00104$
+   213A                     976 00108$:
+   213A 22                  977 	ret
+                            978 ;------------------------------------------------------------
+                            979 ;Allocation info for local variables in function 'PCF_Init'
+                            980 ;------------------------------------------------------------
+                            981 ;------------------------------------------------------------
+                            982 ;	PCF8574.c:104: void PCF_Init(void){
+                            983 ;	-----------------------------------------
+                            984 ;	 function PCF_Init
+                            985 ;	-----------------------------------------
+   213B                     986 _PCF_Init:
+                            987 ;	PCF8574.c:105: I2CInit();
+                            988 ;	genCall
+   213B 12 07 27            989 	lcall	_I2CInit
+                            990 ;	PCF8574.c:106: PCF_Config = 0x00;
+                            991 ;	genAssign
+   213E 90 01 1D            992 	mov	dptr,#_PCF_Config
+                            993 ;	Peephole 181	changed mov to clr
+   2141 E4                  994 	clr	a
+   2142 F0                  995 	movx	@dptr,a
+                            996 ;	PCF8574.c:107: PCF_SetInputOutput(0);  //Config pin 0 as input
+                            997 ;	genCall
+   2143 75 82 00            998 	mov	dpl,#0x00
+   2146 12 20 CD            999 	lcall	_PCF_SetInputOutput
+                           1000 ;	PCF8574.c:108: PCF_SetInputOutput(1);  //Config pin 1 as input
+                           1001 ;	genCall
+   2149 75 82 01           1002 	mov	dpl,#0x01
+   214C 12 20 CD           1003 	lcall	_PCF_SetInputOutput
+                           1004 ;	PCF8574.c:109: IE |= 0x04;     //Enable External interrupt 1
+                           1005 ;	genOr
+   214F 43 A8 04           1006 	orl	_IE,#0x04
+                           1007 ;	Peephole 300	removed redundant label 00101$
+   2152 22                 1008 	ret
+                           1009 	.area CSEG    (CODE)
+                           1010 	.area CONST   (CODE)
+   41B7                    1011 __str_0:
+   41B7 0D                 1012 	.db 0x0D
+   41B8 0A                 1013 	.db 0x0A
+   41B9 52 65 61 64 20 76  1014 	.ascii "Read value %x"
+        61 6C 75 65 20 25
+        78
+   41C6 0D                 1015 	.db 0x0D
+   41C7 0A                 1016 	.db 0x0A
+   41C8 00                 1017 	.db 0x00
+   41C9                    1018 __str_1:
+   41C9 0D                 1019 	.db 0x0D
+   41CA 0A                 1020 	.db 0x0A
+   41CB 53 74 61 74 65 20  1021 	.ascii "State of pins on I/O expander:"
+        6F 66 20 70 69 6E
+        73 20 6F 6E 20 49
+        2F 4F 20 65 78 70
+        61 6E 64 65 72 3A
+   41E9 00                 1022 	.db 0x00
+   41EA                    1023 __str_2:
+   41EA 0D                 1024 	.db 0x0D
+   41EB 0A                 1025 	.db 0x0A
+   41EC 50 69 6E 20 25 64  1026 	.ascii "Pin %d: Input/Output value: %d"
+        3A 20 49 6E 70 75
+        74 2F 4F 75 74 70
+        75 74 20 76 61 6C
+        75 65 3A 20 25 64
+   420A 00                 1027 	.db 0x00
+   420B                    1028 __str_3:
+   420B 0D                 1029 	.db 0x0D
+   420C 0A                 1030 	.db 0x0A
+   420D 50 69 6E 20 25 64  1031 	.ascii "Pin %d: Output value: 0"
+        3A 20 4F 75 74 70
+        75 74 20 76 61 6C
+        75 65 3A 20 30
+   4224 00                 1032 	.db 0x00
+   4225                    1033 __str_4:
+   4225 0D                 1034 	.db 0x0D
+   4226 0A                 1035 	.db 0x0A
+   4227 00                 1036 	.db 0x00
+                           1037 	.area XINIT   (CODE)
+   432C                    1038 __xinit__PCF_Config:
+   432C 00                 1039 	.db #0x00
+   432D                    1040 __xinit__PCF_ButtonPressed:
+   432D 00                 1041 	.db #0x00

@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Sun Nov 13 10:15:20 2016
+; This file generated Sun Nov 13 18:28:18 2016
 ;--------------------------------------------------------
 	.module Timer
 	.optsdcc -mmcs51 --model-large
@@ -212,6 +212,7 @@
 	.globl _DPL
 	.globl _SP
 	.globl _P0
+	.globl _ButtonCount
 	.globl _ActiveAlarms
 	.globl _TimeMinsTens
 	.globl _TimeMinsOnes
@@ -483,6 +484,8 @@ _TimeMinsTens::
 	.ds 1
 _ActiveAlarms::
 	.ds 3
+_ButtonCount::
+	.ds 1
 	.area HOME    (CODE)
 	.area GSINIT0 (CODE)
 	.area GSINIT1 (CODE)
@@ -500,7 +503,7 @@ _ActiveAlarms::
 	.area GSINIT  (CODE)
 	.area GSFINAL (CODE)
 	.area GSINIT  (CODE)
-;	Timer.c:16: bool CG_Accessed = false;
+;	Timer.c:17: bool CG_Accessed = false;
 ;	genAssign
 	clr	_CG_Accessed
 ;--------------------------------------------------------
@@ -518,7 +521,7 @@ _ActiveAlarms::
 ;alarm_duration            Allocated with name '_Clock_NewAlarm_alarm_duration_1_1'
 ;i                         Allocated with name '_Clock_NewAlarm_i_1_1'
 ;------------------------------------------------------------
-;	Timer.c:33: void Clock_NewAlarm(uint16_t alarm_duration){
+;	Timer.c:37: void Clock_NewAlarm(uint16_t alarm_duration){
 ;	-----------------------------------------
 ;	 function Clock_NewAlarm
 ;	-----------------------------------------
@@ -539,7 +542,7 @@ _Clock_NewAlarm:
 	inc	dptr
 	mov	a,r2
 	movx	@dptr,a
-;	Timer.c:36: for (i = 0; i < 3; ++i){
+;	Timer.c:40: for (i = 0; i < 3; ++i){
 ;	genAssign
 	mov	r2,#0x00
 00103$:
@@ -551,7 +554,7 @@ _Clock_NewAlarm:
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00106$
 ;	Peephole 300	removed redundant label 00117$
-;	Timer.c:37: if(!ActiveAlarms[i]){
+;	Timer.c:41: if(!ActiveAlarms[i]){
 ;	genPlus
 ;	Peephole 236.g	used r2 instead of ar2
 	mov	a,r2
@@ -570,14 +573,14 @@ _Clock_NewAlarm:
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00106$
 ;	Peephole 300	removed redundant label 00118$
-;	Timer.c:36: for (i = 0; i < 3; ++i){
+;	Timer.c:40: for (i = 0; i < 3; ++i){
 ;	genPlus
 ;     genPlusIncr
 	inc	r2
 ;	Peephole 112.b	changed ljmp to sjmp
 	sjmp	00103$
 00106$:
-;	Timer.c:41: if (i == 3){
+;	Timer.c:45: if (i == 3){
 ;	genCmpEq
 ;	gencjneshort
 ;	Peephole 112.b	changed ljmp to sjmp
@@ -586,7 +589,7 @@ _Clock_NewAlarm:
 ;	Peephole 200.b	removed redundant sjmp
 ;	Peephole 300	removed redundant label 00119$
 ;	Peephole 300	removed redundant label 00120$
-;	Timer.c:42: printf("\r\nAll alarms busy, cannot create new alarm");
+;	Timer.c:46: printf("\r\nAll alarms busy, cannot create new alarm");
 ;	genIpush
 	mov	a,#__str_0
 	push	acc
@@ -599,13 +602,13 @@ _Clock_NewAlarm:
 	dec	sp
 	dec	sp
 	dec	sp
-;	Timer.c:43: return;
+;	Timer.c:47: return;
 ;	genRet
 ;	Peephole 112.b	changed ljmp to sjmp
 ;	Peephole 251.b	replaced sjmp to ret with ret
 	ret
 00108$:
-;	Timer.c:45: ActiveAlarms[i] = 1;
+;	Timer.c:49: ActiveAlarms[i] = 1;
 ;	genPlus
 ;	Peephole 236.g	used r2 instead of ar2
 	mov	a,r2
@@ -619,7 +622,7 @@ _Clock_NewAlarm:
 ;     genFarPointerSet
 	mov	a,#0x01
 	movx	@dptr,a
-;	Timer.c:46: AlarmCount[i] = alarm_duration;
+;	Timer.c:50: AlarmCount[i] = alarm_duration;
 ;	genLeftShift
 ;	genLeftShiftLiteral
 ;	genlshOne
@@ -651,7 +654,7 @@ _Clock_NewAlarm:
 	inc	dptr
 	mov	a,r6
 	movx	@dptr,a
-;	Timer.c:47: printf("\r\nCreated a new alarm %d with duration %u\r\n", i, alarm_duration);
+;	Timer.c:51: printf("\r\nCreated a new alarm %d with duration %u\r\n", i, alarm_duration);
 ;	genCast
 	mov	r3,#0x00
 ;	genIpush
@@ -680,7 +683,7 @@ _Clock_NewAlarm:
 ;addr                      Allocated with name '_timer0_addr_1_1'
 ;i                         Allocated with name '_timer0_i_1_1'
 ;------------------------------------------------------------
-;	Timer.c:52: void timer0(void) __interrupt(1){
+;	Timer.c:56: void timer0(void) __interrupt(1){
 ;	-----------------------------------------
 ;	 function timer0
 ;	-----------------------------------------
@@ -699,23 +702,23 @@ _timer0:
 	push	(0+1)
 	push	psw
 	mov	psw,#0x00
-;	Timer.c:55: bool updateAlarms = false;
+;	Timer.c:59: bool updateAlarms = false;
 ;	genAssign
 	clr	_timer0_updateAlarms_1_1
-;	Timer.c:58: if (ISR_Count < 2 ){
+;	Timer.c:62: if (ISR_Count < 2 ){
 ;	genAssign
 	mov	dptr,#_ISR_Count
 	movx	a,@dptr
 	mov	r2,a
 ;	genCmpLt
 ;	genCmp
-	cjne	r2,#0x02,00163$
-00163$:
+	cjne	r2,#0x02,00177$
+00177$:
 ;	genIfxJump
 ;	Peephole 108.a	removed ljmp by inverse jump logic
 	jnc	00139$
-;	Peephole 300	removed redundant label 00164$
-;	Timer.c:59: ISR_Count++;
+;	Peephole 300	removed redundant label 00178$
+;	Timer.c:63: ISR_Count++;
 ;	genPlus
 	mov	dptr,#_ISR_Count
 ;     genPlusIncr
@@ -725,16 +728,16 @@ _timer0:
 	movx	@dptr,a
 	ljmp	00140$
 00139$:
-;	Timer.c:61: P1_2 = !P1_2;
+;	Timer.c:65: P1_2 = !P1_2;
 ;	genNot
 	cpl	_P1_2
-;	Timer.c:63: if(CG_Accessed){
+;	Timer.c:67: if(CG_Accessed){
 ;	genIfx
 ;	genIfxJump
-	jb	_CG_Accessed,00165$
+	jb	_CG_Accessed,00179$
 	ljmp	00122$
-00165$:
-;	Timer.c:64: TimeTenths++;
+00179$:
+;	Timer.c:68: TimeTenths++;
 ;	genAssign
 	mov	dptr,#_TimeTenths
 	movx	a,@dptr
@@ -746,25 +749,25 @@ _timer0:
 ;	Peephole 236.a	used r2 instead of ar2
 	add	a,r2
 	movx	@dptr,a
-;	Timer.c:65: if(TimeTenths == 10){
+;	Timer.c:69: if(TimeTenths == 10){
 ;	genAssign
 	mov	dptr,#_TimeTenths
 	movx	a,@dptr
 	mov	r2,a
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x0A,00166$
-	sjmp	00167$
-00166$:
+	cjne	r2,#0x0A,00180$
+	sjmp	00181$
+00180$:
 	ljmp	00123$
-00167$:
-;	Timer.c:66: TimeTenths = 0;
+00181$:
+;	Timer.c:70: TimeTenths = 0;
 ;	genAssign
 	mov	dptr,#_TimeTenths
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;	Timer.c:67: TimeSecsOnes++;
+;	Timer.c:71: TimeSecsOnes++;
 ;	genAssign
 	mov	dptr,#_TimeSecsOnes
 	movx	a,@dptr
@@ -776,28 +779,28 @@ _timer0:
 ;	Peephole 236.a	used r2 instead of ar2
 	add	a,r2
 	movx	@dptr,a
-;	Timer.c:68: updateAlarms = true;
+;	Timer.c:72: updateAlarms = true;
 ;	genAssign
 	setb	_timer0_updateAlarms_1_1
-;	Timer.c:69: if(TimeSecsOnes == 10){
+;	Timer.c:73: if(TimeSecsOnes == 10){
 ;	genAssign
 	mov	dptr,#_TimeSecsOnes
 	movx	a,@dptr
 	mov	r2,a
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x0A,00168$
-	sjmp	00169$
-00168$:
+	cjne	r2,#0x0A,00182$
+	sjmp	00183$
+00182$:
 	ljmp	00123$
-00169$:
-;	Timer.c:70: TimeSecsOnes = 0;
+00183$:
+;	Timer.c:74: TimeSecsOnes = 0;
 ;	genAssign
 	mov	dptr,#_TimeSecsOnes
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;	Timer.c:71: TimeSecsTens++;
+;	Timer.c:75: TimeSecsTens++;
 ;	genAssign
 	mov	dptr,#_TimeSecsTens
 	movx	a,@dptr
@@ -809,25 +812,25 @@ _timer0:
 ;	Peephole 236.a	used r2 instead of ar2
 	add	a,r2
 	movx	@dptr,a
-;	Timer.c:72: if(TimeSecsTens == 6){
+;	Timer.c:76: if(TimeSecsTens == 6){
 ;	genAssign
 	mov	dptr,#_TimeSecsTens
 	movx	a,@dptr
 	mov	r2,a
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x06,00170$
-	sjmp	00171$
-00170$:
+	cjne	r2,#0x06,00184$
+	sjmp	00185$
+00184$:
 	ljmp	00123$
-00171$:
-;	Timer.c:73: TimeSecsTens = 0;
+00185$:
+;	Timer.c:77: TimeSecsTens = 0;
 ;	genAssign
 	mov	dptr,#_TimeSecsTens
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;	Timer.c:74: TimeMinsOnes++;
+;	Timer.c:78: TimeMinsOnes++;
 ;	genAssign
 	mov	dptr,#_TimeMinsOnes
 	movx	a,@dptr
@@ -839,25 +842,25 @@ _timer0:
 ;	Peephole 236.a	used r2 instead of ar2
 	add	a,r2
 	movx	@dptr,a
-;	Timer.c:75: if (TimeMinsOnes == 10){
+;	Timer.c:79: if (TimeMinsOnes == 10){
 ;	genAssign
 	mov	dptr,#_TimeMinsOnes
 	movx	a,@dptr
 	mov	r2,a
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x0A,00172$
-	sjmp	00173$
-00172$:
+	cjne	r2,#0x0A,00186$
+	sjmp	00187$
+00186$:
 	ljmp	00123$
-00173$:
-;	Timer.c:76: TimeMinsOnes = 0;
+00187$:
+;	Timer.c:80: TimeMinsOnes = 0;
 ;	genAssign
 	mov	dptr,#_TimeMinsOnes
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;	Timer.c:77: TimeMinsTens++;
+;	Timer.c:81: TimeMinsTens++;
 ;	genAssign
 	mov	dptr,#_TimeMinsTens
 	movx	a,@dptr
@@ -869,19 +872,19 @@ _timer0:
 ;	Peephole 236.a	used r2 instead of ar2
 	add	a,r2
 	movx	@dptr,a
-;	Timer.c:78: if (TimeMinsTens == 10){
+;	Timer.c:82: if (TimeMinsTens == 10){
 ;	genAssign
 	mov	dptr,#_TimeMinsTens
 	movx	a,@dptr
 	mov	r2,a
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r2,#0x0A,00174$
-	sjmp	00175$
-00174$:
+	cjne	r2,#0x0A,00188$
+	sjmp	00189$
+00188$:
 	ljmp	00123$
-00175$:
-;	Timer.c:79: TimeMinsTens = 0;
+00189$:
+;	Timer.c:83: TimeMinsTens = 0;
 ;	genAssign
 	mov	dptr,#_TimeMinsTens
 ;	Peephole 181	changed mov to clr
@@ -889,11 +892,11 @@ _timer0:
 	movx	@dptr,a
 	ljmp	00123$
 00122$:
-;	Timer.c:88: addr = LCD_ReadAddr();      //Save old address
+;	Timer.c:92: addr = LCD_ReadAddr();      //Save old address
 ;	genCall
 	lcall	_LCD_ReadAddr
 	mov	r2,dpl
-;	Timer.c:90: TimeTenths++;
+;	Timer.c:94: TimeTenths++;
 ;	genAssign
 	mov	dptr,#_TimeTenths
 	movx	a,@dptr
@@ -905,7 +908,7 @@ _timer0:
 ;	Peephole 236.a	used r3 instead of ar3
 	add	a,r3
 	movx	@dptr,a
-;	Timer.c:91: LCD_gotoxy(3, 15);
+;	Timer.c:95: LCD_gotoxy(3, 15);
 ;	genAssign
 	mov	dptr,#_LCD_gotoxy_PARM_2
 	mov	a,#0x0F
@@ -915,7 +918,7 @@ _timer0:
 	push	ar2
 	lcall	_LCD_gotoxy
 	pop	ar2
-;	Timer.c:92: LCD_Putch(TimeTenths + 0x30);
+;	Timer.c:96: LCD_Putch(TimeTenths + 0x30);
 ;	genAssign
 	mov	dptr,#_TimeTenths
 	movx	a,@dptr
@@ -932,25 +935,25 @@ _timer0:
 	push	ar2
 	lcall	_LCD_Putch
 	pop	ar2
-;	Timer.c:94: if(TimeTenths == 10){
+;	Timer.c:98: if(TimeTenths == 10){
 ;	genAssign
 	mov	dptr,#_TimeTenths
 	movx	a,@dptr
 	mov	r3,a
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r3,#0x0A,00176$
-	sjmp	00177$
-00176$:
+	cjne	r3,#0x0A,00190$
+	sjmp	00191$
+00190$:
 	ljmp	00120$
-00177$:
-;	Timer.c:95: TimeTenths = 0;
+00191$:
+;	Timer.c:99: TimeTenths = 0;
 ;	genAssign
 	mov	dptr,#_TimeTenths
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;	Timer.c:96: LCD_gotoxy(3, 15);
+;	Timer.c:100: LCD_gotoxy(3, 15);
 ;	genAssign
 	mov	dptr,#_LCD_gotoxy_PARM_2
 	mov	a,#0x0F
@@ -960,7 +963,7 @@ _timer0:
 	push	ar2
 	lcall	_LCD_gotoxy
 	pop	ar2
-;	Timer.c:97: LCD_Putch(TimeTenths + 0x30);
+;	Timer.c:101: LCD_Putch(TimeTenths + 0x30);
 ;	genAssign
 	mov	dptr,#_TimeTenths
 	movx	a,@dptr
@@ -977,7 +980,7 @@ _timer0:
 	push	ar2
 	lcall	_LCD_Putch
 	pop	ar2
-;	Timer.c:99: TimeSecsOnes++;
+;	Timer.c:103: TimeSecsOnes++;
 ;	genAssign
 	mov	dptr,#_TimeSecsOnes
 	movx	a,@dptr
@@ -989,54 +992,9 @@ _timer0:
 ;	Peephole 236.a	used r3 instead of ar3
 	add	a,r3
 	movx	@dptr,a
-;	Timer.c:100: updateAlarms = true;
+;	Timer.c:104: updateAlarms = true;
 ;	genAssign
 	setb	_timer0_updateAlarms_1_1
-;	Timer.c:101: LCD_gotoxy(3, 13);
-;	genAssign
-	mov	dptr,#_LCD_gotoxy_PARM_2
-	mov	a,#0x0D
-	movx	@dptr,a
-;	genCall
-	mov	dpl,#0x03
-	push	ar2
-	lcall	_LCD_gotoxy
-	pop	ar2
-;	Timer.c:102: LCD_Putch(TimeSecsOnes + 0x30);
-;	genAssign
-	mov	dptr,#_TimeSecsOnes
-	movx	a,@dptr
-	mov	r3,a
-;	genPlus
-;     genPlusIncr
-	mov	a,#0x30
-;	Peephole 236.a	used r3 instead of ar3
-	add	a,r3
-;	genCall
-	mov	r3,a
-;	Peephole 244.c	loading dpl from a instead of r3
-	mov	dpl,a
-	push	ar2
-	lcall	_LCD_Putch
-	pop	ar2
-;	Timer.c:103: if(TimeSecsOnes == 10){
-;	genAssign
-	mov	dptr,#_TimeSecsOnes
-	movx	a,@dptr
-	mov	r3,a
-;	genCmpEq
-;	gencjneshort
-	cjne	r3,#0x0A,00178$
-	sjmp	00179$
-00178$:
-	ljmp	00120$
-00179$:
-;	Timer.c:104: TimeSecsOnes = 0;
-;	genAssign
-	mov	dptr,#_TimeSecsOnes
-;	Peephole 181	changed mov to clr
-	clr	a
-	movx	@dptr,a
 ;	Timer.c:105: LCD_gotoxy(3, 13);
 ;	genAssign
 	mov	dptr,#_LCD_gotoxy_PARM_2
@@ -1064,7 +1022,52 @@ _timer0:
 	push	ar2
 	lcall	_LCD_Putch
 	pop	ar2
-;	Timer.c:108: TimeSecsTens++;
+;	Timer.c:107: if(TimeSecsOnes == 10){
+;	genAssign
+	mov	dptr,#_TimeSecsOnes
+	movx	a,@dptr
+	mov	r3,a
+;	genCmpEq
+;	gencjneshort
+	cjne	r3,#0x0A,00192$
+	sjmp	00193$
+00192$:
+	ljmp	00120$
+00193$:
+;	Timer.c:108: TimeSecsOnes = 0;
+;	genAssign
+	mov	dptr,#_TimeSecsOnes
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+;	Timer.c:109: LCD_gotoxy(3, 13);
+;	genAssign
+	mov	dptr,#_LCD_gotoxy_PARM_2
+	mov	a,#0x0D
+	movx	@dptr,a
+;	genCall
+	mov	dpl,#0x03
+	push	ar2
+	lcall	_LCD_gotoxy
+	pop	ar2
+;	Timer.c:110: LCD_Putch(TimeSecsOnes + 0x30);
+;	genAssign
+	mov	dptr,#_TimeSecsOnes
+	movx	a,@dptr
+	mov	r3,a
+;	genPlus
+;     genPlusIncr
+	mov	a,#0x30
+;	Peephole 236.a	used r3 instead of ar3
+	add	a,r3
+;	genCall
+	mov	r3,a
+;	Peephole 244.c	loading dpl from a instead of r3
+	mov	dpl,a
+	push	ar2
+	lcall	_LCD_Putch
+	pop	ar2
+;	Timer.c:112: TimeSecsTens++;
 ;	genAssign
 	mov	dptr,#_TimeSecsTens
 	movx	a,@dptr
@@ -1076,7 +1079,7 @@ _timer0:
 ;	Peephole 236.a	used r3 instead of ar3
 	add	a,r3
 	movx	@dptr,a
-;	Timer.c:109: LCD_gotoxy(3, 12);
+;	Timer.c:113: LCD_gotoxy(3, 12);
 ;	genAssign
 	mov	dptr,#_LCD_gotoxy_PARM_2
 	mov	a,#0x0C
@@ -1086,7 +1089,7 @@ _timer0:
 	push	ar2
 	lcall	_LCD_gotoxy
 	pop	ar2
-;	Timer.c:110: LCD_Putch(TimeSecsTens + 0x30);
+;	Timer.c:114: LCD_Putch(TimeSecsTens + 0x30);
 ;	genAssign
 	mov	dptr,#_TimeSecsTens
 	movx	a,@dptr
@@ -1103,25 +1106,25 @@ _timer0:
 	push	ar2
 	lcall	_LCD_Putch
 	pop	ar2
-;	Timer.c:112: if(TimeSecsTens == 6){
+;	Timer.c:116: if(TimeSecsTens == 6){
 ;	genAssign
 	mov	dptr,#_TimeSecsTens
 	movx	a,@dptr
 	mov	r3,a
 ;	genCmpEq
 ;	gencjneshort
-	cjne	r3,#0x06,00180$
-	sjmp	00181$
-00180$:
+	cjne	r3,#0x06,00194$
+	sjmp	00195$
+00194$:
 	ljmp	00120$
-00181$:
-;	Timer.c:113: TimeSecsTens = 0;
+00195$:
+;	Timer.c:117: TimeSecsTens = 0;
 ;	genAssign
 	mov	dptr,#_TimeSecsTens
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;	Timer.c:114: LCD_gotoxy(3, 12);
+;	Timer.c:118: LCD_gotoxy(3, 12);
 ;	genAssign
 	mov	dptr,#_LCD_gotoxy_PARM_2
 	mov	a,#0x0C
@@ -1131,7 +1134,7 @@ _timer0:
 	push	ar2
 	lcall	_LCD_gotoxy
 	pop	ar2
-;	Timer.c:115: LCD_Putch(TimeSecsTens + 0x30);
+;	Timer.c:119: LCD_Putch(TimeSecsTens + 0x30);
 ;	genAssign
 	mov	dptr,#_TimeSecsTens
 	movx	a,@dptr
@@ -1148,7 +1151,7 @@ _timer0:
 	push	ar2
 	lcall	_LCD_Putch
 	pop	ar2
-;	Timer.c:117: TimeMinsOnes++;
+;	Timer.c:121: TimeMinsOnes++;
 ;	genAssign
 	mov	dptr,#_TimeMinsOnes
 	movx	a,@dptr
@@ -1159,51 +1162,6 @@ _timer0:
 	mov	a,#0x01
 ;	Peephole 236.a	used r3 instead of ar3
 	add	a,r3
-	movx	@dptr,a
-;	Timer.c:118: LCD_gotoxy(3, 10);
-;	genAssign
-	mov	dptr,#_LCD_gotoxy_PARM_2
-	mov	a,#0x0A
-	movx	@dptr,a
-;	genCall
-	mov	dpl,#0x03
-	push	ar2
-	lcall	_LCD_gotoxy
-	pop	ar2
-;	Timer.c:119: LCD_Putch(TimeMinsOnes + 0x30);
-;	genAssign
-	mov	dptr,#_TimeMinsOnes
-	movx	a,@dptr
-	mov	r3,a
-;	genPlus
-;     genPlusIncr
-	mov	a,#0x30
-;	Peephole 236.a	used r3 instead of ar3
-	add	a,r3
-;	genCall
-	mov	r3,a
-;	Peephole 244.c	loading dpl from a instead of r3
-	mov	dpl,a
-	push	ar2
-	lcall	_LCD_Putch
-	pop	ar2
-;	Timer.c:120: if (TimeMinsOnes == 10){
-;	genAssign
-	mov	dptr,#_TimeMinsOnes
-	movx	a,@dptr
-	mov	r3,a
-;	genCmpEq
-;	gencjneshort
-	cjne	r3,#0x0A,00182$
-	sjmp	00183$
-00182$:
-	ljmp	00120$
-00183$:
-;	Timer.c:121: TimeMinsOnes = 0;
-;	genAssign
-	mov	dptr,#_TimeMinsOnes
-;	Peephole 181	changed mov to clr
-	clr	a
 	movx	@dptr,a
 ;	Timer.c:122: LCD_gotoxy(3, 10);
 ;	genAssign
@@ -1232,31 +1190,37 @@ _timer0:
 	push	ar2
 	lcall	_LCD_Putch
 	pop	ar2
-;	Timer.c:125: TimeMinsTens++;
+;	Timer.c:124: if (TimeMinsOnes == 10){
 ;	genAssign
-	mov	dptr,#_TimeMinsTens
+	mov	dptr,#_TimeMinsOnes
 	movx	a,@dptr
 	mov	r3,a
-;	genPlus
-	mov	dptr,#_TimeMinsTens
-;     genPlusIncr
-	mov	a,#0x01
-;	Peephole 236.a	used r3 instead of ar3
-	add	a,r3
+;	genCmpEq
+;	gencjneshort
+	cjne	r3,#0x0A,00196$
+	sjmp	00197$
+00196$:
+	ljmp	00120$
+00197$:
+;	Timer.c:125: TimeMinsOnes = 0;
+;	genAssign
+	mov	dptr,#_TimeMinsOnes
+;	Peephole 181	changed mov to clr
+	clr	a
 	movx	@dptr,a
-;	Timer.c:126: LCD_gotoxy(3, 9);
+;	Timer.c:126: LCD_gotoxy(3, 10);
 ;	genAssign
 	mov	dptr,#_LCD_gotoxy_PARM_2
-	mov	a,#0x09
+	mov	a,#0x0A
 	movx	@dptr,a
 ;	genCall
 	mov	dpl,#0x03
 	push	ar2
 	lcall	_LCD_gotoxy
 	pop	ar2
-;	Timer.c:127: LCD_Putch(TimeMinsTens + 0x30);
+;	Timer.c:127: LCD_Putch(TimeMinsOnes + 0x30);
 ;	genAssign
-	mov	dptr,#_TimeMinsTens
+	mov	dptr,#_TimeMinsOnes
 	movx	a,@dptr
 	mov	r3,a
 ;	genPlus
@@ -1271,24 +1235,17 @@ _timer0:
 	push	ar2
 	lcall	_LCD_Putch
 	pop	ar2
-;	Timer.c:128: if (TimeMinsTens == 10){
+;	Timer.c:129: TimeMinsTens++;
 ;	genAssign
 	mov	dptr,#_TimeMinsTens
 	movx	a,@dptr
 	mov	r3,a
-;	genCmpEq
-;	gencjneshort
-;	Peephole 112.b	changed ljmp to sjmp
-;	Peephole 198.b	optimized misc jump sequence
-	cjne	r3,#0x0A,00120$
-;	Peephole 200.b	removed redundant sjmp
-;	Peephole 300	removed redundant label 00184$
-;	Peephole 300	removed redundant label 00185$
-;	Timer.c:129: TimeMinsTens = 0;
-;	genAssign
+;	genPlus
 	mov	dptr,#_TimeMinsTens
-;	Peephole 181	changed mov to clr
-	clr	a
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r3 instead of ar3
+	add	a,r3
 	movx	@dptr,a
 ;	Timer.c:130: LCD_gotoxy(3, 9);
 ;	genAssign
@@ -1317,37 +1274,83 @@ _timer0:
 	push	ar2
 	lcall	_LCD_Putch
 	pop	ar2
+;	Timer.c:132: if (TimeMinsTens == 10){
+;	genAssign
+	mov	dptr,#_TimeMinsTens
+	movx	a,@dptr
+	mov	r3,a
+;	genCmpEq
+;	gencjneshort
+;	Peephole 112.b	changed ljmp to sjmp
+;	Peephole 198.b	optimized misc jump sequence
+	cjne	r3,#0x0A,00120$
+;	Peephole 200.b	removed redundant sjmp
+;	Peephole 300	removed redundant label 00198$
+;	Peephole 300	removed redundant label 00199$
+;	Timer.c:133: TimeMinsTens = 0;
+;	genAssign
+	mov	dptr,#_TimeMinsTens
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+;	Timer.c:134: LCD_gotoxy(3, 9);
+;	genAssign
+	mov	dptr,#_LCD_gotoxy_PARM_2
+	mov	a,#0x09
+	movx	@dptr,a
+;	genCall
+	mov	dpl,#0x03
+	push	ar2
+	lcall	_LCD_gotoxy
+	pop	ar2
+;	Timer.c:135: LCD_Putch(TimeMinsTens + 0x30);
+;	genAssign
+	mov	dptr,#_TimeMinsTens
+	movx	a,@dptr
+	mov	r3,a
+;	genPlus
+;     genPlusIncr
+	mov	a,#0x30
+;	Peephole 236.a	used r3 instead of ar3
+	add	a,r3
+;	genCall
+	mov	r3,a
+;	Peephole 244.c	loading dpl from a instead of r3
+	mov	dpl,a
+	push	ar2
+	lcall	_LCD_Putch
+	pop	ar2
 00120$:
-;	Timer.c:137: LCD_gotoaddr(addr);
+;	Timer.c:141: LCD_gotoaddr(addr);
 ;	genCall
 	mov	dpl,r2
 	lcall	_LCD_gotoaddr
 00123$:
-;	Timer.c:139: ISR_Count = 0;
+;	Timer.c:143: ISR_Count = 0;
 ;	genAssign
 	mov	dptr,#_ISR_Count
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;	Timer.c:141: if (updateAlarms){
+;	Timer.c:145: if (updateAlarms){
 ;	genIfx
 ;	genIfxJump
-	jb	_timer0_updateAlarms_1_1,00186$
+	jb	_timer0_updateAlarms_1_1,00200$
 	ljmp	00140$
-00186$:
-;	Timer.c:142: for (i = 0; i < 3; ++i){
+00200$:
+;	Timer.c:146: for (i = 0; i < 3; ++i){
 ;	genAssign
 	mov	r2,#0x00
 00132$:
 ;	genCmpLt
 ;	genCmp
-	cjne	r2,#0x03,00187$
-00187$:
+	cjne	r2,#0x03,00201$
+00201$:
 ;	genIfxJump
-	jc	00188$
+	jc	00202$
 	ljmp	00140$
-00188$:
-;	Timer.c:143: if(ActiveAlarms[i]){
+00202$:
+;	Timer.c:147: if(ActiveAlarms[i]){
 ;	genPlus
 ;	Peephole 236.g	used r2 instead of ar2
 	mov	a,r2
@@ -1365,8 +1368,8 @@ _timer0:
 ;	genIfxJump
 ;	Peephole 108.c	removed ljmp by inverse jump logic
 	jz	00134$
-;	Peephole 300	removed redundant label 00189$
-;	Timer.c:144: if(ExpiredAlarms[i]){
+;	Peephole 300	removed redundant label 00203$
+;	Timer.c:148: if(ExpiredAlarms[i]){
 ;	genPlus
 ;	Peephole 236.g	used r2 instead of ar2
 	mov	a,r2
@@ -1384,8 +1387,8 @@ _timer0:
 ;	genIfxJump
 ;	Peephole 108.b	removed ljmp by inverse jump logic
 	jnz	00134$
-;	Peephole 300	removed redundant label 00190$
-;	Timer.c:147: AlarmCount[i]--;
+;	Peephole 300	removed redundant label 00204$
+;	Timer.c:151: AlarmCount[i]--;
 ;	genLeftShift
 ;	genLeftShiftLiteral
 ;	genlshOne
@@ -1413,9 +1416,9 @@ _timer0:
 ;	genMinus
 ;	genMinusDec
 	dec	r5
-	cjne	r5,#0xff,00191$
+	cjne	r5,#0xff,00205$
 	dec	r6
-00191$:
+00205$:
 ;	genPointerSet
 ;     genFarPointerSet
 	mov	dpl,r3
@@ -1425,21 +1428,21 @@ _timer0:
 	inc	dptr
 	mov	a,r6
 	movx	@dptr,a
-;	Timer.c:148: if(AlarmCount[i] == 0){
+;	Timer.c:152: if(AlarmCount[i] == 0){
 ;	genIfx
 	mov	a,r5
 	orl	a,r6
 ;	genIfxJump
 ;	Peephole 108.b	removed ljmp by inverse jump logic
 	jnz	00134$
-;	Peephole 300	removed redundant label 00192$
-;	Timer.c:152: if(!CG_Accessed){
+;	Peephole 300	removed redundant label 00206$
+;	Timer.c:156: if(!CG_Accessed){
 ;	genIfx
 ;	genIfxJump
 ;	Peephole 108.e	removed ljmp by inverse jump logic
 	jb	_CG_Accessed,00127$
-;	Peephole 300	removed redundant label 00193$
-;	Timer.c:153: LCD_gotoxy(0,0);
+;	Peephole 300	removed redundant label 00207$
+;	Timer.c:157: LCD_gotoxy(0,0);
 ;	genAssign
 	mov	dptr,#_LCD_gotoxy_PARM_2
 ;	Peephole 181	changed mov to clr
@@ -1450,7 +1453,7 @@ _timer0:
 	push	ar2
 	lcall	_LCD_gotoxy
 	pop	ar2
-;	Timer.c:154: LCD_Putstr("Disable Alarm!");
+;	Timer.c:158: LCD_Putstr("Disable Alarm!");
 ;	genCall
 ;	Peephole 182.a	used 16 bit load of DPTR
 	mov	dptr,#__str_2
@@ -1459,7 +1462,7 @@ _timer0:
 	lcall	_LCD_Putstr
 	pop	ar2
 00127$:
-;	Timer.c:156: ExpiredAlarms[i] = 1;
+;	Timer.c:160: ExpiredAlarms[i] = 1;
 ;	genPlus
 ;	Peephole 236.g	used r2 instead of ar2
 	mov	a,r2
@@ -1473,27 +1476,156 @@ _timer0:
 ;     genFarPointerSet
 	mov	a,#0x01
 	movx	@dptr,a
-;	Timer.c:157: DisableFlag = true;
+;	Timer.c:161: DisableFlag = true;
 ;	genAssign
 	setb	_DisableFlag
 00134$:
-;	Timer.c:142: for (i = 0; i < 3; ++i){
+;	Timer.c:146: for (i = 0; i < 3; ++i){
 ;	genPlus
 ;     genPlusIncr
 	inc	r2
 	ljmp	00132$
-;	Timer.c:161: updateAlarms = false;
+;	Timer.c:165: updateAlarms = false;
 00140$:
-;	Timer.c:164: TH0 = Timer0_High_Calibrated;
+;	Timer.c:169: if(PCF_ButtonPressed){
+;	genAssign
+	mov	dptr,#_PCF_ButtonPressed
+	movx	a,@dptr
+;	genIfx
+	mov	r2,a
+;	Peephole 105	removed redundant mov
+;	genIfxJump
+;	Peephole 108.c	removed ljmp by inverse jump logic
+	jz	00150$
+;	Peephole 300	removed redundant label 00208$
+;	Timer.c:170: if (PCF_ButtonPressed < 3){
+;	genCmpLt
+;	genCmp
+	cjne	r2,#0x03,00209$
+00209$:
+;	genIfxJump
+;	Peephole 108.a	removed ljmp by inverse jump logic
+	jnc	00147$
+;	Peephole 300	removed redundant label 00210$
+;	Timer.c:171: PCF_ButtonPressed++;
+;	genPlus
+	mov	dptr,#_PCF_ButtonPressed
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	movx	@dptr,a
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00150$
+00147$:
+;	Timer.c:174: PCF_ButtonPressed = 0;
+;	genAssign
+	mov	dptr,#_PCF_ButtonPressed
+;	Peephole 181	changed mov to clr
+;	Timer.c:175: LCD_gotoxy(3,0);
+;	genAssign
+;	Peephole 181	changed mov to clr
+;	Peephole 219.a	removed redundant clear
+	clr	a
+	movx	@dptr,a
+	mov	dptr,#_LCD_gotoxy_PARM_2
+	movx	@dptr,a
+;	genCall
+	mov	dpl,#0x03
+	lcall	_LCD_gotoxy
+;	Timer.c:176: ButtonCount++;
+;	genAssign
+	mov	dptr,#_ButtonCount
+	movx	a,@dptr
+	mov	r2,a
+;	genPlus
+	mov	dptr,#_ButtonCount
+;     genPlusIncr
+	mov	a,#0x01
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+	movx	@dptr,a
+;	Timer.c:178: if(ButtonCount > 15){
+;	genAssign
+	mov	dptr,#_ButtonCount
+	movx	a,@dptr
+;	genCmpGt
+;	genCmp
+;	genIfxJump
+;	Peephole 108.a	removed ljmp by inverse jump logic
+;	Peephole 132.b	optimized genCmpGt by inverse logic (acc differs)
+	mov  r2,a
+;	Peephole 177.a	removed redundant mov
+	add	a,#0xff - 0x0F
+	jnc	00142$
+;	Peephole 300	removed redundant label 00211$
+;	Timer.c:179: ButtonCount = 0;
+;	genAssign
+	mov	dptr,#_ButtonCount
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+00142$:
+;	Timer.c:181: if(ButtonCount > 9){
+;	genAssign
+	mov	dptr,#_ButtonCount
+	movx	a,@dptr
+;	genCmpGt
+;	genCmp
+;	genIfxJump
+;	Peephole 108.a	removed ljmp by inverse jump logic
+;	Peephole 132.b	optimized genCmpGt by inverse logic (acc differs)
+	mov  r2,a
+;	Peephole 177.a	removed redundant mov
+	add	a,#0xff - 0x09
+	jnc	00144$
+;	Peephole 300	removed redundant label 00212$
+;	Timer.c:182: LCD_Putch(ButtonCount + 55);    //Output hex value
+;	genPlus
+;     genPlusIncr
+	mov	a,#0x37
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+;	genCall
+	mov	r3,a
+;	Peephole 244.c	loading dpl from a instead of r3
+	mov	dpl,a
+	lcall	_LCD_Putch
+;	Peephole 112.b	changed ljmp to sjmp
+	sjmp	00145$
+00144$:
+;	Timer.c:185: LCD_Putch(ButtonCount + 0x30);  //Output decimal value
+;	genPlus
+;     genPlusIncr
+	mov	a,#0x30
+;	Peephole 236.a	used r2 instead of ar2
+	add	a,r2
+;	genCall
+	mov	r2,a
+;	Peephole 244.c	loading dpl from a instead of r2
+	mov	dpl,a
+	lcall	_LCD_Putch
+00145$:
+;	Timer.c:187: PCF_OutputCount(ButtonCount);
+;	genAssign
+	mov	dptr,#_ButtonCount
+	movx	a,@dptr
+;	genCall
+	mov	r2,a
+;	Peephole 244.c	loading dpl from a instead of r2
+	mov	dpl,a
+	lcall	_PCF_OutputCount
+00150$:
+;	Timer.c:191: TH0 = Timer0_High_Calibrated;
 ;	genAssign
 	mov	_TH0,#0x87
-;	Timer.c:165: TL0 = Timer0_Low_Calibrated;
+;	Timer.c:192: TL0 = Timer0_Low_Calibrated;
 ;	genAssign
 	mov	_TL0,#0xFF
-;	Timer.c:166: TCON |= 0x10;    //Start timer 0
+;	Timer.c:193: TCON |= 0x10;    //Start timer 0
 ;	genOr
 	orl	_TCON,#0x10
-;	Peephole 300	removed redundant label 00141$
+;	Peephole 300	removed redundant label 00151$
 	pop	psw
 	pop	(0+1)
 	pop	(0+0)
@@ -1512,15 +1644,15 @@ _timer0:
 ;Allocation info for local variables in function 'TimerRedraw'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	Timer.c:171: void TimerRedraw(void){
+;	Timer.c:198: void TimerRedraw(void){
 ;	-----------------------------------------
 ;	 function TimerRedraw
 ;	-----------------------------------------
 _TimerRedraw:
-;	Timer.c:173: EA = 0; //Disable interrupts temporarily
+;	Timer.c:200: EA = 0; //Disable interrupts temporarily
 ;	genAssign
 	clr	_EA
-;	Timer.c:174: LCD_gotoxy(3,9);
+;	Timer.c:201: LCD_gotoxy(3,9);
 ;	genAssign
 	mov	dptr,#_LCD_gotoxy_PARM_2
 	mov	a,#0x09
@@ -1528,7 +1660,7 @@ _TimerRedraw:
 ;	genCall
 	mov	dpl,#0x03
 	lcall	_LCD_gotoxy
-;	Timer.c:175: LCD_Putch(TimeMinsTens + 0x30);
+;	Timer.c:202: LCD_Putch(TimeMinsTens + 0x30);
 ;	genAssign
 	mov	dptr,#_TimeMinsTens
 	movx	a,@dptr
@@ -1543,7 +1675,7 @@ _TimerRedraw:
 ;	Peephole 244.c	loading dpl from a instead of r2
 	mov	dpl,a
 	lcall	_LCD_Putch
-;	Timer.c:176: LCD_Putch(TimeMinsOnes + 0x30);
+;	Timer.c:203: LCD_Putch(TimeMinsOnes + 0x30);
 ;	genAssign
 	mov	dptr,#_TimeMinsOnes
 	movx	a,@dptr
@@ -1558,11 +1690,11 @@ _TimerRedraw:
 ;	Peephole 244.c	loading dpl from a instead of r2
 	mov	dpl,a
 	lcall	_LCD_Putch
-;	Timer.c:177: LCD_Putch(':');
+;	Timer.c:204: LCD_Putch(':');
 ;	genCall
 	mov	dpl,#0x3A
 	lcall	_LCD_Putch
-;	Timer.c:178: LCD_Putch(TimeSecsTens + 0x30);
+;	Timer.c:205: LCD_Putch(TimeSecsTens + 0x30);
 ;	genAssign
 	mov	dptr,#_TimeSecsTens
 	movx	a,@dptr
@@ -1577,7 +1709,7 @@ _TimerRedraw:
 ;	Peephole 244.c	loading dpl from a instead of r2
 	mov	dpl,a
 	lcall	_LCD_Putch
-;	Timer.c:179: LCD_Putch(TimeSecsOnes + 0x30);
+;	Timer.c:206: LCD_Putch(TimeSecsOnes + 0x30);
 ;	genAssign
 	mov	dptr,#_TimeSecsOnes
 	movx	a,@dptr
@@ -1592,11 +1724,11 @@ _TimerRedraw:
 ;	Peephole 244.c	loading dpl from a instead of r2
 	mov	dpl,a
 	lcall	_LCD_Putch
-;	Timer.c:180: LCD_Putch('.');
+;	Timer.c:207: LCD_Putch('.');
 ;	genCall
 	mov	dpl,#0x2E
 	lcall	_LCD_Putch
-;	Timer.c:181: LCD_Putch(TimeTenths + 0x30);
+;	Timer.c:208: LCD_Putch(TimeTenths + 0x30);
 ;	genAssign
 	mov	dptr,#_TimeTenths
 	movx	a,@dptr
@@ -1611,7 +1743,7 @@ _TimerRedraw:
 ;	Peephole 244.c	loading dpl from a instead of r2
 	mov	dpl,a
 	lcall	_LCD_Putch
-;	Timer.c:182: EA = 1;
+;	Timer.c:209: EA = 1;
 ;	genAssign
 	setb	_EA
 ;	Peephole 300	removed redundant label 00101$
@@ -1620,12 +1752,12 @@ _TimerRedraw:
 ;Allocation info for local variables in function 'Clock_Stop'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	Timer.c:187: void Clock_Stop(void){
+;	Timer.c:214: void Clock_Stop(void){
 ;	-----------------------------------------
 ;	 function Clock_Stop
 ;	-----------------------------------------
 _Clock_Stop:
-;	Timer.c:188: IE &= ~0x02;    //Clear Timer0 interrupt bit
+;	Timer.c:215: IE &= ~0x02;    //Clear Timer0 interrupt bit
 ;	genAnd
 	anl	_IE,#0xFD
 ;	Peephole 300	removed redundant label 00101$
@@ -1634,12 +1766,12 @@ _Clock_Stop:
 ;Allocation info for local variables in function 'Clock_Start'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	Timer.c:192: void Clock_Start(void){
+;	Timer.c:219: void Clock_Start(void){
 ;	-----------------------------------------
 ;	 function Clock_Start
 ;	-----------------------------------------
 _Clock_Start:
-;	Timer.c:193: IE |= 0x82;      //Enable intterupts for timer 0
+;	Timer.c:220: IE |= 0x82;      //Enable intterupts for timer 0
 ;	genOr
 	orl	_IE,#0x82
 ;	Peephole 300	removed redundant label 00101$
@@ -1648,23 +1780,23 @@ _Clock_Start:
 ;Allocation info for local variables in function 'Clock_Reset'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	Timer.c:197: void Clock_Reset(void){
+;	Timer.c:224: void Clock_Reset(void){
 ;	-----------------------------------------
 ;	 function Clock_Reset
 ;	-----------------------------------------
 _Clock_Reset:
-;	Timer.c:198: TimeTenths = 0;
+;	Timer.c:225: TimeTenths = 0;
 ;	genAssign
 	mov	dptr,#_TimeTenths
 ;	Peephole 181	changed mov to clr
-;	Timer.c:199: TimeSecsOnes = 0;
+;	Timer.c:226: TimeSecsOnes = 0;
 ;	genAssign
 ;	Peephole 181	changed mov to clr
 ;	Peephole 219.a	removed redundant clear
-;	Timer.c:200: TimeSecsTens = 0;
+;	Timer.c:227: TimeSecsTens = 0;
 ;	genAssign
 ;	Peephole 181	changed mov to clr
-;	Timer.c:201: TimeMinsOnes = 0;
+;	Timer.c:228: TimeMinsOnes = 0;
 ;	genAssign
 ;	Peephole 181	changed mov to clr
 ;	Peephole 219.a	removed redundant clear
@@ -1677,13 +1809,13 @@ _Clock_Reset:
 	movx	@dptr,a
 	mov	dptr,#_TimeMinsOnes
 	movx	@dptr,a
-;	Timer.c:202: TimeMinsTens = 0;
+;	Timer.c:229: TimeMinsTens = 0;
 ;	genAssign
 	mov	dptr,#_TimeMinsTens
 ;	Peephole 181	changed mov to clr
 	clr	a
 	movx	@dptr,a
-;	Timer.c:203: TimerRedraw();
+;	Timer.c:230: TimerRedraw();
 ;	genCall
 ;	Peephole 253.b	replaced lcall/ret with ljmp
 	ljmp	_TimerRedraw
@@ -1692,35 +1824,35 @@ _Clock_Reset:
 ;Allocation info for local variables in function 'Timer0_Init'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	Timer.c:212: void Timer0_Init(void){
+;	Timer.c:239: void Timer0_Init(void){
 ;	-----------------------------------------
 ;	 function Timer0_Init
 ;	-----------------------------------------
 _Timer0_Init:
-;	Timer.c:213: TMOD |= 0x01;    //16-bit mode
+;	Timer.c:240: TMOD |= 0x01;    //16-bit mode
 ;	genOr
 	orl	_TMOD,#0x01
-;	Timer.c:214: TH0 = Timer0_High_Calibrated;
+;	Timer.c:241: TH0 = Timer0_High_Calibrated;
 ;	genAssign
 	mov	_TH0,#0x87
-;	Timer.c:215: TL0 = Timer0_Low_Calibrated;
+;	Timer.c:242: TL0 = Timer0_Low_Calibrated;
 ;	genAssign
 	mov	_TL0,#0xFF
-;	Timer.c:217: IE |= 0x82;      //Enable intterupts for timer 0
+;	Timer.c:244: IE |= 0x82;      //Enable intterupts for timer 0
 ;	genOr
 	orl	_IE,#0x82
-;	Timer.c:218: P1_2 =  0;
+;	Timer.c:245: P1_2 =  0;
 ;	genAssign
 	clr	_P1_2
-;	Timer.c:220: ISR_Count = 0;
+;	Timer.c:247: ISR_Count = 0;
 ;	genAssign
 	mov	dptr,#_ISR_Count
 ;	Peephole 181	changed mov to clr
-;	Timer.c:221: ExpiredAlarms[0] = 0; ExpiredAlarms[1] = 0; ExpiredAlarms[2] = 0;
-;	genPointerSet
-;     genFarPointerSet
+;	Timer.c:248: ButtonCount = 0;
+;	genAssign
 ;	Peephole 181	changed mov to clr
 ;	Peephole 219.a	removed redundant clear
+;	Timer.c:249: ExpiredAlarms[0] = 0; ExpiredAlarms[1] = 0; ExpiredAlarms[2] = 0;
 ;	genPointerSet
 ;     genFarPointerSet
 ;	Peephole 181	changed mov to clr
@@ -1730,17 +1862,23 @@ _Timer0_Init:
 ;	Peephole 219.a	removed redundant clear
 	clr	a
 	movx	@dptr,a
-	mov	dptr,#_ExpiredAlarms
+	mov	dptr,#_ButtonCount
 	movx	@dptr,a
-	mov	dptr,#(_ExpiredAlarms + 0x0001)
+	mov	dptr,#_ExpiredAlarms
 ;	Peephole 219.b	removed redundant clear
 	movx	@dptr,a
-	mov	dptr,#(_ExpiredAlarms + 0x0002)
+	mov	dptr,#(_ExpiredAlarms + 0x0001)
 	movx	@dptr,a
-;	Timer.c:223: Clock_Reset();
+;	genPointerSet
+;     genFarPointerSet
+	mov	dptr,#(_ExpiredAlarms + 0x0002)
+;	Peephole 181	changed mov to clr
+	clr	a
+	movx	@dptr,a
+;	Timer.c:251: Clock_Reset();
 ;	genCall
 	lcall	_Clock_Reset
-;	Timer.c:225: TCON |= 0x10;    //Start timer 0
+;	Timer.c:253: TCON |= 0x10;    //Start timer 0
 ;	genOr
 	orl	_TCON,#0x10
 ;	Peephole 300	removed redundant label 00101$
@@ -1778,4 +1916,6 @@ __xinit__TimeMinsTens:
 __xinit__ActiveAlarms:
 	.db #0x00
 	.db #0x00
+	.db #0x00
+__xinit__ButtonCount:
 	.db #0x00
