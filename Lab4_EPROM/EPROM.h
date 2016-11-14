@@ -30,6 +30,18 @@ void EPROM_ByteWrite(uint8_t writeData, uint8_t address, uint8_t block);
  */
 uint8_t EPROM_ByteRead(uint8_t address, uint8_t block);
 
+
+/**
+ *  Performs a software reset of EEPROM
+ *  First start bit causes device to reset from state where it's expecting data
+ *  Nine '1's are used to force a reset of those devices that couldn't be reset
+ *      by previous START bit
+ *  Second start bit protects from rare case where micro was reset during a write.
+ *      If it only sent a stop bit here, it could initiate a write
+ *  Stop bit puts the EEPROM in standby mode
+ */
+ void EPROM_Reset(void);
+
 /**
  *  Sets up the EPROM
  */

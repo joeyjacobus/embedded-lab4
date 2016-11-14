@@ -260,10 +260,10 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      0100    l_IRAM
      0118    l_XSEG
      0118    s_XISEG
-     0DD0    l_CONST
-     34E1    l_CSEG
-     3557    s_CONST
-     4327    s_XINIT
+     0E53    l_CONST
+     355A    l_CSEG
+     35D0    s_CONST
+     4423    s_XINIT
 
 Hexadecimal
 
@@ -481,7 +481,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               0076   34E1 =  13537. bytes (REL,CON,CODE)
+CSEG                               0076   355A =  13658. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
@@ -494,102 +494,105 @@ CSEG                               0076   34E1 =  13537. bytes (REL,CON,CODE)
   0C:05F9    _EPROM_SetBlock
   0C:0660    _EPROM_ByteWrite
   0C:06AC    _EPROM_ByteRead
-  0C:070F    _EPROM_Init
-  0C:0712    _Clock_Delay
-  0C:071B    _Clock_High
-  0C:0721    _Clock_Low
-  0C:0727    _I2CInit
-  0C:072C    _I2CStart
-  0C:0731    _I2CRestart
-  0C:073B    _I2CStop
-  0C:0746    _I2CAck
-  0C:0751    _I2CNak
-  0C:075C    _I2CSend
-  0C:07A7    _I2CRead
-  0C:07E6    _LCD_InstructionWrite
-  0C:0805    _LCD_DataWrite
-  0C:0824    _LCD_SetCGRAMAddress
-  0C:0842    _LCD_SetDDRAMAddress
-  0C:085D    _LCD_ReadRAM
-  0C:0876    _LCD_Puthex
-  0C:08AF    _LCD_Busywait
-  0C:08C7    _LCD_ReadAddr
-  0C:08E4    _LCD_ClearScreen
-  0C:08ED    _LCD_gotoaddr
-  0C:091C    _LCD_gotoxy
-  0C:0953    _LCD_Putch
-  0C:0966    _LCD_Putstr
-  0C:0A29    _LCD_Init
-  0C:0A3B    _LCD_DisplayEnable
-  0C:0A44    _LCD_DisplayDisable
-  0C:0A4D    _LCD_Test
-  0C:0A6D    __sdcc_program_startup
-  0C:0A72    __sdcc_external_startup
-  0C:0A79    _getBlockAndAddress
-  0C:0B55    _PCF_Menu
-  0C:0BD4    _handlePCFMode
-  0C:0CAC    _CG_Menu
-  0C:0D40    _handleCGMode
-  0C:0E01    _LCD_Menu
-  0C:0EE9    _handleLCDMode
-  0C:1474    _EEPROM_Menu
-  0C:1508    _handleEEPROMMode
-  0C:18C4    _CLOCK_Menu
-  0C:1997    _handleCLOCKMode
-  0C:1C0F    _MainMenu
-  0C:1CCD    _handleMAINMode
-  0C:1D27    _handleInput
-  0C:1D8C    _main
-  0C:1F5B    _ext1
-  0C:1F6E    _PCF_ReadDevice
-  0C:1F8D    _PCF_UpdateDevice
-  0C:1FA3    _PCF_PrintState
-  0C:20A9    _PCF_SetOutputLow
-  0C:20CD    _PCF_SetInputOutput
-  0C:20F0    _PCF_OutputCount
-  0C:213B    _PCF_Init
-  0C:2153    _putchar
-  0C:2165    _getchar
-  0C:216F    _Serial_GetInteger
-  0C:229A    _Serial_GetHex
-  0C:24B3    _getstring
-  0C:2570    _Serial_Init
-  0C:2581    _Clock_NewAlarm
-  0C:2605    _timer0
-  0C:29DE    _TimerRedraw
-  0C:2A41    _Clock_Stop
-  0C:2A45    _Clock_Start
-  0C:2A49    _Clock_Reset
-  0C:2A62    _Timer0_Init
-  0C:2A8D    _isdigit
-  0C:2AAA    _atoi
-  0C:2BDD    __gptrput
-  0C:2BF6    __mulint
-  0C:2C16    _islower
-  0C:2C33    _isupper
-  0C:2C5D    _vprintf
-  0C:2C9C    _printf
-  0C:2DB5    __print_format
-  0C:34E8    _strlen
-  0C:353B    __gptrget
+  0C:070F    _EPROM_Reset
+  0C:0721    _EPROM_Init
+  0C:0724    _Clock_Delay
+  0C:072D    _Clock_High
+  0C:0733    _Clock_Low
+  0C:0739    _I2CInit
+  0C:073E    _I2CStart
+  0C:0743    _I2CRestart
+  0C:074D    _I2CStop
+  0C:0758    _I2CAck
+  0C:0763    _I2CNak
+  0C:076E    _I2CSend
+  0C:07B9    _I2CRead
+  0C:07F8    _LCD_InstructionWrite
+  0C:0817    _LCD_DataWrite
+  0C:0836    _LCD_SetCGRAMAddress
+  0C:0854    _LCD_SetDDRAMAddress
+  0C:086F    _LCD_ReadRAM
+  0C:0888    _LCD_Puthex
+  0C:08C1    _LCD_Busywait
+  0C:08D9    _LCD_ReadAddr
+  0C:08F6    _LCD_ClearScreen
+  0C:08FF    _LCD_gotoaddr
+  0C:092E    _LCD_gotoxy
+  0C:0965    _LCD_Putch
+  0C:0978    _LCD_Putstr
+  0C:0A3B    _LCD_Init
+  0C:0A4D    _LCD_DisplayEnable
+  0C:0A56    _LCD_DisplayDisable
+  0C:0A5F    _LCD_Test
+  0C:0A7F    __sdcc_program_startup
+  0C:0A84    __sdcc_external_startup
+  0C:0A8B    _getBlockAndAddress
+  0C:0B67    _PCF_Menu
+  0C:0BE6    _handlePCFMode
+  0C:0CBE    _CG_Menu
+  0C:0D52    _handleCGMode
+  0C:0E13    _LCD_Menu
+  0C:0EFB    _handleLCDMode
+  0C:1486    _EEPROM_Menu
+  0C:152F    _handleEEPROMMode
+  0C:1909    _CLOCK_Menu
+  0C:19DC    _handleCLOCKMode
+  0C:1C54    _MainMenu
+  0C:1D27    _handleMAINMode
+  0C:1D88    _handleInput
+  0C:1DED    _main
+  0C:1FBF    _ext1
+  0C:1FD2    _PCF_ReadDevice
+  0C:1FF1    _PCF_UpdateDevice
+  0C:2007    _PCF_PrintState
+  0C:210D    _PCF_SetOutputLow
+  0C:2131    _PCF_SetInputOutput
+  0C:2154    _PCF_OutputCount
+  0C:219F    _PCF_Init
+  0C:21B7    _putchar
+  0C:21CC    _getchar
+  0C:21DB    _Serial_GetInteger
+  0C:2306    _Serial_GetHex
+  0C:251F    _getstring
+  0C:25DC    _Serial_Init
+  0C:25ED    _Clock_NewAlarm
+  0C:2671    _timer0
+  0C:2A4A    _TimerRedraw
+  0C:2AAD    _Clock_Stop
+  0C:2AB1    _Clock_Start
+  0C:2AB5    _Clock_Reset
+  0C:2ACE    _Timer0_Init
+  0C:2AF9    _Watchdog_Reset
+  0C:2B03    _Watchdog_Init
+  0C:2B06    _isdigit
+  0C:2B23    _atoi
+  0C:2C56    __gptrput
+  0C:2C6F    __mulint
+  0C:2C8F    _islower
+  0C:2CAC    _isupper
+  0C:2CD6    _vprintf
+  0C:2D15    _printf
+  0C:2E2E    __print_format
+  0C:3561    _strlen
+  0C:35B4    __gptrget
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CONST                              3557   0DD0 =   3536. bytes (REL,CON,CODE)
+CONST                              35D0   0E53 =   3667. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:363B    _LCD_Addr
-  0C:363D    _AddrMap
-  0C:367D    _ASCII_lookup
+  0C:36B4    _LCD_Addr
+  0C:36B6    _AddrMap
+  0C:36F6    _ASCII_lookup
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-XINIT                              4327   0011 =     17. bytes (REL,CON,CODE)
+XINIT                              4423   0011 =     17. bytes (REL,CON,CODE)
 ASxxxx Linker V01.70 + NoICE + SDCC Feb 1999,  page 1.
 
 Files Linked      [ module(s) ]
@@ -602,6 +605,7 @@ obj\Release\main.rel
 obj\Release\PCF8574.rel
 obj\Release\serial.rel
 obj\Release\Timer.rel
+obj\Release\Watchdog.rel
 
 Libraries Linked            [   object  file   ]
 

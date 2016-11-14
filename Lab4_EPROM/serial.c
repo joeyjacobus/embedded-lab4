@@ -12,6 +12,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include "serial.h"
+#include "Watchdog.h"
 
 #define TIMER1_RELOAD_VAL 0xFD
 #define TIMER1_TMOD_VAL 0x20
@@ -23,13 +24,16 @@
 
 void putchar (char c){
     while (TI == 0);
+    Watchdog_Reset();
     SBUF = c; // load serial port with transmit value
     TI = 0; // clear TI flag
 }
 
 char getchar (){
     // char cc;
-    while (RI == 0);
+    while (RI == 0){
+        Watchdog_Reset();
+    }
     RI = 0; // clear RI flag
     return SBUF; // return character from SBUF
 }

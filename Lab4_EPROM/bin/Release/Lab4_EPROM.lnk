@@ -21,5 +21,6 @@ obj\Release\main.rel
 obj\Release\PCF8574.rel
 obj\Release\serial.rel
 obj\Release\Timer.rel
+obj\Release\Watchdog.rel
 
 -e

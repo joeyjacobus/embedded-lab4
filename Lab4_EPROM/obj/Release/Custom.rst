@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Sun Nov 13 12:11:05 2016
+                              4 ; This file generated Sun Nov 13 23:06:26 2016
                               5 ;--------------------------------------------------------
                               6 	.module Custom
                               7 	.optsdcc -mmcs51 --model-large
@@ -607,7 +607,7 @@
                             607 ;	Peephole 244.c	loading dpl from a instead of r2
    00C4 F5 82               608 	mov	dpl,a
                             609 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   00C6 02 09 53            610 	ljmp	_LCD_Putch
+   00C6 02 09 65            610 	ljmp	_LCD_Putch
                             611 ;
                             612 ;------------------------------------------------------------
                             613 ;Allocation info for local variables in function 'Custom_New'
@@ -674,27 +674,27 @@
    00EA F0                  674 	movx	@dptr,a
                             675 ;	Custom.c:45: printf("\r\nInput a custom character\r\n");
                             676 ;	genIpush
-   00EB 74 57               677 	mov	a,#__str_0
+   00EB 74 D0               677 	mov	a,#__str_0
    00ED C0 E0               678 	push	acc
    00EF 74 35               679 	mov	a,#(__str_0 >> 8)
    00F1 C0 E0               680 	push	acc
    00F3 74 80               681 	mov	a,#0x80
    00F5 C0 E0               682 	push	acc
                             683 ;	genCall
-   00F7 12 2C 9C            684 	lcall	_printf
+   00F7 12 2D 15            684 	lcall	_printf
    00FA 15 81               685 	dec	sp
    00FC 15 81               686 	dec	sp
    00FE 15 81               687 	dec	sp
                             688 ;	Custom.c:46: printf("\r\nEnter an address from 0-7:");
                             689 ;	genIpush
-   0100 74 74               690 	mov	a,#__str_1
+   0100 74 ED               690 	mov	a,#__str_1
    0102 C0 E0               691 	push	acc
    0104 74 35               692 	mov	a,#(__str_1 >> 8)
    0106 C0 E0               693 	push	acc
    0108 74 80               694 	mov	a,#0x80
    010A C0 E0               695 	push	acc
                             696 ;	genCall
-   010C 12 2C 9C            697 	lcall	_printf
+   010C 12 2D 15            697 	lcall	_printf
    010F 15 81               698 	dec	sp
    0111 15 81               699 	dec	sp
    0113 15 81               700 	dec	sp
@@ -702,7 +702,7 @@
                             702 ;	genCall
                             703 ;	Peephole 182.b	used 16 bit load of dptr
    0115 90 00 01            704 	mov	dptr,#0x0001
-   0118 12 21 6F            705 	lcall	_Serial_GetInteger
+   0118 12 21 DB            705 	lcall	_Serial_GetInteger
    011B AA 82               706 	mov	r2,dpl
    011D AB 83               707 	mov	r3,dph
                             708 ;	genCast
@@ -726,14 +726,14 @@
                             726 ;	Peephole 300	removed redundant label 00132$
                             727 ;	Custom.c:49: printf("\r\nEnter an address from 0-7:");
                             728 ;	genIpush
-   012D 74 74               729 	mov	a,#__str_1
+   012D 74 ED               729 	mov	a,#__str_1
    012F C0 E0               730 	push	acc
    0131 74 35               731 	mov	a,#(__str_1 >> 8)
    0133 C0 E0               732 	push	acc
    0135 74 80               733 	mov	a,#0x80
    0137 C0 E0               734 	push	acc
                             735 ;	genCall
-   0139 12 2C 9C            736 	lcall	_printf
+   0139 12 2D 15            736 	lcall	_printf
    013C 15 81               737 	dec	sp
    013E 15 81               738 	dec	sp
    0140 15 81               739 	dec	sp
@@ -741,7 +741,7 @@
                             741 ;	genCall
                             742 ;	Peephole 182.b	used 16 bit load of dptr
    0142 90 00 01            743 	mov	dptr,#0x0001
-   0145 12 21 6F            744 	lcall	_Serial_GetInteger
+   0145 12 21 DB            744 	lcall	_Serial_GetInteger
    0148 AA 82               745 	mov	r2,dpl
    014A AB 83               746 	mov	r3,dph
                             747 ;	genCast
@@ -753,14 +753,14 @@
    0153                     753 00103$:
                             754 ;	Custom.c:54: printf("\r\nEnter the top row (5 bits) using 1s and 0s:\r\n");
                             755 ;	genIpush
-   0153 74 91               756 	mov	a,#__str_2
+   0153 74 0A               756 	mov	a,#__str_2
    0155 C0 E0               757 	push	acc
-   0157 74 35               758 	mov	a,#(__str_2 >> 8)
+   0157 74 36               758 	mov	a,#(__str_2 >> 8)
    0159 C0 E0               759 	push	acc
    015B 74 80               760 	mov	a,#0x80
    015D C0 E0               761 	push	acc
                             762 ;	genCall
-   015F 12 2C 9C            763 	lcall	_printf
+   015F 12 2D 15            763 	lcall	_printf
    0162 15 81               764 	dec	sp
    0164 15 81               765 	dec	sp
    0166 15 81               766 	dec	sp
@@ -795,7 +795,7 @@
    017E C0 02               795 	push	ar2
    0180 C0 03               796 	push	ar3
    0182 C0 04               797 	push	ar4
-   0184 12 21 65            798 	lcall	_getchar
+   0184 12 21 CC            798 	lcall	_getchar
    0187 E5 82               799 	mov	a,dpl
    0189 D0 04               800 	pop	ar4
    018B D0 03               801 	pop	ar3
@@ -826,7 +826,7 @@
    01A2 C0 02               826 	push	ar2
    01A4 C0 03               827 	push	ar3
    01A6 C0 04               828 	push	ar4
-   01A8 12 21 65            829 	lcall	_getchar
+   01A8 12 21 CC            829 	lcall	_getchar
    01AB E5 82               830 	mov	a,dpl
    01AD D0 04               831 	pop	ar4
    01AF D0 03               832 	pop	ar3
@@ -849,7 +849,7 @@
    01C2 C0 03               849 	push	ar3
    01C4 C0 04               850 	push	ar4
    01C6 C0 05               851 	push	ar5
-   01C8 12 21 53            852 	lcall	_putchar
+   01C8 12 21 B7            852 	lcall	_putchar
    01CB D0 05               853 	pop	ar5
    01CD D0 04               854 	pop	ar4
    01CF D0 03               855 	pop	ar3
@@ -929,14 +929,14 @@
                             929 ;	Custom.c:65: printf("\r\n");
                             930 ;	genIpush
    0210 C0 02               931 	push	ar2
-   0212 74 C1               932 	mov	a,#__str_3
+   0212 74 3A               932 	mov	a,#__str_3
    0214 C0 E0               933 	push	acc
-   0216 74 35               934 	mov	a,#(__str_3 >> 8)
+   0216 74 36               934 	mov	a,#(__str_3 >> 8)
    0218 C0 E0               935 	push	acc
    021A 74 80               936 	mov	a,#0x80
    021C C0 E0               937 	push	acc
                             938 ;	genCall
-   021E 12 2C 9C            939 	lcall	_printf
+   021E 12 2D 15            939 	lcall	_printf
    0221 15 81               940 	dec	sp
    0223 15 81               941 	dec	sp
    0225 15 81               942 	dec	sp
@@ -949,14 +949,14 @@
    022D                     949 00117$:
                             950 ;	Custom.c:68: printf("\r\nDone entering code\r\n");
                             951 ;	genIpush
-   022D 74 C4               952 	mov	a,#__str_4
+   022D 74 3D               952 	mov	a,#__str_4
    022F C0 E0               953 	push	acc
-   0231 74 35               954 	mov	a,#(__str_4 >> 8)
+   0231 74 36               954 	mov	a,#(__str_4 >> 8)
    0233 C0 E0               955 	push	acc
    0235 74 80               956 	mov	a,#0x80
    0237 C0 E0               957 	push	acc
                             958 ;	genCall
-   0239 12 2C 9C            959 	lcall	_printf
+   0239 12 2D 15            959 	lcall	_printf
    023C 15 81               960 	dec	sp
    023E 15 81               961 	dec	sp
    0240 15 81               962 	dec	sp
@@ -1018,7 +1018,7 @@
    026E C2 AF              1018 	clr	_EA
                            1019 ;	Custom.c:86: Saved_Address = LCD_ReadAddr();
                            1020 ;	genCall
-   0270 12 08 C7           1021 	lcall	_LCD_ReadAddr
+   0270 12 08 D9           1021 	lcall	_LCD_ReadAddr
    0273 E5 82              1022 	mov	a,dpl
                            1023 ;	genAssign
    0275 90 00 D9           1024 	mov	dptr,#_Saved_Address
@@ -1031,7 +1031,7 @@
    027B D2 AF              1031 	setb	_EA
                            1032 ;	Custom.c:91: LCD_DisplayDisable();
                            1033 ;	genCall
-   027D 12 0A 44           1034 	lcall	_LCD_DisplayDisable
+   027D 12 0A 56           1034 	lcall	_LCD_DisplayDisable
                            1035 ;	Custom.c:93: LCD_SetCGRAMAddress(index);
                            1036 ;	genAssign
    0280 90 00 16           1037 	mov	dptr,#_CG_CharacterWrite_index_1_1
@@ -1040,7 +1040,7 @@
    0284 FA                 1040 	mov	r2,a
                            1041 ;	Peephole 244.c	loading dpl from a instead of r2
    0285 F5 82              1042 	mov	dpl,a
-   0287 12 08 24           1043 	lcall	_LCD_SetCGRAMAddress
+   0287 12 08 36           1043 	lcall	_LCD_SetCGRAMAddress
                            1044 ;	Custom.c:95: for(row = 0; row < 8; ++row){
                            1045 ;	genAssign
    028A 90 00 13           1046 	mov	dptr,#_CG_CharacterWrite_PARM_2
@@ -1081,7 +1081,7 @@
    02A4 8E 82              1081 	mov	dpl,r6
    02A6 8F 83              1082 	mov	dph,r7
    02A8 88 F0              1083 	mov	b,r0
-   02AA 12 35 3B           1084 	lcall	__gptrget
+   02AA 12 35 B4           1084 	lcall	__gptrget
                            1085 ;	genCall
    02AD FE                 1086 	mov	r6,a
                            1087 ;	Peephole 244.c	loading dpl from a instead of r6
@@ -1090,7 +1090,7 @@
    02B2 C0 03              1090 	push	ar3
    02B4 C0 04              1091 	push	ar4
    02B6 C0 05              1092 	push	ar5
-   02B8 12 09 53           1093 	lcall	_LCD_Putch
+   02B8 12 09 65           1093 	lcall	_LCD_Putch
    02BB D0 05              1094 	pop	ar5
    02BD D0 04              1095 	pop	ar4
    02BF D0 03              1096 	pop	ar3
@@ -1110,10 +1110,10 @@
    02CA FA                 1110 	mov	r2,a
                            1111 ;	Peephole 244.c	loading dpl from a instead of r2
    02CB F5 82              1112 	mov	dpl,a
-   02CD 12 08 42           1113 	lcall	_LCD_SetDDRAMAddress
+   02CD 12 08 54           1113 	lcall	_LCD_SetDDRAMAddress
                            1114 ;	Custom.c:100: LCD_DisplayEnable();
                            1115 ;	genCall
-   02D0 12 0A 3B           1116 	lcall	_LCD_DisplayEnable
+   02D0 12 0A 4D           1116 	lcall	_LCD_DisplayEnable
                            1117 ;	Custom.c:101: EA = 0;
                            1118 ;	genAssign
    02D3 C2 AF              1119 	clr	_EA
@@ -1187,10 +1187,10 @@
    02FB F0                 1187 	movx	@dptr,a
                            1188 ;	Custom.c:114: LCD_ClearScreen();
                            1189 ;	genCall
-   02FC 12 08 E4           1190 	lcall	_LCD_ClearScreen
+   02FC 12 08 F6           1190 	lcall	_LCD_ClearScreen
                            1191 ;	Custom.c:115: TimerRedraw();
                            1192 ;	genCall
-   02FF 12 29 DE           1193 	lcall	_TimerRedraw
+   02FF 12 2A 4A           1193 	lcall	_TimerRedraw
                            1194 ;	Custom.c:118: map[0] = 0x1F;
                            1195 ;	genPointerSet
                            1196 ;     genFarPointerSet
@@ -1260,11 +1260,11 @@
    034B F0                 1260 	movx	@dptr,a
                            1261 ;	genCall
    034C 75 82 00           1262 	mov	dpl,#0x00
-   034F 12 09 1C           1263 	lcall	_LCD_gotoxy
+   034F 12 09 2E           1263 	lcall	_LCD_gotoxy
                            1264 ;	Custom.c:128: LCD_Putch(addr);
                            1265 ;	genCall
    0352 75 82 00           1266 	mov	dpl,#0x00
-   0355 12 09 53           1267 	lcall	_LCD_Putch
+   0355 12 09 65           1267 	lcall	_LCD_Putch
                            1268 ;	Custom.c:131: map[0] = 0x1F;
                            1269 ;	genPointerSet
                            1270 ;     genFarPointerSet
@@ -1335,11 +1335,11 @@
    03A0 F0                 1335 	movx	@dptr,a
                            1336 ;	genCall
    03A1 75 82 00           1337 	mov	dpl,#0x00
-   03A4 12 09 1C           1338 	lcall	_LCD_gotoxy
+   03A4 12 09 2E           1338 	lcall	_LCD_gotoxy
                            1339 ;	Custom.c:141: LCD_Putch(addr);
                            1340 ;	genCall
    03A7 75 82 01           1341 	mov	dpl,#0x01
-   03AA 12 09 53           1342 	lcall	_LCD_Putch
+   03AA 12 09 65           1342 	lcall	_LCD_Putch
                            1343 ;	Custom.c:144: map[0] = 0x1F;
                            1344 ;	genPointerSet
                            1345 ;     genFarPointerSet
@@ -1410,11 +1410,11 @@
    03F5 F0                 1410 	movx	@dptr,a
                            1411 ;	genCall
    03F6 75 82 00           1412 	mov	dpl,#0x00
-   03F9 12 09 1C           1413 	lcall	_LCD_gotoxy
+   03F9 12 09 2E           1413 	lcall	_LCD_gotoxy
                            1414 ;	Custom.c:154: LCD_Putch(addr);
                            1415 ;	genCall
    03FC 75 82 02           1416 	mov	dpl,#0x02
-   03FF 12 09 53           1417 	lcall	_LCD_Putch
+   03FF 12 09 65           1417 	lcall	_LCD_Putch
                            1418 ;	Custom.c:158: map[0] = 0x1F;
                            1419 ;	genPointerSet
                            1420 ;     genFarPointerSet
@@ -1484,11 +1484,11 @@
    044B F0                 1484 	movx	@dptr,a
                            1485 ;	genCall
    044C 75 82 00           1486 	mov	dpl,#0x00
-   044F 12 09 1C           1487 	lcall	_LCD_gotoxy
+   044F 12 09 2E           1487 	lcall	_LCD_gotoxy
                            1488 ;	Custom.c:168: LCD_Putch(addr);
                            1489 ;	genCall
    0452 75 82 03           1490 	mov	dpl,#0x03
-   0455 12 09 53           1491 	lcall	_LCD_Putch
+   0455 12 09 65           1491 	lcall	_LCD_Putch
                            1492 ;	Custom.c:173: map[0] = 0x10;
                            1493 ;	genPointerSet
                            1494 ;     genFarPointerSet
@@ -1558,11 +1558,11 @@
    04A1 F0                 1558 	movx	@dptr,a
                            1559 ;	genCall
    04A2 75 82 01           1560 	mov	dpl,#0x01
-   04A5 12 09 1C           1561 	lcall	_LCD_gotoxy
+   04A5 12 09 2E           1561 	lcall	_LCD_gotoxy
                            1562 ;	Custom.c:183: LCD_Putch(addr);
                            1563 ;	genCall
    04A8 75 82 04           1564 	mov	dpl,#0x04
-   04AB 12 09 53           1565 	lcall	_LCD_Putch
+   04AB 12 09 65           1565 	lcall	_LCD_Putch
                            1566 ;	Custom.c:186: map[0] = 0x00;
                            1567 ;	genPointerSet
                            1568 ;     genFarPointerSet
@@ -1634,11 +1634,11 @@
    04F4 F0                 1634 	movx	@dptr,a
                            1635 ;	genCall
    04F5 75 82 01           1636 	mov	dpl,#0x01
-   04F8 12 09 1C           1637 	lcall	_LCD_gotoxy
+   04F8 12 09 2E           1637 	lcall	_LCD_gotoxy
                            1638 ;	Custom.c:196: LCD_Putch(addr);
                            1639 ;	genCall
    04FB 75 82 05           1640 	mov	dpl,#0x05
-   04FE 12 09 53           1641 	lcall	_LCD_Putch
+   04FE 12 09 65           1641 	lcall	_LCD_Putch
                            1642 ;	Custom.c:199: map[0] = 0x00;
                            1643 ;	genPointerSet
                            1644 ;     genFarPointerSet
@@ -1710,11 +1710,11 @@
    0547 F0                 1710 	movx	@dptr,a
                            1711 ;	genCall
    0548 75 82 01           1712 	mov	dpl,#0x01
-   054B 12 09 1C           1713 	lcall	_LCD_gotoxy
+   054B 12 09 2E           1713 	lcall	_LCD_gotoxy
                            1714 ;	Custom.c:209: LCD_Putch(addr);
                            1715 ;	genCall
    054E 75 82 06           1716 	mov	dpl,#0x06
-   0551 12 09 53           1717 	lcall	_LCD_Putch
+   0551 12 09 65           1717 	lcall	_LCD_Putch
                            1718 ;	Custom.c:213: map[0] = 0x01;
                            1719 ;	genPointerSet
                            1720 ;     genFarPointerSet
@@ -1784,38 +1784,38 @@
    059D F0                 1784 	movx	@dptr,a
                            1785 ;	genCall
    059E 75 82 01           1786 	mov	dpl,#0x01
-   05A1 12 09 1C           1787 	lcall	_LCD_gotoxy
+   05A1 12 09 2E           1787 	lcall	_LCD_gotoxy
                            1788 ;	Custom.c:223: LCD_Putch(addr);
                            1789 ;	genCall
    05A4 75 82 07           1790 	mov	dpl,#0x07
                            1791 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   05A7 02 09 53           1792 	ljmp	_LCD_Putch
+   05A7 02 09 65           1792 	ljmp	_LCD_Putch
                            1793 ;
                            1794 	.area CSEG    (CODE)
                            1795 	.area CONST   (CODE)
-   3557                    1796 __str_0:
-   3557 0D                 1797 	.db 0x0D
-   3558 0A                 1798 	.db 0x0A
-   3559 49 6E 70 75 74 20  1799 	.ascii "Input a custom character"
+   35D0                    1796 __str_0:
+   35D0 0D                 1797 	.db 0x0D
+   35D1 0A                 1798 	.db 0x0A
+   35D2 49 6E 70 75 74 20  1799 	.ascii "Input a custom character"
         61 20 63 75 73 74
         6F 6D 20 63 68 61
         72 61 63 74 65 72
-   3571 0D                 1800 	.db 0x0D
-   3572 0A                 1801 	.db 0x0A
-   3573 00                 1802 	.db 0x00
-   3574                    1803 __str_1:
-   3574 0D                 1804 	.db 0x0D
-   3575 0A                 1805 	.db 0x0A
-   3576 45 6E 74 65 72 20  1806 	.ascii "Enter an address from 0-7:"
+   35EA 0D                 1800 	.db 0x0D
+   35EB 0A                 1801 	.db 0x0A
+   35EC 00                 1802 	.db 0x00
+   35ED                    1803 __str_1:
+   35ED 0D                 1804 	.db 0x0D
+   35EE 0A                 1805 	.db 0x0A
+   35EF 45 6E 74 65 72 20  1806 	.ascii "Enter an address from 0-7:"
         61 6E 20 61 64 64
         72 65 73 73 20 66
         72 6F 6D 20 30 2D
         37 3A
-   3590 00                 1807 	.db 0x00
-   3591                    1808 __str_2:
-   3591 0D                 1809 	.db 0x0D
-   3592 0A                 1810 	.db 0x0A
-   3593 45 6E 74 65 72 20  1811 	.ascii "Enter the top row (5 bits) using 1s and 0s:"
+   3609 00                 1807 	.db 0x00
+   360A                    1808 __str_2:
+   360A 0D                 1809 	.db 0x0D
+   360B 0A                 1810 	.db 0x0A
+   360C 45 6E 74 65 72 20  1811 	.ascii "Enter the top row (5 bits) using 1s and 0s:"
         74 68 65 20 74 6F
         70 20 72 6F 77 20
         28 35 20 62 69 74
@@ -1823,20 +1823,20 @@
         6E 67 20 31 73 20
         61 6E 64 20 30 73
         3A
-   35BE 0D                 1812 	.db 0x0D
-   35BF 0A                 1813 	.db 0x0A
-   35C0 00                 1814 	.db 0x00
-   35C1                    1815 __str_3:
-   35C1 0D                 1816 	.db 0x0D
-   35C2 0A                 1817 	.db 0x0A
-   35C3 00                 1818 	.db 0x00
-   35C4                    1819 __str_4:
-   35C4 0D                 1820 	.db 0x0D
-   35C5 0A                 1821 	.db 0x0A
-   35C6 44 6F 6E 65 20 65  1822 	.ascii "Done entering code"
+   3637 0D                 1812 	.db 0x0D
+   3638 0A                 1813 	.db 0x0A
+   3639 00                 1814 	.db 0x00
+   363A                    1815 __str_3:
+   363A 0D                 1816 	.db 0x0D
+   363B 0A                 1817 	.db 0x0A
+   363C 00                 1818 	.db 0x00
+   363D                    1819 __str_4:
+   363D 0D                 1820 	.db 0x0D
+   363E 0A                 1821 	.db 0x0A
+   363F 44 6F 6E 65 20 65  1822 	.ascii "Done entering code"
         6E 74 65 72 69 6E
         67 20 63 6F 64 65
-   35D8 0D                 1823 	.db 0x0D
-   35D9 0A                 1824 	.db 0x0A
-   35DA 00                 1825 	.db 0x00
+   3651 0D                 1823 	.db 0x0D
+   3652 0A                 1824 	.db 0x0A
+   3653 00                 1825 	.db 0x00
                            1826 	.area XINIT   (CODE)

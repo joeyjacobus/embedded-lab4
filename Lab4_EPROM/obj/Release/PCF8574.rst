@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
                               3 ; Version 2.6.0 #4309 (Jul 28 2006)
-                              4 ; This file generated Sun Nov 13 18:32:33 2016
+                              4 ; This file generated Sun Nov 13 23:06:30 2016
                               5 ;--------------------------------------------------------
                               6 	.module PCF8574
                               7 	.optsdcc -mmcs51 --model-large
@@ -496,7 +496,7 @@
                             496 ;	-----------------------------------------
                             497 ;	 function ext1
                             498 ;	-----------------------------------------
-   1F5B                     499 _ext1:
+   1FBF                     499 _ext1:
                     0002    500 	ar2 = 0x02
                     0003    501 	ar3 = 0x03
                     0004    502 	ar4 = 0x04
@@ -505,19 +505,19 @@
                     0007    505 	ar7 = 0x07
                     0000    506 	ar0 = 0x00
                     0001    507 	ar1 = 0x01
-   1F5B C0 E0               508 	push	acc
-   1F5D C0 82               509 	push	dpl
-   1F5F C0 83               510 	push	dph
+   1FBF C0 E0               508 	push	acc
+   1FC1 C0 82               509 	push	dpl
+   1FC3 C0 83               510 	push	dph
                             511 ;	PCF8574.c:21: PCF_ButtonPressed = 1;
                             512 ;	genAssign
-   1F61 90 01 1E            513 	mov	dptr,#_PCF_ButtonPressed
-   1F64 74 01               514 	mov	a,#0x01
-   1F66 F0                  515 	movx	@dptr,a
+   1FC5 90 01 1E            513 	mov	dptr,#_PCF_ButtonPressed
+   1FC8 74 01               514 	mov	a,#0x01
+   1FCA F0                  515 	movx	@dptr,a
                             516 ;	Peephole 300	removed redundant label 00101$
-   1F67 D0 83               517 	pop	dph
-   1F69 D0 82               518 	pop	dpl
-   1F6B D0 E0               519 	pop	acc
-   1F6D 32                  520 	reti
+   1FCB D0 83               517 	pop	dph
+   1FCD D0 82               518 	pop	dpl
+   1FCF D0 E0               519 	pop	acc
+   1FD1 32                  520 	reti
                             521 ;	eliminated unneeded push/pop psw
                             522 ;	eliminated unneeded push/pop b
                             523 ;------------------------------------------------------------
@@ -530,33 +530,33 @@
                             530 ;	-----------------------------------------
                             531 ;	 function PCF_ReadDevice
                             532 ;	-----------------------------------------
-   1F6E                     533 _PCF_ReadDevice:
+   1FD2                     533 _PCF_ReadDevice:
                             534 ;	PCF8574.c:31: I2CStart();
                             535 ;	genCall
-   1F6E 12 07 2C            536 	lcall	_I2CStart
+   1FD2 12 07 3E            536 	lcall	_I2CStart
                             537 ;	PCF8574.c:32: ack = I2CSend(PCF_ADDRESS | READ);
                             538 ;	genCall
-   1F71 75 82 71            539 	mov	dpl,#0x71
-   1F74 12 07 5C            540 	lcall	_I2CSend
+   1FD5 75 82 71            539 	mov	dpl,#0x71
+   1FD8 12 07 6E            540 	lcall	_I2CSend
                             541 ;	PCF8574.c:33: value = I2CRead();
                             542 ;	genCall
-   1F77 12 07 A7            543 	lcall	_I2CRead
-   1F7A AA 82               544 	mov	r2,dpl
+   1FDB 12 07 B9            543 	lcall	_I2CRead
+   1FDE AA 82               544 	mov	r2,dpl
                             545 ;	PCF8574.c:34: I2CNak();
                             546 ;	genCall
-   1F7C C0 02               547 	push	ar2
-   1F7E 12 07 51            548 	lcall	_I2CNak
-   1F81 D0 02               549 	pop	ar2
+   1FE0 C0 02               547 	push	ar2
+   1FE2 12 07 63            548 	lcall	_I2CNak
+   1FE5 D0 02               549 	pop	ar2
                             550 ;	PCF8574.c:35: I2CStop();
                             551 ;	genCall
-   1F83 C0 02               552 	push	ar2
-   1F85 12 07 3B            553 	lcall	_I2CStop
-   1F88 D0 02               554 	pop	ar2
+   1FE7 C0 02               552 	push	ar2
+   1FE9 12 07 4D            553 	lcall	_I2CStop
+   1FEC D0 02               554 	pop	ar2
                             555 ;	PCF8574.c:36: return value;
                             556 ;	genRet
-   1F8A 8A 82               557 	mov	dpl,r2
+   1FEE 8A 82               557 	mov	dpl,r2
                             558 ;	Peephole 300	removed redundant label 00101$
-   1F8C 22                  559 	ret
+   1FF0 22                  559 	ret
                             560 ;------------------------------------------------------------
                             561 ;Allocation info for local variables in function 'PCF_UpdateDevice'
                             562 ;------------------------------------------------------------
@@ -566,27 +566,27 @@
                             566 ;	-----------------------------------------
                             567 ;	 function PCF_UpdateDevice
                             568 ;	-----------------------------------------
-   1F8D                     569 _PCF_UpdateDevice:
+   1FF1                     569 _PCF_UpdateDevice:
                             570 ;	PCF8574.c:44: I2CStart();
                             571 ;	genCall
-   1F8D 12 07 2C            572 	lcall	_I2CStart
+   1FF1 12 07 3E            572 	lcall	_I2CStart
                             573 ;	PCF8574.c:45: ack = I2CSend(PCF_ADDRESS | WRITE);
                             574 ;	genCall
-   1F90 75 82 70            575 	mov	dpl,#0x70
-   1F93 12 07 5C            576 	lcall	_I2CSend
+   1FF4 75 82 70            575 	mov	dpl,#0x70
+   1FF7 12 07 6E            576 	lcall	_I2CSend
                             577 ;	PCF8574.c:46: ack = I2CSend(PCF_Config);
                             578 ;	genAssign
-   1F96 90 01 1D            579 	mov	dptr,#_PCF_Config
-   1F99 E0                  580 	movx	a,@dptr
+   1FFA 90 01 1D            579 	mov	dptr,#_PCF_Config
+   1FFD E0                  580 	movx	a,@dptr
                             581 ;	genCall
-   1F9A FA                  582 	mov	r2,a
+   1FFE FA                  582 	mov	r2,a
                             583 ;	Peephole 244.c	loading dpl from a instead of r2
-   1F9B F5 82               584 	mov	dpl,a
-   1F9D 12 07 5C            585 	lcall	_I2CSend
+   1FFF F5 82               584 	mov	dpl,a
+   2001 12 07 6E            585 	lcall	_I2CSend
                             586 ;	PCF8574.c:47: I2CStop();
                             587 ;	genCall
                             588 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   1FA0 02 07 3B            589 	ljmp	_I2CStop
+   2004 02 07 4D            589 	ljmp	_I2CStop
                             590 ;
                             591 ;------------------------------------------------------------
                             592 ;Allocation info for local variables in function 'PCF_PrintState'
@@ -599,202 +599,202 @@
                             599 ;	-----------------------------------------
                             600 ;	 function PCF_PrintState
                             601 ;	-----------------------------------------
-   1FA3                     602 _PCF_PrintState:
+   2007                     602 _PCF_PrintState:
                             603 ;	PCF8574.c:56: uint8_t value = PCF_ReadDevice();
                             604 ;	genCall
-   1FA3 12 1F 6E            605 	lcall	_PCF_ReadDevice
-   1FA6 AA 82               606 	mov	r2,dpl
+   2007 12 1F D2            605 	lcall	_PCF_ReadDevice
+   200A AA 82               606 	mov	r2,dpl
                             607 ;	PCF8574.c:58: printf("\r\nRead value %x\r\n", value);
                             608 ;	genCast
-   1FA8 7B 00               609 	mov	r3,#0x00
+   200C 7B 00               609 	mov	r3,#0x00
                             610 ;	genIpush
-   1FAA C0 02               611 	push	ar2
-   1FAC C0 03               612 	push	ar3
-   1FAE C0 02               613 	push	ar2
-   1FB0 C0 03               614 	push	ar3
+   200E C0 02               611 	push	ar2
+   2010 C0 03               612 	push	ar3
+   2012 C0 02               613 	push	ar2
+   2014 C0 03               614 	push	ar3
                             615 ;	genIpush
-   1FB2 74 B7               616 	mov	a,#__str_0
-   1FB4 C0 E0               617 	push	acc
-   1FB6 74 41               618 	mov	a,#(__str_0 >> 8)
-   1FB8 C0 E0               619 	push	acc
-   1FBA 74 80               620 	mov	a,#0x80
-   1FBC C0 E0               621 	push	acc
+   2016 74 B3               616 	mov	a,#__str_0
+   2018 C0 E0               617 	push	acc
+   201A 74 42               618 	mov	a,#(__str_0 >> 8)
+   201C C0 E0               619 	push	acc
+   201E 74 80               620 	mov	a,#0x80
+   2020 C0 E0               621 	push	acc
                             622 ;	genCall
-   1FBE 12 2C 9C            623 	lcall	_printf
-   1FC1 E5 81               624 	mov	a,sp
-   1FC3 24 FB               625 	add	a,#0xfb
-   1FC5 F5 81               626 	mov	sp,a
-   1FC7 D0 03               627 	pop	ar3
-   1FC9 D0 02               628 	pop	ar2
+   2022 12 2D 15            623 	lcall	_printf
+   2025 E5 81               624 	mov	a,sp
+   2027 24 FB               625 	add	a,#0xfb
+   2029 F5 81               626 	mov	sp,a
+   202B D0 03               627 	pop	ar3
+   202D D0 02               628 	pop	ar2
                             629 ;	PCF8574.c:59: printf("\r\nState of pins on I/O expander:");
                             630 ;	genIpush
-   1FCB C0 02               631 	push	ar2
-   1FCD C0 03               632 	push	ar3
-   1FCF 74 C9               633 	mov	a,#__str_1
-   1FD1 C0 E0               634 	push	acc
-   1FD3 74 41               635 	mov	a,#(__str_1 >> 8)
-   1FD5 C0 E0               636 	push	acc
-   1FD7 74 80               637 	mov	a,#0x80
-   1FD9 C0 E0               638 	push	acc
+   202F C0 02               631 	push	ar2
+   2031 C0 03               632 	push	ar3
+   2033 74 C5               633 	mov	a,#__str_1
+   2035 C0 E0               634 	push	acc
+   2037 74 42               635 	mov	a,#(__str_1 >> 8)
+   2039 C0 E0               636 	push	acc
+   203B 74 80               637 	mov	a,#0x80
+   203D C0 E0               638 	push	acc
                             639 ;	genCall
-   1FDB 12 2C 9C            640 	lcall	_printf
-   1FDE 15 81               641 	dec	sp
-   1FE0 15 81               642 	dec	sp
-   1FE2 15 81               643 	dec	sp
-   1FE4 D0 03               644 	pop	ar3
-   1FE6 D0 02               645 	pop	ar2
+   203F 12 2D 15            640 	lcall	_printf
+   2042 15 81               641 	dec	sp
+   2044 15 81               642 	dec	sp
+   2046 15 81               643 	dec	sp
+   2048 D0 03               644 	pop	ar3
+   204A D0 02               645 	pop	ar2
                             646 ;	PCF8574.c:60: for(i = 0; i < 8; ++i){
                             647 ;	genAssign
-   1FE8 7C 00               648 	mov	r4,#0x00
-   1FEA                     649 00104$:
+   204C 7C 00               648 	mov	r4,#0x00
+   204E                     649 00104$:
                             650 ;	genCmpLt
                             651 ;	genCmp
-   1FEA BC 08 00            652 	cjne	r4,#0x08,00114$
-   1FED                     653 00114$:
+   204E BC 08 00            652 	cjne	r4,#0x08,00114$
+   2051                     653 00114$:
                             654 ;	genIfxJump
-   1FED 40 03               655 	jc	00115$
-   1FEF 02 20 93            656 	ljmp	00107$
-   1FF2                     657 00115$:
+   2051 40 03               655 	jc	00115$
+   2053 02 20 F7            656 	ljmp	00107$
+   2056                     657 00115$:
                             658 ;	PCF8574.c:61: if(PCF_Config & (0x01 << i))
                             659 ;	genLeftShift
-   1FF2 8C F0               660 	mov	b,r4
-   1FF4 05 F0               661 	inc	b
-   1FF6 74 01               662 	mov	a,#0x01
-   1FF8 80 02               663 	sjmp	00118$
-   1FFA                     664 00116$:
-   1FFA 25 E0               665 	add	a,acc
-   1FFC                     666 00118$:
-   1FFC D5 F0 FB            667 	djnz	b,00116$
-   1FFF FD                  668 	mov	r5,a
+   2056 8C F0               660 	mov	b,r4
+   2058 05 F0               661 	inc	b
+   205A 74 01               662 	mov	a,#0x01
+   205C 80 02               663 	sjmp	00118$
+   205E                     664 00116$:
+   205E 25 E0               665 	add	a,acc
+   2060                     666 00118$:
+   2060 D5 F0 FB            667 	djnz	b,00116$
+   2063 FD                  668 	mov	r5,a
                             669 ;	genAssign
-   2000 90 01 1D            670 	mov	dptr,#_PCF_Config
-   2003 E0                  671 	movx	a,@dptr
-   2004 FE                  672 	mov	r6,a
+   2064 90 01 1D            670 	mov	dptr,#_PCF_Config
+   2067 E0                  671 	movx	a,@dptr
+   2068 FE                  672 	mov	r6,a
                             673 ;	genAnd
-   2005 ED                  674 	mov	a,r5
-   2006 5E                  675 	anl	a,r6
+   2069 ED                  674 	mov	a,r5
+   206A 5E                  675 	anl	a,r6
                             676 ;	genIfx
                             677 ;	genIfxJump
                             678 ;	Peephole 108.c	removed ljmp by inverse jump logic
-   2007 60 5D               679 	jz	00102$
+   206B 60 5D               679 	jz	00102$
                             680 ;	Peephole 300	removed redundant label 00119$
                             681 ;	PCF8574.c:62: printf("\r\nPin %d: Input/Output value: %d", i, ((value & (0x01 << i)) >> i));
                             682 ;	genCast
-   2009 8C 05               683 	mov	ar5,r4
-   200B 7E 00               684 	mov	r6,#0x00
+   206D 8C 05               683 	mov	ar5,r4
+   206F 7E 00               684 	mov	r6,#0x00
                             685 ;	genLeftShift
-   200D 8C F0               686 	mov	b,r4
-   200F 05 F0               687 	inc	b
-   2011 7F 01               688 	mov	r7,#0x01
-   2013 78 00               689 	mov	r0,#0x00
-   2015 80 06               690 	sjmp	00121$
-   2017                     691 00120$:
-   2017 EF                  692 	mov	a,r7
+   2071 8C F0               686 	mov	b,r4
+   2073 05 F0               687 	inc	b
+   2075 7F 01               688 	mov	r7,#0x01
+   2077 78 00               689 	mov	r0,#0x00
+   2079 80 06               690 	sjmp	00121$
+   207B                     691 00120$:
+   207B EF                  692 	mov	a,r7
                             693 ;	Peephole 254	optimized left shift
-   2018 2F                  694 	add	a,r7
-   2019 FF                  695 	mov	r7,a
-   201A E8                  696 	mov	a,r0
-   201B 33                  697 	rlc	a
-   201C F8                  698 	mov	r0,a
-   201D                     699 00121$:
-   201D D5 F0 F7            700 	djnz	b,00120$
+   207C 2F                  694 	add	a,r7
+   207D FF                  695 	mov	r7,a
+   207E E8                  696 	mov	a,r0
+   207F 33                  697 	rlc	a
+   2080 F8                  698 	mov	r0,a
+   2081                     699 00121$:
+   2081 D5 F0 F7            700 	djnz	b,00120$
                             701 ;	genAnd
-   2020 EA                  702 	mov	a,r2
-   2021 52 07               703 	anl	ar7,a
-   2023 EB                  704 	mov	a,r3
-   2024 52 00               705 	anl	ar0,a
+   2084 EA                  702 	mov	a,r2
+   2085 52 07               703 	anl	ar7,a
+   2087 EB                  704 	mov	a,r3
+   2088 52 00               705 	anl	ar0,a
                             706 ;	genRightShift
                             707 ;	genSignedRightShift
-   2026 8C F0               708 	mov	b,r4
-   2028 05 F0               709 	inc	b
-   202A E8                  710 	mov	a,r0
-   202B 33                  711 	rlc	a
-   202C 92 D2               712 	mov	ov,c
-   202E 80 08               713 	sjmp	00123$
-   2030                     714 00122$:
-   2030 A2 D2               715 	mov	c,ov
-   2032 E8                  716 	mov	a,r0
-   2033 13                  717 	rrc	a
-   2034 F8                  718 	mov	r0,a
-   2035 EF                  719 	mov	a,r7
-   2036 13                  720 	rrc	a
-   2037 FF                  721 	mov	r7,a
-   2038                     722 00123$:
-   2038 D5 F0 F5            723 	djnz	b,00122$
+   208A 8C F0               708 	mov	b,r4
+   208C 05 F0               709 	inc	b
+   208E E8                  710 	mov	a,r0
+   208F 33                  711 	rlc	a
+   2090 92 D2               712 	mov	ov,c
+   2092 80 08               713 	sjmp	00123$
+   2094                     714 00122$:
+   2094 A2 D2               715 	mov	c,ov
+   2096 E8                  716 	mov	a,r0
+   2097 13                  717 	rrc	a
+   2098 F8                  718 	mov	r0,a
+   2099 EF                  719 	mov	a,r7
+   209A 13                  720 	rrc	a
+   209B FF                  721 	mov	r7,a
+   209C                     722 00123$:
+   209C D5 F0 F5            723 	djnz	b,00122$
                             724 ;	genIpush
-   203B C0 02               725 	push	ar2
-   203D C0 03               726 	push	ar3
-   203F C0 04               727 	push	ar4
-   2041 C0 07               728 	push	ar7
-   2043 C0 00               729 	push	ar0
+   209F C0 02               725 	push	ar2
+   20A1 C0 03               726 	push	ar3
+   20A3 C0 04               727 	push	ar4
+   20A5 C0 07               728 	push	ar7
+   20A7 C0 00               729 	push	ar0
                             730 ;	genIpush
-   2045 C0 05               731 	push	ar5
-   2047 C0 06               732 	push	ar6
+   20A9 C0 05               731 	push	ar5
+   20AB C0 06               732 	push	ar6
                             733 ;	genIpush
-   2049 74 EA               734 	mov	a,#__str_2
-   204B C0 E0               735 	push	acc
-   204D 74 41               736 	mov	a,#(__str_2 >> 8)
-   204F C0 E0               737 	push	acc
-   2051 74 80               738 	mov	a,#0x80
-   2053 C0 E0               739 	push	acc
+   20AD 74 E6               734 	mov	a,#__str_2
+   20AF C0 E0               735 	push	acc
+   20B1 74 42               736 	mov	a,#(__str_2 >> 8)
+   20B3 C0 E0               737 	push	acc
+   20B5 74 80               738 	mov	a,#0x80
+   20B7 C0 E0               739 	push	acc
                             740 ;	genCall
-   2055 12 2C 9C            741 	lcall	_printf
-   2058 E5 81               742 	mov	a,sp
-   205A 24 F9               743 	add	a,#0xf9
-   205C F5 81               744 	mov	sp,a
-   205E D0 04               745 	pop	ar4
-   2060 D0 03               746 	pop	ar3
-   2062 D0 02               747 	pop	ar2
+   20B9 12 2D 15            741 	lcall	_printf
+   20BC E5 81               742 	mov	a,sp
+   20BE 24 F9               743 	add	a,#0xf9
+   20C0 F5 81               744 	mov	sp,a
+   20C2 D0 04               745 	pop	ar4
+   20C4 D0 03               746 	pop	ar3
+   20C6 D0 02               747 	pop	ar2
                             748 ;	Peephole 112.b	changed ljmp to sjmp
-   2064 80 29               749 	sjmp	00106$
-   2066                     750 00102$:
+   20C8 80 29               749 	sjmp	00106$
+   20CA                     750 00102$:
                             751 ;	PCF8574.c:64: printf("\r\nPin %d: Output value: 0", i);
                             752 ;	genCast
-   2066 8C 05               753 	mov	ar5,r4
-   2068 7E 00               754 	mov	r6,#0x00
+   20CA 8C 05               753 	mov	ar5,r4
+   20CC 7E 00               754 	mov	r6,#0x00
                             755 ;	genIpush
-   206A C0 02               756 	push	ar2
-   206C C0 03               757 	push	ar3
-   206E C0 04               758 	push	ar4
-   2070 C0 05               759 	push	ar5
-   2072 C0 06               760 	push	ar6
+   20CE C0 02               756 	push	ar2
+   20D0 C0 03               757 	push	ar3
+   20D2 C0 04               758 	push	ar4
+   20D4 C0 05               759 	push	ar5
+   20D6 C0 06               760 	push	ar6
                             761 ;	genIpush
-   2074 74 0B               762 	mov	a,#__str_3
-   2076 C0 E0               763 	push	acc
-   2078 74 42               764 	mov	a,#(__str_3 >> 8)
-   207A C0 E0               765 	push	acc
-   207C 74 80               766 	mov	a,#0x80
-   207E C0 E0               767 	push	acc
+   20D8 74 07               762 	mov	a,#__str_3
+   20DA C0 E0               763 	push	acc
+   20DC 74 43               764 	mov	a,#(__str_3 >> 8)
+   20DE C0 E0               765 	push	acc
+   20E0 74 80               766 	mov	a,#0x80
+   20E2 C0 E0               767 	push	acc
                             768 ;	genCall
-   2080 12 2C 9C            769 	lcall	_printf
-   2083 E5 81               770 	mov	a,sp
-   2085 24 FB               771 	add	a,#0xfb
-   2087 F5 81               772 	mov	sp,a
-   2089 D0 04               773 	pop	ar4
-   208B D0 03               774 	pop	ar3
-   208D D0 02               775 	pop	ar2
-   208F                     776 00106$:
+   20E4 12 2D 15            769 	lcall	_printf
+   20E7 E5 81               770 	mov	a,sp
+   20E9 24 FB               771 	add	a,#0xfb
+   20EB F5 81               772 	mov	sp,a
+   20ED D0 04               773 	pop	ar4
+   20EF D0 03               774 	pop	ar3
+   20F1 D0 02               775 	pop	ar2
+   20F3                     776 00106$:
                             777 ;	PCF8574.c:60: for(i = 0; i < 8; ++i){
                             778 ;	genPlus
                             779 ;     genPlusIncr
-   208F 0C                  780 	inc	r4
-   2090 02 1F EA            781 	ljmp	00104$
-   2093                     782 00107$:
+   20F3 0C                  780 	inc	r4
+   20F4 02 20 4E            781 	ljmp	00104$
+   20F7                     782 00107$:
                             783 ;	PCF8574.c:66: printf("\r\n");
                             784 ;	genIpush
-   2093 74 25               785 	mov	a,#__str_4
-   2095 C0 E0               786 	push	acc
-   2097 74 42               787 	mov	a,#(__str_4 >> 8)
-   2099 C0 E0               788 	push	acc
-   209B 74 80               789 	mov	a,#0x80
-   209D C0 E0               790 	push	acc
+   20F7 74 21               785 	mov	a,#__str_4
+   20F9 C0 E0               786 	push	acc
+   20FB 74 43               787 	mov	a,#(__str_4 >> 8)
+   20FD C0 E0               788 	push	acc
+   20FF 74 80               789 	mov	a,#0x80
+   2101 C0 E0               790 	push	acc
                             791 ;	genCall
-   209F 12 2C 9C            792 	lcall	_printf
-   20A2 15 81               793 	dec	sp
-   20A4 15 81               794 	dec	sp
-   20A6 15 81               795 	dec	sp
+   2103 12 2D 15            792 	lcall	_printf
+   2106 15 81               793 	dec	sp
+   2108 15 81               794 	dec	sp
+   210A 15 81               795 	dec	sp
                             796 ;	Peephole 300	removed redundant label 00108$
-   20A8 22                  797 	ret
+   210C 22                  797 	ret
                             798 ;------------------------------------------------------------
                             799 ;Allocation info for local variables in function 'PCF_SetOutputLow'
                             800 ;------------------------------------------------------------
@@ -804,42 +804,42 @@
                             804 ;	-----------------------------------------
                             805 ;	 function PCF_SetOutputLow
                             806 ;	-----------------------------------------
-   20A9                     807 _PCF_SetOutputLow:
+   210D                     807 _PCF_SetOutputLow:
                             808 ;	genReceive
-   20A9 E5 82               809 	mov	a,dpl
-   20AB 90 00 B9            810 	mov	dptr,#_PCF_SetOutputLow_pin_1_1
-   20AE F0                  811 	movx	@dptr,a
+   210D E5 82               809 	mov	a,dpl
+   210F 90 00 B9            810 	mov	dptr,#_PCF_SetOutputLow_pin_1_1
+   2112 F0                  811 	movx	@dptr,a
                             812 ;	PCF8574.c:74: PCF_Config &= ~(1 << pin);
                             813 ;	genAssign
-   20AF 90 00 B9            814 	mov	dptr,#_PCF_SetOutputLow_pin_1_1
-   20B2 E0                  815 	movx	a,@dptr
-   20B3 FA                  816 	mov	r2,a
+   2113 90 00 B9            814 	mov	dptr,#_PCF_SetOutputLow_pin_1_1
+   2116 E0                  815 	movx	a,@dptr
+   2117 FA                  816 	mov	r2,a
                             817 ;	genLeftShift
-   20B4 8A F0               818 	mov	b,r2
-   20B6 05 F0               819 	inc	b
-   20B8 74 01               820 	mov	a,#0x01
-   20BA 80 02               821 	sjmp	00105$
-   20BC                     822 00103$:
-   20BC 25 E0               823 	add	a,acc
-   20BE                     824 00105$:
-   20BE D5 F0 FB            825 	djnz	b,00103$
+   2118 8A F0               818 	mov	b,r2
+   211A 05 F0               819 	inc	b
+   211C 74 01               820 	mov	a,#0x01
+   211E 80 02               821 	sjmp	00105$
+   2120                     822 00103$:
+   2120 25 E0               823 	add	a,acc
+   2122                     824 00105$:
+   2122 D5 F0 FB            825 	djnz	b,00103$
                             826 ;	genCpl
                             827 ;	Peephole 105	removed redundant mov
                             828 ;	Peephole 184	removed redundant mov
-   20C1 F4                  829 	cpl	a
-   20C2 FA                  830 	mov	r2,a
+   2125 F4                  829 	cpl	a
+   2126 FA                  830 	mov	r2,a
                             831 ;	genAssign
                             832 ;	genAnd
-   20C3 90 01 1D            833 	mov	dptr,#_PCF_Config
-   20C6 E0                  834 	movx	a,@dptr
-   20C7 FB                  835 	mov	r3,a
+   2127 90 01 1D            833 	mov	dptr,#_PCF_Config
+   212A E0                  834 	movx	a,@dptr
+   212B FB                  835 	mov	r3,a
                             836 ;	Peephole 248.b	optimized and to xdata
-   20C8 5A                  837 	anl	a,r2
-   20C9 F0                  838 	movx	@dptr,a
+   212C 5A                  837 	anl	a,r2
+   212D F0                  838 	movx	@dptr,a
                             839 ;	PCF8574.c:75: PCF_UpdateDevice();
                             840 ;	genCall
                             841 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   20CA 02 1F 8D            842 	ljmp	_PCF_UpdateDevice
+   212E 02 1F F1            842 	ljmp	_PCF_UpdateDevice
                             843 ;
                             844 ;------------------------------------------------------------
                             845 ;Allocation info for local variables in function 'PCF_SetInputOutput'
@@ -850,38 +850,38 @@
                             850 ;	-----------------------------------------
                             851 ;	 function PCF_SetInputOutput
                             852 ;	-----------------------------------------
-   20CD                     853 _PCF_SetInputOutput:
+   2131                     853 _PCF_SetInputOutput:
                             854 ;	genReceive
-   20CD E5 82               855 	mov	a,dpl
-   20CF 90 00 BA            856 	mov	dptr,#_PCF_SetInputOutput_pin_1_1
-   20D2 F0                  857 	movx	@dptr,a
+   2131 E5 82               855 	mov	a,dpl
+   2133 90 00 BA            856 	mov	dptr,#_PCF_SetInputOutput_pin_1_1
+   2136 F0                  857 	movx	@dptr,a
                             858 ;	PCF8574.c:82: PCF_Config |= INPUT << pin;
                             859 ;	genAssign
-   20D3 90 00 BA            860 	mov	dptr,#_PCF_SetInputOutput_pin_1_1
-   20D6 E0                  861 	movx	a,@dptr
-   20D7 FA                  862 	mov	r2,a
+   2137 90 00 BA            860 	mov	dptr,#_PCF_SetInputOutput_pin_1_1
+   213A E0                  861 	movx	a,@dptr
+   213B FA                  862 	mov	r2,a
                             863 ;	genLeftShift
-   20D8 8A F0               864 	mov	b,r2
-   20DA 05 F0               865 	inc	b
-   20DC 74 01               866 	mov	a,#0x01
-   20DE 80 02               867 	sjmp	00105$
-   20E0                     868 00103$:
-   20E0 25 E0               869 	add	a,acc
-   20E2                     870 00105$:
-   20E2 D5 F0 FB            871 	djnz	b,00103$
-   20E5 FA                  872 	mov	r2,a
+   213C 8A F0               864 	mov	b,r2
+   213E 05 F0               865 	inc	b
+   2140 74 01               866 	mov	a,#0x01
+   2142 80 02               867 	sjmp	00105$
+   2144                     868 00103$:
+   2144 25 E0               869 	add	a,acc
+   2146                     870 00105$:
+   2146 D5 F0 FB            871 	djnz	b,00103$
+   2149 FA                  872 	mov	r2,a
                             873 ;	genAssign
                             874 ;	genOr
-   20E6 90 01 1D            875 	mov	dptr,#_PCF_Config
-   20E9 E0                  876 	movx	a,@dptr
-   20EA FB                  877 	mov	r3,a
+   214A 90 01 1D            875 	mov	dptr,#_PCF_Config
+   214D E0                  876 	movx	a,@dptr
+   214E FB                  877 	mov	r3,a
                             878 ;	Peephole 248.a	optimized or to xdata
-   20EB 4A                  879 	orl	a,r2
-   20EC F0                  880 	movx	@dptr,a
+   214F 4A                  879 	orl	a,r2
+   2150 F0                  880 	movx	@dptr,a
                             881 ;	PCF8574.c:83: PCF_UpdateDevice();
                             882 ;	genCall
                             883 ;	Peephole 253.b	replaced lcall/ret with ljmp
-   20ED 02 1F 8D            884 	ljmp	_PCF_UpdateDevice
+   2151 02 1F F1            884 	ljmp	_PCF_UpdateDevice
                             885 ;
                             886 ;------------------------------------------------------------
                             887 ;Allocation info for local variables in function 'PCF_OutputCount'
@@ -893,88 +893,88 @@
                             893 ;	-----------------------------------------
                             894 ;	 function PCF_OutputCount
                             895 ;	-----------------------------------------
-   20F0                     896 _PCF_OutputCount:
+   2154                     896 _PCF_OutputCount:
                             897 ;	genReceive
-   20F0 E5 82               898 	mov	a,dpl
-   20F2 90 00 BB            899 	mov	dptr,#_PCF_OutputCount_count_1_1
-   20F5 F0                  900 	movx	@dptr,a
+   2154 E5 82               898 	mov	a,dpl
+   2156 90 00 BB            899 	mov	dptr,#_PCF_OutputCount_count_1_1
+   2159 F0                  900 	movx	@dptr,a
                             901 ;	PCF8574.c:92: for (i = 0; i < 4; ++i){
                             902 ;	genAssign
-   20F6 90 00 BB            903 	mov	dptr,#_PCF_OutputCount_count_1_1
-   20F9 E0                  904 	movx	a,@dptr
-   20FA FA                  905 	mov	r2,a
+   215A 90 00 BB            903 	mov	dptr,#_PCF_OutputCount_count_1_1
+   215D E0                  904 	movx	a,@dptr
+   215E FA                  905 	mov	r2,a
                             906 ;	genAssign
-   20FB 7B 00               907 	mov	r3,#0x00
-   20FD                     908 00104$:
+   215F 7B 00               907 	mov	r3,#0x00
+   2161                     908 00104$:
                             909 ;	genCmpLt
                             910 ;	genCmp
-   20FD BB 04 00            911 	cjne	r3,#0x04,00114$
-   2100                     912 00114$:
+   2161 BB 04 00            911 	cjne	r3,#0x04,00114$
+   2164                     912 00114$:
                             913 ;	genIfxJump
                             914 ;	Peephole 108.a	removed ljmp by inverse jump logic
-   2100 50 38               915 	jnc	00108$
+   2164 50 38               915 	jnc	00108$
                             916 ;	Peephole 300	removed redundant label 00115$
                             917 ;	PCF8574.c:93: if ( count & (0x01 << i) )  //
                             918 ;	genLeftShift
-   2102 8B F0               919 	mov	b,r3
-   2104 05 F0               920 	inc	b
-   2106 74 01               921 	mov	a,#0x01
-   2108 80 02               922 	sjmp	00118$
-   210A                     923 00116$:
-   210A 25 E0               924 	add	a,acc
-   210C                     925 00118$:
-   210C D5 F0 FB            926 	djnz	b,00116$
+   2166 8B F0               919 	mov	b,r3
+   2168 05 F0               920 	inc	b
+   216A 74 01               921 	mov	a,#0x01
+   216C 80 02               922 	sjmp	00118$
+   216E                     923 00116$:
+   216E 25 E0               924 	add	a,acc
+   2170                     925 00118$:
+   2170 D5 F0 FB            926 	djnz	b,00116$
                             927 ;	genAnd
-   210F FC                  928 	mov	r4,a
+   2173 FC                  928 	mov	r4,a
                             929 ;	Peephole 105	removed redundant mov
-   2110 5A                  930 	anl	a,r2
+   2174 5A                  930 	anl	a,r2
                             931 ;	genIfx
                             932 ;	genIfxJump
                             933 ;	Peephole 108.c	removed ljmp by inverse jump logic
-   2111 60 13               934 	jz	00102$
+   2175 60 13               934 	jz	00102$
                             935 ;	Peephole 300	removed redundant label 00119$
                             936 ;	PCF8574.c:94: PCF_SetInputOutput(i + 4); //Bits 7-4
                             937 ;	genPlus
                             938 ;     genPlusIncr
-   2113 74 04               939 	mov	a,#0x04
+   2177 74 04               939 	mov	a,#0x04
                             940 ;	Peephole 236.a	used r3 instead of ar3
-   2115 2B                  941 	add	a,r3
+   2179 2B                  941 	add	a,r3
                             942 ;	genCall
-   2116 FC                  943 	mov	r4,a
+   217A FC                  943 	mov	r4,a
                             944 ;	Peephole 244.c	loading dpl from a instead of r4
-   2117 F5 82               945 	mov	dpl,a
-   2119 C0 02               946 	push	ar2
-   211B C0 03               947 	push	ar3
-   211D 12 20 CD            948 	lcall	_PCF_SetInputOutput
-   2120 D0 03               949 	pop	ar3
-   2122 D0 02               950 	pop	ar2
+   217B F5 82               945 	mov	dpl,a
+   217D C0 02               946 	push	ar2
+   217F C0 03               947 	push	ar3
+   2181 12 21 31            948 	lcall	_PCF_SetInputOutput
+   2184 D0 03               949 	pop	ar3
+   2186 D0 02               950 	pop	ar2
                             951 ;	Peephole 112.b	changed ljmp to sjmp
-   2124 80 11               952 	sjmp	00106$
-   2126                     953 00102$:
+   2188 80 11               952 	sjmp	00106$
+   218A                     953 00102$:
                             954 ;	PCF8574.c:96: PCF_SetOutputLow(i+4);
                             955 ;	genPlus
                             956 ;     genPlusIncr
-   2126 74 04               957 	mov	a,#0x04
+   218A 74 04               957 	mov	a,#0x04
                             958 ;	Peephole 236.a	used r3 instead of ar3
-   2128 2B                  959 	add	a,r3
+   218C 2B                  959 	add	a,r3
                             960 ;	genCall
-   2129 FC                  961 	mov	r4,a
+   218D FC                  961 	mov	r4,a
                             962 ;	Peephole 244.c	loading dpl from a instead of r4
-   212A F5 82               963 	mov	dpl,a
-   212C C0 02               964 	push	ar2
-   212E C0 03               965 	push	ar3
-   2130 12 20 A9            966 	lcall	_PCF_SetOutputLow
-   2133 D0 03               967 	pop	ar3
-   2135 D0 02               968 	pop	ar2
-   2137                     969 00106$:
+   218E F5 82               963 	mov	dpl,a
+   2190 C0 02               964 	push	ar2
+   2192 C0 03               965 	push	ar3
+   2194 12 21 0D            966 	lcall	_PCF_SetOutputLow
+   2197 D0 03               967 	pop	ar3
+   2199 D0 02               968 	pop	ar2
+   219B                     969 00106$:
                             970 ;	PCF8574.c:92: for (i = 0; i < 4; ++i){
                             971 ;	genPlus
                             972 ;     genPlusIncr
-   2137 0B                  973 	inc	r3
+   219B 0B                  973 	inc	r3
                             974 ;	Peephole 112.b	changed ljmp to sjmp
-   2138 80 C3               975 	sjmp	00104$
-   213A                     976 00108$:
-   213A 22                  977 	ret
+   219C 80 C3               975 	sjmp	00104$
+   219E                     976 00108$:
+   219E 22                  977 	ret
                             978 ;------------------------------------------------------------
                             979 ;Allocation info for local variables in function 'PCF_Init'
                             980 ;------------------------------------------------------------
@@ -983,72 +983,72 @@
                             983 ;	-----------------------------------------
                             984 ;	 function PCF_Init
                             985 ;	-----------------------------------------
-   213B                     986 _PCF_Init:
+   219F                     986 _PCF_Init:
                             987 ;	PCF8574.c:105: I2CInit();
                             988 ;	genCall
-   213B 12 07 27            989 	lcall	_I2CInit
+   219F 12 07 39            989 	lcall	_I2CInit
                             990 ;	PCF8574.c:106: PCF_Config = 0x00;
                             991 ;	genAssign
-   213E 90 01 1D            992 	mov	dptr,#_PCF_Config
+   21A2 90 01 1D            992 	mov	dptr,#_PCF_Config
                             993 ;	Peephole 181	changed mov to clr
-   2141 E4                  994 	clr	a
-   2142 F0                  995 	movx	@dptr,a
+   21A5 E4                  994 	clr	a
+   21A6 F0                  995 	movx	@dptr,a
                             996 ;	PCF8574.c:107: PCF_SetInputOutput(0);  //Config pin 0 as input
                             997 ;	genCall
-   2143 75 82 00            998 	mov	dpl,#0x00
-   2146 12 20 CD            999 	lcall	_PCF_SetInputOutput
+   21A7 75 82 00            998 	mov	dpl,#0x00
+   21AA 12 21 31            999 	lcall	_PCF_SetInputOutput
                            1000 ;	PCF8574.c:108: PCF_SetInputOutput(1);  //Config pin 1 as input
                            1001 ;	genCall
-   2149 75 82 01           1002 	mov	dpl,#0x01
-   214C 12 20 CD           1003 	lcall	_PCF_SetInputOutput
+   21AD 75 82 01           1002 	mov	dpl,#0x01
+   21B0 12 21 31           1003 	lcall	_PCF_SetInputOutput
                            1004 ;	PCF8574.c:109: IE |= 0x04;     //Enable External interrupt 1
                            1005 ;	genOr
-   214F 43 A8 04           1006 	orl	_IE,#0x04
+   21B3 43 A8 04           1006 	orl	_IE,#0x04
                            1007 ;	Peephole 300	removed redundant label 00101$
-   2152 22                 1008 	ret
+   21B6 22                 1008 	ret
                            1009 	.area CSEG    (CODE)
                            1010 	.area CONST   (CODE)
-   41B7                    1011 __str_0:
-   41B7 0D                 1012 	.db 0x0D
-   41B8 0A                 1013 	.db 0x0A
-   41B9 52 65 61 64 20 76  1014 	.ascii "Read value %x"
+   42B3                    1011 __str_0:
+   42B3 0D                 1012 	.db 0x0D
+   42B4 0A                 1013 	.db 0x0A
+   42B5 52 65 61 64 20 76  1014 	.ascii "Read value %x"
         61 6C 75 65 20 25
         78
-   41C6 0D                 1015 	.db 0x0D
-   41C7 0A                 1016 	.db 0x0A
-   41C8 00                 1017 	.db 0x00
-   41C9                    1018 __str_1:
-   41C9 0D                 1019 	.db 0x0D
-   41CA 0A                 1020 	.db 0x0A
-   41CB 53 74 61 74 65 20  1021 	.ascii "State of pins on I/O expander:"
+   42C2 0D                 1015 	.db 0x0D
+   42C3 0A                 1016 	.db 0x0A
+   42C4 00                 1017 	.db 0x00
+   42C5                    1018 __str_1:
+   42C5 0D                 1019 	.db 0x0D
+   42C6 0A                 1020 	.db 0x0A
+   42C7 53 74 61 74 65 20  1021 	.ascii "State of pins on I/O expander:"
         6F 66 20 70 69 6E
         73 20 6F 6E 20 49
         2F 4F 20 65 78 70
         61 6E 64 65 72 3A
-   41E9 00                 1022 	.db 0x00
-   41EA                    1023 __str_2:
-   41EA 0D                 1024 	.db 0x0D
-   41EB 0A                 1025 	.db 0x0A
-   41EC 50 69 6E 20 25 64  1026 	.ascii "Pin %d: Input/Output value: %d"
+   42E5 00                 1022 	.db 0x00
+   42E6                    1023 __str_2:
+   42E6 0D                 1024 	.db 0x0D
+   42E7 0A                 1025 	.db 0x0A
+   42E8 50 69 6E 20 25 64  1026 	.ascii "Pin %d: Input/Output value: %d"
         3A 20 49 6E 70 75
         74 2F 4F 75 74 70
         75 74 20 76 61 6C
         75 65 3A 20 25 64
-   420A 00                 1027 	.db 0x00
-   420B                    1028 __str_3:
-   420B 0D                 1029 	.db 0x0D
-   420C 0A                 1030 	.db 0x0A
-   420D 50 69 6E 20 25 64  1031 	.ascii "Pin %d: Output value: 0"
+   4306 00                 1027 	.db 0x00
+   4307                    1028 __str_3:
+   4307 0D                 1029 	.db 0x0D
+   4308 0A                 1030 	.db 0x0A
+   4309 50 69 6E 20 25 64  1031 	.ascii "Pin %d: Output value: 0"
         3A 20 4F 75 74 70
         75 74 20 76 61 6C
         75 65 3A 20 30
-   4224 00                 1032 	.db 0x00
-   4225                    1033 __str_4:
-   4225 0D                 1034 	.db 0x0D
-   4226 0A                 1035 	.db 0x0A
-   4227 00                 1036 	.db 0x00
+   4320 00                 1032 	.db 0x00
+   4321                    1033 __str_4:
+   4321 0D                 1034 	.db 0x0D
+   4322 0A                 1035 	.db 0x0A
+   4323 00                 1036 	.db 0x00
                            1037 	.area XINIT   (CODE)
-   432C                    1038 __xinit__PCF_Config:
-   432C 00                 1039 	.db #0x00
-   432D                    1040 __xinit__PCF_ButtonPressed:
-   432D 00                 1041 	.db #0x00
+   4428                    1038 __xinit__PCF_Config:
+   4428 00                 1039 	.db #0x00
+   4429                    1040 __xinit__PCF_ButtonPressed:
+   4429 00                 1041 	.db #0x00

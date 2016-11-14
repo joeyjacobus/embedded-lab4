@@ -17,6 +17,7 @@
 #include <stdbool.h>
 #include "Custom.h"
 #include "PCF8574.h"
+#include "Watchdog.h"
 
 #define AUXR_ENABLE_XRAM_MASK 0x0C
 
@@ -349,6 +350,7 @@ void EEPROM_Menu(void){
     printf("\r\nPress 'R' to read a byte from EEPROM");
     printf("\r\nPress 'L' to display EEPROM data on LCD");
     printf("\r\nPress 'D' to do a Hex Dump of EEPROM");
+    printf("\r\nPress 'Y' to perform an EEPROM software reset");
     printf("\r\nPress 'r' to return to main menu\r\n");
 }
 
@@ -422,7 +424,10 @@ void handleEEPROMMode(char c){
                 printf("\r\n");
             }
             break;
-
+        case 'Y':
+            printf("\r\nReset the EEPROM interface\r\n");
+            EPROM_Reset();
+            break;
         case 'r':
             mode = MAIN_MODE;
             MainMenu();
@@ -523,6 +528,7 @@ void MainMenu(void){
     printf("\r\nPress 'E' to enter EEPROM control mode");
     printf("\r\nPress 'C' to enter Clock control mode");
     printf("\r\nPress 'G' to enter Custom Code control mode");
+    printf("\r\nPress 'I' to enter infinite loop to test watchdog");
     printf("\r\nPress 'P' to enter PCF I/O expander control mode\r\n");
 }
 
@@ -550,6 +556,10 @@ void handleMAINMode(char c){
         case 'P':
             mode = PCF_MODE;
             PCF_Menu();
+            break;
+        case 'I':
+            while(1);
+            break;
         default:
             break;
     }
@@ -597,6 +607,7 @@ void main(void)
     mode = MAIN_MODE;
     LCD_gotoxy(0,0);    //Start at 0,0
     MainMenu();
+    Watchdog_Init();
     while(1){
         char c;
         uint8_t i;

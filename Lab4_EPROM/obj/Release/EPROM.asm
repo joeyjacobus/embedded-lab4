@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : FreeWare ANSI-C Compiler
 ; Version 2.6.0 #4309 (Jul 28 2006)
-; This file generated Sun Nov 13 10:15:18 2016
+; This file generated Sun Nov 13 23:06:27 2016
 ;--------------------------------------------------------
 	.module EPROM
 	.optsdcc -mmcs51 --model-large
@@ -10,6 +10,7 @@
 ; Public variables in this module
 ;--------------------------------------------------------
 	.globl _EPROM_Init
+	.globl _EPROM_Reset
 	.globl _EPROM_ByteRead
 	.globl _EPROM_ByteWrite
 	.globl _EPROM_SetBlock
@@ -881,15 +882,42 @@ _EPROM_ByteRead:
 ;	Peephole 300	removed redundant label 00101$
 	ret
 ;------------------------------------------------------------
+;Allocation info for local variables in function 'EPROM_Reset'
+;------------------------------------------------------------
+;------------------------------------------------------------
+;	EPROM.c:90: void EPROM_Reset(void){
+;	-----------------------------------------
+;	 function EPROM_Reset
+;	-----------------------------------------
+_EPROM_Reset:
+;	EPROM.c:91: I2CStart();
+;	genCall
+	lcall	_I2CStart
+;	EPROM.c:92: I2CSend(0xFF);
+;	genCall
+	mov	dpl,#0xFF
+	lcall	_I2CSend
+;	EPROM.c:93: I2CNak();
+;	genCall
+	lcall	_I2CNak
+;	EPROM.c:94: I2CRestart();
+;	genCall
+	lcall	_I2CRestart
+;	EPROM.c:95: I2CStop();
+;	genCall
+;	Peephole 253.b	replaced lcall/ret with ljmp
+	ljmp	_I2CStop
+;
+;------------------------------------------------------------
 ;Allocation info for local variables in function 'EPROM_Init'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
-;	EPROM.c:84: void EPROM_Init(void){
+;	EPROM.c:101: void EPROM_Init(void){
 ;	-----------------------------------------
 ;	 function EPROM_Init
 ;	-----------------------------------------
 _EPROM_Init:
-;	EPROM.c:85: I2CInit();
+;	EPROM.c:102: I2CInit();
 ;	genCall
 ;	Peephole 253.b	replaced lcall/ret with ljmp
 	ljmp	_I2CInit

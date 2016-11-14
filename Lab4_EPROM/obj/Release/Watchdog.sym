@@ -172,7 +172,6 @@ Symbol Table
     TXD                                                            00B1 
     _AC                                                         =  00D6 G
     _ACC                                                        =  00E0 G
-  9 _ACK_RETRY                                                     0000 GR
     _AUXR                                                       =  008E G
     _AUXR1                                                      =  00A2 G
     _B                                                          =  00F0 G
@@ -215,19 +214,6 @@ Symbol Table
     _EA                                                         =  00AF G
     _EC                                                         =  00AE G
     _EECON                                                      =  00D2 G
- 13 _EPROM_ByteRead                                                0102 GR
-  8 _EPROM_ByteRead_PARM_2                                         0008 GR
-  8 _EPROM_ByteRead_address_1_1                                    0009 R
- 13 _EPROM_ByteWrite                                               00B6 GR
-  8 _EPROM_ByteWrite_PARM_2                                        0005 GR
-  8 _EPROM_ByteWrite_PARM_3                                        0006 GR
-  8 _EPROM_ByteWrite_writeData_1_1                                 0007 R
- 13 _EPROM_Init                                                    0177 GR
- 13 _EPROM_Reset                                                   0165 GR
- 13 _EPROM_SetBlock                                                004F GR
-  8 _EPROM_SetBlock_PARM_2                                         0002 GR
-  8 _EPROM_SetBlock_block_1_1                                      0003 R
-  8 _EPROM_SetBlock_byte_1_1                                       0004 R
     _ES                                                         =  00AC G
     _ET0                                                        =  00A9 G
     _ET1                                                        =  00AB G
@@ -238,13 +224,6 @@ Symbol Table
     _EXF2                                                       =  00CE G
     _F0                                                         =  00D5 G
     _F1                                                         =  00D1 G
-    _I2CInit                                                       **** GX
-    _I2CNak                                                        **** GX
-    _I2CRead                                                       **** GX
-    _I2CRestart                                                    **** GX
-    _I2CSend                                                       **** GX
-    _I2CStart                                                      **** GX
-    _I2CStop                                                       **** GX
     _IE                                                         =  00A8 G
     _IE0                                                        =  0089 G
     _IE1                                                        =  008B G
@@ -343,9 +322,6 @@ Symbol Table
     _RS0                                                        =  00D3 G
     _RS1                                                        =  00D4 G
     _RXD                                                        =  00B0 G
- 13 _RetryAck                                                      0000 GR
-  8 _RetryAck_PARM_2                                               0000 GR
-  8 _RetryAck_byte_1_1                                             0001 R
     _SADDR                                                      =  00A9 G
     _SADEN                                                      =  00B9 G
     _SBUF                                                       =  0099 G
@@ -390,10 +366,8 @@ Symbol Table
     _WDTPRG                                                     =  00A7 G
     _WDTRST                                                     =  00A6 G
     _WR                                                         =  00B6 G
- 14 __str_0                                                        0000 R
- 14 __str_1                                                        0046 R
- 15 __xinit__ACK_RETRY                                             0000 R
-    _printf                                                        **** GX
+ 13 _Watchdog_Init                                                 000A GR
+ 13 _Watchdog_Reset                                                0000 GR
     a                                                              00D6 
     ac                                                             00D6 
     acc                                                            00E0 
@@ -583,8 +557,8 @@ Area Table
    5 ISEG                                                                               size    0   flags 0
    6 BSEG                                                                               size    0   flags 80
    7 PSEG                                                                               size    0   flags 50
-   8 XSEG                                                                               size    A   flags 40
-   9 XISEG                                                                              size    1   flags 40
+   8 XSEG                                                                               size    0   flags 40
+   9 XISEG                                                                              size    0   flags 40
    A HOME                                                                               size    0   flags 20
    B GSINIT0                                                                            size    0   flags 20
    C GSINIT1                                                                            size    0   flags 20
@@ -594,6 +568,6 @@ Area Table
   10 GSINIT5                                                                            size    0   flags 20
   11 GSINIT                                                                             size    0   flags 20
   12 GSFINAL                                                                            size    0   flags 20
-  13 CSEG                                                                               size  17A   flags 20
-  14 CONST                                                                              size   60   flags 20
-  15 XINIT                                                                              size    1   flags 20
+  13 CSEG                                                                               size    D   flags 20
+  14 CONST                                                                              size    0   flags 20
+  15 XINIT                                                                              size    0   flags 20

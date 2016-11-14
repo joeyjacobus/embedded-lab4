@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1479082066 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\main.c
+1479101447 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\main.c
 	<mcs51/8051.h>
 	"at89c51ed2.h"
 	"LCD.h"
@@ -11,6 +11,7 @@
 	<stdbool.h>
 	"Custom.h"
 	"PCF8574.h"
+	"Watchdog.h"
 
 1479057295 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\lcd.h
 	<stdint.h>
@@ -25,15 +26,16 @@
 	<stdio.h>
 	<stdbool.h>
 
-1478997218 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\serial.c
+1479103681 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\serial.c
 	<mcs51/8051.h>
 	"at89c51ed2.h"
 	<stdio.h>
 	<ctype.h>
 	<stdlib.h>
 	"serial.h"
+	"Watchdog.h"
 
-1478666567 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\eprom.c
+1479096918 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\eprom.c
 	"at89c51ed2.h"
 	<stdint.h>
 	"I2C.h"
@@ -46,7 +48,7 @@
 	"at89c51ed2.h"
 	<stdint.h>
 
-1478666602 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\eprom.h
+1479096643 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\eprom.h
 	<stdint.h>
 
 1479086896 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\timer.c
@@ -82,4 +84,13 @@
 
 1479086878 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\pcf8574.h
 	<stdint.h>
+
+1479097524 c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\watchdog.h
+
+1479103626 source:c:\users\joeyj\documents\fall_2016_classes\embedded systems\lab4\lab4_eprom\watchdog.c
+	<stdint.h>
+	"at89c51ed2.h"
+	<stdio.h>
+	<stdbool.h>
+	"Watchdog.h"
 
